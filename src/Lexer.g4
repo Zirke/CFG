@@ -1,10 +1,10 @@
 lexer grammar Lexer;
 
-INTDCL   : 'integer' ;
-FLOATDCL : 'decimal' ;
-TRUTHDCL : 'truth' ;
-TEXTDCL  : 'text' ;
-ARRDCL   : 'array' ;
+INTDCL   : 'integer' ; //Name a bit weird? Not a dcl on its own.
+FLOATDCL : 'decimal' ; //
+TRUTHDCL : 'truth' ; //
+TEXTDCL  : 'text' ; //
+ARRDCL   : 'array' ; //
 LPAR     : '(' ;
 RPAR     : ')' ;
 TIMES    : '*' ;
@@ -38,18 +38,18 @@ RCB      : '}' ;
 EOL      : NEWLINE+ ; //for newline
 FNUM     : ([0-9])+ '.' ([0-9])+ ;
 INUM     : ([0-9])+ ;
-ID       : (([A-Za-z])+([0-9A-Za-z])*) ;
+ID       : (([A-Za-z])+([0-9A-Za-z])*) ; //TODO: Add support for symbols for example: _funcName
 TEXT
-   : '"' ~ ["\r\n]* '"'
+   : '"' ~ ["\r\n]* '"' //Tilde symbol means negate, dot means include (Blockcomment)
    | '\'' ~ ['\r\n]* '\''
    ;
 
 
 
-BLOCKCOMMENT :   '#' .*? '#' EOL
+BLOCKCOMMENT :   '#' .*? '#' EOL //A bit weird, non-greedy approach but #comment#text# works? Non-greedy should mean comment ends after 2nd #, read more regex.
         -> skip ;
 
-WS : [ \t\u000C]+ -> skip ;
+WS : [ \t\u000C]+ -> skip ; //Unsure if \r\n should be in here as well, parser accepts multiple \n's as statement end/EOL atm
 
 fragment UNICODE  :  '\u0000'..'\u00FF' ;
 fragment NEWLINE   : '\r' '\n' | '\n' | '\r';

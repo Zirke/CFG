@@ -2,17 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="08c3367c-482c-43b2-9911-903cc53e1dc6" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/Lexer.interp" beforeDir="false" afterPath="$PROJECT_DIR$/gen/Lexer.interp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/Lexer.java" beforeDir="false" afterPath="$PROJECT_DIR$/gen/Lexer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/Parser.interp" beforeDir="false" afterPath="$PROJECT_DIR$/gen/Parser.interp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/Parser.java" beforeDir="false" afterPath="$PROJECT_DIR$/gen/Parser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/ParserBaseListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/gen/ParserBaseListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/ParserBaseVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/gen/ParserBaseVisitor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/ParserListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/gen/ParserListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/ParserVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/gen/ParserVisitor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CFG/Lexer.g4" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CFG/Lexer.g4" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CFG/Parser.g4" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CFG/Parser.g4" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Lexer.g4" beforeDir="false" afterPath="$PROJECT_DIR$/src/Lexer.g4" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Parser.g4" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser.g4" afterDir="false" />
     </list>
@@ -31,8 +20,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Parser.g4">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="425">
-              <caret line="25" column="3" lean-forward="true" selection-start-line="25" selection-start-column="3" selection-end-line="25" selection-end-column="3" />
+            <state relative-caret-position="46">
+              <caret line="16" column="24" lean-forward="true" selection-start-line="16" selection-start-column="24" selection-end-line="16" selection-end-column="24" />
             </state>
           </provider>
         </entry>
@@ -40,8 +29,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Lexer.g4">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="816">
-              <caret line="48" column="24" selection-start-line="48" selection-start-column="24" selection-end-line="48" selection-end-column="24" />
+            <state relative-caret-position="34">
+              <caret line="2" column="64" selection-start-line="2" selection-start-column="64" selection-end-line="2" selection-end-column="64" />
             </state>
           </provider>
         </entry>
@@ -62,10 +51,10 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="379" />
-    <option name="y" value="231" />
-    <option name="width" value="1749" />
-    <option name="height" value="1059" />
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1936" />
+    <option name="height" value="1096" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -139,16 +128,15 @@
       <workItem from="1553366931833" duration="2090000" />
       <workItem from="1553394458002" duration="6111000" />
       <workItem from="1553448339452" duration="4184000" />
-      <workItem from="1553502526445" duration="255000" />
+      <workItem from="1553502526445" duration="1674000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="33759000" />
+    <option name="totallyTimeSpent" value="35178000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="2576" height="1456" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.14944357" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -167,7 +155,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
-      <window_info anchor="bottom" id="Terminal" order="10" />
+      <window_info anchor="bottom" id="Terminal" order="10" weight="0.32955405" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
       <window_info anchor="bottom" id="Tool Output" order="12" weight="0.32804233" />
       <window_info active="true" anchor="bottom" id="ANTLR Preview" order="13" visible="true" weight="0.46787605" />
@@ -219,17 +207,17 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/Parser.g4">
+    <entry file="file://$PROJECT_DIR$/src/Lexer.g4">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="25" column="3" lean-forward="true" selection-start-line="25" selection-start-column="3" selection-end-line="25" selection-end-column="3" />
+        <state relative-caret-position="34">
+          <caret line="2" column="64" selection-start-line="2" selection-start-column="64" selection-end-line="2" selection-end-column="64" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Lexer.g4">
+    <entry file="file://$PROJECT_DIR$/src/Parser.g4">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="816">
-          <caret line="48" column="24" selection-start-line="48" selection-start-column="24" selection-end-line="48" selection-end-column="24" />
+        <state relative-caret-position="46">
+          <caret line="16" column="24" lean-forward="true" selection-start-line="16" selection-start-column="24" selection-end-line="16" selection-end-column="24" />
         </state>
       </provider>
     </entry>

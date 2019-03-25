@@ -10,7 +10,7 @@ stmt
         | ifstmt
         | whilestmt
         | returnstmt
-        | functioncall EOL
+        | functioncall EOL //A bit weird, only stmt that needs EOL, as it can be a statement as well as part of an expr
         | repeatuntilstmt
         | fromstmt
         | assignment
