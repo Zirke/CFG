@@ -118,6 +118,18 @@ public interface ParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitAddexpr(Parser.AddexprContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link Parser#multexpr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitMultexpr(Parser.MultexprContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link Parser#parexpr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitParexpr(Parser.ParexprContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link Parser#truthexpr}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

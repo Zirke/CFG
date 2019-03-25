@@ -1,7 +1,5 @@
 lexer grammar Lexer;
 
-
-
 INTDCL   : 'integer' ;
 FLOATDCL : 'decimal' ;
 TRUTHDCL : 'truth' ;
@@ -37,8 +35,7 @@ FUNCTION : 'function' ;
 ASSIGN   : 'is' ;
 LCB      : '{' ;
 RCB      : '}' ;
-fragment NEWLINE   : '\r' '\n' | '\n' | '\r';
-EOL      : NEWLINE+ ; //for newline TODO: can't do more than one newline or it expects EOF
+EOL      : NEWLINE+ ; //for newline
 FNUM     : ([0-9])+ '.' ([0-9])+ ;
 INUM     : ([0-9])+ ;
 ID       : (([A-Za-z])+([0-9A-Za-z])*) ;
@@ -49,10 +46,10 @@ TEXT
 
 
 
-BLOCKCOMMENT :   '#' .*? '#' EOL ;
-        //-> skip
+BLOCKCOMMENT :   '#' .* '#' EOL
+        -> skip ;
 
-WS : [ \t\r\n\u000C]+ -> skip ;
+WS : [ \t\u000C]+ -> skip ;
 
 fragment UNICODE  :  '\u0000'..'\u00FF' ;
-
+fragment NEWLINE   : '\r' '\n' | '\n' | '\r';

@@ -3,7 +3,7 @@ parser grammar Parser;
 options { tokenVocab=Lexer; }
 
 start
-        : (functiondcl | stmt | BLOCKCOMMENT)* EOF;
+        : (functiondcl | stmt /*| BLOCKCOMMENT*/)* EOF;
 
 stmt
         : dcl
@@ -13,7 +13,9 @@ stmt
         | functioncall EOL
         | repeatuntilstmt
         | fromstmt
-        | assignment ;
+        | assignment
+        //| BLOCKCOMMENT
+        | EOL ;
 
 stmtblock
         : LCB stmt* RCB ;
@@ -25,7 +27,8 @@ dcl
         : (INTDCL ID (ASSIGN (value))?
         |  FLOATDCL ID (ASSIGN (value))?
         |  TEXTDCL ID (ASSIGN TEXT)?
-        |  TRUTHDCL ID (ASSIGN (truthexpr))?) EOL ;
+        |  TRUTHDCL ID (ASSIGN (truthexpr))?
+        |  ARRDCL ID (ASSIGN LCB (ID (COMMA ID)*)* RCB)) EOL ;
 
 functiondcl
         : FUNCTION ID RETURNS type LPAR paramlist RPAR LCB stmt* returnstmt RCB
@@ -41,7 +44,7 @@ truedcl
         | TRUTHDCL ID ;
 
 functioncall
-        : ID LPAR args RPAR; //TODO: EOL
+        : ID LPAR args RPAR;
 args
         : (types (COMMA types)*)* ;
 
@@ -72,17 +75,17 @@ value
         //| ID ;
 
 addexpr
-        :  nums (PLUS nums | MINUS nums)*
-        |  nums (TIMES nums | DIVIDES nums)*
-        |  nums
-        |  LPAR addexpr RPAR ;
+         : multexpr ((PLUS | MINUS ) multexpr)* ; //TODO: Add function calls?
+multexpr
+         : parexpr ((TIMES | DIVIDES) parexpr)* ;
+parexpr
+         : nums
+         | LPAR addexpr RPAR ;
 
 truthexpr
         : truth (OR | AND)*
-        | value EQUALS value
-        | value GRTHAN value
-        | value LESSTHAN value
-        | (NOT)? TRUTHID | ID
+        | value ((EQUALS  | GRTHAN | LESSTHAN)  value)*
+        | (NOT)? (TRUTHID | ID)
         | LPAR truthexpr RPAR ;
 
 truth

@@ -1,7 +1,5 @@
 lexer grammar Lexer;
 
-
-
 INTDCL   : 'integer' ;
 FLOATDCL : 'decimal' ;
 TRUTHDCL : 'truth' ;
@@ -48,8 +46,8 @@ TEXT
 
 
 
-BLOCKCOMMENT :   '#' .*? '#' EOL ;
-        //-> skip
+BLOCKCOMMENT :   '#' .*? '#' EOL
+        -> skip ;
 
 WS : [ \t\u000C]+ -> skip ;
 

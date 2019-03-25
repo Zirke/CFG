@@ -187,6 +187,26 @@ public interface ParserListener extends ParseTreeListener {
 	 */
 	void exitAddexpr(Parser.AddexprContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link Parser#multexpr}.
+	 * @param ctx the parse tree
+	 */
+	void enterMultexpr(Parser.MultexprContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link Parser#multexpr}.
+	 * @param ctx the parse tree
+	 */
+	void exitMultexpr(Parser.MultexprContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link Parser#parexpr}.
+	 * @param ctx the parse tree
+	 */
+	void enterParexpr(Parser.ParexprContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link Parser#parexpr}.
+	 * @param ctx the parse tree
+	 */
+	void exitParexpr(Parser.ParexprContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link Parser#truthexpr}.
 	 * @param ctx the parse tree
 	 */

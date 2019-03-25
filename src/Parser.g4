@@ -3,7 +3,7 @@ parser grammar Parser;
 options { tokenVocab=Lexer; }
 
 start
-        : (functiondcl | stmt | BLOCKCOMMENT)* EOF;
+        : (functiondcl | stmt /*| BLOCKCOMMENT*/)* EOF;
 
 stmt
         : dcl
@@ -14,6 +14,7 @@ stmt
         | repeatuntilstmt
         | fromstmt
         | assignment
+        //| BLOCKCOMMENT
         | EOL ;
 
 stmtblock
@@ -26,7 +27,8 @@ dcl
         : (INTDCL ID (ASSIGN (value))?
         |  FLOATDCL ID (ASSIGN (value))?
         |  TEXTDCL ID (ASSIGN TEXT)?
-        |  TRUTHDCL ID (ASSIGN (truthexpr))?) EOL ;
+        |  TRUTHDCL ID (ASSIGN (truthexpr))?
+        |  ARRDCL ID (ASSIGN LCB (ID (COMMA ID)*)* RCB)) EOL ;
 
 functiondcl
         : FUNCTION ID RETURNS type LPAR paramlist RPAR LCB stmt* returnstmt RCB
@@ -73,9 +75,12 @@ value
         //| ID ;
 
 addexpr
-        :  nums (PLUS nums | MINUS nums)* //TODO: Add function calls?
-        |  nums (TIMES nums | DIVIDES nums)*
-        |  LPAR addexpr RPAR ;
+         : multexpr ((PLUS | MINUS ) multexpr)* ; //TODO: Add function calls?
+multexpr
+         : parexpr ((TIMES | DIVIDES) parexpr)* ;
+parexpr
+         : nums
+         | LPAR addexpr RPAR ;
 
 truthexpr
         : truth (OR | AND)*
