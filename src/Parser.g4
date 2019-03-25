@@ -10,32 +10,23 @@ stmt
         | ifstmt
         | whilestmt
         | returnstmt
-        | functioncall EOL //A bit weird, only stmt that needs EOL, as it can be a statement as well as part of an expr
+        | functioncall stmtend //A bit weird, only stmt that needs EOL, as it can be a statement as well as part of an expr
         | repeatuntilstmt
         | fromstmt
         | assignment
         //| BLOCKCOMMENT
-        | EOL ;
+        | stmtend ;
 
-stmtblock
-        : LCB stmt* RCB ;
-
-truthpar
-        : LPAR truthexpr RPAR ;
+functiondcl
+        : FUNCTION ID RETURNS type LPAR paramlist RPAR LCB stmt* returnstmt RCB
+        | FUNCTION ID LPAR paramlist RPAR stmtblock ;
 
 dcl
         : (INTDCL ID (ASSIGN (value))?
         |  FLOATDCL ID (ASSIGN (value))?
         |  TEXTDCL ID (ASSIGN TEXT)?
         |  TRUTHDCL ID (ASSIGN (truthexpr))?
-        |  ARRDCL ID (ASSIGN LCB (ID (COMMA ID)*)* RCB)) EOL ;
-
-functiondcl
-        : FUNCTION ID RETURNS type LPAR paramlist RPAR LCB stmt* returnstmt RCB
-        | FUNCTION ID LPAR paramlist RPAR stmtblock ;
-
-paramlist
-        : (truedcl (COMMA truedcl)*)* ;
+        |  type ARRDCL ID (ASSIGN LCB arrelems RCB)?) stmtend;
 
 truedcl
         : INTDCL ID
@@ -45,6 +36,7 @@ truedcl
 
 functioncall
         : ID LPAR args RPAR;
+
 args
         : (types (COMMA types)*)* ;
 
@@ -63,30 +55,58 @@ fromstmt
         : FROM LPAR value (UPTO | DOWNTO) value RPAR stmtblock ;
 
 returnstmt
-        : RETURN (value | truthexpr)* EOL ;
+        : RETURN (value | truthexpr)* stmtend ;
 
 assignment
         : (ID ASSIGN value
-        | ID ASSIGN truthexpr) EOL ;
+        | ID ASSIGN truthexpr
+        | ID ASSIGN TEXT
+        | ID ASSIGN LCB arrelems RCB) stmtend ;
 
 value
-        : addexpr
+        : arithmexpr
         | functioncall ;
         //| ID ;
 
-addexpr
+arithmexpr
          : multexpr ((PLUS | MINUS ) multexpr)* ; //TODO: Add function calls?
 multexpr
          : parexpr ((TIMES | DIVIDES) parexpr)* ;
 parexpr
          : nums
-         | LPAR addexpr RPAR ;
+         | LPAR arithmexpr RPAR ;
 
 truthexpr
         : truth (OR | AND)*
         | value ((EQUALS  | GRTHAN | LESSTHAN)  value)*
         | (NOT)? (TRUTHID | ID)
         | LPAR truthexpr RPAR ;
+
+append
+        : (TEXT | ID) PLUS (TEXT | ID) ; //Unused
+
+arrelems
+        : (ID (COMMA ID)*)* ;
+
+arrindex
+        : ID ELEMENT INUM ;             //Unused
+
+arradd
+        : ID ELEMENT INUM ASSIGN type ; //Unused
+
+nums
+        : INUM
+        | FNUM
+        | ID ;
+
+paramlist
+        : (truedcl (COMMA truedcl)*)* ;
+
+stmtblock
+        : LCB stmt* RCB ;
+
+truthpar
+        : LPAR truthexpr RPAR ;
 
 truth
         : TRUTHID
@@ -97,11 +117,11 @@ type
         | FLOATDCL
         | TRUTHDCL
         | TEXTDCL ;
-nums
-        : INUM
-        | FNUM
-        | ID ;
+
 types
         : nums
         | TEXT
         | TRUTHID ;
+
+stmtend
+        : EOL | EOF ;

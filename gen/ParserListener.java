@@ -27,36 +27,6 @@ public interface ParserListener extends ParseTreeListener {
 	 */
 	void exitStmt(Parser.StmtContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link Parser#stmtblock}.
-	 * @param ctx the parse tree
-	 */
-	void enterStmtblock(Parser.StmtblockContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link Parser#stmtblock}.
-	 * @param ctx the parse tree
-	 */
-	void exitStmtblock(Parser.StmtblockContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link Parser#truthpar}.
-	 * @param ctx the parse tree
-	 */
-	void enterTruthpar(Parser.TruthparContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link Parser#truthpar}.
-	 * @param ctx the parse tree
-	 */
-	void exitTruthpar(Parser.TruthparContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link Parser#dcl}.
-	 * @param ctx the parse tree
-	 */
-	void enterDcl(Parser.DclContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link Parser#dcl}.
-	 * @param ctx the parse tree
-	 */
-	void exitDcl(Parser.DclContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link Parser#functiondcl}.
 	 * @param ctx the parse tree
 	 */
@@ -67,15 +37,15 @@ public interface ParserListener extends ParseTreeListener {
 	 */
 	void exitFunctiondcl(Parser.FunctiondclContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link Parser#paramlist}.
+	 * Enter a parse tree produced by {@link Parser#dcl}.
 	 * @param ctx the parse tree
 	 */
-	void enterParamlist(Parser.ParamlistContext ctx);
+	void enterDcl(Parser.DclContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link Parser#paramlist}.
+	 * Exit a parse tree produced by {@link Parser#dcl}.
 	 * @param ctx the parse tree
 	 */
-	void exitParamlist(Parser.ParamlistContext ctx);
+	void exitDcl(Parser.DclContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link Parser#truedcl}.
 	 * @param ctx the parse tree
@@ -177,15 +147,15 @@ public interface ParserListener extends ParseTreeListener {
 	 */
 	void exitValue(Parser.ValueContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link Parser#addexpr}.
+	 * Enter a parse tree produced by {@link Parser#arithmexpr}.
 	 * @param ctx the parse tree
 	 */
-	void enterAddexpr(Parser.AddexprContext ctx);
+	void enterArithmexpr(Parser.ArithmexprContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link Parser#addexpr}.
+	 * Exit a parse tree produced by {@link Parser#arithmexpr}.
 	 * @param ctx the parse tree
 	 */
-	void exitAddexpr(Parser.AddexprContext ctx);
+	void exitArithmexpr(Parser.ArithmexprContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link Parser#multexpr}.
 	 * @param ctx the parse tree
@@ -217,6 +187,86 @@ public interface ParserListener extends ParseTreeListener {
 	 */
 	void exitTruthexpr(Parser.TruthexprContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link Parser#append}.
+	 * @param ctx the parse tree
+	 */
+	void enterAppend(Parser.AppendContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link Parser#append}.
+	 * @param ctx the parse tree
+	 */
+	void exitAppend(Parser.AppendContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link Parser#arrelems}.
+	 * @param ctx the parse tree
+	 */
+	void enterArrelems(Parser.ArrelemsContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link Parser#arrelems}.
+	 * @param ctx the parse tree
+	 */
+	void exitArrelems(Parser.ArrelemsContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link Parser#arrindex}.
+	 * @param ctx the parse tree
+	 */
+	void enterArrindex(Parser.ArrindexContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link Parser#arrindex}.
+	 * @param ctx the parse tree
+	 */
+	void exitArrindex(Parser.ArrindexContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link Parser#arradd}.
+	 * @param ctx the parse tree
+	 */
+	void enterArradd(Parser.ArraddContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link Parser#arradd}.
+	 * @param ctx the parse tree
+	 */
+	void exitArradd(Parser.ArraddContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link Parser#nums}.
+	 * @param ctx the parse tree
+	 */
+	void enterNums(Parser.NumsContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link Parser#nums}.
+	 * @param ctx the parse tree
+	 */
+	void exitNums(Parser.NumsContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link Parser#paramlist}.
+	 * @param ctx the parse tree
+	 */
+	void enterParamlist(Parser.ParamlistContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link Parser#paramlist}.
+	 * @param ctx the parse tree
+	 */
+	void exitParamlist(Parser.ParamlistContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link Parser#stmtblock}.
+	 * @param ctx the parse tree
+	 */
+	void enterStmtblock(Parser.StmtblockContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link Parser#stmtblock}.
+	 * @param ctx the parse tree
+	 */
+	void exitStmtblock(Parser.StmtblockContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link Parser#truthpar}.
+	 * @param ctx the parse tree
+	 */
+	void enterTruthpar(Parser.TruthparContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link Parser#truthpar}.
+	 * @param ctx the parse tree
+	 */
+	void exitTruthpar(Parser.TruthparContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link Parser#truth}.
 	 * @param ctx the parse tree
 	 */
@@ -237,16 +287,6 @@ public interface ParserListener extends ParseTreeListener {
 	 */
 	void exitType(Parser.TypeContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link Parser#nums}.
-	 * @param ctx the parse tree
-	 */
-	void enterNums(Parser.NumsContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link Parser#nums}.
-	 * @param ctx the parse tree
-	 */
-	void exitNums(Parser.NumsContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link Parser#types}.
 	 * @param ctx the parse tree
 	 */
@@ -256,4 +296,14 @@ public interface ParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitTypes(Parser.TypesContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link Parser#stmtend}.
+	 * @param ctx the parse tree
+	 */
+	void enterStmtend(Parser.StmtendContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link Parser#stmtend}.
+	 * @param ctx the parse tree
+	 */
+	void exitStmtend(Parser.StmtendContext ctx);
 }

@@ -22,35 +22,17 @@ public interface ParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitStmt(Parser.StmtContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link Parser#stmtblock}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitStmtblock(Parser.StmtblockContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link Parser#truthpar}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitTruthpar(Parser.TruthparContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link Parser#dcl}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitDcl(Parser.DclContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link Parser#functiondcl}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitFunctiondcl(Parser.FunctiondclContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link Parser#paramlist}.
+	 * Visit a parse tree produced by {@link Parser#dcl}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitParamlist(Parser.ParamlistContext ctx);
+	T visitDcl(Parser.DclContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link Parser#truedcl}.
 	 * @param ctx the parse tree
@@ -112,11 +94,11 @@ public interface ParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitValue(Parser.ValueContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link Parser#addexpr}.
+	 * Visit a parse tree produced by {@link Parser#arithmexpr}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitAddexpr(Parser.AddexprContext ctx);
+	T visitArithmexpr(Parser.ArithmexprContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link Parser#multexpr}.
 	 * @param ctx the parse tree
@@ -136,6 +118,54 @@ public interface ParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitTruthexpr(Parser.TruthexprContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link Parser#append}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAppend(Parser.AppendContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link Parser#arrelems}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitArrelems(Parser.ArrelemsContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link Parser#arrindex}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitArrindex(Parser.ArrindexContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link Parser#arradd}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitArradd(Parser.ArraddContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link Parser#nums}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitNums(Parser.NumsContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link Parser#paramlist}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitParamlist(Parser.ParamlistContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link Parser#stmtblock}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitStmtblock(Parser.StmtblockContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link Parser#truthpar}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitTruthpar(Parser.TruthparContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link Parser#truth}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -148,15 +178,15 @@ public interface ParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitType(Parser.TypeContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link Parser#nums}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitNums(Parser.NumsContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link Parser#types}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitTypes(Parser.TypesContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link Parser#stmtend}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitStmtend(Parser.StmtendContext ctx);
 }
