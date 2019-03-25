@@ -36,7 +36,7 @@ ELEMENT  : 'element' ;
 ASSIGN   : 'is' ;
 LCB      : '{' ;
 RCB      : '}' ;
-EOL      : NEWLINE+ | EOF ; //for newline
+EOL      : NEWLINE+ ; //for newline
 FNUM     : ([0-9])+ '.' ([0-9])+ ;
 INUM     : ([0-9])+ ;
 ID       : (([A-Za-z])+([0-9A-Za-z])*) ; //TODO: Add support for symbols for example: _funcName

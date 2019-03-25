@@ -3,19 +3,19 @@ parser grammar Parser;
 options { tokenVocab=Lexer; }
 
 start
-        : (functiondcl | stmt /*| BLOCKCOMMENT*/)* EOF;
+        : (functiondcl | stmt /*| BLOCKCOMMENT*/)* EOF?;
 
 stmt
         : dcl
         | ifstmt
         | whilestmt
         | returnstmt
-        | functioncall stmtend //A bit weird, only stmt that needs EOL, as it can be a statement as well as part of an expr
+        | functioncall EOL //A bit weird, only stmt that needs EOL, as it can be a statement as well as part of an expr
         | repeatuntilstmt
         | fromstmt
         | assignment
         //| BLOCKCOMMENT
-        | stmtend ;
+        | EOL ;
 
 functiondcl
         : FUNCTION ID RETURNS type LPAR paramlist RPAR LCB stmt* returnstmt RCB
@@ -26,7 +26,7 @@ dcl
         |  FLOATDCL ID (ASSIGN (value))?
         |  TEXTDCL ID (ASSIGN TEXT)?
         |  TRUTHDCL ID (ASSIGN (truthexpr))?
-        |  type ARRDCL ID (ASSIGN LCB arrelems RCB)?) stmtend;
+        |  type ARRDCL ID (ASSIGN LCB arrelems RCB)?) EOL ;
 
 truedcl
         : INTDCL ID
@@ -55,13 +55,13 @@ fromstmt
         : FROM LPAR value (UPTO | DOWNTO) value RPAR stmtblock ;
 
 returnstmt
-        : RETURN (value | truthexpr)* stmtend ;
+        : RETURN (value | truthexpr)* EOL ;
 
 assignment
         : (ID ASSIGN value
         | ID ASSIGN truthexpr
         | ID ASSIGN TEXT
-        | ID ASSIGN LCB arrelems RCB) stmtend ;
+        | ID ASSIGN LCB arrelems RCB) EOL ;
 
 value
         : arithmexpr
@@ -124,4 +124,4 @@ types
         | TRUTHID ;
 
 stmtend
-        : EOL | EOF ;
+        : EOL | EOF ; //Help
