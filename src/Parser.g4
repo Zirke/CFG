@@ -10,7 +10,7 @@ stmt
         | ifstmt
         | whilestmt
         | returnstmt
-        | functioncall EOL //A bit weird, only stmt that needs EOL, as it can be a statement as well as part of an expr
+        | functioncall EOL? //A bit weird, only stmt that needs EOL, as it can be a statement as well as part of an expr
         | repeatuntilstmt
         | fromstmt
         | assignment
@@ -65,8 +65,8 @@ assignment
 
 value
         : arithmexpr
-         ; //| functioncall
-        //| ID ;
+        | functioncall
+        | ID ;
 
 arithmexpr
          : multexpr ((PLUS | MINUS ) multexpr)* ; //TODO: Add function calls?
@@ -83,7 +83,8 @@ logicalexpr
         :  truth (OR logicalexpr | AND logicalexpr)* //and or
         | (NOT)? truth
         | LPAR logicalexpr RPAR
-        | relationalexpr;
+        | relationalexpr
+        ;
 
 relationalexpr
         :   value ((EQUALS  | GRTHAN | LESSTHAN)  value)+ //grt less equals

@@ -39,7 +39,7 @@ RCB      : '}' ;
 EOL      : NEWLINE+ ; //for newline
 FNUM     : ([0-9])+ '.' ([0-9])+ ;
 INUM     : ([0-9])+ ;
-ID       : (([A-Za-z])+([0-9A-Za-z])*) ; //TODO: Add support for symbols for example: _funcName
+ID       : (([A-Za-z])+([0-9A-Za-z])*) ; //TODO: Add support for symbols for example: _funcName()
 TEXT
    : '"' ~ ["\r\n]* '"' //Tilde symbol means negate, dot means include (Blockcomment)
    | '\'' ~ ['\r\n]* '\''

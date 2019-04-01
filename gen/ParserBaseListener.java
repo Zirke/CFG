@@ -1,4 +1,4 @@
-// Generated from S:/JavaProjects/CFG/src\Parser.g4 by ANTLR 4.7.2
+// Generated from C:/Users/Zirke/Documents/JavaProjects/CFG/src\Parser.g4 by ANTLR 4.7.2
 
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ErrorNode;
@@ -226,6 +226,30 @@ public class ParserBaseListener implements ParserListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitTruthexpr(Parser.TruthexprContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterLogicalexpr(Parser.LogicalexprContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitLogicalexpr(Parser.LogicalexprContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterRelationalexpr(Parser.RelationalexprContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitRelationalexpr(Parser.RelationalexprContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

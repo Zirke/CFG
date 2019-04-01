@@ -1,4 +1,4 @@
-// Generated from S:/JavaProjects/CFG/src\Parser.g4 by ANTLR 4.7.2
+// Generated from C:/Users/Zirke/Documents/JavaProjects/CFG/src\Parser.g4 by ANTLR 4.7.2
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
 /**
@@ -186,6 +186,26 @@ public interface ParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitTruthexpr(Parser.TruthexprContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link Parser#logicalexpr}.
+	 * @param ctx the parse tree
+	 */
+	void enterLogicalexpr(Parser.LogicalexprContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link Parser#logicalexpr}.
+	 * @param ctx the parse tree
+	 */
+	void exitLogicalexpr(Parser.LogicalexprContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link Parser#relationalexpr}.
+	 * @param ctx the parse tree
+	 */
+	void enterRelationalexpr(Parser.RelationalexprContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link Parser#relationalexpr}.
+	 * @param ctx the parse tree
+	 */
+	void exitRelationalexpr(Parser.RelationalexprContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link Parser#append}.
 	 * @param ctx the parse tree

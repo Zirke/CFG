@@ -1,4 +1,4 @@
-// Generated from S:/JavaProjects/CFG/src\Parser.g4 by ANTLR 4.7.2
+// Generated from C:/Users/Zirke/Documents/JavaProjects/CFG/src\Parser.g4 by ANTLR 4.7.2
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
 /**
@@ -117,6 +117,18 @@ public interface ParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitTruthexpr(Parser.TruthexprContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link Parser#logicalexpr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitLogicalexpr(Parser.LogicalexprContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link Parser#relationalexpr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitRelationalexpr(Parser.RelationalexprContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link Parser#append}.
 	 * @param ctx the parse tree
