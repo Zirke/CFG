@@ -65,7 +65,7 @@ assignment
 
 value
         : arithmexpr
-        | functioncall ;
+         ; //| functioncall
         //| ID ;
 
 arithmexpr
@@ -77,11 +77,17 @@ parexpr
          | LPAR arithmexpr RPAR ;
 
 truthexpr
-        : truth (OR | AND)*
-        | value ((EQUALS  | GRTHAN | LESSTHAN)  value)*
-        | (NOT)? (TRUTHID | ID)
-        | LPAR truthexpr RPAR ;
+        : logicalexpr;
 
+logicalexpr
+        :  truth (OR logicalexpr | AND logicalexpr)* //and or
+        | (NOT)? truth
+        | LPAR logicalexpr RPAR
+        | relationalexpr;
+
+relationalexpr
+        :   value ((EQUALS  | GRTHAN | LESSTHAN)  value)+ //grt less equals
+        ;
 append
         : (TEXT | ID) PLUS (TEXT | ID) ; //Unused
 
