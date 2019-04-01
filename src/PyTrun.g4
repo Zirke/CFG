@@ -41,8 +41,8 @@ args
         : (types (COMMA types)*)* ;
 
 ifstmt
-        : IF truthpar THEN stmtblock
-          (ELSE IF truthpar THEN stmtblock)*
+        : IF truthpar THEN stmtblock EOL*
+          (ELSE IF truthpar THEN stmtblock EOL*)*
           (ELSE THEN stmtblock)? ;
 
 whilestmt
@@ -74,6 +74,7 @@ multexpr
          : parexpr ((TIMES | DIVIDES) parexpr)* ;
 parexpr
          : nums
+         | functioncall
          | LPAR arithmexpr RPAR ;
 
 truthexpr
@@ -82,12 +83,12 @@ truthexpr
 logicalexpr
         :  truth (OR logicalexpr | AND logicalexpr)* //and or
         | (NOT)? truth
-        | LPAR logicalexpr RPAR
         | relationalexpr
         ;
 
 relationalexpr
-        :   value ((EQUALS  | GRTHAN | LESSTHAN)  value)+ //grt less equals
+        :   value ((EQUALS  | GRTHAN | LESSTHAN)  value)+
+        |   LPAR logicalexpr RPAR //grt less equals
         ;
 append
         : (TEXT | ID) PLUS (TEXT | ID) ; //Unused

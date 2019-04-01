@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="08c3367c-482c-43b2-9911-903cc53e1dc6" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/Lexer.g4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Parser.g4" beforeDir="false" afterPath="$PROJECT_DIR$/src/PyTrun.g4" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gen/PyTrun.interp" beforeDir="false" afterPath="$PROJECT_DIR$/gen/PyTrun.interp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gen/PyTrun.java" beforeDir="false" afterPath="$PROJECT_DIR$/gen/PyTrun.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PyTrun.g4" beforeDir="false" afterPath="$PROJECT_DIR$/src/PyTrun.g4" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -20,8 +22,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/PyTrun.g4">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34">
-              <caret line="2" column="35" lean-forward="true" selection-start-line="2" selection-start-column="35" selection-end-line="2" selection-end-column="35" />
+            <state relative-caret-position="458">
+              <caret line="90" column="51" lean-forward="true" selection-start-line="90" selection-start-column="51" selection-end-line="90" selection-end-column="51" />
             </state>
           </provider>
         </entry>
@@ -30,7 +32,7 @@
         <entry file="file://$PROJECT_DIR$/src/PyTrunLexer.g4">
           <provider selected="true" editor-type-id="text-editor">
             <state>
-              <caret column="25" lean-forward="true" selection-start-column="25" selection-end-column="25" />
+              <caret column="25" selection-start-column="25" selection-end-column="25" />
             </state>
           </provider>
         </entry>
@@ -47,8 +49,8 @@
         <option value="$PROJECT_DIR$/src/lexer.g4" />
         <option value="$PROJECT_DIR$/src/Lexer.g4" />
         <option value="$PROJECT_DIR$/src/Parser.g4" />
-        <option value="$PROJECT_DIR$/src/PyTrun.g4" />
         <option value="$PROJECT_DIR$/src/PyTrunLexer.g4" />
+        <option value="$PROJECT_DIR$/src/PyTrun.g4" />
       </list>
     </option>
   </component>
@@ -64,6 +66,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -85,15 +89,13 @@
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1554105064154" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1554106824442" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -139,17 +141,18 @@
       <workItem from="1553502526445" duration="4728000" />
       <workItem from="1553510543640" duration="329000" />
       <workItem from="1553604770627" duration="3191000" />
+      <workItem from="1554105698124" duration="1723000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="41752000" />
+    <option name="totallyTimeSpent" value="43475000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-6" y="-6" width="1549" height="877" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1529175" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15492958" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -168,8 +171,8 @@
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Terminal" order="10" weight="0.32955405" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
-      <window_info anchor="bottom" id="Tool Output" order="12" visible="true" weight="0.32797858" />
-      <window_info anchor="bottom" id="ANTLR Preview" order="13" weight="0.46720216" />
+      <window_info anchor="bottom" id="Tool Output" order="12" weight="0.32797858" />
+      <window_info active="true" anchor="bottom" id="ANTLR Preview" order="13" visible="true" weight="0.46720216" />
       <window_info anchor="bottom" id="Messages" order="14" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -256,14 +259,14 @@
     <entry file="file://$PROJECT_DIR$/src/PyTrunLexer.g4">
       <provider selected="true" editor-type-id="text-editor">
         <state>
-          <caret column="25" lean-forward="true" selection-start-column="25" selection-end-column="25" />
+          <caret column="25" selection-start-column="25" selection-end-column="25" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/PyTrun.g4">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="35" lean-forward="true" selection-start-line="2" selection-start-column="35" selection-end-line="2" selection-end-column="35" />
+        <state relative-caret-position="458">
+          <caret line="90" column="51" lean-forward="true" selection-start-line="90" selection-start-column="51" selection-end-line="90" selection-end-column="51" />
         </state>
       </provider>
     </entry>
