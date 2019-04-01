@@ -1,6 +1,6 @@
-parser grammar Parser;
+parser grammar PyTrun;
 
-options { tokenVocab=Lexer; }
+options { tokenVocab=PyTrunLexer; }
 
 start
         : (functiondcl | stmt /*| BLOCKCOMMENT*/)* EOF?;
