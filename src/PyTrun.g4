@@ -59,14 +59,19 @@ returnstmt
 
 assignment
         : (ID ASSIGN value
-        | ID ASSIGN truthexpr
         | ID ASSIGN TEXT
+        | ID ASSIGN expr
         | ID ASSIGN LCB arrelems RCB) EOL? ;
 
 value
         : arithmexpr
         | functioncall
         | ID ;
+
+expr
+        : arithmexpr
+        | truthexpr
+        | append;
 
 arithmexpr
          : multexpr ((PLUS | MINUS ) multexpr)* ; //TODO: Add function calls?
@@ -117,7 +122,7 @@ truthpar
         : LPAR truthexpr RPAR ;
 
 truth
-        : TRUTHID
+        : TRUTHVAL
         | ID ;
 
 type
@@ -129,7 +134,7 @@ type
 types
         : nums
         | TEXT
-        | TRUTHID ;
+        | TRUTHVAL ;
 
 stmtend
         : EOL | EOF ; //Help

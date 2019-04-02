@@ -14,7 +14,7 @@ MINUS    : '-' ;
 AND      : 'AND' ;
 OR       : 'OR' ;
 NOT      : 'NOT' ;
-TRUTHID  : 'true' | 'false' ;
+TRUTHVAL  : 'true' | 'false' ;
 EQUALS   : '=' ;
 GRTHAN   : '>' ;
 LESSTHAN : '<' ;
