@@ -22,8 +22,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/PyTrun.g4">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="458">
-              <caret line="90" column="51" lean-forward="true" selection-start-line="90" selection-start-column="51" selection-end-line="90" selection-end-column="51" />
+            <state relative-caret-position="231">
+              <caret line="77" column="33" lean-forward="true" selection-start-line="77" selection-start-column="33" selection-end-line="77" selection-end-column="33" />
             </state>
           </provider>
         </entry>
@@ -31,10 +31,15 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/PyTrunLexer.g4">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="25" selection-start-column="25" selection-end-column="25" />
+            <state relative-caret-position="-170">
+              <caret line="23" selection-start-line="23" selection-end-line="23" selection-end-column="2" />
             </state>
           </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/gen/PyTrunBaseVisitor.java">
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
     </leaf>
@@ -66,8 +71,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -89,13 +92,15 @@
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1554106824442" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1554191057844" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -141,18 +146,19 @@
       <workItem from="1553502526445" duration="4728000" />
       <workItem from="1553510543640" duration="329000" />
       <workItem from="1553604770627" duration="3191000" />
-      <workItem from="1554105698124" duration="1723000" />
+      <workItem from="1554105698124" duration="6101000" />
+      <workItem from="1554188833755" duration="2101000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="43475000" />
+    <option name="totallyTimeSpent" value="49954000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-6" y="-6" width="1549" height="877" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15492958" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.07645875" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -172,7 +178,7 @@
       <window_info anchor="bottom" id="Terminal" order="10" weight="0.32955405" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
       <window_info anchor="bottom" id="Tool Output" order="12" weight="0.32797858" />
-      <window_info active="true" anchor="bottom" id="ANTLR Preview" order="13" visible="true" weight="0.46720216" />
+      <window_info active="true" anchor="bottom" id="ANTLR Preview" order="13" visible="true" weight="0.3842035" />
       <window_info anchor="bottom" id="Messages" order="14" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -222,51 +228,28 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/gen/ParserLexer.tokens">
+    <entry file="file://$PROJECT_DIR$/gen/ParserLexer.tokens" />
+    <entry file="file://$PROJECT_DIR$/gen/ParserListener.java" />
+    <entry file="file://$PROJECT_DIR$/gen/ParserLexer.java" />
+    <entry file="file://$PROJECT_DIR$/gen/ParserBaseListener.java" />
+    <entry file="file://$PROJECT_DIR$/gen/ParserBaseVisitor.java" />
+    <entry file="file://$PROJECT_DIR$/gen/Parser.java" />
+    <entry file="file://$PROJECT_DIR$/gen/ParserVisitor.java" />
+    <entry file="file://$PROJECT_DIR$/gen/ParserParser.java" />
+    <entry file="file://$PROJECT_DIR$/gen/PyTrunBaseVisitor.java">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gen/ParserListener.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-4884" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gen/ParserLexer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1875" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gen/ParserBaseListener.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-6363" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gen/ParserBaseVisitor.java">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gen/Parser.java">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gen/ParserVisitor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2895" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gen/ParserParser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-17617" />
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/PyTrunLexer.g4">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="25" selection-start-column="25" selection-end-column="25" />
+        <state relative-caret-position="-170">
+          <caret line="23" selection-start-line="23" selection-end-line="23" selection-end-column="2" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/PyTrun.g4">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="458">
-          <caret line="90" column="51" lean-forward="true" selection-start-line="90" selection-start-column="51" selection-end-line="90" selection-end-column="51" />
+        <state relative-caret-position="231">
+          <caret line="77" column="33" lean-forward="true" selection-start-line="77" selection-start-column="33" selection-end-line="77" selection-end-column="33" />
         </state>
       </provider>
     </entry>

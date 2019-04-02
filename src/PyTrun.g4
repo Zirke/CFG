@@ -26,7 +26,7 @@ dcl
         |  FLOATDCL ID (ASSIGN (value))?
         |  TEXTDCL ID (ASSIGN TEXT)?
         |  TRUTHDCL ID (ASSIGN (truthexpr))?
-        |  type ARRDCL ID (ASSIGN LCB arrelems RCB)?) EOL ;
+        |  type ARRDCL ID (ASSIGN LCB arrelems RCB)?) EOL? ;
 
 truedcl
         : INTDCL ID
@@ -55,13 +55,13 @@ fromstmt
         : FROM LPAR value (UPTO | DOWNTO) value RPAR stmtblock ;
 
 returnstmt
-        : RETURN (value | truthexpr)* EOL ;
+        : RETURN (value | truthexpr)* ;
 
 assignment
         : (ID ASSIGN value
         | ID ASSIGN truthexpr
         | ID ASSIGN TEXT
-        | ID ASSIGN LCB arrelems RCB) EOL ;
+        | ID ASSIGN LCB arrelems RCB) EOL? ;
 
 value
         : arithmexpr
