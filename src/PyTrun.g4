@@ -14,6 +14,8 @@ stmt
         | repeatuntilstmt
         | fromstmt
         | assignment
+        | arradd
+        | arrindex
         //| BLOCKCOMMENT
         | EOL ;
 
@@ -22,11 +24,11 @@ functiondcl
         | FUNCTION ID LPAR paramlist RPAR stmtblock ;
 
 dcl
-        : (INTDCL ID (ASSIGN (value))?
-        |  FLOATDCL ID (ASSIGN (value))?
-        |  TEXTDCL ID (ASSIGN TEXT)?
-        |  TRUTHDCL ID (ASSIGN (truthexpr))?
-        |  type ARRDCL ID (ASSIGN LCB arrelems RCB)?) EOL? ;
+        : INTDCL ID (ASSIGN (value))?(ASSIGN (arrindex))? EOL?
+        |  FLOATDCL ID (ASSIGN (value))?(ASSIGN (arrindex))? EOL?
+        |  TEXTDCL ID (ASSIGN TEXT)?(ASSIGN (arrindex))? EOL?
+        |  TRUTHDCL ID (ASSIGN (truthexpr))?(ASSIGN (arrindex))? EOL?
+        |  type ARRDCL ID (ASSIGN LCB arrelems RCB)? EOL? ;
 
 truedcl
         : INTDCL ID
@@ -59,6 +61,7 @@ returnstmt
 
 assignment
         : (ID ASSIGN value
+        | ID ASSIGN arrindex
         | ID ASSIGN TEXT
         | ID ASSIGN expr
         | ID ASSIGN LCB arrelems RCB) EOL? ;
@@ -96,16 +99,16 @@ relationalexpr
         |   LPAR logicalexpr RPAR //grt less equals
         ;
 append
-        : (TEXT | ID) PLUS (TEXT | ID) ; //Unused
+        : (TEXT | ID) PLUS (TEXT | ID) ;
 
 arrelems
-        : (ID (COMMA ID)*)* ;
+        : (types (COMMA types)*)* ;
 
 arrindex
-        : ID ELEMENT INUM ;             //Unused
+        : ID ELEMENT INUM ;
 
 arradd
-        : ID ELEMENT INUM ASSIGN type ; //Unused
+        : ID ELEMENT INUM ASSIGN types ;
 
 nums
         : INUM
@@ -137,4 +140,4 @@ types
         | TRUTHVAL ;
 
 stmtend
-        : EOL | EOF ; //Help
+        : EOL | EOF ; //Hilfen please!!!
