@@ -24,9 +24,9 @@ functiondcl
         | FUNCTION ID LPAR paramlist RPAR stmtblock ;
 
 dcl
-        : INTDCL ID (ASSIGN (value))?(ASSIGN (arrindex))? EOL?
-        |  FLOATDCL ID (ASSIGN (value))?(ASSIGN (arrindex))? EOL?
-        |  TEXTDCL ID (ASSIGN TEXT)?(ASSIGN (arrindex))? EOL?
+        : INTDCL ID (assignment)? EOL?
+        |  FLOATDCL ID (assignment)? EOL?
+        |  TEXTDCL ID (assignment)? EOL?
         |  TRUTHDCL ID (ASSIGN (truthexpr))?(ASSIGN (arrindex))? EOL?
         |  type ARRDCL ID (ASSIGN LCB arrelems RCB)? EOL? ;
 
