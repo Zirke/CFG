@@ -3,8 +3,9 @@ parser grammar PyTrun;
 options { tokenVocab=PyTrunLexer; }
 
 start
-        : (functiondcl | stmt /*| BLOCKCOMMENT*/)* EOF?;
-
+        :  stmts EOF?; //(functiondcl | stmt)*
+stmts
+        : stmt (EOL stmt)+;
 stmt
         : dcl
         | ifstmt
@@ -16,6 +17,7 @@ stmt
         | assignment
         | arradd
         | arrindex
+        | functiondcl
         //| BLOCKCOMMENT
         | EOL ;
 
