@@ -5,7 +5,7 @@ options { tokenVocab=PyTrunLexer; }
 start
         :  stmts EOF?; //(functiondcl | stmt)*
 stmts
-        : stmt (EOL stmt)+;
+        : stmt (EOL stmt)*;
 stmt
         : dcl
         | ifstmt
