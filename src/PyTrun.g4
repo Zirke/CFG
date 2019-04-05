@@ -26,11 +26,11 @@ functiondcl
         | FUNCTION ID LPAR paramlist RPAR stmtblock ;
 
 dcl
-        : INTDCL ID (assignment)? EOL?
-        |  FLOATDCL ID (assignment)? EOL?
-        |  TEXTDCL ID (assignment)? EOL?
-        |  TRUTHDCL ID (ASSIGN (truthexpr))?(ASSIGN (arrindex))? EOL?
-        |  type ARRDCL ID (ASSIGN LCB arrelems RCB)? EOL? ;
+        : INTDCL ID (assignment)?
+        |  FLOATDCL ID (assignment)?
+        |  TEXTDCL ID (assignment)?
+        |  TRUTHDCL ID (ASSIGN (truthexpr))?(ASSIGN (arrindex))?
+        |  type ARRDCL ID (ASSIGN LCB arrelems RCB)?;
 
 truedcl
         : INTDCL ID
@@ -59,7 +59,7 @@ fromstmt
         : FROM LPAR value (UPTO | DOWNTO) value RPAR stmtblock ;
 
 returnstmt
-        : RETURN (value | truthexpr)* ;
+        : RETURN (value | truthexpr) ;
 
 assignment
         : (ID ASSIGN value
