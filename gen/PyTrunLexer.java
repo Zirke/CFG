@@ -1,4 +1,4 @@
-// Generated from C:\Users\Zirke\Documents\JavaProjects\CFG\src\PyTrunLexer.g4 by ANTLR 4.7.2
+// Generated from C:\Users\Abiram Mohanaraj\Documents\GitHub\CFG\src\PyTrunLexer.g4 by ANTLR 4.7.2
 import org.antlr.v4.runtime.Lexer;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.Token;
@@ -17,7 +17,7 @@ public class PyTrunLexer extends Lexer {
 		new PredictionContextCache();
 	public static final int
 		INTDCL=1, FLOATDCL=2, TRUTHDCL=3, TEXTDCL=4, ARRDCL=5, LPAR=6, RPAR=7, 
-		TIMES=8, DIVIDES=9, PLUS=10, MINUS=11, AND=12, OR=13, NOT=14, TRUTHID=15, 
+		TIMES=8, DIVIDES=9, PLUS=10, MINUS=11, AND=12, OR=13, NOT=14, TRUTHVAL=15, 
 		EQUALS=16, GRTHAN=17, LESSTHAN=18, IF=19, ELSE=20, WHILE=21, DO=22, FROM=23, 
 		REPEAT=24, UNTIL=25, THEN=26, UPTO=27, DOWNTO=28, COMMA=29, RETURN=30, 
 		RETURNS=31, FUNCTION=32, ELEMENT=33, ASSIGN=34, LCB=35, RCB=36, EOL=37, 
@@ -33,11 +33,11 @@ public class PyTrunLexer extends Lexer {
 	private static String[] makeRuleNames() {
 		return new String[] {
 			"INTDCL", "FLOATDCL", "TRUTHDCL", "TEXTDCL", "ARRDCL", "LPAR", "RPAR", 
-			"TIMES", "DIVIDES", "PLUS", "MINUS", "AND", "OR", "NOT", "TRUTHID", "EQUALS", 
-			"GRTHAN", "LESSTHAN", "IF", "ELSE", "WHILE", "DO", "FROM", "REPEAT", 
-			"UNTIL", "THEN", "UPTO", "DOWNTO", "COMMA", "RETURN", "RETURNS", "FUNCTION", 
-			"ELEMENT", "ASSIGN", "LCB", "RCB", "EOL", "FNUM", "INUM", "ID", "TEXT", 
-			"BLOCKCOMMENT", "WS", "UNICODE", "NEWLINE"
+			"TIMES", "DIVIDES", "PLUS", "MINUS", "AND", "OR", "NOT", "TRUTHVAL", 
+			"EQUALS", "GRTHAN", "LESSTHAN", "IF", "ELSE", "WHILE", "DO", "FROM", 
+			"REPEAT", "UNTIL", "THEN", "UPTO", "DOWNTO", "COMMA", "RETURN", "RETURNS", 
+			"FUNCTION", "ELEMENT", "ASSIGN", "LCB", "RCB", "EOL", "FNUM", "INUM", 
+			"ID", "TEXT", "BLOCKCOMMENT", "WS", "UNICODE", "NEWLINE"
 		};
 	}
 	public static final String[] ruleNames = makeRuleNames();
@@ -55,7 +55,7 @@ public class PyTrunLexer extends Lexer {
 	private static String[] makeSymbolicNames() {
 		return new String[] {
 			null, "INTDCL", "FLOATDCL", "TRUTHDCL", "TEXTDCL", "ARRDCL", "LPAR", 
-			"RPAR", "TIMES", "DIVIDES", "PLUS", "MINUS", "AND", "OR", "NOT", "TRUTHID", 
+			"RPAR", "TIMES", "DIVIDES", "PLUS", "MINUS", "AND", "OR", "NOT", "TRUTHVAL", 
 			"EQUALS", "GRTHAN", "LESSTHAN", "IF", "ELSE", "WHILE", "DO", "FROM", 
 			"REPEAT", "UNTIL", "THEN", "UPTO", "DOWNTO", "COMMA", "RETURN", "RETURNS", 
 			"FUNCTION", "ELEMENT", "ASSIGN", "LCB", "RCB", "EOL", "FNUM", "INUM", 
