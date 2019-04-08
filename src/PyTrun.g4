@@ -3,19 +3,21 @@ parser grammar PyTrun;
 options { tokenVocab=PyTrunLexer; }
 
 start
-        : (functiondcl | stmt /*| BLOCKCOMMENT*/)* EOF?;
-
+        :  stmts EOF?; //(functiondcl | stmt)*
+stmts
+        : stmt (EOL stmt)*;
 stmt
         : dcl
         | ifstmt
         | whilestmt
         | returnstmt
-        | functioncall EOL? //A bit weird, only stmt that needs EOL, as it can be a statement as well as part of an expr
+        | functioncall //A bit weird, only stmt that needs EOL, as it can be a statement as well as part of an expr
         | repeatuntilstmt
         | fromstmt
         | assignment
         | arradd
         | arrindex
+        | functiondcl
         //| BLOCKCOMMENT
         | EOL ;
 
@@ -24,11 +26,11 @@ functiondcl
         | FUNCTION ID LPAR paramlist RPAR stmtblock ;
 
 dcl
-        : INTDCL ID (assignment)? EOL?
-        |  FLOATDCL ID (assignment)? EOL?
-        |  TEXTDCL ID (assignment)? EOL?
-        |  TRUTHDCL ID (ASSIGN (truthexpr))?(ASSIGN (arrindex))? EOL?
-        |  type ARRDCL ID (ASSIGN LCB arrelems RCB)? EOL? ;
+        : INTDCL ID (assignment)?
+        |  FLOATDCL ID (assignment)?
+        |  TEXTDCL ID (assignment)?
+        |  TRUTHDCL ID (ASSIGN (truthexpr))?(ASSIGN (arrindex))?
+        |  type ARRDCL ID (ASSIGN LCB arrelems RCB)?;
 
 truedcl
         : INTDCL ID
@@ -57,7 +59,7 @@ fromstmt
         : FROM LPAR value (UPTO | DOWNTO) value RPAR stmtblock ;
 
 returnstmt
-        : RETURN (value | truthexpr)* ;
+        : RETURN (value | truthexpr) ;
 
 assignment
         : (ID ASSIGN value
