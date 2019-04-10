@@ -1,4 +1,4 @@
-// Generated from C:/Users/Zirke/Documents/JavaProjects/CFG/src\PyTrun.g4 by ANTLR 4.7.2
+// Generated from C:/Users/Abiram Mohanaraj/Documents/GitHub/CFG/src\PyTrun.g4 by ANTLR 4.7.2
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
 /**
@@ -15,6 +15,12 @@ public interface PyTrunVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitStart(PyTrun.StartContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link PyTrun#stmts}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitStmts(PyTrun.StmtsContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link PyTrun#stmt}.
 	 * @param ctx the parse tree
@@ -93,6 +99,12 @@ public interface PyTrunVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitValue(PyTrun.ValueContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link PyTrun#expr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitExpr(PyTrun.ExprContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link PyTrun#arithmexpr}.
 	 * @param ctx the parse tree
