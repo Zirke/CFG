@@ -21,29 +21,29 @@ public class BuildASTVisitor extends AbstractParseTreeVisitor<AbstractNode> impl
 
 	@Override public AbstractNode visitStmt(PyTrun.StmtContext ctx) {
 		Statement stmt = null;
-		/*if( ctx.class == PyTrun.DclContext.class){
+		if( null != ctx.dcl()){
 			stmt = (Statement) visitDcl(ctx.dcl());
-		}else if(ctx.class == PyTrun.IfstmtContext.class){
+		}else if(null != ctx.ifstmt()){
 			stmt = (Statement) visitIfstmt(ctx.ifstmt());
-		}else if(ctx.class == PyTrun.WhilestmtContext.class){
+		}else if(null != ctx.whilestmt()){
 			stmt = (Statement) visitWhilestmt(ctx.whilestmt());
-		}else if(ctx.class == PyTrun.ReturnstmtContext.class){
+		}else if(null != ctx.returnstmt()){
 			stmt = (Statement) visitReturnstmt(ctx.returnstmt());
-		}else if(ctx.class == PyTrun.FunctioncallContext.class){
+		}else if(null != ctx.functioncall()){
 			stmt = (Statement) visitFunctioncall(ctx.functioncall());
-		}else if(ctx.class == PyTrun.RepeatuntilstmtContext.class){
+		}else if(null != ctx.repeatuntilstmt()){
 			stmt = (Statement) visitRepeatuntilstmt(ctx.repeatuntilstmt());
-		}else if(ctx.class == PyTrun.FromstmtContext.class){
+		}else if(null != ctx.fromstmt()){
 			stmt = (Statement) visitFromstmt(ctx.fromstmt());
-		}else if(ctx.class == PyTrun.AssignmentContext.class){
+		}else if(null != ctx.assignment()){
 			stmt = (Statement) visitAssignment(ctx.assignment());
-		}else if(ctx.class == PyTrun.ArraddContext.class){
+		}else if(null != ctx.arradd()){
 			stmt = (Statement) visitArradd(ctx.arradd());
-		}else if(ctx.class == PyTrun.ArrindexContext.class){
+		}else if(null != ctx.arrindex()){
 			stmt = (Statement) visitArrindex(ctx.arrindex());
-		}else if(ctx.class == PyTrun.FunctiondclContext.class){
+		}else if(null != ctx.functiondcl()){
 			stmt = (Statement) visitFunctiondcl(ctx.functiondcl());
-		}*/
+		}
 		return stmt;
 	}
 
@@ -53,7 +53,23 @@ public class BuildASTVisitor extends AbstractParseTreeVisitor<AbstractNode> impl
 
 	}
 
-	@Override public AbstractNode visitDcl(PyTrun.DclContext ctx) { return visitChildren(ctx); }
+	@Override public AbstractNode visitDcl(PyTrun.DclContext ctx) {
+		Identifier varName = new Identifier(ctx.ID().toString());
+
+		if(ctx.ARRDCL() != null){
+			return null;//for now untill implementation.
+		}else if(ctx.FLOATDCL() != null){
+			return new floatDeclaration(varName,(Statement) visitDclValue(ctx.dclValue()));
+		} else if(ctx.INTDCL() != null){
+			return new IntDeclaration(varName, (Statement) visitDclValue(ctx.dclValue()));
+		}else if(ctx.TEXTDCL() != null){
+			return new TextDeclaration(varName, (Statement) visitDclValue(ctx.dclValue()));
+		}else if(ctx.TRUTHDCL() != null){
+			return new TruthDeclaration(varName, (TruthOperator) visitTruthexpr(ctx.truthexpr()));
+		}else{
+			return null;
+		}
+	}
 
 
 	@Override public AbstractNode visitTruedcl(PyTrun.TruedclContext ctx) { return visitChildren(ctx); }
@@ -86,4 +102,13 @@ public class BuildASTVisitor extends AbstractParseTreeVisitor<AbstractNode> impl
 	@Override public AbstractNode visitType(PyTrun.TypeContext ctx) { return visitChildren(ctx); }
 	@Override public AbstractNode visitTypes(PyTrun.TypesContext ctx) { return visitChildren(ctx); }
 	@Override public AbstractNode visitStmtend(PyTrun.StmtendContext ctx) { return visitChildren(ctx); }
+
+
+	//need to be placed in a more appropriate place.
+	@Override
+	public AbstractNode visitDclValue(PyTrun.DclValueContext ctx) {
+
+
+		return null;
+	}
 }
