@@ -1,12 +1,14 @@
 import org.antlr.v4.runtime.tree.AbstractParseTreeVisitor;
+import org.antlr.v4.runtime.tree.ParseTree;
+import org.antlr.v4.runtime.tree.TerminalNode;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
 public class BuildASTVisitor extends AbstractParseTreeVisitor<AbstractNode> implements PyTrunVisitor<AbstractNode> {
 
 	@Override public AbstractNode visitStart(PyTrun.StartContext ctx) {
-		//return visitChildren(ctx);
 		return visit(ctx.stmts());
 	}
 
@@ -48,7 +50,7 @@ public class BuildASTVisitor extends AbstractParseTreeVisitor<AbstractNode> impl
 	}
 
 	@Override public AbstractNode visitFunctiondcl(PyTrun.FunctiondclContext ctx) {
-		Identifier functionName = new Identifier( ctx.ID().toString());
+		Identifier functionName = new Identifier( ctx.ID().getText());
 		return visitChildren(ctx);
 
 	}
@@ -63,7 +65,7 @@ public class BuildASTVisitor extends AbstractParseTreeVisitor<AbstractNode> impl
 		} else if(ctx.INTDCL() != null){
 			return new IntDeclaration(varName, (Statement) visitDclValue(ctx.dclValue()));
 		}else if(ctx.TEXTDCL() != null){
-			return new TextDeclaration(varName, (Statement) visitDclValue(ctx.dclValue()));
+			return new TextDeclaration(varName, (Value)visitDclValue(ctx.dclValue()));
 		}else if(ctx.TRUTHDCL() != null){
 			return new TruthDeclaration(varName, (TruthOperator) visitTruthexpr(ctx.truthexpr()));
 		}else{
@@ -82,15 +84,96 @@ public class BuildASTVisitor extends AbstractParseTreeVisitor<AbstractNode> impl
 	@Override public AbstractNode visitFromstmt(PyTrun.FromstmtContext ctx) { return visitChildren(ctx); }
 	@Override public AbstractNode visitReturnstmt(PyTrun.ReturnstmtContext ctx) { return visitChildren(ctx); }
 	@Override public AbstractNode visitAssignment(PyTrun.AssignmentContext ctx) { return visitChildren(ctx); }
-	@Override public AbstractNode visitValue(PyTrun.ValueContext ctx) { return visitChildren(ctx); }
-	@Override public AbstractNode visitExpr(PyTrun.ExprContext ctx) { return visitChildren(ctx); }
-	@Override public AbstractNode visitArithmexpr(PyTrun.ArithmexprContext ctx) { return visitChildren(ctx); }
+
+	@Override public AbstractNode visitValue(PyTrun.ValueContext ctx) {
+		if(ctx.arithmexpr() != null){
+			return visitArithmexpr(ctx.arithmexpr());
+		}else if(ctx.functioncall() != null){
+			return visitFunctioncall(ctx.functioncall());
+		}else if(ctx.ID() != null){
+			return new Identifier(ctx.ID().getText());
+		}
+		return null;
+	}
+
+	@Override public AbstractNode visitExpr(PyTrun.ExprContext ctx) {
+		if(ctx.append() != null){
+			System.out.println("hello");
+			return visitAppend(ctx.append());
+		}else if(ctx.truthexpr() != null){
+			return visitTruthexpr(ctx.truthexpr());
+		}else if(ctx.arithmexpr() != null){
+			return visitArithmexpr(ctx.arithmexpr());
+		}
+
+		return null;
+	}
+
+	//Arithmetic expression visit methods
+	@Override public AbstractNode visitArithmexpr(PyTrun.ArithmexprContext ctx) {
+		ArrayList<ArithmOperator> plusMinus = new ArrayList<>();
+		List<PyTrun.MultexprContext> exprs = ctx.multexpr();
+		for(ParseTree x : ctx.children){
+				 if(x.getText().equals("+")){
+					 plusMinus.add(new Plus());
+				 }else if(x.getText().equals("-")){
+				 	 plusMinus.add(new Minus());
+				 }
+		}
+		if(plusMinus.isEmpty()){
+			return visitMultexpr(ctx.multexpr(0));
+		}else{
+
+			plusMinus.get(0).left = (Value) visitMultexpr(exprs.get(0));
+			exprs.remove(0);
+			if(plusMinus.size() > 1){
+			    plusMinus.get(0).right = plusMinus.get(1);
+			    plusMinus.get(1).left =  (Value) visitMultexpr(exprs.get(0));
+			    exprs.remove(0);
+			}
+			while (plusMinus.size() > 1){
+
+
+			}
+		}
+		System.out.println(ctx.children.size());
+		return null;
+	}
 	@Override public AbstractNode visitMultexpr(PyTrun.MultexprContext ctx) { return visitChildren(ctx); }
 	@Override public AbstractNode visitParexpr(PyTrun.ParexprContext ctx) { return visitChildren(ctx); }
+
+
+
+
+	//Truth expression methods
 	@Override public AbstractNode visitTruthexpr(PyTrun.TruthexprContext ctx) { return visitChildren(ctx); }
 	@Override public AbstractNode visitLogicalexpr(PyTrun.LogicalexprContext ctx) { return visitChildren(ctx); }
 	@Override public AbstractNode visitRelationalexpr(PyTrun.RelationalexprContext ctx) { return visitChildren(ctx); }
-	@Override public AbstractNode visitAppend(PyTrun.AppendContext ctx) { return visitChildren(ctx); }
+
+
+	//needs to be tested
+	@Override public AbstractNode visitAppend(PyTrun.AppendContext ctx) {
+		Value left = null;
+		Value right = null;
+		if(ctx.TEXT() != null){
+			left = new TextLiteral( ctx.TEXT().get(0).getText());
+			if(ctx.TEXT().size() == 2){
+				right = new TextLiteral( ctx.TEXT().get(1).getText());
+				return new Plus("Append", left, right);
+			}else{
+				right = new Identifier(ctx.ID(0).toString());
+				return new Plus("Append", left, right);
+			}
+		}/*else if(ctx.ID() != null){   //this will never happen as an arithmetic expression instead.
+			   left = new Identifier(ctx.ID().get(0).getText());
+			   right = new Identifier(ctx.ID().get(1).getText());
+			   return new Append("Append", left, right);
+		}*/
+
+		return null;
+	}
+
+
 	@Override public AbstractNode visitArrelems(PyTrun.ArrelemsContext ctx) { return visitChildren(ctx); }
 	@Override public AbstractNode visitArrindex(PyTrun.ArrindexContext ctx) { return visitChildren(ctx); }
 	@Override public AbstractNode visitArradd(PyTrun.ArraddContext ctx) { return visitChildren(ctx); }
@@ -108,6 +191,13 @@ public class BuildASTVisitor extends AbstractParseTreeVisitor<AbstractNode> impl
 	@Override
 	public AbstractNode visitDclValue(PyTrun.DclValueContext ctx) {
 
+		if(ctx.TEXT() != null){
+			return new TextLiteral(ctx.TEXT().getText());
+		}else if(ctx.value() != null){
+			return visitValue(ctx.value()); //needs to return
+		}else if(ctx.expr() != null){
+			return visitExpr(ctx.expr()); //needs to return
+		}
 
 		return null;
 	}

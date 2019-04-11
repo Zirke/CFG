@@ -44,11 +44,11 @@ class floatDeclaration extends Statement{
 
 class TextDeclaration extends Statement{
     Identifier id;
-    Statement stm;
+    Value val;
 
-    public TextDeclaration(Identifier id, Statement stm) {
+    public TextDeclaration(Identifier id, Value stm) {
         this.id = id;
-        this.stm = stm;
+        this.val = stm;
     }
 }
 
@@ -350,22 +350,33 @@ abstract class ArithmOperator extends Operator implements Value{
     Value left;
     Value right;
 
+
+
     public ArithmOperator(String spelling, Value left, Value right) {
         super(spelling);
         this.left = left;
         this.right = right;
     }
+
+    public ArithmOperator() {
+    }
 }
 
-class Plus extends ArithmOperator{
+class Plus extends ArithmOperator{ //can also be used with truth values and in that case is not an arithmetic operation.
     public Plus(String spelling, Value left, Value right) {
         super(spelling, left, right);
+    }
+
+    public Plus() {
     }
 }
 
 class Minus extends ArithmOperator{
     public Minus(String spelling, Value left, Value right) {
         super(spelling, left, right);
+    }
+
+    public Minus() {
     }
 }
 
@@ -387,6 +398,16 @@ class ArithmParenthesis extends ArithmOperator{
     }
 }
 
+/*class Append extends Operator implements Value{
+    Value left;
+    Value right;
+
+    public Append(String spelling, Value left, Value right) {
+        super(spelling);
+        this.left = left;
+        this.right = right;
+    }
+}*/
 
 //Terminals
 abstract class Terminal extends AbstractNode{
@@ -394,6 +415,9 @@ abstract class Terminal extends AbstractNode{
 
     public Terminal(String spelling) {
         this.spelling = spelling;
+    }
+
+    public Terminal() {
     }
 }
 
@@ -455,6 +479,9 @@ class Downto extends FromKeyword{
 abstract class Operator extends Terminal{
     public Operator(String spelling) {
         super(spelling);
+    }
+
+    public Operator() {
     }
 }
 
