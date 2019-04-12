@@ -29,12 +29,11 @@ dcl
         : INTDCL ID dclValue?
         |  FLOATDCL ID dclValue?
         |  TEXTDCL ID dclValue?
-        |  TRUTHDCL ID (ASSIGN (truthexpr))?(ASSIGN (arrindex))?
+        |  TRUTHDCL ID (ASSIGN truthexpr)?
         |  type ARRDCL ID (ASSIGN LCB arrelems RCB)?;
 
 dclValue
         :( ASSIGN value
-        |  ASSIGN arrindex
         |  ASSIGN TEXT
         |  ASSIGN expr);
 

@@ -75,6 +75,18 @@ public class PyTrunBaseListener implements PyTrunListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterDclValue(PyTrun.DclValueContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDclValue(PyTrun.DclValueContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterTruedcl(PyTrun.TruedclContext ctx) { }
 	/**
 	 * {@inheritDoc}

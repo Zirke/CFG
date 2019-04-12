@@ -40,6 +40,12 @@ public interface PyTrunVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitDcl(PyTrun.DclContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link PyTrun#dclValue}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDclValue(PyTrun.DclValueContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link PyTrun#truedcl}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

@@ -57,6 +57,16 @@ public interface PyTrunListener extends ParseTreeListener {
 	 */
 	void exitDcl(PyTrun.DclContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link PyTrun#dclValue}.
+	 * @param ctx the parse tree
+	 */
+	void enterDclValue(PyTrun.DclValueContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PyTrun#dclValue}.
+	 * @param ctx the parse tree
+	 */
+	void exitDclValue(PyTrun.DclValueContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link PyTrun#truedcl}.
 	 * @param ctx the parse tree
 	 */
