@@ -18,6 +18,9 @@ stmt
         | arradd
         | arrindex
         | functiondcl
+        | drive
+        | turnleft
+        | turnright
         //| BLOCKCOMMENT
         | EOL ;
 
@@ -96,14 +99,14 @@ truthexpr
         : logicalexpr;
 
 logicalexpr
-        :  truth (OR logicalexpr | AND logicalexpr)* //and or
-        | (NOT)? truth
-        | relationalexpr
+        :  (NOT)? relationalexpr ((OR| AND) (NOT)? relationalexpr)* //and or
+        //| relationalexpr
         ;
 
 relationalexpr
         :   value ((EQUALS  | GRTHAN | LESSTHAN)  value)+
         |   LPAR logicalexpr RPAR //grt less equals
+        |   truth
         ;
 append
         : (TEXT | ID) PLUS (TEXT | ID) ;
@@ -116,6 +119,12 @@ arrindex
 
 arradd
         : ID ELEMENT INUM ASSIGN types ;
+
+drive   : DRIVE LPAR value RPAR;
+
+turnleft   : TURNLEFT LPAR value RPAR;
+
+turnright   : TURNRIGHT LPAR value RPAR;
 
 nums
         : INUM
@@ -145,6 +154,3 @@ types
         : nums
         | TEXT
         | TRUTHVAL ;
-
-stmtend
-        : EOL | EOF ; //Hilfen please!!!
