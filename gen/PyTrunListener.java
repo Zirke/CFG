@@ -1,4 +1,4 @@
-// Generated from C:/Users/Abiram Mohanaraj/Documents/GitHub/CFG/src\PyTrun.g4 by ANTLR 4.7.2
+// Generated from C:/Users/Zirke/Documents/JavaProjects/CFG/src\PyTrun.g4 by ANTLR 4.7.2
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
 /**
@@ -277,6 +277,36 @@ public interface PyTrunListener extends ParseTreeListener {
 	 */
 	void exitArradd(PyTrun.ArraddContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link PyTrun#drive}.
+	 * @param ctx the parse tree
+	 */
+	void enterDrive(PyTrun.DriveContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PyTrun#drive}.
+	 * @param ctx the parse tree
+	 */
+	void exitDrive(PyTrun.DriveContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link PyTrun#turnleft}.
+	 * @param ctx the parse tree
+	 */
+	void enterTurnleft(PyTrun.TurnleftContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PyTrun#turnleft}.
+	 * @param ctx the parse tree
+	 */
+	void exitTurnleft(PyTrun.TurnleftContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link PyTrun#turnright}.
+	 * @param ctx the parse tree
+	 */
+	void enterTurnright(PyTrun.TurnrightContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PyTrun#turnright}.
+	 * @param ctx the parse tree
+	 */
+	void exitTurnright(PyTrun.TurnrightContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link PyTrun#nums}.
 	 * @param ctx the parse tree
 	 */
@@ -346,14 +376,4 @@ public interface PyTrunListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitTypes(PyTrun.TypesContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link PyTrun#stmtend}.
-	 * @param ctx the parse tree
-	 */
-	void enterStmtend(PyTrun.StmtendContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link PyTrun#stmtend}.
-	 * @param ctx the parse tree
-	 */
-	void exitStmtend(PyTrun.StmtendContext ctx);
 }

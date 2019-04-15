@@ -25,7 +25,7 @@ stmt
         | EOL ;
 
 functiondcl
-        : FUNCTION ID RETURNS type LPAR paramlist RPAR LCB stmt* returnstmt RCB
+        : FUNCTION ID RETURNS (type | ARRDCL) LPAR paramlist RPAR LCB stmt* returnstmt RCB
         | FUNCTION ID LPAR paramlist RPAR stmtblock ;
 
 dcl
@@ -33,7 +33,7 @@ dcl
         |  FLOATDCL ID dclValue?
         |  TEXTDCL ID dclValue?
         |  TRUTHDCL ID (ASSIGN truthexpr)?
-        |  type ARRDCL ID (ASSIGN LCB arrelems RCB)?;
+        |  type ARRDCL ID (ASSIGN ((functioncall) | LCB arrelems RCB))?;
 
 dclValue
         :( ASSIGN value
@@ -67,7 +67,7 @@ fromstmt
         : FROM LPAR value (UPTO | DOWNTO) value RPAR stmtblock ;
 
 returnstmt
-        : RETURN (value | truthexpr) ;
+        : RETURN (value | truthexpr) EOL* ;
 
 assignment
         : ID ( ASSIGN value
@@ -79,6 +79,7 @@ assignment
 value
         : arithmexpr
         | functioncall
+        | arrindex
         | ID ;
 
 expr
@@ -118,7 +119,7 @@ arrindex
         : ID ELEMENT INUM ;
 
 arradd
-        : ID ELEMENT INUM ASSIGN types ;
+        : ID ELEMENT (INUM | ID) ASSIGN types ;
 
 drive   : DRIVE LPAR value RPAR;
 

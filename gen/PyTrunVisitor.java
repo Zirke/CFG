@@ -1,4 +1,4 @@
-// Generated from C:/Users/Abiram Mohanaraj/Documents/GitHub/CFG/src\PyTrun.g4 by ANTLR 4.7.2
+// Generated from C:/Users/Zirke/Documents/JavaProjects/CFG/src\PyTrun.g4 by ANTLR 4.7.2
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
 /**
@@ -172,6 +172,24 @@ public interface PyTrunVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitArradd(PyTrun.ArraddContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link PyTrun#drive}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDrive(PyTrun.DriveContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link PyTrun#turnleft}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitTurnleft(PyTrun.TurnleftContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link PyTrun#turnright}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitTurnright(PyTrun.TurnrightContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link PyTrun#nums}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -213,10 +231,4 @@ public interface PyTrunVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitTypes(PyTrun.TypesContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link PyTrun#stmtend}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitStmtend(PyTrun.StmtendContext ctx);
 }
