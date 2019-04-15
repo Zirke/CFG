@@ -36,6 +36,9 @@ ELEMENT  : 'element' ;
 ASSIGN   : 'is' ;
 LCB      : '{' ;
 RCB      : '}' ;
+DRIVE    : 'drive';
+TURNLEFT    : 'turnleft';
+TURNRIGHT    : 'turnright';
 EOL      : NEWLINE+ ; //for newline
 FNUM     : ([0-9])+ '.' ([0-9])+ ;
 INUM     : ([0-9])+ ;

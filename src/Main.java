@@ -6,7 +6,7 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
 
-        ANTLRInputStream input = new ANTLRInputStream("5 + 2 - 2");
+        ANTLRInputStream input = new ANTLRInputStream("id AND sd AND ds");
 
         PyTrunLexer x = new PyTrunLexer((input));
         CommonTokenStream tokens = new CommonTokenStream(x);
@@ -23,7 +23,7 @@ public class Main {
         //System.out.println(((PyTrun.StmtContext) tree).ifstmt());
         BuildASTVisitor visitor = new BuildASTVisitor();
         AbstractNode ast = visitor.visit(tree);
-        System.out.println(ast);
+        //System.out.println(ast);
     }
 
 }

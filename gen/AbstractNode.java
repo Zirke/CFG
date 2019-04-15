@@ -384,15 +384,21 @@ class Times extends ArithmOperator{
     public Times(String spelling, Value left, Value right) {
         super(spelling, left, right);
     }
+
+    public Times() {
+    }
 }
 
 class Divide extends ArithmOperator{
     public Divide(String spelling, Value left, Value right) {
         super(spelling, left, right);
     }
+
+    public Divide() {
+    }
 }
 
-class ArithmParenthesis extends ArithmOperator{
+class ArithmParenthesis extends ArithmOperator{ //right should be null
     public ArithmParenthesis(String spelling, Value left, Value right) {
         super(spelling, left, right);
     }
