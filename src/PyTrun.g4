@@ -3,7 +3,7 @@ parser grammar PyTrun;
 options { tokenVocab=PyTrunLexer; }
 
 start
-        :  stmts EOF?; //(functiondcl | stmt)*
+        : stmts EOL* EOF?; //(functiondcl | stmt)*
 stmts
         : stmt (EOL stmt)*;
 stmt
