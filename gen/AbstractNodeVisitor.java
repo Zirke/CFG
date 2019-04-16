@@ -1,9 +1,8 @@
-import abstractSyntaxTree;
-
 abstract class AbstractNodeVisitor<T>{
     public abstract T visit(AbstractNode node);
     public abstract T visit(And node);
     public abstract T visit(ArithmOperator node);
+    public abstract T visit(ArithmParenthesis node);
     public abstract T visit(ArrayAssignment node);
     public abstract T visit(ArrayDeclaration node);
     public abstract T visit(ArrayElementAddStatement node);
@@ -39,7 +38,6 @@ abstract class AbstractNodeVisitor<T>{
     public abstract T visit(RepeatStatement node);
     public abstract T visit(ReturnFunctionDeclaration node);
     public abstract T visit(SingleElementAssign node);
-    public abstract T visit(SingleElementAssign node);
     public abstract T visit(Statement node);
     public abstract T visit(StatementList node);
     public abstract T visit(Terminal node);
@@ -51,7 +49,6 @@ abstract class AbstractNodeVisitor<T>{
     public abstract T visit(TRUTHDCL node);
     public abstract T visit(TruthDeclaration node);
     public abstract T visit(TruthLiteral node);
-    public abstract T visit(TruthOperator node);
     public abstract T visit(TruthOperator node);
     public abstract T visit(TruthParenthesis node);
     public abstract T visit(Type node);

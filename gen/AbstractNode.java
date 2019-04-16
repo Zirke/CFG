@@ -73,41 +73,41 @@ class ArrayDeclaration extends Statement{
 }
 
 //assignments
-class IntAssignemnt extends Statement{
+class IntAssignment extends Statement{
     Identifier id;
     Value value; //needs arithmeritc expression
 
-    public IntAssignemnt(Identifier id, Value value) {
+    public IntAssignment(Identifier id, Value value) {
         this.id = id;
         this.value = value;
     }
 }
 
-class FloatAssignemnt extends Statement{
+class FloatAssignment extends Statement{
     Identifier id;
     Value value;
 
-    public FloatAssignemnt(Identifier id, Value value) {
+    public FloatAssignment(Identifier id, Value value) {
         this.id = id;
         this.value = value;
     }
 }
 
-class TextAssignemnt extends Statement{
+class TextAssignment extends Statement{
     Identifier id;
     TextLiteral text;
 
-    public TextAssignemnt(Identifier id, TextLiteral text) {
+    public TextAssignment(Identifier id, TextLiteral text) {
         this.id = id;
         this.text = text;
     }
 }
 
-class ArrayAssignemnt extends Statement{
+class ArrayAssignment extends Statement{
     Identifier id;
     ArrayAsmValue value;
 
-    public ArrayAssignemnt(Identifier id, ArrayAsmValue value) {
+    public ArrayAssignment(Identifier id, ArrayAsmValue value) {
         this.id = id;
         this.value = value;
     }
