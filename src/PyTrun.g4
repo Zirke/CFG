@@ -25,15 +25,15 @@ stmt
         | EOL ;
 
 functiondcl
-        : FUNCTION ID RETURNS (type | ARRDCL) LPAR paramlist RPAR LCB stmt* returnstmt RCB
-        | FUNCTION ID LPAR paramlist RPAR stmtblock ;
+        : FUNCTION ID RETURNS (type | ARRDCL) LPAR (truedcl (COMMA truedcl)*)* RPAR LCB stmt* returnstmt RCB
+        | FUNCTION ID LPAR (truedcl (COMMA truedcl)*)* RPAR stmtblock ;
 
 dcl
         : INTDCL ID dclValue?
         |  FLOATDCL ID dclValue?
         |  TEXTDCL ID dclValue?
         |  TRUTHDCL ID (ASSIGN truthexpr)?
-        |  type ARRDCL ID (ASSIGN ((functioncall) | LCB arrelems RCB))?;
+        |  type ARRDCL ID (ASSIGN ((functioncall) | LCB (types (COMMA types)*)* RCB))?;
 
 dclValue
         :( ASSIGN value
@@ -47,10 +47,7 @@ truedcl
         | TRUTHDCL ID ;
 
 functioncall
-        : ID LPAR args RPAR;
-
-args
-        : (types (COMMA types)*)* ;
+        : ID LPAR (types (COMMA types)*)* RPAR;
 
 ifstmt
         : IF truthpar THEN stmtblock EOL*
@@ -74,7 +71,7 @@ assignment
         |  ASSIGN arrindex
         |  ASSIGN TEXT
         |  ASSIGN expr
-        |  ASSIGN LCB arrelems RCB) ;
+        |  ASSIGN LCB (types (COMMA types)*)* RCB) ;
 
 value
         : arithmexpr
@@ -105,18 +102,15 @@ logicalexpr
         ;
 
 relationalexpr
-        :   value ((EQUALS  | GRTHAN | LESSTHAN)  value)+
+        :   value ((EQUALS  | GRTHAN | LESSTHAN)  value)
         |   LPAR logicalexpr RPAR //grt less equals
         |   truth
         ;
 append
         : (TEXT | ID) PLUS (TEXT | ID) ;
 
-arrelems
-        : (types (COMMA types)*)* ;
-
 arrindex
-        : ID ELEMENT INUM ;
+        :  ID ELEMENT INUM;
 
 arradd
         : ID ELEMENT (INUM | ID) ASSIGN types ;
@@ -131,9 +125,6 @@ nums
         : INUM
         | FNUM
         | ID ;
-
-paramlist
-        : (truedcl (COMMA truedcl)*)* ;
 
 stmtblock
         : LCB stmt* RCB ;

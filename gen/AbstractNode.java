@@ -171,6 +171,24 @@ class IfStatement extends Statement{
         this.elseifs = elseifs;
         this.elsethen = elsethen;
     }
+
+    public IfStatement(TruthOperator truthVal, StatementList trueStm) {
+        this.truthVal = truthVal;
+        this.trueStm = trueStm;
+    }
+
+    public IfStatement(TruthOperator truthVal, StatementList trueStm, List<ElseIfStatement> elseifs) {
+        this.truthVal = truthVal;
+        this.trueStm = trueStm;
+        this.elseifs = elseifs;
+    }
+
+    public IfStatement(TruthOperator truthVal, StatementList trueStm, ElseThenStmt elsethen) {
+        this.truthVal = truthVal;
+        this.trueStm = trueStm;
+        this.elsethen = elsethen;
+    }
+
 }
 
 class ElseIfStatement{
@@ -239,32 +257,38 @@ class FunctionDeclaration extends Statement{
     }
 }
 
-class Parameter{
+class Parameter extends Terminal implements Value{
     Type paramType;
-    Identifier paramName;
+    //Identifier paramName;
 
-    public Parameter(Type paramType, Identifier paramName) {
+
+    public Parameter(Type paramType) {
         this.paramType = paramType;
-        this.paramName = paramName;
+        //this.paramName = paramName;
     }
 }
 
 class ReturnFunctionDeclaration extends FunctionDeclaration{
     Type returnType;
-    Value returnstm;
 
-    public ReturnFunctionDeclaration(Identifier functionName, List<Parameter> parameters, StatementList stmtBody, Type returnType, Value returnstm) {
+    public ReturnFunctionDeclaration(Identifier functionName, List<Parameter> parameters, StatementList stmtBody, Type returnType) {
         super(functionName, parameters, stmtBody);
         this.returnType = returnType;
-        this.returnstm = returnstm;
+
     }
 }
+class ReturnStatement extends AbstractNode{
+    Value val;
 
+    public ReturnStatement(Value val) {
+        this.val = val;
+    }
+}
 class FunctionCall extends Statement implements Value{
     Identifier functionName;
-    List<Parameter> arguments;
+    List<Value> arguments;
 
-    public FunctionCall(Identifier functionName, List<Parameter> arguments) {
+    public FunctionCall(Identifier functionName, List<Value> arguments) {
         this.functionName = functionName;
         this.arguments = arguments;
     }
@@ -279,30 +303,43 @@ interface Value{}
 }*/
 
 abstract class TruthOperator extends Operator implements Value{
+    Value lhs;
+    Value rhs;
+
     public TruthOperator(String spelling) {
         super(spelling);
+    }
+
+    public TruthOperator() {
+    }
+
+    public TruthOperator(Value lhs, Value rhs) {
+        this.lhs = lhs;
+        this.rhs = rhs;
     }
 }
 
 class And extends TruthOperator{
-    Value lhs;
-    Value rhs;
 
     public And(String spelling, Value lhs, Value rhs) {
         super(spelling);
         this.lhs = lhs;
         this.rhs = rhs;
     }
+
+    public And() {
+    }
 }
 
 class Or extends TruthOperator{
-    Value lhs;
-    Value rhs;
 
     public Or(String spelling, Value lhs, Value rhs) {
         super(spelling);
         this.lhs = lhs;
         this.rhs = rhs;
+    }
+
+    public Or() {
     }
 }
 
@@ -313,27 +350,41 @@ class Not extends TruthOperator{
         super(spelling);
         this.truth = truth;
     }
+
+    public Not() {
+    }
 }
 
 class GreaterThan extends TruthOperator{
-    Value left;
-    Value right;
 
     public GreaterThan(String spelling, Value left, Value right) {
         super(spelling);
-        this.left = left;
-        this.right = right;
+        this.lhs = left;
+        this.rhs = right;
+    }
+
+    public GreaterThan() {
     }
 }
 
 class LessThan extends TruthOperator{
-    Value left;
-    Value right;
 
     public LessThan(String spelling, Value left, Value right) {
         super(spelling);
-        this.left = left;
-        this.right = right;
+        this.lhs = left;
+        this.rhs = right;
+    }
+
+    public LessThan() {
+    }
+}
+
+class Equal extends TruthOperator{
+    public Equal() {
+    }
+
+    public Equal(Value lhs, Value rhs) {
+        super(lhs, rhs);
     }
 }
 
@@ -343,6 +394,9 @@ class TruthParenthesis extends TruthOperator{
     public TruthParenthesis(String spelling, Value expr) {
         super(spelling);
         this.expr = expr;
+    }
+
+    public TruthParenthesis() {
     }
 }
 
@@ -492,6 +546,12 @@ abstract class Operator extends Terminal{
 }
 
 abstract class Type extends AbstractNode{
+    Identifier id;
+
+    public Type(Identifier id) {
+        this.id = id;
+    }
+
     public Type() {
     }
 }
@@ -499,19 +559,35 @@ abstract class Type extends AbstractNode{
 class INTDCL extends Type{
     public INTDCL() {
     }
+
+    public INTDCL(Identifier id1){
+        this.id = id1;
+    }
 }
 
 class FLOATDCL extends Type{
     public FLOATDCL() {
+    }
+
+    public FLOATDCL(Identifier id) {
+        super(id);
     }
 }
 
 class TRUTHDCL extends Type{
     public TRUTHDCL() {
     }
+
+    public TRUTHDCL(Identifier id) {
+        super(id);
+    }
 }
 
 class TEXTDCL extends Type{
     public TEXTDCL() {
+    }
+
+    public TEXTDCL(Identifier id) {
+        super(id);
     }
 }

@@ -6,7 +6,7 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
 
-        ANTLRInputStream input = new ANTLRInputStream("id AND sd AND ds");
+        ANTLRInputStream input = new ANTLRInputStream("5>2");
 
         PyTrunLexer x = new PyTrunLexer((input));
         CommonTokenStream tokens = new CommonTokenStream(x);
