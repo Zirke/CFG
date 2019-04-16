@@ -417,11 +417,19 @@ public class BuildASTVisitor extends AbstractParseTreeVisitor<AbstractNode> impl
 	}
 
 	@Override public AbstractNode visitTruth(PyTrun.TruthContext ctx) {
+		if(ctx.ID() != null){
+			return new Identifier(ctx.ID().getText());
+		}else if(ctx.TRUTHVAL() != null){
+			return new TruthLiteral(ctx.TRUTHVAL().getText());
+		}else
+			return visitChildren(ctx);
+	}
+
+	@Override public AbstractNode visitType(PyTrun.TypeContext ctx) {
 
 		return visitChildren(ctx);
 	}
 
-	@Override public AbstractNode visitType(PyTrun.TypeContext ctx) { return visitChildren(ctx); }
 	@Override public AbstractNode visitTypes(PyTrun.TypesContext ctx) { return visitChildren(ctx); }
 
 

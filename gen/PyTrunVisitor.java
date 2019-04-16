@@ -1,4 +1,4 @@
-// Generated from C:/Users/Zirke/Documents/JavaProjects/CFG/src\PyTrun.g4 by ANTLR 4.7.2
+// Generated from C:/Users/Abiram Mohanaraj/Documents/GitHub/CFG/src\PyTrun.g4 by ANTLR 4.7.2
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
 /**
@@ -57,12 +57,6 @@ public interface PyTrunVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitFunctioncall(PyTrun.FunctioncallContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link PyTrun#args}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitArgs(PyTrun.ArgsContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link PyTrun#ifstmt}.
 	 * @param ctx the parse tree
@@ -154,12 +148,6 @@ public interface PyTrunVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitAppend(PyTrun.AppendContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link PyTrun#arrelems}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitArrelems(PyTrun.ArrelemsContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link PyTrun#arrindex}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -195,12 +183,6 @@ public interface PyTrunVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitNums(PyTrun.NumsContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link PyTrun#paramlist}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitParamlist(PyTrun.ParamlistContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link PyTrun#stmtblock}.
 	 * @param ctx the parse tree
