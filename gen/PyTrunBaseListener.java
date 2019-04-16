@@ -1,4 +1,4 @@
-// Generated from C:/Users/Zirke/Documents/JavaProjects/CFG/src\PyTrun.g4 by ANTLR 4.7.2
+// Generated from C:/Users/Abiram Mohanaraj/Documents/GitHub/CFG/src\PyTrun.g4 by ANTLR 4.7.2
 
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ErrorNode;
@@ -106,18 +106,6 @@ public class PyTrunBaseListener implements PyTrunListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitFunctioncall(PyTrun.FunctioncallContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterArgs(PyTrun.ArgsContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitArgs(PyTrun.ArgsContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -303,18 +291,6 @@ public class PyTrunBaseListener implements PyTrunListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterArrelems(PyTrun.ArrelemsContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitArrelems(PyTrun.ArrelemsContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterArrindex(PyTrun.ArrindexContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -382,18 +358,6 @@ public class PyTrunBaseListener implements PyTrunListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitNums(PyTrun.NumsContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterParamlist(PyTrun.ParamlistContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitParamlist(PyTrun.ParamlistContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

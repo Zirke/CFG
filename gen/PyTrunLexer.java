@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 // Generated from C:/Users/Zirke/Documents/JavaProjects/CFG/src\PyTrunLexer.g4 by ANTLR 4.7.2
+=======
+// Generated from C:\Users\Abiram Mohanaraj\Documents\GitHub\CFG\src\PyTrunLexer.g4 by ANTLR 4.7.2
+>>>>>>> 232ac38ca52eddfd2113822da7de08ed3f4cee75
 import org.antlr.v4.runtime.Lexer;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.Token;
