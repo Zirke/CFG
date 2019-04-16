@@ -50,10 +50,14 @@ TEXT
 
 
 
-BLOCKCOMMENT :   '#' .*? '#' EOL //A bit weird, non-greedy approach but #comment#text# works? Non-greedy should mean comment ends after 2nd #, read more regex.
-        -> skip ;
+
+
 
 WS : [ \t\u000C]+ -> skip ; //Unsure if \r\n should be in here as well, parser accepts multiple \n's as statement end/EOL atm
 
+COMMENT       : '/*' .*? '*/' -> skip ;
+LINE_COMMENT  : '#' .*? NEWLINE -> skip ;
+
 fragment UNICODE  :  '\u0000'..'\u00FF' ;
 fragment NEWLINE   : '\r' '\n' | '\n' | '\r';
+

@@ -1,11 +1,11 @@
-#Returns the number squared (a^2)#
+#Returns the number squared (a^2)
 function intSquared returns integer(integer a){
 
 	a is a * a
 
 	return a
 }
-#Returns the number to the power of p (b^p)#
+#Returns the number to the power of p (b^p)
 function intPower returns integer (integer b, integer p){
 
 	integer i is 0	
@@ -16,7 +16,7 @@ function intPower returns integer (integer b, integer p){
 	return b
 }
 
-#Returns the n'th fibonacci number#
+#Returns the n'th fibonacci number
 function fibNumber returns integer(integer n){
 	
 	integer i is 1
@@ -33,7 +33,7 @@ function fibNumber returns integer(integer n){
 	return nextTerm
 }
 
-#Returns an array with n fibonacci numbers#
+#Returns an array with n fibonacci numbers
 function fibArray returns array(integer n){
     
     integer i is 1
@@ -53,8 +53,15 @@ function fibArray returns array(integer n){
 
 }
 
-integer array fibNums is fibArray(10)
-integer fibNum1 is fibNumber(5)
-integer fibNum2 is fibNums element 10
+/* This section
+   assigns values
+   to variables */
 
-integer product is intSquared(fibNum1) + intPower(fibNum2, 3)
+integer array fibNums is fibArray(10)
+
+integer fibNum1 is fibNumber(5) #test
+
+integer fibNum2 is fibNums element 10 #test
+
+integer result is intSquared(fibNum1) + intPower(fibNum2, 3)  /* Square the 5th fibonacci number and add to it the 10th fibonacci number to the power of 3
+                                                              and assign the result to an int */

@@ -3,7 +3,7 @@ parser grammar PyTrun;
 options { tokenVocab=PyTrunLexer; }
 
 start
-        : stmts EOL* EOF?; //(functiondcl | stmt)*
+        : EOL* (stmts | functiondcl)* EOL* EOF?;
 stmts
         : stmt (EOL stmt)*;
 stmt
@@ -11,13 +11,12 @@ stmt
         | ifstmt
         | whilestmt
         | returnstmt
-        | functioncall //A bit weird, only stmt that needs EOL, as it can be a statement as well as part of an expr
+        | functioncall
         | repeatuntilstmt
         | fromstmt
         | assignment
         | arradd
         | arrindex
-        | functiondcl
         | drive
         | turnleft
         | turnright
@@ -25,7 +24,7 @@ stmt
         | EOL ;
 
 functiondcl
-        : FUNCTION ID RETURNS (type | ARRDCL) LPAR paramlist RPAR LCB stmt* returnstmt RCB
+        : FUNCTION ID RETURNS (type | ARRDCL) LPAR paramlist RPAR stmtblock
         | FUNCTION ID LPAR paramlist RPAR stmtblock ;
 
 dcl
