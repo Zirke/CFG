@@ -25,8 +25,8 @@ stmt
 
 functiondcl
 
-        : FUNCTION ID RETURNS (type | ARRDCL) LPAR paramlist RPAR stmtblock
-        | FUNCTION ID LPAR paramlist RPAR stmtblock ;
+        : FUNCTION ID RETURNS (type | ARRDCL) LPAR (truedcl (COMMA truedcl)*)* RPAR LCB stmt* RCB
+        | FUNCTION ID LPAR (truedcl (COMMA truedcl)*)* RPAR LCB stmt* RCB ;
 
 
 dcl
@@ -69,7 +69,7 @@ returnstmt
 
 assignment
         : ID ( ASSIGN value
-        |  ASSIGN arrindex
+        |  ELEMENT INUM ASSIGN value
         |  ASSIGN TEXT
         |  ASSIGN expr
         |  ASSIGN LCB (types (COMMA types)*)* RCB) ;

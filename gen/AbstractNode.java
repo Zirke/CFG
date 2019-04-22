@@ -64,16 +64,28 @@ class TruthDeclaration extends Statement{
 
 class ArrayDeclaration extends Statement{
     Identifier id;
-    List<Value> values;
+    Type type;
+    ArrayAsmValue values;
 
-    public ArrayDeclaration(Identifier id, List<Value> values) {
+    public ArrayDeclaration(Identifier id, ArrayAsmValue values, Type type) {
         this.id = id;
         this.values = values;
+        this.type = type;
     }
 }
 
 //assignments
-class IntAssignment extends Statement{
+class ValueAssignment extends Statement{
+    Identifier id;
+    Value value;
+
+    public ValueAssignment(Identifier id, Value value) {
+        this.id = id;
+        this.value = value;
+    }
+}
+
+/*class IntAssignment extends Statement{
     Identifier id;
     Value value; //needs arithmeritc expression
 
@@ -91,7 +103,7 @@ class FloatAssignment extends Statement{
         this.id = id;
         this.value = value;
     }
-}
+}*/
 
 class TextAssignment extends Statement{
     Identifier id;
@@ -147,10 +159,10 @@ class ArrayIndexStatement extends Statement{
 
 class ArrayElementAddStatement extends Statement{
     Identifier arrayName;
-    IntegerLiteral elementNumber;
+    Value elementNumber;
     Value value;
 
-    public ArrayElementAddStatement(Identifier arrayName, IntegerLiteral elementNumber, Value value) {
+    public ArrayElementAddStatement(Identifier arrayName, Value elementNumber, Value value) {
         this.arrayName = arrayName;
         this.elementNumber = elementNumber;
         this.value = value;
@@ -291,6 +303,31 @@ class FunctionCall extends Statement implements Value{
     public FunctionCall(Identifier functionName, List<Value> arguments) {
         this.functionName = functionName;
         this.arguments = arguments;
+    }
+}
+
+//Arduino statements
+class DriveStatement extends Statement{
+    Value val;
+
+    public DriveStatement(Value val) {
+        this.val = val;
+    }
+}
+
+class TurnLeftStatement extends Statement{
+    Value val;
+
+    public TurnLeftStatement(Value val) {
+        this.val = val;
+    }
+}
+
+class TurnRightStatement extends Statement{
+    Value val;
+
+    public TurnRightStatement(Value val) {
+        this.val = val;
     }
 }
 

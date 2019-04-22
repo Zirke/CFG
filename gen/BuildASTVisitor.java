@@ -6,7 +6,14 @@ import java.util.List;
 public class BuildASTVisitor extends AbstractParseTreeVisitor<AbstractNode> implements PyTrunVisitor<AbstractNode> {
 
 	@Override public AbstractNode visitStart(PyTrun.StartContext ctx) {
-		return visit(ctx.stmts());
+		ArrayList<Statement> statements = new ArrayList<>();
+		for (PyTrun.StmtsContext x: ctx.stmts()) {
+			statements.addAll(((StatementList)visitStmts(x)).stmts);
+		}
+		for (PyTrun.FunctiondclContext x: ctx.functiondcl()) {
+			statements.add((Statement) visitFunctiondcl(x));
+		}
+		return new StatementList(statements);
 	}
 
 	@Override public AbstractNode visitStmts(PyTrun.StmtsContext ctx) {
@@ -40,13 +47,12 @@ public class BuildASTVisitor extends AbstractParseTreeVisitor<AbstractNode> impl
 			stmt = (Statement) visitArradd(ctx.arradd());
 		}else if(null != ctx.arrindex()){
 			stmt = (Statement) visitArrindex(ctx.arrindex());
-		}else if(null != ctx.functiondcl()){
+		}/*else if(null != ctx.functiondcl()){
 			stmt = (Statement) visitFunctiondcl(ctx.functiondcl());
-		}
+		}*/
 		return stmt;
 	}
 
-	//TODO proper implementation is needed
 	@Override public AbstractNode visitFunctiondcl(PyTrun.FunctiondclContext ctx) {
 		Identifier functionName = new Identifier( ctx.ID().getText());
 		ArrayList<Parameter> parameters = new ArrayList<>();
@@ -71,7 +77,17 @@ public class BuildASTVisitor extends AbstractParseTreeVisitor<AbstractNode> impl
 		Identifier varName = new Identifier(ctx.ID().toString());
 
 		if(ctx.ARRDCL() != null){
-			return null;//TODO for now untill implementation.
+			if(ctx.functioncall() != null){
+				return new ArrayDeclaration(new Identifier(ctx.ID().getText()) , (ArrayAsmValue) visitFunctioncall(ctx.functioncall()),(Type) visitType(ctx.type()));
+			}else if(ctx.types() != null){
+				ArrayList<Value> values = new ArrayList<>();
+				for (PyTrun.TypesContext x :ctx.types()){
+					values.add( (Value) visitTypes(x));
+				}
+				return new ArrayDeclaration(new Identifier(ctx.ID().getText()) , new MultipleElementAssign(values),(Type) visitType(ctx.type()));
+			}else{
+				return new ArrayDeclaration(new Identifier(ctx.ID().getText()) , null,(Type) visitType(ctx.type()));
+			}
 		}else if(ctx.FLOATDCL() != null){
 			return new floatDeclaration(varName,(Statement) visitDclValue(ctx.dclValue()));
 		} else if(ctx.INTDCL() != null){
@@ -170,9 +186,25 @@ public class BuildASTVisitor extends AbstractParseTreeVisitor<AbstractNode> impl
 		}
 	}
 
+	//TODO needs to be done
 	@Override public AbstractNode visitAssignment(PyTrun.AssignmentContext ctx) {
-
-		return visitChildren(ctx);
+		if(ctx.TEXT() != null){
+			return new TextAssignment(new Identifier(ctx.ID().getText()), new TextLiteral(ctx.TEXT().getText()));
+		}else if(ctx.ELEMENT() != null){
+			return new ArrayAssignment(new Identifier(ctx.ID().getText()), new SingleElementAssign(
+					new IntegerLiteral(ctx.INUM().getText()),(Value) visitValue(ctx.value())));
+		}else if (ctx.value() != null){
+			return new ValueAssignment(new Identifier(ctx.ID().getText()), (Value) visitValue(ctx.value()));
+		}else if(ctx.types() != null){
+			ArrayList<Value> values = new ArrayList<>();
+			for (PyTrun.TypesContext x :ctx.types()){
+				values.add( (Value) visitTypes(x));
+			}
+			return new ArrayAssignment(new Identifier(ctx.ID().getText()) , new MultipleElementAssign(values));
+		}else if(ctx.expr() != null){
+			return new ValueAssignment(new Identifier(ctx.ID().getText()), (Value) visitExpr(ctx.expr()));
+		}else
+			return null;
 	}
 
 	@Override public AbstractNode visitValue(PyTrun.ValueContext ctx) {
@@ -389,8 +421,22 @@ public class BuildASTVisitor extends AbstractParseTreeVisitor<AbstractNode> impl
 		return null;
 	}
 
-	@Override public AbstractNode visitArrindex(PyTrun.ArrindexContext ctx) { return visitChildren(ctx); }
-	@Override public AbstractNode visitArradd(PyTrun.ArraddContext ctx) { return visitChildren(ctx); }
+	@Override public AbstractNode visitArrindex(PyTrun.ArrindexContext ctx) {
+		return new ArrayIndexStatement(new Identifier(ctx.ID().getText()), new IntegerLiteral(ctx.INUM().getText()));
+	}
+
+	@Override public AbstractNode visitArradd(PyTrun.ArraddContext ctx) {
+		if(ctx.INUM() != null){
+			return new ArrayElementAddStatement(new Identifier(ctx.ID().get(0).getText()),
+					new IntegerLiteral(ctx.INUM().getText()),
+					(Value) visitTypes(ctx.types()));
+		}else if(ctx.ID().size() == 2){
+			return new ArrayElementAddStatement(new Identifier(ctx.ID().get(0).getText()),
+					new Identifier(ctx.ID().get(1).getText()),
+					(Value) visitTypes(ctx.types()));
+		}else
+			return null;
+	}
 
 	@Override public AbstractNode visitNums(PyTrun.NumsContext ctx) {
 		if(ctx.INUM() != null){
@@ -422,15 +468,32 @@ public class BuildASTVisitor extends AbstractParseTreeVisitor<AbstractNode> impl
 		}else if(ctx.TRUTHVAL() != null){
 			return new TruthLiteral(ctx.TRUTHVAL().getText());
 		}else
-			return visitChildren(ctx);
+			return null;
 	}
 
 	@Override public AbstractNode visitType(PyTrun.TypeContext ctx) {
-
-		return visitChildren(ctx);
+		if(ctx.INTDCL() != null){
+			return new INTDCL();
+		}else if(ctx.FLOATDCL() != null){
+			return new FLOATDCL();
+		}else if(ctx.TRUTHDCL() != null){
+			return new TRUTHDCL();
+		}else if(ctx.TEXTDCL() != null){
+			return new TEXTDCL();
+		}else
+			return null;
 	}
 
-	@Override public AbstractNode visitTypes(PyTrun.TypesContext ctx) { return visitChildren(ctx); }
+	@Override public AbstractNode visitTypes(PyTrun.TypesContext ctx) {
+		if(ctx.nums() != null){
+			return visitNums(ctx.nums());
+		}else if(ctx.TEXT() != null){
+			return new TextLiteral(ctx.TEXT().getText());
+		}else if(ctx.TRUTHVAL() != null){
+			return new TruthLiteral(ctx.TRUTHVAL().getText());
+		}else
+			return null;
+	}
 
 
 	//need to be placed in a more appropriate place.
@@ -440,9 +503,9 @@ public class BuildASTVisitor extends AbstractParseTreeVisitor<AbstractNode> impl
 		if(ctx.TEXT() != null){
 			return new TextLiteral(ctx.TEXT().getText());
 		}else if(ctx.value() != null){
-			return visitValue(ctx.value()); //needs to return
+			return visitValue(ctx.value());
 		}else if(ctx.expr() != null){
-			return visitExpr(ctx.expr()); //needs to return
+			return visitExpr(ctx.expr());
 		}
 
 		return null;
@@ -451,16 +514,16 @@ public class BuildASTVisitor extends AbstractParseTreeVisitor<AbstractNode> impl
 
 	@Override
 	public AbstractNode visitDrive(PyTrun.DriveContext ctx) {
-		return null;
+		return new DriveStatement((Value) visitValue(ctx.value()));
 	}
 
 	@Override
 	public AbstractNode visitTurnleft(PyTrun.TurnleftContext ctx) {
-		return null;
+		return new TurnLeftStatement((Value) visitValue(ctx.value()));
 	}
 
 	@Override
 	public AbstractNode visitTurnright(PyTrun.TurnrightContext ctx) {
-		return null;
+		return new TurnRightStatement((Value) visitValue(ctx.value()));
 	}
 }
