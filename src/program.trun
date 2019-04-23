@@ -53,9 +53,9 @@ function fibArray returns array(integer n){
 
 }
 
-/* This section
+/# This section
    assigns values
-   to variables */
+   to variables #/
 
 integer array fibNums is fibArray(10)
 
@@ -63,5 +63,5 @@ integer fibNum1 is fibNumber(5) #test
 
 integer fibNum2 is fibNums element 10 #test
 
-integer result is intSquared(fibNum1) + intPower(fibNum2, 3)  /* Square the 5th fibonacci number and add to it the 10th fibonacci number to the power of 3
-                                                              and assign the result to an int */
+integer result is intSquared(fibNum1) + intPower(fibNum2, 3)  /# Square the 5th fibonacci number and add to it the 10th fibonacci number to the power of 3
+                                                              and assign the result to an int #/

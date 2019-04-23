@@ -55,7 +55,7 @@ TEXT
 
 WS : [ \t\u000C]+ -> skip ; //Unsure if \r\n should be in here as well, parser accepts multiple \n's as statement end/EOL atm
 
-COMMENT       : '/*' .*? '*/' -> skip ;
+COMMENT       : '/#' .*? '#/' -> skip ;
 LINE_COMMENT  : '#' .*? NEWLINE -> skip ;
 
 fragment UNICODE  :  '\u0000'..'\u00FF' ;
