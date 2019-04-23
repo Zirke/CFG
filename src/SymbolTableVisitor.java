@@ -58,6 +58,11 @@ public class SymbolTableVisitor extends AbstractNodeVisitor{
     }
 
     @Override
+    public Object visit(DriveStatement node) {
+        return null;
+    }
+
+    @Override
     public Object visit(ElseIfStatement node) {
         return null;
     }
@@ -68,17 +73,12 @@ public class SymbolTableVisitor extends AbstractNodeVisitor{
     }
 
     @Override
-    public Object visit(FloatAssignment node) {
-        return null;
-    }
-
-    @Override
     public Object visit(FLOATDCL node) {
         return null;
     }
 
     @Override
-    public Object visit(floatDeclaration node) {
+    public Object visit(FloatDeclaration node) {
         return null;
     }
 
@@ -119,11 +119,6 @@ public class SymbolTableVisitor extends AbstractNodeVisitor{
 
     @Override
     public Object visit(IfStatement node) {
-        return null;
-    }
-
-    @Override
-    public Object visit(IntAssignment node) {
         return null;
     }
 
@@ -189,6 +184,11 @@ public class SymbolTableVisitor extends AbstractNodeVisitor{
 
     @Override
     public Object visit(ReturnFunctionDeclaration node) {
+        return null;
+    }
+
+    @Override
+    public Object visit(ReturnStatement node) {
         return null;
     }
 
@@ -263,12 +263,27 @@ public class SymbolTableVisitor extends AbstractNodeVisitor{
     }
 
     @Override
+    public Object visit(TurnLeftStatement node) {
+        return null;
+    }
+
+    @Override
+    public Object visit(TurnRightStatement node) {
+        return null;
+    }
+
+    @Override
     public Object visit(Type node) {
         return null;
     }
 
     @Override
     public Object visit(Upto node) {
+        return null;
+    }
+
+    @Override
+    public Object visit(ValueAssignment node) {
         return null;
     }
 

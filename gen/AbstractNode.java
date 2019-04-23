@@ -32,11 +32,11 @@ class IntDeclaration extends Statement{
 }
 
 
-class floatDeclaration extends Statement{
+class FloatDeclaration extends Statement{
     Identifier id;
     Statement stm;
 
-    public floatDeclaration(Identifier id, Statement stm) {
+    public FloatDeclaration(Identifier id, Statement stm) {
         this.id = id;
         this.stm = stm;
     }
@@ -440,7 +440,6 @@ class TruthParenthesis extends TruthOperator{
 abstract class ArithmOperator extends Operator implements Value{
     Value left;
     Value right;
-
 
 
     public ArithmOperator(String spelling, Value left, Value right) {

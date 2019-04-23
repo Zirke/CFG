@@ -1,4 +1,4 @@
-abstract class AbstractNodeVisitor<T>{
+public abstract class AbstractNodeVisitor<T>{
     public abstract T visit(AbstractNode node);
     public abstract T visit(And node);
     public abstract T visit(ArithmOperator node);
@@ -10,11 +10,11 @@ abstract class AbstractNodeVisitor<T>{
     public abstract T visit(ArrayLiteral node);
     public abstract T visit(Divide node);
     public abstract T visit(Downto node);
+    public abstract T visit(DriveStatement node);
     public abstract T visit(ElseIfStatement node);
     public abstract T visit(ElseThenStmt node);
-    public abstract T visit(FloatAssignment node);
     public abstract T visit(FLOATDCL node);
-    public abstract T visit(floatDeclaration node);
+    public abstract T visit(FloatDeclaration node);
     public abstract T visit(FloatLiteral node);
     public abstract T visit(FromKeyword node);
     public abstract T visit(FromStatement node);
@@ -23,7 +23,6 @@ abstract class AbstractNodeVisitor<T>{
     public abstract T visit(GreaterThan node);
     public abstract T visit(Identifier node);
     public abstract T visit(IfStatement node);
-    public abstract T visit(IntAssignment node);
     public abstract T visit(INTDCL node);
     public abstract T visit(IntDeclaration node);
     public abstract T visit(IntegerLiteral node);
@@ -37,6 +36,7 @@ abstract class AbstractNodeVisitor<T>{
     public abstract T visit(Plus node);
     public abstract T visit(RepeatStatement node);
     public abstract T visit(ReturnFunctionDeclaration node);
+    public abstract T visit(ReturnStatement node);
     public abstract T visit(SingleElementAssign node);
     public abstract T visit(Statement node);
     public abstract T visit(StatementList node);
@@ -51,7 +51,10 @@ abstract class AbstractNodeVisitor<T>{
     public abstract T visit(TruthLiteral node);
     public abstract T visit(TruthOperator node);
     public abstract T visit(TruthParenthesis node);
+    public abstract T visit(TurnLeftStatement node);
+    public abstract T visit(TurnRightStatement node);
     public abstract T visit(Type node);
     public abstract T visit(Upto node);
+    public abstract T visit(ValueAssignment node);
     public abstract T visit(WhileStatement node);
 }
