@@ -89,7 +89,7 @@ public class BuildASTVisitor extends AbstractParseTreeVisitor<AbstractNode> impl
 				return new ArrayDeclaration(new Identifier(ctx.ID().getText()) , null,(Type) visitType(ctx.type()));
 			}
 		}else if(ctx.FLOATDCL() != null){
-			return new floatDeclaration(varName,(Statement) visitDclValue(ctx.dclValue()));
+			return new FloatDeclaration(varName,(Statement) visitDclValue(ctx.dclValue()));
 		} else if(ctx.INTDCL() != null){
 			return new IntDeclaration(varName, (Statement) visitDclValue(ctx.dclValue()));
 		}else if(ctx.TEXTDCL() != null){
