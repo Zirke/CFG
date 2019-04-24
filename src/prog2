@@ -1,0 +1,59 @@
+function intSquared returns integer(integer a){
+
+	a is a * a
+
+	return a
+}
+function intPower returns integer (integer b, integer p){
+
+	integer i is 0
+	from (i upto p) {
+		b is b * b
+	}
+
+	return b
+}
+
+function fibNumber returns integer(integer n){
+
+	integer i is 1
+	integer term1 is 0
+	integer term2 is 1
+	integer nextTerm
+
+	from (i upto n) {
+		nextTerm is term1 + term2
+		term1 is term2
+		term2 is nextTerm
+	}
+
+	return nextTerm
+}
+
+function fibArray returns array(integer n){
+
+    integer i is 1
+    integer term1 is 0
+	integer term2 is 1
+	integer nextTerm
+	integer array fibArr is {term2}
+
+    from (i upto n) {
+	    nextTerm is term1 + term2
+	    term1 is term2
+	    term2 is nextTerm
+	    fibArr element i is nextTerm
+	}
+
+    return fibArr
+
+}
+
+
+integer array fibNums is fibArray(10)
+
+integer fibNum1 is fibNumber(5)
+
+integer fibNum2 is fibNums element 10
+
+integer result is intSquared(fibNum1) + intPower(fibNum2, 3)

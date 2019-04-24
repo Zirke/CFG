@@ -24,9 +24,9 @@ abstract class Statement extends AbstractNode{
 class IntDeclaration extends Statement{
     Identifier id;
 
-    Statement stm;
+    Value stm;
 
-    public IntDeclaration(Identifier id, Statement stm) {
+    public IntDeclaration(Identifier id, Value stm) {
         this.id = id;
         this.stm = stm;
     }
@@ -35,9 +35,9 @@ class IntDeclaration extends Statement{
 
 class FloatDeclaration extends Statement{
     Identifier id;
-    Statement stm;
+    Value stm;
 
-    public FloatDeclaration(Identifier id, Statement stm) {
+    public FloatDeclaration(Identifier id, Value stm) {
         this.id = id;
         this.stm = stm;
     }
@@ -291,14 +291,14 @@ class ReturnFunctionDeclaration extends FunctionDeclaration{
 
     }
 }
-class ReturnStatement extends AbstractNode{
+class ReturnStatement extends Statement {
     Value val;
 
     public ReturnStatement(Value val) {
         this.val = val;
     }
 }
-class FunctionCall extends Statement implements Value{
+class FunctionCall extends Statement implements Value, ArrayAsmValue{
     Identifier functionName;
     List<Value> arguments;
 
