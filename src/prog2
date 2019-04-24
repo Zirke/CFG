@@ -1,3 +1,4 @@
+# hha
 function intSquared returns integer(integer a){
 
 	a is a * a
@@ -57,3 +58,11 @@ integer fibNum1 is fibNumber(5)
 integer fibNum2 is fibNums element 10
 
 integer result is intSquared(fibNum1) + intPower(fibNum2, 3)
+
+if (5=2) then {
+        # body
+    } else if (tds) then {
+        # else if body
+    } else then {
+        # else body
+    }

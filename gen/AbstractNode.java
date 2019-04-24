@@ -207,10 +207,15 @@ class IfStatement extends Statement{
 
 class ElseIfStatement{
     TruthOperator truth;
+    Identifier truthVar;
     StatementList stms;
 
     public ElseIfStatement(TruthOperator truth, StatementList stms) {
         this.truth = truth;
+        this.stms = stms;
+    }
+    public ElseIfStatement(Identifier truthVar, StatementList stms) {
+        this.truthVar = truthVar;
         this.stms = stms;
     }
 }

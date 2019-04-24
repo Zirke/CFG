@@ -10,16 +10,18 @@ import java.io.IOException;
 public class Main{
 
     public static void main(String[] args) throws IOException {
-        File file = new File("C:\\Users\\pankaj\\Desktop\\test.txt");
-
+        File file = new File("C:\\Users\\Abiram Mohanaraj\\Documents\\GitHub\\CFG\\src\\prog2");
+        String d = "";
         BufferedReader br = new BufferedReader(new FileReader(file));
 
         String st;
-        while ((st = br.readLine()) != null)
-            System.out.println(st);
+        while ((st = br.readLine()) != null) {
+           d += st;
+           d += "\n";
+            // System.out.println(st);
+        }
 
-
-    ANTLRInputStream input = new ANTLRInputStream("interger as is 5");
+        ANTLRInputStream input = new ANTLRInputStream(d);
 
         PyTrunLexer x = new PyTrunLexer((input));
         CommonTokenStream tokens = new CommonTokenStream(x);
@@ -36,7 +38,6 @@ public class Main{
         //System.out.println(((PyTrun.StmtContext) tree).ifstmt());
         BuildASTVisitor visitor = new BuildASTVisitor();
         AbstractNode ast = visitor.visit(tree);
-        System.out.println(ast);
         PrettyPrintAST visitor2 = new PrettyPrintAST();
         visitor2.visit(ast);
         //System.out.println(ast);

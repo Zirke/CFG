@@ -8,7 +8,7 @@ function intSquared returns integer(integer a){
 #Returns the number to the power of p (b^p)
 function intPower returns integer (integer b, integer p){
 
-	integer i is 0	
+	integer i is 0
 	from (i upto p) {
 		b is b * b
 	}
@@ -18,7 +18,7 @@ function intPower returns integer (integer b, integer p){
 
 #Returns the n'th fibonacci number
 function fibNumber returns integer(integer n){
-	
+
 	integer i is 1
 	integer term1 is 0
 	integer term2 is 1
@@ -29,26 +29,26 @@ function fibNumber returns integer(integer n){
 		term1 is term2
 		term2 is nextTerm
 	}
-	
+
 	return nextTerm
 }
 
 #Returns an array with n fibonacci numbers
 function fibArray returns array(integer n){
-    
+
     integer i is 1
     integer term1 is 0
 	integer term2 is 1
 	integer nextTerm
 	integer array fibArr is {term2}
-    
+
     from (i upto n) {
 	    nextTerm is term1 + term2
 	    term1 is term2
 	    term2 is nextTerm
 	    fibArr element i is nextTerm
 	}
-    
+
     return fibArr
 
 }
@@ -65,13 +65,3 @@ integer fibNum2 is fibNums element 10 #test
 
 integer result is intSquared(fibNum1) + intPower(fibNum2, 3)  /# Square the 5th fibonacci number and add to it the 10th fibonacci number to the power of 3
                                                               and assign the result to an int #/
-
-
-
-if(visitTruthpar(ctx.truthpar(i)) instanceof Identifier){
-    					elseIfStatements.add(new ElseIfStatement((Identifier) visitTruthpar(ctx.truthpar(i)),
-    							(StatementList) visitStmtblock(ctx.stmtblock(i))));
-    				}else{
-    					elseIfStatements.add(new ElseIfStatement((TruthOperator) visitTruthpar(ctx.truthpar(i)),
-    							(StatementList) visitStmtblock(ctx.stmtblock(i))));
-    				}
