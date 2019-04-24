@@ -23,6 +23,7 @@ abstract class Statement extends AbstractNode{
 //Declaration types
 class IntDeclaration extends Statement{
     Identifier id;
+
     Statement stm;
 
     public IntDeclaration(Identifier id, Statement stm) {
@@ -541,12 +542,12 @@ class TruthLiteral extends Terminal implements Value{
     }
 }
 
-class ArrayLiteral extends Terminal{ //skal den med?
+/*class ArrayLiteral extends Terminal{ //skal den med?
 
     public ArrayLiteral(String spelling) {
         super(spelling);
     }
-}
+}*/
 
 class Identifier extends Terminal implements Value{
     public Identifier(String spelling) {
