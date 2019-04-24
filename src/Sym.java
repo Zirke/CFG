@@ -14,4 +14,5 @@ public class Sym {
     public int getDepth() {
         return depth;
     }
+
 }

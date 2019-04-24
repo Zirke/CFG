@@ -175,10 +175,10 @@ public class SymbolTableVisitor extends AbstractNodeVisitor{
 
     @Override
     public Object visit(IntDeclaration node) {
-        if(symbolTable.get(node.id) == null){
+        if(!symbolTable.getIdTable().containsKey(node.id)){
             symbolTable.put(node.id, new Sym(node, symbolTable.getDepth()));
         } else{
-            throw new DublicateDeclaration("Variable " + node.id + "is already declared");
+            throw new DublicateDeclaration("Variable Int " + node.id.toString() + "is already declared");
         }
         return null;
     }
@@ -367,5 +367,9 @@ public class SymbolTableVisitor extends AbstractNodeVisitor{
     @Override
     public Object visit(Equal node) {
         return null;
+    }
+
+    public SymbolTable getSymbolTable() {
+        return symbolTable;
     }
 }
