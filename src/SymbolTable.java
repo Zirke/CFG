@@ -3,11 +3,10 @@ import java.util.*;
 public class SymbolTable {
 
     private Integer depth = 0;
-    private ArrayList<Integer> scopeDisplay;
 
-    private HashMap<Identifier, Object> IdTable = new HashMap<>();
+    private HashMap<Identifier, Sym> IdTable = new HashMap<>();
 
-    public void put(Identifier key, Object value){
+    public void put(Identifier key, Sym value){
         IdTable.put(key, value);
     }
 
@@ -17,6 +16,10 @@ public class SymbolTable {
 
     public String toString(){
         return IdTable.toString();
+    }
+
+    private int getDepth(){
+        return depth;
     }
 
     // Return an array contains all of the keys
@@ -36,34 +39,50 @@ public class SymbolTable {
     // method defining what happens for each node. Long switch on each node class
     public void processNode(AbstractNode node){
 
-        if(node instanceof StatementList){
+        if(node instanceof FunctionDeclaration || node instanceof WhileStatement || node instanceof RepeatStatement || node instanceof FromStatement){
+            openScope();
+        }
 
-            for(Statement statement : ((StatementList) node).getStmts()){
+        if(node instanceof IfStatement){
+            openScope();
+        }
+
+        if(node instanceof INTDCL && IdTable.get(((INTDCL) node).id) == null){
+
+            IdTable.put(((INTDCL) node).id, new Sym(node, depth));
+
+        } else if(node instanceof FLOATDCL && IdTable.get(((FLOATDCL) node).id) == null){
+
+            IdTable.put(((FLOATDCL) node).id, new Sym(node, depth));
+
+        } else if(node instanceof TEXTDCL && IdTable.get(((TEXTDCL) node).id) == null){
+
+            IdTable.put(((TEXTDCL) node).id, new Sym(node, depth));
+
+        } else if(node instanceof TRUTHDCL && IdTable.get(((TRUTHDCL) node).id) == null){
+
+            IdTable.put(((TRUTHDCL) node).id, new Sym(node, depth));
+
+        } else if(node instanceof ArrayDeclaration && IdTable.get(((ArrayDeclaration) node).id) == null){
+
+            //TODO check later if the correct object is passed into hashmap.
+            IdTable.put(((ArrayDeclaration) node).id, new Sym(node, depth));
+
+        } else if(node instanceof FunctionDeclaration && IdTable.get(((FunctionDeclaration) node).functionName) == null){
+
+            IdTable.put(((FunctionDeclaration) node).functionName, new Sym(node, depth));
+
+        }
+
+        if(node instanceof StatementList) {
+            for (Statement statement : ((StatementList) node).getStmts()) {
                 processNode(statement);
             }
-
-        } else if(node instanceof IntDeclaration){
-            IdTable.put(((IntDeclaration) node).id, new INTDCL());
-        } else if(node instanceof FloatDeclaration){
-            IdTable.put(((FloatDeclaration) node).id, new FLOATDCL());
-        } else if(node instanceof TextDeclaration){
-            IdTable.put(((TextDeclaration) node).id, new TEXTDCL());
-        } else if(node instanceof TruthDeclaration){
-            IdTable.put(((TruthDeclaration) node).id, new TRUTHDCL());
-        } else if(node instanceof ArrayDeclaration){
-            IdTable.put(((ArrayDeclaration) node).id, )
         }
-
     }
 
-    public void openScope(){
+    private void openScope(){
         depth++;
-        scopeDisplay.set(depth, null);
     }
 
-    public void closeScope(){
-        for(Integer i: scopeDisplay){
-
-        }
-    }
 }
