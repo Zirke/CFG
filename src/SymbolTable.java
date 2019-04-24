@@ -1,3 +1,4 @@
+import java.security.Key;
 import java.util.*;
 
 public class SymbolTable {
@@ -18,7 +19,7 @@ public class SymbolTable {
         return IdTable.toString();
     }
 
-    private int getDepth(){
+    public int getDepth(){
         return depth;
     }
 
@@ -35,54 +36,18 @@ public class SymbolTable {
         return keys;
     }
 
-
-    // method defining what happens for each node. Long switch on each node class
-    public void processNode(AbstractNode node){
-
-        if(node instanceof FunctionDeclaration || node instanceof WhileStatement || node instanceof RepeatStatement || node instanceof FromStatement){
-            openScope();
-        }
-
-        if(node instanceof IfStatement){
-            openScope();
-        }
-
-        if(node instanceof INTDCL && IdTable.get(((INTDCL) node).id) == null){
-
-            IdTable.put(((INTDCL) node).id, new Sym(node, depth));
-
-        } else if(node instanceof FLOATDCL && IdTable.get(((FLOATDCL) node).id) == null){
-
-            IdTable.put(((FLOATDCL) node).id, new Sym(node, depth));
-
-        } else if(node instanceof TEXTDCL && IdTable.get(((TEXTDCL) node).id) == null){
-
-            IdTable.put(((TEXTDCL) node).id, new Sym(node, depth));
-
-        } else if(node instanceof TRUTHDCL && IdTable.get(((TRUTHDCL) node).id) == null){
-
-            IdTable.put(((TRUTHDCL) node).id, new Sym(node, depth));
-
-        } else if(node instanceof ArrayDeclaration && IdTable.get(((ArrayDeclaration) node).id) == null){
-
-            //TODO check later if the correct object is passed into hashmap.
-            IdTable.put(((ArrayDeclaration) node).id, new Sym(node, depth));
-
-        } else if(node instanceof FunctionDeclaration && IdTable.get(((FunctionDeclaration) node).functionName) == null){
-
-            IdTable.put(((FunctionDeclaration) node).functionName, new Sym(node, depth));
-
-        }
-
-        if(node instanceof StatementList) {
-            for (Statement statement : ((StatementList) node).getStmts()) {
-                processNode(statement);
-            }
-        }
+    public void openScope(){
+        depth++;
     }
 
-    private void openScope(){
-        depth++;
+    public void closeScope(){
+        for(String id : keys()){
+            Object node = IdTable.get(id);
+            if(depth == ((Sym) node).getDepth()){
+                IdTable.remove(id);
+            }
+        }
+        depth--;
     }
 
 }

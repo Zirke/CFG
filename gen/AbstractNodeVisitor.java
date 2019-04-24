@@ -9,7 +9,6 @@ public abstract class AbstractNodeVisitor<T>{
     public abstract T visit(ArrayDeclaration node);
     public abstract T visit(ArrayElementAddStatement node);
     public abstract T visit(ArrayIndexStatement node);
-    //public abstract T visit(ArrayLiteral node);
     public abstract T visit(Divide node);
     public abstract T visit(Downto node);
     public abstract T visit(DriveStatement node);
@@ -33,7 +32,6 @@ public abstract class AbstractNodeVisitor<T>{
     public abstract T visit(Minus node);
     public abstract T visit(MultipleElementAssign node);
     public abstract T visit(Not node);
-    //public abstract T visit(Operator node);
     public abstract T visit(Or node);
     public abstract T visit(Parameter node);
     public abstract T visit(Plus node);
@@ -43,7 +41,6 @@ public abstract class AbstractNodeVisitor<T>{
     public abstract T visit(SingleElementAssign node);
     public abstract T visit(Statement node);
     public abstract T visit(StatementList node);
-    //public abstract T visit(Terminal node);
     public abstract T visit(TextAssignment node);
     public abstract T visit(TEXTDCL node);
     public abstract T visit(TextDeclaration node);

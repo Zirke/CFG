@@ -1,9 +1,21 @@
+import Exceptions.SymbolTableErrorExceptions.DublicateDeclaration;
+
 public class SymbolTableVisitor extends AbstractNodeVisitor{
 
     public SymbolTable symbolTable = new SymbolTable();
 
     @Override
     public Object visit(AbstractNode node) {
+        if(node instanceof StatementList){
+            visit((StatementList) node);
+        } else if(node instanceof Statement) {
+            visit((Statement) node);
+        }
+        return null;
+    }
+
+    @Override
+    public Object visit(Value node) {
         return null;
     }
 
@@ -28,7 +40,17 @@ public class SymbolTableVisitor extends AbstractNodeVisitor{
     }
 
     @Override
+    public Object visit(ArrayAsmValue node) {
+        return null;
+    }
+
+    @Override
     public Object visit(ArrayDeclaration node) {
+        if(symbolTable.get(node.id) == null){
+            symbolTable.put(node.id, new Sym(node, symbolTable.getDepth()));
+        } else{
+            throw new DublicateDeclaration("Variable " + node.id + "is already declared");
+        }
         return null;
     }
 
@@ -39,11 +61,6 @@ public class SymbolTableVisitor extends AbstractNodeVisitor{
 
     @Override
     public Object visit(ArrayIndexStatement node) {
-        return null;
-    }
-
-    @Override
-    public Object visit(ArrayLiteral node) {
         return null;
     }
 
@@ -64,11 +81,22 @@ public class SymbolTableVisitor extends AbstractNodeVisitor{
 
     @Override
     public Object visit(ElseIfStatement node) {
+        symbolTable.openScope();
+        visit(node.stms);
+        symbolTable.closeScope();
         return null;
     }
 
     @Override
     public Object visit(ElseThenStmt node) {
+        symbolTable.openScope();
+        visit(node.stms);
+        symbolTable.closeScope();
+        return null;
+    }
+
+    @Override
+    public Object visit(ValueAssignment node) {
         return null;
     }
 
@@ -79,6 +107,11 @@ public class SymbolTableVisitor extends AbstractNodeVisitor{
 
     @Override
     public Object visit(FloatDeclaration node) {
+        if(symbolTable.get(node.id) == null){
+            symbolTable.put(node.id, new Sym(node, symbolTable.getDepth()));
+        } else{
+            throw new DublicateDeclaration("Variable " + node.id + "is already declared");
+        }
         return null;
     }
 
@@ -94,6 +127,7 @@ public class SymbolTableVisitor extends AbstractNodeVisitor{
 
     @Override
     public Object visit(FromStatement node) {
+        symbolTable.openScope();
         return null;
     }
 
@@ -104,6 +138,11 @@ public class SymbolTableVisitor extends AbstractNodeVisitor{
 
     @Override
     public Object visit(FunctionDeclaration node) {
+        if(symbolTable.get(node.functionName) == null){
+            symbolTable.put(node.functionName, new Sym(node, symbolTable.getDepth()));
+        } else{
+            throw new DublicateDeclaration("Variable " + node.functionName + "is already declared");
+        }
         return null;
     }
 
@@ -119,6 +158,13 @@ public class SymbolTableVisitor extends AbstractNodeVisitor{
 
     @Override
     public Object visit(IfStatement node) {
+        symbolTable.openScope();
+        visit(node.trueStm);
+        symbolTable.closeScope();
+        for(ElseIfStatement elseIfStatement : node.elseifs){
+            visit(elseIfStatement);
+        }
+        visit(node.elsethen);
         return null;
     }
 
@@ -129,6 +175,11 @@ public class SymbolTableVisitor extends AbstractNodeVisitor{
 
     @Override
     public Object visit(IntDeclaration node) {
+        if(symbolTable.get(node.id) == null){
+            symbolTable.put(node.id, new Sym(node, symbolTable.getDepth()));
+        } else{
+            throw new DublicateDeclaration("Variable " + node.id + "is already declared");
+        }
         return null;
     }
 
@@ -158,11 +209,6 @@ public class SymbolTableVisitor extends AbstractNodeVisitor{
     }
 
     @Override
-    public Object visit(Operator node) {
-        return null;
-    }
-
-    @Override
     public Object visit(Or node) {
         return null;
     }
@@ -179,6 +225,7 @@ public class SymbolTableVisitor extends AbstractNodeVisitor{
 
     @Override
     public Object visit(RepeatStatement node) {
+        symbolTable.openScope();
         return null;
     }
 
@@ -199,16 +246,35 @@ public class SymbolTableVisitor extends AbstractNodeVisitor{
 
     @Override
     public Object visit(Statement node) {
+        if(node instanceof IntDeclaration){
+            visit((IntDeclaration) node);
+        }else if(node instanceof FloatDeclaration){
+            visit((FloatDeclaration) node);
+        }else if(node instanceof TextDeclaration){
+            visit((TextDeclaration) node);
+        }else if(node instanceof TruthDeclaration){
+            visit((TruthDeclaration) node);
+        } else if(node instanceof ArrayDeclaration) {
+            visit((ArrayDeclaration) node);
+        } else if(node instanceof IfStatement){
+            visit((IfStatement) node);
+        } else if(node instanceof WhileStatement){
+            visit((WhileStatement) node);
+        } else if(node instanceof RepeatStatement) {
+            visit((RepeatStatement) node);
+        } else if(node instanceof FromStatement){
+            visit((FromStatement) node);
+        } else if(node instanceof FunctionDeclaration){
+            visit((FunctionDeclaration) node);
+        }
         return null;
     }
 
     @Override
     public Object visit(StatementList node) {
-        return null;
-    }
-
-    @Override
-    public Object visit(Terminal node) {
+        for(Statement stm : node.stmts){
+            visit(stm);
+        }
         return null;
     }
 
@@ -224,6 +290,11 @@ public class SymbolTableVisitor extends AbstractNodeVisitor{
 
     @Override
     public Object visit(TextDeclaration node) {
+        if(symbolTable.get(node.id) == null){
+            symbolTable.put(node.id, new Sym(node, symbolTable.getDepth()));
+        } else{
+            throw new DublicateDeclaration("Variable " + node.id + "is already declared");
+        }
         return null;
     }
 
@@ -244,6 +315,11 @@ public class SymbolTableVisitor extends AbstractNodeVisitor{
 
     @Override
     public Object visit(TruthDeclaration node) {
+        if(symbolTable.get(node.id) == null){
+            symbolTable.put(node.id, new Sym(node, symbolTable.getDepth()));
+        } else{
+            throw new DublicateDeclaration("Variable " + node.id + "is already declared");
+        }
         return null;
     }
 
@@ -283,12 +359,13 @@ public class SymbolTableVisitor extends AbstractNodeVisitor{
     }
 
     @Override
-    public Object visit(ValueAssignment node) {
+    public Object visit(WhileStatement node) {
+        symbolTable.openScope();
         return null;
     }
 
     @Override
-    public Object visit(WhileStatement node) {
+    public Object visit(Equal node) {
         return null;
     }
 }
