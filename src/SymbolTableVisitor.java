@@ -4,6 +4,17 @@ public class SymbolTableVisitor extends AbstractNodeVisitor{
 
     @Override
     public Object visit(AbstractNode node) {
+
+        if(node instanceof StatementList){
+            visit((StatementList) node);
+        }else if(node instanceof Statement) {
+            visit((Statement) node);
+        }
+        return null;
+    }
+
+    @Override
+    public Object visit(Value node) {
         return null;
     }
 
@@ -28,6 +39,11 @@ public class SymbolTableVisitor extends AbstractNodeVisitor{
     }
 
     @Override
+    public Object visit(ArrayAsmValue node) {
+        return null;
+    }
+
+    @Override
     public Object visit(ArrayDeclaration node) {
         return null;
     }
@@ -39,11 +55,6 @@ public class SymbolTableVisitor extends AbstractNodeVisitor{
 
     @Override
     public Object visit(ArrayIndexStatement node) {
-        return null;
-    }
-
-    @Override
-    public Object visit(ArrayLiteral node) {
         return null;
     }
 
@@ -73,7 +84,13 @@ public class SymbolTableVisitor extends AbstractNodeVisitor{
     }
 
     @Override
+    public Object visit(ValueAssignment node) {
+        return null;
+    }
+
+    @Override
     public Object visit(FLOATDCL node) {
+
         return null;
     }
 
@@ -158,11 +175,6 @@ public class SymbolTableVisitor extends AbstractNodeVisitor{
     }
 
     @Override
-    public Object visit(Operator node) {
-        return null;
-    }
-
-    @Override
     public Object visit(Or node) {
         return null;
     }
@@ -204,11 +216,6 @@ public class SymbolTableVisitor extends AbstractNodeVisitor{
 
     @Override
     public Object visit(StatementList node) {
-        return null;
-    }
-
-    @Override
-    public Object visit(Terminal node) {
         return null;
     }
 
@@ -283,12 +290,12 @@ public class SymbolTableVisitor extends AbstractNodeVisitor{
     }
 
     @Override
-    public Object visit(ValueAssignment node) {
+    public Object visit(WhileStatement node) {
         return null;
     }
 
     @Override
-    public Object visit(WhileStatement node) {
+    public Object visit(Equal node) {
         return null;
     }
 }
