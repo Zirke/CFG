@@ -25,8 +25,8 @@ stmt
 
 functiondcl
 
-        : FUNCTION ID RETURNS (type | ARRDCL) LPAR (truedcl (COMMA truedcl)*)* RPAR LCB stmt* RCB
-        | FUNCTION ID LPAR (truedcl (COMMA truedcl)*)* RPAR LCB stmt* RCB ;
+        : FUNCTION ID RETURNS (type | ARRDCL) LPAR (truedcl (COMMA truedcl)*) RPAR LCB stmt* RCB
+        | FUNCTION ID LPAR (truedcl (COMMA truedcl)*) RPAR LCB stmt* RCB ;
 
 
 dcl
@@ -34,7 +34,7 @@ dcl
         |  FLOATDCL ID dclValue?
         |  TEXTDCL ID dclValue?
         |  TRUTHDCL ID (ASSIGN truthexpr)?
-        |  type ARRDCL ID (ASSIGN ((functioncall) | LCB (types (COMMA types)*)* RCB))?;
+        |  type ARRDCL ID (ASSIGN ((functioncall) | LCB (types (COMMA types)*) RCB))?;
 
 dclValue
         :( ASSIGN value
@@ -48,7 +48,7 @@ truedcl
         | TRUTHDCL ID ;
 
 functioncall
-        : ID LPAR (types (COMMA types)*)* RPAR;
+        : ID LPAR (types (COMMA types)*) RPAR;
 
 ifstmt
         : IF truthpar THEN stmtblock EOL*
@@ -72,7 +72,7 @@ assignment
         |  ELEMENT INUM ASSIGN value
         |  ASSIGN TEXT
         |  ASSIGN expr
-        |  ASSIGN LCB (types (COMMA types)*)* RCB) ;
+        |  ASSIGN LCB (types (COMMA types)*) RCB) ;
 
 value
         : arithmexpr
@@ -98,7 +98,7 @@ truthexpr
         : logicalexpr;
 
 logicalexpr
-        :  (NOT)? relationalexpr ((OR| AND) (NOT)? relationalexpr)* //and or
+        :  NOT? relationalexpr ((OR| AND) NOT? relationalexpr)* //and or
         //| relationalexpr
         ;
 
