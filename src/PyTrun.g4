@@ -25,7 +25,7 @@ stmt
 
 functiondcl
 
-        : FUNCTION ID RETURNS (type | ARRDCL) LPAR (truedcl (COMMA truedcl)*) RPAR LCB stmt* RCB
+        : FUNCTION ID RETURNS (type | ARRDCL) LPAR (truedcl (COMMA truedcl)*) RPAR LCB stmt* RCB //TODO: FIxed superfluous asterisk here
         | FUNCTION ID LPAR (truedcl (COMMA truedcl)*) RPAR LCB stmt* RCB ;
 
 
@@ -34,7 +34,7 @@ dcl
         |  FLOATDCL ID dclValue?
         |  TEXTDCL ID dclValue?
         |  TRUTHDCL ID (ASSIGN truthexpr)?
-        |  type ARRDCL ID (ASSIGN ((functioncall) | LCB (types (COMMA types)*) RCB))?;
+        |  type ARRDCL ID (ASSIGN ((functioncall) | LCB (types (COMMA types)*) RCB))?; //TODO: FIxed superfluous asterisk here
 
 dclValue
         :( ASSIGN value
@@ -48,7 +48,7 @@ truedcl
         | TRUTHDCL ID ;
 
 functioncall
-        : ID LPAR (types (COMMA types)*) RPAR;
+        : ID LPAR (types (COMMA types)*) RPAR; //TODO: FIxed superfluous asterisk here
 
 ifstmt
         : IF truthpar THEN stmtblock EOL*
@@ -72,7 +72,7 @@ assignment
         |  ELEMENT INUM ASSIGN value
         |  ASSIGN TEXT
         |  ASSIGN expr
-        |  ASSIGN LCB (types (COMMA types)*) RCB) ;
+        |  ASSIGN LCB (types (COMMA types)*) RCB) ; //TODO: FIxed superfluous asterisk here
 
 value
         : arithmexpr
