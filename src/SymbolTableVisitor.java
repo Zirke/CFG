@@ -47,7 +47,7 @@ public class SymbolTableVisitor extends AbstractNodeVisitor{
     @Override
     public Object visit(ArrayDeclaration node) {
         if(symbolTable.getIdTable().get(node.id.spelling) == null && !symbolTable.getIdTable().containsKey(node.id.spelling)){
-            symbolTable.put(node.id.spelling, new Sym(node, symbolTable.getDepth()));
+            symbolTable.put(node.id.spelling, new Sym(node, symbolTable.getDepth(), node.type));
         } else{
             throw new DublicateDeclaration("Variable " + node.id.spelling + " is already declared");
         }
@@ -108,7 +108,7 @@ public class SymbolTableVisitor extends AbstractNodeVisitor{
     @Override
     public Object visit(FloatDeclaration node) {
         if(symbolTable.getIdTable().get(node.id.spelling) == null && !symbolTable.getIdTable().containsKey(node.id.spelling)){
-            symbolTable.put(node.id.spelling, new Sym(node, symbolTable.getDepth()));
+            symbolTable.put(node.id.spelling, new Sym(node, symbolTable.getDepth(), new FLOATDCL()));
         } else{
             throw new DublicateDeclaration("Variable " + node.id + " is already declared");
         }
@@ -128,6 +128,8 @@ public class SymbolTableVisitor extends AbstractNodeVisitor{
     @Override
     public Object visit(FromStatement node) {
         symbolTable.openScope();
+        visit(node.stmts);
+        symbolTable.closeScope();
         return null;
     }
 
@@ -139,7 +141,10 @@ public class SymbolTableVisitor extends AbstractNodeVisitor{
     @Override
     public Object visit(FunctionDeclaration node) {
         if(symbolTable.getIdTable().get(node.functionName.spelling) == null && !symbolTable.getIdTable().containsKey(node.functionName.spelling)){
-            symbolTable.put(node.functionName.spelling, new Sym(node, symbolTable.getDepth()));
+            symbolTable.put(node.functionName.spelling, new Sym(node, symbolTable.getDepth(), null));
+            symbolTable.openScope();
+            visit(node.stmtBody);
+            symbolTable.closeScope();
         } else{
             throw new DublicateDeclaration("Variable " + node.functionName.spelling + " is already declared");
         }
@@ -176,7 +181,7 @@ public class SymbolTableVisitor extends AbstractNodeVisitor{
     @Override
     public Object visit(IntDeclaration node) {
         if(symbolTable.getIdTable().get(node.id.spelling) == null && !symbolTable.getIdTable().containsKey(node.id.spelling)){
-            symbolTable.put(node.id.spelling, new Sym(node, symbolTable.getDepth()));
+            symbolTable.put(node.id.spelling, new Sym(node, symbolTable.getDepth(), new INTDCL()));
         } else{
             throw new DublicateDeclaration("Variable " + node.id.spelling + " is already declared");
         }
@@ -226,11 +231,21 @@ public class SymbolTableVisitor extends AbstractNodeVisitor{
     @Override
     public Object visit(RepeatStatement node) {
         symbolTable.openScope();
+        visit(node.stmts);
+        symbolTable.closeScope();
         return null;
     }
 
     @Override
     public Object visit(ReturnFunctionDeclaration node) {
+        if(symbolTable.getIdTable().get(node.functionName.spelling) == null && !symbolTable.getIdTable().containsKey(node.functionName.spelling)){
+            symbolTable.put(node.functionName.spelling, new Sym(node, symbolTable.getDepth(), node.returnType));
+            symbolTable.openScope();
+            visit(node.stmtBody);
+            symbolTable.closeScope();
+        } else{
+            throw new DublicateDeclaration("Variable " + node.functionName.spelling + " is already declared");
+        }
         return null;
     }
 
@@ -291,7 +306,7 @@ public class SymbolTableVisitor extends AbstractNodeVisitor{
     @Override
     public Object visit(TextDeclaration node) {
         if(symbolTable.getIdTable().get(node.id.spelling) == null && !symbolTable.getIdTable().containsKey(node.id.spelling)){
-            symbolTable.put(node.id.spelling, new Sym(node, symbolTable.getDepth()));
+            symbolTable.put(node.id.spelling, new Sym(node, symbolTable.getDepth(),new TEXTDCL()));
         } else{
             throw new DublicateDeclaration("Variable " + node.id + " is already declared");
         }
@@ -316,7 +331,7 @@ public class SymbolTableVisitor extends AbstractNodeVisitor{
     @Override
     public Object visit(TruthDeclaration node) {
         if(symbolTable.getIdTable().get(node.id.spelling) == null && !symbolTable.getIdTable().containsKey(node.id.spelling)){
-            symbolTable.put(node.id.spelling, new Sym(node, symbolTable.getDepth()));
+            symbolTable.put(node.id.spelling, new Sym(node, symbolTable.getDepth(), new TRUTHDCL()));
         } else {
             throw new DublicateDeclaration("Variable " + node.id.spelling + " is already declared");
         }
@@ -361,6 +376,8 @@ public class SymbolTableVisitor extends AbstractNodeVisitor{
     @Override
     public Object visit(WhileStatement node) {
         symbolTable.openScope();
+        visit(node.stmts);
+        symbolTable.closeScope();
         return null;
     }
 

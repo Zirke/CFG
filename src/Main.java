@@ -45,7 +45,10 @@ public class Main{
 
         SymbolTableVisitor symbolTableVisitor = new SymbolTableVisitor();
         SymbolTable sym =(SymbolTable) symbolTableVisitor.visit(ast);
-        
+
+        for (String s : sym.getIdTable().keySet()){
+            System.out.println(s + " " + sym.getIdTable().get(s).getDepth() + " " + sym.getIdTable().get(s).getType().getClass().toString());
+        }
 
     }
 }
