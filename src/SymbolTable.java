@@ -1,5 +1,4 @@
-import java.util.HashMap;
-import java.util.Set;
+import java.util.*;
 
 public class SymbolTable {
 
@@ -7,34 +6,41 @@ public class SymbolTable {
 
     private HashMap<String, Sym> IdTable = new HashMap<>();
 
-    public void put(String key, Sym value){
+    public void put(String key, Sym value) {
         IdTable.put(key, value);
     }
 
-    public Object get(String key){
+    public Object get(String key) {
         return IdTable.get(key);
     }
 
-    public String toString(){
+    public String toString() {
         return IdTable.toString();
     }
 
-    public int getDepth(){
+    public int getDepth() {
         return depth;
     }
 
-    public void openScope(){
+    public void openScope() {
         depth++;
     }
 
-    public void closeScope(){
-        Set keySet = IdTable.keySet();
-        for(Object id : keySet){
-            Object node = IdTable.get(id);
-            if(depth == ((Sym) node).getDepth()){
-                IdTable.remove(id);
+    public void closeScope() {
+
+        List<String> remove = new ArrayList<>();
+        for (String id : IdTable.keySet()) {
+            Sym node = IdTable.get(id);
+
+            if (depth == (node.getDepth())) {
+                remove.add(id);
             }
         }
+
+        for (String s : remove) {
+            IdTable.remove(s);
+        }
+
         depth--;
     }
 

@@ -109,7 +109,6 @@ public class SymbolTableVisitor extends AbstractNodeVisitor{
     public Object visit(FloatDeclaration node) {
         if(symbolTable.getIdTable().get(node.id.spelling) == null && !symbolTable.getIdTable().containsKey(node.id.spelling)){
             symbolTable.put(node.id.spelling, new Sym(node, symbolTable.getDepth()));
-
         } else{
             throw new DublicateDeclaration("Variable " + node.id + " is already declared");
         }
@@ -142,7 +141,7 @@ public class SymbolTableVisitor extends AbstractNodeVisitor{
         if(symbolTable.getIdTable().get(node.functionName.spelling) == null && !symbolTable.getIdTable().containsKey(node.functionName.spelling)){
             symbolTable.put(node.functionName.spelling, new Sym(node, symbolTable.getDepth()));
         } else{
-            throw new DublicateDeclaration("Variable " + node.functionName + " is already declared");
+            throw new DublicateDeclaration("Variable " + node.functionName.spelling + " is already declared");
         }
         return null;
     }

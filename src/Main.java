@@ -10,7 +10,7 @@ import java.io.IOException;
 public class Main{
 
     public static void main(String[] args) throws IOException {
-        File file = new File("C:\\Users\\Abiram Mohanaraj\\Documents\\GitHub\\CFG\\src\\prog");
+        File file = new File("C:\\Users\\Christoffer\\Documents\\GitHub\\CFG\\src\\prog2");
         String d = "";
         BufferedReader br = new BufferedReader(new FileReader(file));
 
@@ -39,16 +39,13 @@ public class Main{
         //System.out.println(((PyTrun.StmtContext) tree).ifstmt());
         BuildASTVisitor visitor = new BuildASTVisitor();
         AbstractNode ast = visitor.visit(tree);
-         PrettyPrintAST visitor2 = new PrettyPrintAST();
-         visitor2.visit(ast);
+        // PrettyPrintAST visitor2 = new PrettyPrintAST();
+         //visitor2.visit(ast);
         // System.out.println(ast);
 
         SymbolTableVisitor symbolTableVisitor = new SymbolTableVisitor();
         SymbolTable sym =(SymbolTable) symbolTableVisitor.visit(ast);
-
-        for (String s : sym.getIdTable().keySet()){
-            System.out.println(s);
-        }
+        
 
     }
 }
