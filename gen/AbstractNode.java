@@ -55,9 +55,9 @@ class TextDeclaration extends Statement{
 
 class TruthDeclaration extends Statement{
     Identifier id;
-    TruthOperator expr;
+    Value expr;
 
-    public TruthDeclaration(Identifier id, TruthOperator expr) {
+    public TruthDeclaration(Identifier id, Value expr) {
         this.id = id;
         this.expr = expr;
     }
@@ -173,30 +173,30 @@ class ArrayElementAddStatement extends Statement{
 
 //Selective control structure(s)
 class IfStatement extends Statement{
-    TruthOperator truthVal;
+    Value truthVal;
     StatementList trueStm;
     List<ElseIfStatement> elseifs;
     ElseThenStmt elsethen;
 
-    public IfStatement(TruthOperator truthVal, StatementList trueStm, List<ElseIfStatement> elseifs, ElseThenStmt elsethen) {
+    public IfStatement(Value truthVal, StatementList trueStm, List<ElseIfStatement> elseifs, ElseThenStmt elsethen) {
         this.truthVal = truthVal;
         this.trueStm = trueStm;
         this.elseifs = elseifs;
         this.elsethen = elsethen;
     }
 
-    public IfStatement(TruthOperator truthVal, StatementList trueStm) {
+    public IfStatement(Value truthVal, StatementList trueStm) {
         this.truthVal = truthVal;
         this.trueStm = trueStm;
     }
 
-    public IfStatement(TruthOperator truthVal, StatementList trueStm, List<ElseIfStatement> elseifs) {
+    public IfStatement(Value truthVal, StatementList trueStm, List<ElseIfStatement> elseifs) {
         this.truthVal = truthVal;
         this.trueStm = trueStm;
         this.elseifs = elseifs;
     }
 
-    public IfStatement(TruthOperator truthVal, StatementList trueStm, ElseThenStmt elsethen) {
+    public IfStatement(Value truthVal, StatementList trueStm, ElseThenStmt elsethen) {
         this.truthVal = truthVal;
         this.trueStm = trueStm;
         this.elsethen = elsethen;
@@ -206,11 +206,11 @@ class IfStatement extends Statement{
 }
 
 class ElseIfStatement{
-    TruthOperator truth;
+    Value truth;
     Identifier truthVar;
     StatementList stms;
 
-    public ElseIfStatement(TruthOperator truth, StatementList stms) {
+    public ElseIfStatement(Value truth, StatementList stms) {
         this.truth = truth;
         this.stms = stms;
     }
@@ -230,10 +230,10 @@ class ElseThenStmt{
 
 //Iterative control structure(s)
 class WhileStatement extends Statement{
-    TruthOperator expr;
+    Value expr;
     StatementList stmts;
 
-    public WhileStatement(TruthOperator expr, StatementList stmts) {
+    public WhileStatement(Value expr, StatementList stmts) {
         this.expr = expr;
         this.stmts = stmts;
     }
@@ -241,9 +241,9 @@ class WhileStatement extends Statement{
 
 class RepeatStatement extends Statement{
     StatementList stmts;
-    TruthOperator expr;
+    Value expr;
 
-    public RepeatStatement(StatementList stmts, TruthOperator expr) {
+    public RepeatStatement(StatementList stmts, Value expr) {
         this.stmts = stmts;
         this.expr = expr;
     }
@@ -278,11 +278,13 @@ class FunctionDeclaration extends Statement{
 
 class Parameter extends Terminal implements Value{
     Type paramType;
+    Identifier id;
     //Identifier paramName;
 
 
-    public Parameter(Type paramType) {
+    public Parameter(Type paramType, Identifier id) {
         this.paramType = paramType;
+        this.id = id;
         //this.paramName = paramName;
     }
 }

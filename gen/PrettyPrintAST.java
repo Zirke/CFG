@@ -6,8 +6,6 @@ public class PrettyPrintAST extends AbstractNodeVisitor<AbstractNode>{
             visit((StatementList) node);
         }else if(node instanceof Statement){
             visit((Statement) node);
-        }else if(node instanceof ReturnStatement){
-            visit((ReturnStatement) node);
         }else if(node instanceof Terminal){
             visit((Terminal) node); //should not be possible
         }else if(node instanceof Type){
@@ -45,6 +43,8 @@ public class PrettyPrintAST extends AbstractNodeVisitor<AbstractNode>{
             visit((SingleElementAssign)node);
         }else if(node instanceof MultipleElementAssign){
             visit((MultipleElementAssign) node);
+        }else if(node instanceof FunctionCall){
+            visit((FunctionCall)node);
         }
         return null;
     }
@@ -188,10 +188,13 @@ public class PrettyPrintAST extends AbstractNodeVisitor<AbstractNode>{
     public AbstractNode visit(IfStatement node) {
         visit(node.truthVal);
         visit(node.trueStm);
-        for(ElseIfStatement x : node.elseifs){
-            visit(x);
+        if(node.elseifs != null) {
+            for (ElseIfStatement x : node.elseifs) {
+                visit(x);
+            }
         }
-        visit(node.elsethen);
+        if(node.elsethen != null)
+            visit(node.elsethen);
         System.out.println("If statement node");
         return null;
     }
@@ -259,6 +262,8 @@ public class PrettyPrintAST extends AbstractNodeVisitor<AbstractNode>{
     @Override
     public AbstractNode visit(Parameter node) {
         visit(node.paramType);
+        visit(node.id);
+        System.out.println("Paramenter node");
         return null;
     }
 
@@ -434,6 +439,8 @@ public class PrettyPrintAST extends AbstractNodeVisitor<AbstractNode>{
             visit((Equal)node);
         }else if(node instanceof TruthParenthesis){
             visit((TruthParenthesis)node);
+        }else if(node instanceof And){
+            visit((And) node);
         }
         return null;
     }
@@ -493,7 +500,11 @@ public class PrettyPrintAST extends AbstractNodeVisitor<AbstractNode>{
             visit((RepeatStatement) node);
         } else if(node instanceof FromStatement){
             visit((FromStatement) node);
-        } else if(node instanceof FunctionDeclaration){
+        } else if(node instanceof ReturnStatement){
+            visit((ReturnStatement) node);
+        }else if(node instanceof ReturnFunctionDeclaration){
+            visit((ReturnFunctionDeclaration) node);
+        }else if(node instanceof FunctionDeclaration){
             visit((FunctionDeclaration) node);
         } else if(node instanceof FunctionCall){
             visit((FunctionCall) node);
