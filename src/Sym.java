@@ -7,6 +7,14 @@ public class Sym {
         this.depth = depth;
     }
 
+    @Override
+    public String toString() {
+        return "Sym{" +
+                "node=" + node +
+                ", depth=" + depth +
+                '}';
+    }
+
     public AbstractNode getNode() {
         return node;
     }

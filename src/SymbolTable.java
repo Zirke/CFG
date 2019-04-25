@@ -5,13 +5,13 @@ public class SymbolTable {
 
     private Integer depth = 0;
 
-    private HashMap<Identifier, Sym> IdTable = new HashMap<>();
+    private HashMap<String, Sym> IdTable = new HashMap<>();
 
-    public void put(Identifier key, Sym value){
+    public void put(String key, Sym value){
         IdTable.put(key, value);
     }
 
-    public Object get(Identifier key){
+    public Object get(String key){
         return IdTable.get(key);
     }
 
@@ -38,7 +38,7 @@ public class SymbolTable {
         depth--;
     }
 
-    public HashMap<Identifier, Sym> getIdTable() {
+    public HashMap<String, Sym> getIdTable() {
         return IdTable;
     }
 }
