@@ -446,7 +446,10 @@ public class BuildASTVisitor extends AbstractParseTreeVisitor<AbstractNode> impl
 	}
 
 	@Override public AbstractNode visitArrindex(PyTrun.ArrindexContext ctx) {
-		return new ArrayIndexStatement(new Identifier(ctx.ID().getText()), new IntegerLiteral(ctx.INUM().getText()));
+		if(ctx.ID().size() == 2){
+			return new ArrayIndexStatement(new Identifier(ctx.ID().get(0).getText()), new Identifier(ctx.ID().get(1).getText()));
+		}else
+			return new ArrayIndexStatement(new Identifier(ctx.ID().get(0).getText()), new IntegerLiteral(ctx.INUM().getText()));
 	}
 
 	@Override public AbstractNode visitArradd(PyTrun.ArraddContext ctx) {

@@ -111,7 +111,7 @@ append
         : (TEXT | ID) PLUS (TEXT | ID) ;
 
 arrindex
-        :  ID ELEMENT INUM;
+        :  ID ELEMENT (INUM | ID); //TODO fix to also id.
 
 arradd
         : ID ELEMENT (INUM | ID) ASSIGN types ;

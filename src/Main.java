@@ -49,5 +49,6 @@ public class Main{
         for (String s : sym.getIdTable().keySet()){
             System.out.println(s);
         }
+
     }
 }
