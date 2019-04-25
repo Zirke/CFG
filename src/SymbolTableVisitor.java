@@ -139,8 +139,8 @@ public class SymbolTableVisitor extends AbstractNodeVisitor{
 
     @Override
     public Object visit(FunctionDeclaration node) {
-        if(symbolTable.getIdTable().get(node.functionName.spelling) == null && !symbolTable.getIdTable().containsKey(node.functionName.toString())){
-            symbolTable.put(node.functionName.toString(), new Sym(node, symbolTable.getDepth()));
+        if(symbolTable.getIdTable().get(node.functionName.spelling) == null && !symbolTable.getIdTable().containsKey(node.functionName.spelling)){
+            symbolTable.put(node.functionName.spelling, new Sym(node, symbolTable.getDepth()));
         } else{
             throw new DublicateDeclaration("Variable " + node.functionName + " is already declared");
         }

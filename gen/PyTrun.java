@@ -153,7 +153,6 @@ public class PyTrun extends Parser {
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof PyTrunVisitor ) return ((PyTrunVisitor<? extends T>)visitor).visitStart(this);
-			if ( visitor instanceof PyTrunVisitor ) return ((PyTrunVisitor<? extends T>)visitor).visitStart(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -2457,7 +2456,10 @@ public class PyTrun extends Parser {
 	}
 
 	public static class ArrindexContext extends ParserRuleContext {
-		public TerminalNode ID() { return getToken(PyTrun.ID, 0); }
+		public List<TerminalNode> ID() { return getTokens(PyTrun.ID); }
+		public TerminalNode ID(int i) {
+			return getToken(PyTrun.ID, i);
+		}
 		public TerminalNode ELEMENT() { return getToken(PyTrun.ELEMENT, 0); }
 		public TerminalNode INUM() { return getToken(PyTrun.INUM, 0); }
 		public ArrindexContext(ParserRuleContext parent, int invokingState) {
@@ -2482,6 +2484,7 @@ public class PyTrun extends Parser {
 	public final ArrindexContext arrindex() throws RecognitionException {
 		ArrindexContext _localctx = new ArrindexContext(_ctx, getState());
 		enterRule(_localctx, 46, RULE_arrindex);
+		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
@@ -2490,7 +2493,15 @@ public class PyTrun extends Parser {
 			setState(409);
 			match(ELEMENT);
 			setState(410);
-			match(INUM);
+			_la = _input.LA(1);
+			if ( !(_la==INUM || _la==ID) ) {
+			_errHandler.recoverInline(this);
+			}
+			else {
+				if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+				_errHandler.reportMatch(this);
+				consume();
+			}
 			}
 		}
 		catch (RecognitionException re) {
@@ -3227,8 +3238,8 @@ public class PyTrun extends Parser {
 		"\u0191\5*\26\2\u0191\u0192\7\t\2\2\u0192\u0195\3\2\2\2\u0193\u0195\5@"+
 		"!\2\u0194\u018b\3\2\2\2\u0194\u018f\3\2\2\2\u0194\u0193\3\2\2\2\u0195"+
 		"-\3\2\2\2\u0196\u0197\t\7\2\2\u0197\u0198\7\f\2\2\u0198\u0199\t\7\2\2"+
-		"\u0199/\3\2\2\2\u019a\u019b\7-\2\2\u019b\u019c\7#\2\2\u019c\u019d\7,\2"+
-		"\2\u019d\61\3\2\2\2\u019e\u019f\7-\2\2\u019f\u01a0\7#\2\2\u01a0\u01a1"+
+		"\u0199/\3\2\2\2\u019a\u019b\7-\2\2\u019b\u019c\7#\2\2\u019c\u019d\t\b"+
+		"\2\2\u019d\61\3\2\2\2\u019e\u019f\7-\2\2\u019f\u01a0\7#\2\2\u01a0\u01a1"+
 		"\t\b\2\2\u01a1\u01a2\7$\2\2\u01a2\u01a3\5D#\2\u01a3\63\3\2\2\2\u01a4\u01a5"+
 		"\7\'\2\2\u01a5\u01a6\7\b\2\2\u01a6\u01a7\5\36\20\2\u01a7\u01a8\7\t\2\2"+
 		"\u01a8\65\3\2\2\2\u01a9\u01aa\7(\2\2\u01aa\u01ab\7\b\2\2\u01ab\u01ac\5"+

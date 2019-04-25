@@ -1,5 +1,5 @@
-import java.security.Key;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Set;
 
 public class SymbolTable {
 

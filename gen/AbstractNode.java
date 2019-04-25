@@ -150,9 +150,9 @@ class MultipleElementAssign implements ArrayAsmValue{
 //Array operation classes
 class ArrayIndexStatement extends Statement{
     Identifier id;
-    IntegerLiteral number;
+    Value number;
 
-    public ArrayIndexStatement(Identifier id, IntegerLiteral number) {
+    public ArrayIndexStatement(Identifier id, Value number) {
         this.id = id;
         this.number = number;
     }
