@@ -6,13 +6,11 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Iterator;
-import java.util.Set;
 
 public class Main{
 
     public static void main(String[] args) throws IOException {
-        File file = new File("C:\\Users\\Christoffer\\Documents\\GitHub\\CFG\\src\\prog2");
+        File file = new File("C:\\Users\\Abiram Mohanaraj\\Documents\\GitHub\\CFG\\src\\prog");
         String d = "";
         BufferedReader br = new BufferedReader(new FileReader(file));
 
@@ -47,5 +45,9 @@ public class Main{
 
         SymbolTableVisitor symbolTableVisitor = new SymbolTableVisitor();
         SymbolTable sym =(SymbolTable) symbolTableVisitor.visit(ast);
+
+        for (String s : sym.getIdTable().keySet()){
+            System.out.println(s);
+        }
     }
 }
