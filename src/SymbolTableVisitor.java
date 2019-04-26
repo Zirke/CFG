@@ -1,8 +1,10 @@
 import Exceptions.SymbolTableErrorExceptions.DublicateDeclaration;
+import Exceptions.SymbolTableErrorExceptions.IncompatibleTypes;
+import Exceptions.SymbolTableErrorExceptions.VariableMissing;
 import ast.*;
 
 public class SymbolTableVisitor extends AbstractNodeVisitor{
-    public SymbolTable symbolTable = new SymbolTable();
+    private SymbolTable symbolTable = new SymbolTable();
 
 
     @Override
@@ -47,10 +49,10 @@ public class SymbolTableVisitor extends AbstractNodeVisitor{
 
     @Override
     public Object visit(ArrayDeclaration node) {
-        if(symbolTable.getIdTable().get(node.id.spelling) == null && !symbolTable.getIdTable().containsKey(node.id.spelling)){
-            symbolTable.put(node.id.spelling, new Sym(node, symbolTable.getDepth(), node.type));
+        if(symbolTable.getIdTable().get(node.getId().getSpelling()) == null && !symbolTable.getIdTable().containsKey(node.getId().getSpelling())){
+            symbolTable.put(node.getId().getSpelling(), new Sym(node, symbolTable.getDepth(), node.getType()));
         } else{
-            throw new DublicateDeclaration("Variable " + node.id.spelling + " is already declared");
+            throw new DublicateDeclaration("Variable " + node.getId().spelling + " is already declared");
         }
         return null;
     }
@@ -83,7 +85,7 @@ public class SymbolTableVisitor extends AbstractNodeVisitor{
     @Override
     public Object visit(ElseIfStatement node) {
         symbolTable.openScope();
-        visit(node.stms);
+        visit(node.getStms());
         symbolTable.closeScope();
         return null;
     }
@@ -91,13 +93,24 @@ public class SymbolTableVisitor extends AbstractNodeVisitor{
     @Override
     public Object visit(ElseThenStmt node) {
         symbolTable.openScope();
-        visit(node.stms);
+        visit(node.getStms());
         symbolTable.closeScope();
         return null;
     }
 
     @Override
     public Object visit(ValueAssignment node) {
+        TRUNType vType = (TRUNType) visit(node.getId());
+        TRUNType eType = (TRUNType) visit(node.getValue());
+
+        boolean isInSymbolTable = symbolTable.getIdTable().containsKey(node.getId().getSpelling());
+
+        if(!isInSymbolTable){
+            throw new VariableMissing("Variable " + node.getId().spelling + " is not declared");
+        }
+        if(!(symbolTable.getIdTable().get(node.getId().getSpelling()).getType() instanceof INTDCL && node.getValue() instanceof IntegerLiteral)){
+            throw new IncompatibleTypes(node.getValue().getClass().getName() + " cannot be assigned to " + node.getId().getSpelling());
+        }
         return null;
     }
 
@@ -107,283 +120,285 @@ public class SymbolTableVisitor extends AbstractNodeVisitor{
     }
 
     @Override
-    public Object visit(ast.FloatDeclaration node) {
-        if(symbolTable.getIdTable().get(node.id.spelling) == null && !symbolTable.getIdTable().containsKey(node.id.spelling)){
-            symbolTable.put(node.id.spelling, new Sym(node, symbolTable.getDepth(), new ast.FLOATDCL()));
+    public Object visit(FloatDeclaration node) {
+        if(symbolTable.getIdTable().get(node.getId().getSpelling()) == null && !symbolTable.getIdTable().containsKey(node.getId().getSpelling())){
+            symbolTable.put(node.getId().getSpelling(), new Sym(node, symbolTable.getDepth(), new FLOATDCL()));
         } else{
-            throw new DublicateDeclaration("Variable " + node.id + " is already declared");
+            throw new DublicateDeclaration("Variable " + node.getId().getSpelling() + " is already declared");
         }
         return null;
     }
 
     @Override
-    public Object visit(ast.FloatLiteral node) {
+    public Object visit(FloatLiteral node) {
         return null;
     }
 
     @Override
-    public Object visit(ast.FromKeyword node) {
+    public Object visit(FromKeyword node) {
         return null;
     }
 
     @Override
-    public Object visit(ast.FromStatement node) {
+    public Object visit(FromStatement node) {
         symbolTable.openScope();
-        visit(node.stmts);
+        visit(node.getStmts());
         symbolTable.closeScope();
         return null;
     }
 
     @Override
-    public Object visit(ast.FunctionCall node) {
+    public Object visit(FunctionCall node) {
         return null;
     }
 
     @Override
-    public Object visit(ast.FunctionDeclaration node) {
-        if(symbolTable.getIdTable().get(node.functionName.spelling) == null && !symbolTable.getIdTable().containsKey(node.functionName.spelling)){
-            symbolTable.put(node.functionName.spelling, new Sym(node, symbolTable.getDepth(), null));
+    public Object visit(FunctionDeclaration node) {
+        if(symbolTable.getIdTable().get(node.getFunctionName().getSpelling()) == null && !symbolTable.getIdTable().containsKey(node.getFunctionName().getSpelling())){
+            symbolTable.put(node.getFunctionName().getSpelling(), new Sym(node, symbolTable.getDepth(), null));
             symbolTable.openScope();
-            visit(node.stmtBody);
+            visit(node.getStmtBody());
             symbolTable.closeScope();
         } else{
-            throw new DublicateDeclaration("Variable " + node.functionName.spelling + " is already declared");
+            throw new DublicateDeclaration("Variable " + node.getFunctionName().getSpelling() + " is already declared");
         }
         return null;
     }
 
     @Override
-    public Object visit(ast.GreaterThan node) {
+    public Object visit(GreaterThan node) {
         return null;
     }
 
     @Override
-    public Object visit(ast.Identifier node) {
+    public Object visit(Identifier node) {
         return null;
     }
 
     @Override
-    public Object visit(ast.IfStatement node) {
+    public Object visit(IfStatement node) {
         symbolTable.openScope();
-        visit(node.trueStm);
+        visit(node.getTrueStm());
         symbolTable.closeScope();
-        for(ast.ElseIfStatement elseIfStatement : node.elseifs){
+        for(ElseIfStatement elseIfStatement : node.getElseifs()){
             visit(elseIfStatement);
         }
-        visit(node.elsethen);
+        visit(node.getElsethen());
         return null;
     }
 
     @Override
-    public Object visit(ast.INTDCL node) {
+    public Object visit(INTDCL node) {
         return null;
     }
 
     @Override
-    public Object visit(ast.IntDeclaration node) {
-        if(symbolTable.getIdTable().get(node.id.spelling) == null && !symbolTable.getIdTable().containsKey(node.id.spelling)){
-            symbolTable.put(node.id.spelling, new Sym(node, symbolTable.getDepth(), new ast.INTDCL()));
+    public Object visit(IntDeclaration node) {
+        if(symbolTable.getIdTable().get(node.getId().getSpelling()) == null && !symbolTable.getIdTable().containsKey(node.getId().getSpelling())){
+            symbolTable.put(node.getId().getSpelling(), new Sym(node, symbolTable.getDepth(), new INTDCL()));
         } else{
-            throw new DublicateDeclaration("Variable " + node.id.spelling + " is already declared");
+            throw new DublicateDeclaration("Variable " + node.getId().getSpelling() + " is already declared");
         }
         return null;
     }
 
     @Override
-    public Object visit(ast.IntegerLiteral node) {
+    public Object visit(IntegerLiteral node) {
         return null;
     }
 
     @Override
-    public Object visit(ast.LessThan node) {
+    public Object visit(LessThan node) {
         return null;
     }
 
     @Override
-    public Object visit(ast.Minus node) {
+    public Object visit(Minus node) {
         return null;
     }
 
     @Override
-    public Object visit(ast.MultipleElementAssign node) {
+    public Object visit(MultipleElementAssign node) {
         return null;
     }
 
     @Override
-    public Object visit(ast.Not node) {
+    public Object visit(Not node) {
         return null;
     }
 
     @Override
-    public Object visit(ast.Or node) {
+    public Object visit(Or node) {
         return null;
     }
 
     @Override
-    public Object visit(ast.Parameter node) {
+    public Object visit(Parameter node) {
         return null;
     }
 
     @Override
-    public Object visit(ast.Plus node) {
+    public Object visit(Plus node) {
         return null;
     }
 
     @Override
-    public Object visit(ast.RepeatStatement node) {
+    public Object visit(RepeatStatement node) {
         symbolTable.openScope();
-        visit(node.stmts);
+        visit(node.getStmts());
         symbolTable.closeScope();
         return null;
     }
 
     @Override
-    public Object visit(ast.ReturnFunctionDeclaration node) {
-        if(symbolTable.getIdTable().get(node.functionName.spelling) == null && !symbolTable.getIdTable().containsKey(node.functionName.spelling)){
-            symbolTable.put(node.functionName.spelling, new Sym(node, symbolTable.getDepth(), node.returnType));
+    public Object visit(ReturnFunctionDeclaration node) {
+        if(symbolTable.getIdTable().get(node.getFunctionName().getSpelling()) == null && !symbolTable.getIdTable().containsKey(node.getFunctionName().getSpelling())){
+            symbolTable.put(node.getFunctionName().getSpelling(), new Sym(node, symbolTable.getDepth(), node.getReturnType()));
             symbolTable.openScope();
-            visit(node.stmtBody);
+            visit(node.getStmtBody());
             symbolTable.closeScope();
         } else{
-            throw new DublicateDeclaration("Variable " + node.functionName.spelling + " is already declared");
+            throw new DublicateDeclaration("Variable " + node.getFunctionName().getSpelling() + " is already declared");
         }
         return null;
     }
 
     @Override
-    public Object visit(ast.ReturnStatement node) {
+    public Object visit(ReturnStatement node) {
         return null;
     }
 
     @Override
-    public Object visit(ast.SingleElementAssign node) {
+    public Object visit(SingleElementAssign node) {
         return null;
     }
 
     @Override
-    public Object visit(ast.Statement node) {
-        if(node instanceof ast.IntDeclaration){
-            visit((ast.IntDeclaration) node);
-        }else if(node instanceof ast.FloatDeclaration){
-            visit((ast.FloatDeclaration) node);
-        }else if(node instanceof ast.TextDeclaration){
-            visit((ast.TextDeclaration) node);
-        }else if(node instanceof ast.TruthDeclaration){
-            visit((ast.TruthDeclaration) node);
-        } else if(node instanceof ast.ArrayDeclaration) {
-            visit((ast.ArrayDeclaration) node);
-        } else if(node instanceof ast.IfStatement){
-            visit((ast.IfStatement) node);
-        } else if(node instanceof ast.WhileStatement){
-            visit((ast.WhileStatement) node);
-        } else if(node instanceof ast.RepeatStatement) {
-            visit((ast.RepeatStatement) node);
-        } else if(node instanceof ast.FromStatement){
-            visit((ast.FromStatement) node);
-        } else if(node instanceof ast.FunctionDeclaration){
-            visit((ast.FunctionDeclaration) node);
+    public Object visit(Statement node) {
+        if(node instanceof IntDeclaration){
+            visit((IntDeclaration) node);
+        }else if(node instanceof FloatDeclaration){
+            visit((FloatDeclaration) node);
+        }else if(node instanceof TextDeclaration){
+            visit((TextDeclaration) node);
+        }else if(node instanceof TruthDeclaration){
+            visit((TruthDeclaration) node);
+        } else if(node instanceof ArrayDeclaration) {
+            visit((ArrayDeclaration) node);
+        }else if(node instanceof ValueAssignment) {
+            visit((ValueAssignment) node);
+        }else if(node instanceof IfStatement){
+            visit((IfStatement) node);
+        } else if(node instanceof WhileStatement){
+            visit((WhileStatement) node);
+        } else if(node instanceof RepeatStatement) {
+            visit((RepeatStatement) node);
+        } else if(node instanceof FromStatement){
+            visit((FromStatement) node);
+        } else if(node instanceof FunctionDeclaration){
+            visit((FunctionDeclaration) node);
         }
         return null;
     }
 
     @Override
-    public Object visit(ast.StatementList node) {
-        for(ast.Statement stm : node.stmts){
+    public Object visit(StatementList node) {
+        for(Statement stm : node.getStmts()){
             visit(stm);
         }
         return null;
     }
 
     @Override
-    public Object visit(ast.TextAssignment node) {
+    public Object visit(TextAssignment node) {
         return null;
     }
 
     @Override
-    public Object visit(ast.TEXTDCL node) {
+    public Object visit(TEXTDCL node) {
         return null;
     }
 
     @Override
-    public Object visit(ast.TextDeclaration node) {
-        if(symbolTable.getIdTable().get(node.id.spelling) == null && !symbolTable.getIdTable().containsKey(node.id.spelling)){
-            symbolTable.put(node.id.spelling, new Sym(node, symbolTable.getDepth(),new ast.TEXTDCL()));
+    public Object visit(TextDeclaration node) {
+        if(symbolTable.getIdTable().get(node.getId().getSpelling()) == null && !symbolTable.getIdTable().containsKey(node.getId().getSpelling())){
+            symbolTable.put(node.getId().getSpelling(), new Sym(node, symbolTable.getDepth(),new TEXTDCL()));
         } else{
-            throw new DublicateDeclaration("Variable " + node.id + " is already declared");
+            throw new DublicateDeclaration("Variable " + node.getId().getSpelling() + " is already declared");
         }
         return null;
     }
 
     @Override
-    public Object visit(ast.TextLiteral node) {
+    public Object visit(TextLiteral node) {
         return null;
     }
 
     @Override
-    public Object visit(ast.Times node) {
+    public Object visit(Times node) {
         return null;
     }
 
     @Override
-    public Object visit(ast.TRUTHDCL node) {
+    public Object visit(TRUTHDCL node) {
         return null;
     }
 
     @Override
-    public Object visit(ast.TruthDeclaration node) {
-        if(symbolTable.getIdTable().get(node.id.spelling) == null && !symbolTable.getIdTable().containsKey(node.id.spelling)){
-            symbolTable.put(node.id.spelling, new Sym(node, symbolTable.getDepth(), new ast.TRUTHDCL()));
+    public Object visit(TruthDeclaration node) {
+        if(symbolTable.getIdTable().get(node.getId().getSpelling()) == null && !symbolTable.getIdTable().containsKey(node.getId().getSpelling())){
+            symbolTable.put(node.getId().getSpelling(), new Sym(node, symbolTable.getDepth(), new TRUTHDCL()));
         } else {
-            throw new DublicateDeclaration("Variable " + node.id.spelling + " is already declared");
+            throw new DublicateDeclaration("Variable " + node.getId().getSpelling() + " is already declared");
         }
         return null;
     }
 
     @Override
-    public Object visit(ast.TruthLiteral node) {
+    public Object visit(TruthLiteral node) {
         return null;
     }
 
     @Override
-    public Object visit(ast.TruthOperator node) {
+    public Object visit(TruthOperator node) {
         return null;
     }
 
     @Override
-    public Object visit(ast.TruthParenthesis node) {
+    public Object visit(TruthParenthesis node) {
         return null;
     }
 
     @Override
-    public Object visit(ast.TurnLeftStatement node) {
+    public Object visit(TurnLeftStatement node) {
         return null;
     }
 
     @Override
-    public Object visit(ast.TurnRightStatement node) {
+    public Object visit(TurnRightStatement node) {
         return null;
     }
 
     @Override
-    public Object visit(ast.Type node) {
+    public Object visit(Type node) {
         return null;
     }
 
     @Override
-    public Object visit(ast.Upto node) {
+    public Object visit(Upto node) {
         return null;
     }
 
     @Override
-    public Object visit(ast.WhileStatement node) {
+    public Object visit(WhileStatement node) {
         symbolTable.openScope();
-        visit(node.stmts);
+        visit(node.getStmts());
         symbolTable.closeScope();
         return null;
     }
 
     @Override
-    public Object visit(ast.Equal node) {
+    public Object visit(Equal node) {
         return null;
     }
 
