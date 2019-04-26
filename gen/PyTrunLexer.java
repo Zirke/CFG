@@ -33,7 +33,7 @@ public class PyTrunLexer extends Lexer {
 
 	private static String[] makeRuleNames() {
 		return new String[] {
-			"INTDCL", "FLOATDCL", "TRUTHDCL", "TEXTDCL", "ARRDCL", "LPAR", "RPAR", 
+			"ast.INTDCL", "ast.FLOATDCL", "ast.TRUTHDCL", "ast.TEXTDCL", "ARRDCL", "LPAR", "RPAR",
 			"TIMES", "DIVIDES", "PLUS", "MINUS", "AND", "OR", "NOT", "TRUTHVAL", 
 			"EQUALS", "GRTHAN", "LESSTHAN", "IF", "ELSE", "WHILE", "DO", "FROM", 
 			"REPEAT", "UNTIL", "THEN", "UPTO", "DOWNTO", "COMMA", "RETURN", "RETURNS", 
@@ -57,7 +57,7 @@ public class PyTrunLexer extends Lexer {
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();
 	private static String[] makeSymbolicNames() {
 		return new String[] {
-			null, "INTDCL", "FLOATDCL", "TRUTHDCL", "TEXTDCL", "ARRDCL", "LPAR", 
+			null, "ast.INTDCL", "ast.FLOATDCL", "ast.TRUTHDCL", "ast.TEXTDCL", "ARRDCL", "LPAR",
 			"RPAR", "TIMES", "DIVIDES", "PLUS", "MINUS", "AND", "OR", "NOT", "TRUTHVAL", 
 			"EQUALS", "GRTHAN", "LESSTHAN", "IF", "ELSE", "WHILE", "DO", "FROM", 
 			"REPEAT", "UNTIL", "THEN", "UPTO", "DOWNTO", "COMMA", "RETURN", "RETURNS", 

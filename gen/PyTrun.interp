@@ -50,10 +50,10 @@ null
 
 token symbolic names:
 null
-INTDCL
-FLOATDCL
-TRUTHDCL
-TEXTDCL
+ast.INTDCL
+ast.FLOATDCL
+ast.TRUTHDCL
+ast.TEXTDCL
 ARRDCL
 LPAR
 RPAR

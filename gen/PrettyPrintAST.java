@@ -1,3 +1,5 @@
+import ast.*;
+
 public class PrettyPrintAST extends AbstractNodeVisitor<AbstractNode>{
 
     @Override
@@ -16,23 +18,23 @@ public class PrettyPrintAST extends AbstractNodeVisitor<AbstractNode>{
 
     @Override
     public AbstractNode visit(And node) {
-        visit(node.lhs);
-        visit(node.rhs);
-        System.out.println("And Node");
+        visit(node.getLhs());
+        visit(node.getRhs());
+        System.out.println("ast.And Node");
         return null;
     }
 
     @Override
     public AbstractNode visit(ArithmParenthesis node) {
-        visit(node.left);
+        visit(node.getLeft());
         System.out.println("Arithmetic Parenthesis");
         return null;
     }
 
     @Override
     public AbstractNode visit(ArrayAssignment node) {
-        visit(node.id);
-        visit(node.value);
+        visit(node.getId());
+        visit(node.getValue());
         System.out.println("Array assignment node");
         return null;
     }
@@ -51,35 +53,35 @@ public class PrettyPrintAST extends AbstractNodeVisitor<AbstractNode>{
 
     @Override
     public AbstractNode visit(ArrayDeclaration node) {
-        visit(node.id);
-        visit(node.type);
-        visit(node.values);
+        visit(node.getId());
+        visit(node.getType());
+        visit(node.getValues());
         System.out.println("Array declaration node");
         return null;
     }
 
     @Override
     public AbstractNode visit(ArrayElementAddStatement node) {
-        visit(node.arrayName);
-        visit(node.elementNumber);
-        visit(node.value);
+        visit(node.getArrayName());
+        visit(node.getElementNumber());
+        visit(node.getValue());
         System.out.println("Array element add statement node");
         return null;
     }
 
     @Override
     public AbstractNode visit(ArrayIndexStatement node) {
-        visit(node.id);
-        visit(node.number);
-        System.out.println("ArrayIndexStatement node");
+        visit(node.getId());
+        visit(node.getNumber());
+        System.out.println("ast.ArrayIndexStatement node");
         return null;
     }
 
     @Override
     public AbstractNode visit(Divide node) {
-        visit(node.left);
-        visit(node.right);
-        System.out.println("Divide node");
+        visit(node.getLeft());
+        visit(node.getRight());
+        System.out.println("ast.Divide node");
         return null;
     }
 
@@ -91,24 +93,24 @@ public class PrettyPrintAST extends AbstractNodeVisitor<AbstractNode>{
 
     @Override
     public AbstractNode visit(ElseIfStatement node) {
-        visit(node.truth);
-        visit(node.stms);
+        visit(node.getTruth());
+        visit(node.getStms());
         System.out.println("Else if statement node");
         return null;
     }
 
     @Override
     public AbstractNode visit(ElseThenStmt node) {
-        visit(node.stms);
+        visit(node.getStms());
         System.out.println("Else then statement node");
         return null;
     }
 
     @Override
     public AbstractNode visit(ValueAssignment node) {
-        visit(node.id);
-        visit(node.value);
-        System.out.println("Value assignment node");
+        visit(node.getId());
+        visit(node.getValue());
+        System.out.println("ast.Value assignment node");
         return null;
     }
 
@@ -120,15 +122,15 @@ public class PrettyPrintAST extends AbstractNodeVisitor<AbstractNode>{
 
     @Override
     public AbstractNode visit(FloatDeclaration node) {
-        visit(node.id);
-        visit(node.stm);
+        visit(node.getId());
+        visit(node.getStm());
         System.out.println("Float Declaration node");
         return null;
     }
 
     @Override
     public AbstractNode visit(FloatLiteral node) {
-        System.out.println(node.spelling);
+        System.out.println(node.getSpelling());
         System.out.println("Float Literal Node");
         return null;
     }
@@ -141,18 +143,18 @@ public class PrettyPrintAST extends AbstractNodeVisitor<AbstractNode>{
 
     @Override
     public AbstractNode visit(FromStatement node) {
-        visit(node.fromVal);
-        visit(node.toVal);
-        visit(node.uptoOrDownto);
-        visit(node.stmts);
+        visit(node.getFromVal());
+        visit(node.getToVal());
+        visit(node.getUptoOrDownto());
+        visit(node.getStmts());
         System.out.println("From statement");
         return null;
     }
 
     @Override
     public AbstractNode visit(FunctionCall node) {
-        visit(node.functionName);
-        for(Value x : node.arguments){
+        visit(node.getFunctionName());
+        for(Value x : node.getArguments()){
             visit(x);
         }
         System.out.println("Function Call node");
@@ -161,40 +163,40 @@ public class PrettyPrintAST extends AbstractNodeVisitor<AbstractNode>{
 
     @Override
     public AbstractNode visit(FunctionDeclaration node) {
-        visit(node.functionName);
-        for(Parameter x : node.parameters){
+        visit(node.getFunctionName());
+        for(Parameter x : node.getParameters()){
             visit(x);
         }
-        visit(node.stmtBody);
+        visit(node.getStmtBody());
         System.out.println("Function declaration node");
         return null;
     }
 
     @Override
     public AbstractNode visit(GreaterThan node) {
-        visit(node.lhs);
-        visit(node.rhs);
+        visit(node.getLhs());
+        visit(node.getRhs());
         System.out.println("Greater than Node");
         return null;
     }
 
     @Override
     public AbstractNode visit(Identifier node) {
-        System.out.println(node.spelling +"  : Identifier Node");
+        System.out.println(node.spelling +"  : ast.Identifier Node");
         return null;
     }
 
     @Override
     public AbstractNode visit(IfStatement node) {
-        visit(node.truthVal);
-        visit(node.trueStm);
-        if(node.elseifs != null) {
-            for (ElseIfStatement x : node.elseifs) {
+        visit(node.getTruthVal());
+        visit(node.getTrueStm());
+        if(node.getElseifs() != null) {
+            for (ElseIfStatement x : node.getElseifs()) {
                 visit(x);
             }
         }
-        if(node.elsethen != null)
-            visit(node.elsethen);
+        if(node.getElsethen() != null)
+            visit(node.getElsethen());
         System.out.println("If statement node");
         return null;
     }
@@ -207,38 +209,38 @@ public class PrettyPrintAST extends AbstractNodeVisitor<AbstractNode>{
 
     @Override
     public AbstractNode visit(IntDeclaration node) {
-        visit(node.id);
-        visit(node.stm);
+        visit(node.getId());
+        visit(node.getStm());
         System.out.println("Integer declaration node");
         return null;
     }
 
     @Override
     public AbstractNode visit(IntegerLiteral node) {
-        System.out.println(node.spelling);
+        System.out.println(node.getSpelling());
         System.out.println("Integer Literal node");
         return null;
     }
 
     @Override
     public AbstractNode visit(LessThan node) {
-        visit(node.lhs);
-        visit(node.rhs);
+        visit(node.getLhs());
+        visit(node.getRhs());
         System.out.println("Less than node");
         return null;
     }
 
     @Override
     public AbstractNode visit(Minus node) {
-        visit(node.left);
-        visit(node.right);
-        System.out.println("Minus node");
+        visit(node.getLeft());
+        visit(node.getRight());
+        System.out.println("ast.Minus node");
         return null;
     }
 
     @Override
     public AbstractNode visit(MultipleElementAssign node) {
-        for(Value x : node.elements){
+        for(Value x : node.getElements()){
             visit(x);
         }
         return null;
@@ -246,65 +248,65 @@ public class PrettyPrintAST extends AbstractNodeVisitor<AbstractNode>{
 
     @Override
     public AbstractNode visit(Not node) {
-        visit(node.lhs); //TODO double check whether value is stored in lhs.
-        System.out.println("Not node");
+        visit(node.getTruth());
+        System.out.println("ast.Not node");
         return null;
     }
 
     @Override
     public AbstractNode visit(Or node) {
-        visit(node.lhs);
-        visit(node.rhs);
-        System.out.println("Or node");
+        visit(node.getLhs());
+        visit(node.getRhs());
+        System.out.println("ast.Or node");
         return null;
     }
 
     @Override
     public AbstractNode visit(Parameter node) {
-        visit(node.paramType);
-        visit(node.id);
+        visit(node.getParamType());
+        visit(node.getId());
         System.out.println("Paramenter node");
         return null;
     }
 
     @Override
     public AbstractNode visit(Plus node) {
-        visit(node.left);
-        visit(node.right);
-        System.out.println("Plus node");
+        visit(node.getLeft());
+        visit(node.getRight());
+        System.out.println("ast.Plus node");
         return null;
     }
 
     @Override
     public AbstractNode visit(RepeatStatement node) {
-        visit(node.expr);
-        visit(node.stmts);
+        visit(node.getExpr());
+        visit(node.getStmts());
         System.out.println("Repeat statement node");
         return null;
     }
 
     @Override
     public AbstractNode visit(ReturnFunctionDeclaration node) {
-        visit(node.functionName);
-        visit(node.returnType);
-        for(Parameter x : node.parameters){
+        visit(node.getFunctionName());
+        visit(node.getReturnType());
+        for(Parameter x : node.getParameters()){
             visit(x);
         }
-        visit(node.stmtBody);
+        visit(node.getStmtBody());
         System.out.println("Return Function declaration node");
         return null;
     }
 
     @Override
     public AbstractNode visit(SingleElementAssign node) {
-        visit(node.elementNr);
-        visit(node.assignemntVal);
+        visit(node.getElementNr());
+        visit(node.getAssignemntVal());
         return null;
     }
 
     @Override
     public AbstractNode visit(StatementList node) {
-        for(Statement x : node.stmts){
+        for(Statement x : node.getStmts()){
             visit(x);
         }
         return null;
@@ -312,8 +314,8 @@ public class PrettyPrintAST extends AbstractNodeVisitor<AbstractNode>{
 
     @Override
     public AbstractNode visit(TextAssignment node) {
-        visit(node.id);
-        visit(node.text);
+        visit(node.getId());
+        visit(node.getText());
         System.out.println("Text assignment node");
         return null;
     }
@@ -326,23 +328,23 @@ public class PrettyPrintAST extends AbstractNodeVisitor<AbstractNode>{
 
     @Override
     public AbstractNode visit(TextDeclaration node) {
-        visit(node.id);
-        visit(node.val);
+        visit(node.getId());
+        visit(node.getVal());
         System.out.println("Text declaration");
         return null;
     }
 
     @Override
     public AbstractNode visit(TextLiteral node) {
-        System.out.println(node.spelling);
+        System.out.println(node.getSpelling());
         return null;
     }
 
     @Override
     public AbstractNode visit(Times node) {
-        visit(node.left);
-        visit(node.right);
-        System.out.println("Times node");
+        visit(node.getLeft());
+        visit(node.getRight());
+        System.out.println("ast.Times node");
         return null;
     }
 
@@ -354,21 +356,21 @@ public class PrettyPrintAST extends AbstractNodeVisitor<AbstractNode>{
 
     @Override
     public AbstractNode visit(TruthDeclaration node) {
-        visit(node.id);
-        visit(node.expr);
+        visit(node.getId());
+        visit(node.getExpr());
         System.out.println("Truth declaration node");
         return null;
     }
 
     @Override
     public AbstractNode visit(TruthLiteral node) {
-        System.out.println(node.spelling);
+        System.out.println(node.getSpelling());
         return null;
     }
 
     @Override
     public AbstractNode visit(TruthParenthesis node) {
-        visit(node.expr);
+        visit(node.getExpr());
         System.out.println("Truth Parenthesis node");
         return null;
     }
@@ -395,8 +397,8 @@ public class PrettyPrintAST extends AbstractNodeVisitor<AbstractNode>{
 
     @Override
     public AbstractNode visit(WhileStatement node) {
-        visit(node.expr);
-        visit(node.stmts);
+        visit(node.getExpr());
+        visit(node.getStmts());
         System.out.println("While statement");
         return null;
     }
@@ -447,9 +449,9 @@ public class PrettyPrintAST extends AbstractNodeVisitor<AbstractNode>{
 
     @Override
     public AbstractNode visit(Equal node) {
-        visit(node.lhs);
-        visit(node.rhs);
-        System.out.println("Equal node");
+        visit(node.getLhs());
+        visit(node.getRhs());
+        System.out.println("ast.Equal node");
         return null;
     }
 
@@ -521,29 +523,29 @@ public class PrettyPrintAST extends AbstractNodeVisitor<AbstractNode>{
 
     @Override
     public AbstractNode visit(DriveStatement node) {
-        visit(node.val);
+        visit(node.getVal());
         System.out.println("Drive Statmenet node");
         return null;
     }
 
     @Override
     public AbstractNode visit(ReturnStatement node) {
-        visit(node.val);
-        System.out.println("Return Statement node");
+        visit(node.getVal());
+        System.out.println("Return ast.Statement node");
         return null;
     }
 
     @Override
     public AbstractNode visit(TurnLeftStatement node) {
-        visit(node.val);
+        visit(node.getVal());
         System.out.println("Turn Left Node");
         return null;
     }
 
     @Override
     public AbstractNode visit(TurnRightStatement node) {
-        visit(node.val);
-        System.out.println("Turn Right Statement");
+        visit(node.getVal());
+        System.out.println("Turn Right ast.Statement");
         return null;
     }
 }

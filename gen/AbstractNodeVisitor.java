@@ -1,3 +1,5 @@
+import ast.*;
+
 public abstract class AbstractNodeVisitor<T>{
     public abstract T visit(AbstractNode node);
     public abstract T visit(Value node);

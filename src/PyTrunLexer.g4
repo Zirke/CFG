@@ -1,6 +1,6 @@
 lexer grammar PyTrunLexer;
 
-INTDCL   : 'integer' ; //Name a bit weird? Not a dcl on its own.
+INTDCL   : 'integer' ; //Name a bit weird? ast.Not a dcl on its own.
 FLOATDCL : 'decimal' ; //
 TRUTHDCL : 'truth' ; //
 TEXTDCL  : 'text' ; //

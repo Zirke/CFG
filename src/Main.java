@@ -1,3 +1,4 @@
+import ast.AbstractNode;
 import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
@@ -22,7 +23,6 @@ public class Main{
         }
 
         ANTLRInputStream input = new ANTLRInputStream(d);
-
         PyTrunLexer x = new PyTrunLexer(input);
         CommonTokenStream tokens = new CommonTokenStream(x);
         PyTrun parser = new PyTrun(tokens);
@@ -39,7 +39,7 @@ public class Main{
 
         BuildASTVisitor visitor = new BuildASTVisitor();
         AbstractNode ast = visitor.visit(tree);
-         PrettyPrintAST visitor2 = new PrettyPrintAST();
+        PrettyPrintAST visitor2 = new PrettyPrintAST();
          visitor2.visit(ast);
         // System.out.println(ast);
 

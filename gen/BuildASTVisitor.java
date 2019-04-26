@@ -1,3 +1,4 @@
+import ast.*;
 import org.antlr.v4.runtime.tree.AbstractParseTreeVisitor;
 import org.antlr.v4.runtime.tree.ParseTree;
 import java.util.ArrayList;
@@ -8,7 +9,7 @@ public class BuildASTVisitor extends AbstractParseTreeVisitor<AbstractNode> impl
 	@Override public AbstractNode visitStart(PyTrun.StartContext ctx) {
 		ArrayList<Statement> statements = new ArrayList<>();
 		for (PyTrun.StmtsContext x: ctx.stmts()) {
-			statements.addAll(((StatementList)visitStmts(x)).stmts);
+			statements.addAll(((StatementList)visitStmts(x)).getStmts());
 		}
 		for (PyTrun.FunctiondclContext x: ctx.functiondcl()) {
 			statements.add((Statement) visitFunctiondcl(x));
@@ -55,7 +56,7 @@ public class BuildASTVisitor extends AbstractParseTreeVisitor<AbstractNode> impl
 			stmt = (Statement) visitTurnright(ctx.turnright());
 		}
 		/*else if(null != ctx.functiondcl()){
-			stmt = (Statement) visitFunctiondcl(ctx.functiondcl());
+			stmt = (ast.Statement) visitFunctiondcl(ctx.functiondcl());
 		}*/
 		return stmt;
 	}
@@ -128,7 +129,6 @@ public class BuildASTVisitor extends AbstractParseTreeVisitor<AbstractNode> impl
 		}
 	}
 
-
 	@Override public AbstractNode visitTruedcl(PyTrun.TruedclContext ctx) {
 		if(ctx.INTDCL() != null){
 			return new Parameter( new INTDCL(new Identifier( ctx.ID().getText())), new Identifier(ctx.ID().getText()));
@@ -152,7 +152,6 @@ public class BuildASTVisitor extends AbstractParseTreeVisitor<AbstractNode> impl
 		return new FunctionCall(functionName, arguments);
 	}
 
-	//TODO test needs to be done
 	@Override public AbstractNode visitIfstmt(PyTrun.IfstmtContext ctx) {
 		if(ctx.ELSE() == null){
 			return new IfStatement((TruthOperator) visitTruthpar( ctx.truthpar(0)),(StatementList) visitStmtblock(ctx.stmtblock(0)));
@@ -170,8 +169,8 @@ public class BuildASTVisitor extends AbstractParseTreeVisitor<AbstractNode> impl
 							(StatementList) visitStmtblock(ctx.stmtblock(i))));
 				}
 
-				/*elseIfStatements.add(new ElseIfStatement((TruthOperator) visitTruthpar( ctx.truthpar(i)),
-						(StatementList) visitStmtblock(ctx.stmtblock(i))));*/
+				/*elseIfStatements.add(new ast.ElseIfStatement((ast.TruthOperator) visitTruthpar( ctx.truthpar(i)),
+						(ast.StatementList) visitStmtblock(ctx.stmtblock(i))));*/
 				i++;
 			}
 			if(ctx.ELSE().size() == i){
@@ -191,7 +190,6 @@ public class BuildASTVisitor extends AbstractParseTreeVisitor<AbstractNode> impl
 		}
 	}
 
-
 	@Override public AbstractNode visitWhilestmt(PyTrun.WhilestmtContext ctx) {
 		return new WhileStatement((Value) visitTruthpar(ctx.truthpar()),
 				(StatementList) visitStmtblock(ctx.stmtblock()));
@@ -207,7 +205,7 @@ public class BuildASTVisitor extends AbstractParseTreeVisitor<AbstractNode> impl
 			return new FromStatement( (Value) visitValue(ctx.value(0)), (Value)visitValue(ctx.value(1)), new Upto("upto"),
 					(StatementList) visitStmtblock(ctx.stmtblock()));
 		}else if(ctx.DOWNTO() != null){
-			return new FromStatement( (Value) visitValue(ctx.value(0)), (Value)visitValue(ctx.value(1)), new Downto("Downto"),
+			return new FromStatement( (Value) visitValue(ctx.value(0)), (Value)visitValue(ctx.value(1)), new Downto("ast.Downto"),
 					(StatementList) visitStmtblock(ctx.stmtblock()));
 		}else
 			return null;
@@ -223,7 +221,6 @@ public class BuildASTVisitor extends AbstractParseTreeVisitor<AbstractNode> impl
 		}
 	}
 
-	//TODO needs to be done
 	@Override public AbstractNode visitAssignment(PyTrun.AssignmentContext ctx) {
 		if(ctx.TEXT() != null){
 			return new TextAssignment(new Identifier(ctx.ID().getText()), new TextLiteral(ctx.TEXT().getText()));
@@ -281,28 +278,36 @@ public class BuildASTVisitor extends AbstractParseTreeVisitor<AbstractNode> impl
 		if(plusMinus.isEmpty()){
 			return visitMultexpr(ctx.multexpr(0));
 		}else if(plusMinus.size() == 1){
-			plusMinus.get(0).left =(Value)visitMultexpr(ctx.multexpr(0));
-			plusMinus.get(0).right =(Value)visitMultexpr(ctx.multexpr(1));
+			plusMinus.get(0).setLeft((Value)visitMultexpr(ctx.multexpr(0)));
+			plusMinus.get(0).setRight((Value)visitMultexpr(ctx.multexpr(1)));
+			//plusMinus.get(0).left =(Value)visitMultexpr(ctx.multexpr(0));
+			//plusMinus.get(0).right =(Value)visitMultexpr(ctx.multexpr(1));
 			return plusMinus.get(0);
 		}else{
-			plusMinus.get(0).left = (Value) visitMultexpr(exprs.get(0)) ;
+			plusMinus.get(0).setLeft((Value) visitMultexpr(exprs.get(0)));
+			//plusMinus.get(0).left = (Value) visitMultexpr(exprs.get(0)) ;
 			exprs.remove(0);
-			plusMinus.get(0).right = plusMinus.get(1);
+			plusMinus.get(0).setRight(plusMinus.get(1));
+			//plusMinus.get(0).right = plusMinus.get(1);
 			int i = 1;
 			/*if(plusMinus.size() > 1){
 			    plusMinus.get(0).right = plusMinus.get(1);
-			    plusMinus.get(1).left =  (Value) visitMultexpr(exprs.get(0));
+			    plusMinus.get(1).left =  (ast.Value) visitMultexpr(exprs.get(0));
 			    exprs.remove(0);
 			}*/
 			while (i < (exprs.size())){
 				if( (exprs.size()) == 2){
-					plusMinus.get(i).right = (Value) visitMultexpr(exprs.get(0));
-					plusMinus.get(i).left =  (Value) visitMultexpr(exprs.get(1));
+					plusMinus.get(i).setRight((Value) visitMultexpr(exprs.get(0)));
+					//plusMinus.get(i).right = (Value) visitMultexpr(exprs.get(0));
+					plusMinus.get(i).setLeft((Value) visitMultexpr(exprs.get(1)));
+					//plusMinus.get(i).left =  (Value) visitMultexpr(exprs.get(1));
 					exprs.remove(1);
 					exprs.remove(0);
 				}else {
-					plusMinus.get(i).right = plusMinus.get(i + 1);
-					plusMinus.get(i + 1).left = (Value) visitMultexpr(exprs.get(0));
+					plusMinus.get(i).setRight(plusMinus.get(i + 1));
+					//plusMinus.get(i).right = plusMinus.get(i + 1);
+					plusMinus.get(i + 1).setLeft((Value) visitMultexpr(exprs.get(0)));
+					//plusMinus.get(i + 1).left = (Value) visitMultexpr(exprs.get(0));
 					exprs.remove(0);
 				}
 				i++;
@@ -324,22 +329,29 @@ public class BuildASTVisitor extends AbstractParseTreeVisitor<AbstractNode> impl
 		if(timesDivide.isEmpty()){
 			return visitParexpr(ctx.parexpr(0));
 		}else if(timesDivide.size() == 1){
-			timesDivide.get(0).left =(Value)visitParexpr(ctx.parexpr(0));
-			timesDivide.get(0).right =(Value)visitParexpr(ctx.parexpr(1));
+			timesDivide.get(0).setLeft((Value)visitParexpr(ctx.parexpr(0)));
+			//timesDivide.get(0).left =(Value)visitParexpr(ctx.parexpr(0));
+			timesDivide.get(0).setRight((Value)visitParexpr(ctx.parexpr(1)));
+			//timesDivide.get(0).right =(Value)visitParexpr(ctx.parexpr(1));
 			return timesDivide.get(0);
 		}else{
-			timesDivide.get(0).left = (Value) visitParexpr (exprs.get(0)) ;
+			timesDivide.get(0).setLeft((Value) visitParexpr (exprs.get(0)));
+			//timesDivide.get(0).left = (Value) visitParexpr (exprs.get(0)) ;
 			exprs.remove(0);
 			int i = 0; // moske 1 istedet
 			while (i < (exprs.size())){
 				if( (exprs.size()) == 2){
-					timesDivide.get(i).right = (Value) visitParexpr(exprs.get(0));
-					timesDivide.get(i).left =  (Value) visitParexpr(exprs.get(1));
+					timesDivide.get(i).setRight((Value) visitParexpr(exprs.get(0)));
+					//timesDivide.get(i).right = (Value) visitParexpr(exprs.get(0));
+					timesDivide.get(i).setLeft((Value) visitParexpr(exprs.get(1)));
+					//timesDivide.get(i).left =  (Value) visitParexpr(exprs.get(1));
 					exprs.remove(1);
 					exprs.remove(0);
 				}else {
-					timesDivide.get(i).right = timesDivide.get(i + 1);
-					timesDivide.get(i + 1).left = (Value) visitParexpr(exprs.get(0));
+					timesDivide.get(i).setRight(timesDivide.get(i + 1));
+					//timesDivide.get(i).right = timesDivide.get(i + 1);
+					timesDivide.get(i + 1).setLeft((Value) visitParexpr(exprs.get(0)));
+					//timesDivide.get(i + 1).left = (Value) visitParexpr(exprs.get(0));
 					exprs.remove(0);
 				}
 				i++;
@@ -364,18 +376,22 @@ public class BuildASTVisitor extends AbstractParseTreeVisitor<AbstractNode> impl
 		return visitLogicalexpr(ctx.logicalexpr());
 	}
 
-	//TODO needs to be impemented.
+
 	@Override public AbstractNode visitLogicalexpr(PyTrun.LogicalexprContext ctx) {
 		ArrayList<TruthOperator> operators = new ArrayList<>();
 		List<PyTrun.RelationalexprContext> exprs = ctx.relationalexpr();
 
 		for(ParseTree x : ctx.children){
-			if(x.getText().equals("NOT")){
-				operators.add(new Not());
-			}else if(x.getText().equals("OR")){
-				operators.add(new Or());
-			}else if(x.getText().equals("AND")){
-				operators.add(new And());
+			switch (x.getText()) {
+				case "NOT":
+					operators.add(new Not());
+					break;
+				case "OR":
+					operators.add(new Or());
+					break;
+				case "AND":
+					operators.add(new And());
+					break;
 			}
 		}
 
@@ -383,33 +399,44 @@ public class BuildASTVisitor extends AbstractParseTreeVisitor<AbstractNode> impl
 			return visitRelationalexpr(ctx.relationalexpr(0));
 		}else if(operators.size() == 1){
 			if(operators.get(0) instanceof Not){
-				operators.get(0).lhs = (Value)visitRelationalexpr(ctx.relationalexpr(0));
+				operators.get(0).setLhs((Value)visitRelationalexpr(ctx.relationalexpr(0)));
+				//operators.get(0).lhs = (Value)visitRelationalexpr(ctx.relationalexpr(0));
 				return operators.get(0);
 			}else{
-				operators.get(0).rhs = (Value)visitRelationalexpr(ctx.relationalexpr(0));
-				operators.get(0).lhs = (Value)visitRelationalexpr(ctx.relationalexpr(1));
+				operators.get(0).setRhs((Value)visitRelationalexpr(ctx.relationalexpr(0)));
+				//operators.get(0).rhs = (Value)visitRelationalexpr(ctx.relationalexpr(0));
+				operators.get(0).setLhs((Value)visitRelationalexpr(ctx.relationalexpr(1)));
+				//operators.get(0).lhs = (Value)visitRelationalexpr(ctx.relationalexpr(1));
 				return operators.get(0);
 			}
 		}else{
-			operators.get(0).lhs = (Value) visitRelationalexpr (exprs.get(0)) ;
+			operators.get(0).setLhs((Value) visitRelationalexpr (exprs.get(0)));
+			//operators.get(0).lhs = (Value) visitRelationalexpr (exprs.get(0)) ;
 			exprs.remove(0);
-			operators.get(0).rhs = operators.get(1);
+			operators.get(0).setRhs(operators.get(1));
+			//operators.get(0).rhs = operators.get(1);
 			int i = 0;
 			while (i < (exprs.size())){
 				if( ((exprs.size()) == 2) && (! (operators.get(i) instanceof Not)) ){
-					operators.get(i+1).rhs = (Value) visitRelationalexpr(exprs.get(0));
-					operators.get(i+1).lhs = (Value) visitRelationalexpr(exprs.get(1));
+					operators.get(i+1).setRhs((Value) visitRelationalexpr(exprs.get(0)));
+					//operators.get(i+1).rhs = (Value) visitRelationalexpr(exprs.get(0));
+					operators.get(i+1).setLhs((Value) visitRelationalexpr(exprs.get(1)));
+					//operators.get(i+1).lhs = (Value) visitRelationalexpr(exprs.get(1));
 					exprs.remove(1);
 					exprs.remove(0);
 				}else if(((exprs.size()) == 1) && (operators.get(i) instanceof Not)){
-					operators.get(i).lhs = (Value) visitRelationalexpr(exprs.get(0));
+					operators.get(i).setLhs((Value) visitRelationalexpr(exprs.get(0)));
+					//operators.get(i).lhs = (Value) visitRelationalexpr(exprs.get(0));
 					exprs.remove(0);
 				}else {
 					if(operators.get(i) instanceof Not){
-						operators.get(i).rhs = operators.get(i + 1);
+						operators.get(i).setRhs(operators.get(i + 1));
+						//operators.get(i).rhs = operators.get(i + 1);
 					}else {
-						operators.get(i).rhs = operators.get(i + 1);
-						operators.get(i + 1).lhs = (Value) visitRelationalexpr(exprs.get(0));
+						operators.get(i).setRhs(operators.get(i + 1));
+						//operators.get(i).rhs = operators.get(i + 1);
+						operators.get(i + 1).setLhs((Value) visitRelationalexpr(exprs.get(0)));
+						//operators.get(i + 1).lhs = (Value) visitRelationalexpr(exprs.get(0));
 						exprs.remove(0);
 					}
 				}
@@ -437,10 +464,8 @@ public class BuildASTVisitor extends AbstractParseTreeVisitor<AbstractNode> impl
 		}
 	}
 
-
-	//needs to be tested
 	@Override public AbstractNode visitAppend(PyTrun.AppendContext ctx) {
-		Value left = null;
+		Value left;
 		Value right = null;
 		if(ctx.TEXT() != null){
 			left = new TextLiteral( ctx.TEXT().get(0).getText());
@@ -452,8 +477,8 @@ public class BuildASTVisitor extends AbstractParseTreeVisitor<AbstractNode> impl
 				return new Plus("Append", left, right);
 			}
 		}/*else if(ctx.ID() != null){   //this will never happen as an arithmetic expression instead.
-			   left = new Identifier(ctx.ID().get(0).getText());
-			   right = new Identifier(ctx.ID().get(1).getText());
+			   left = new ast.Identifier(ctx.ID().get(0).getText());
+			   right = new ast.Identifier(ctx.ID().get(1).getText());
 			   return new Append("Append", left, right);
 		}*/
 
@@ -537,8 +562,6 @@ public class BuildASTVisitor extends AbstractParseTreeVisitor<AbstractNode> impl
 			return null;
 	}
 
-
-	//need to be placed in a more appropriate place.
 	@Override
 	public AbstractNode visitDclValue(PyTrun.DclValueContext ctx) {
 
@@ -555,7 +578,6 @@ public class BuildASTVisitor extends AbstractParseTreeVisitor<AbstractNode> impl
 		}
 
 	}
-
 
 	@Override
 	public AbstractNode visitDrive(PyTrun.DriveContext ctx) {
