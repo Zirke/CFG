@@ -3,8 +3,40 @@ package astVisitor;
 import ast.*;
 
 public abstract class AbstractNodeVisitor<T>{
-    public abstract T visit(AbstractNode node);
-    public abstract T visit(Value node);
+    public T visit(AbstractNode node){
+        if(node instanceof StatementList){
+            return visit((StatementList) node);
+        }else if(node instanceof Statement){
+            return visit((Statement) node);
+        }else if(node instanceof Terminal){
+            return visit((Terminal) node);
+        }else if(node instanceof Type){
+           return visit((Type) node);
+        }
+        return null;
+    };
+    public T visit(Value node){
+        if(node instanceof FunctionCall){
+            return visit((FunctionCall)node);
+        }else if(node instanceof TruthOperator){
+            return visit((TruthOperator)node);
+        }else if(node instanceof ArithmOperator){
+            return visit((ArithmOperator)node);
+        }else if(node instanceof IntegerLiteral){
+            return visit((IntegerLiteral)node);
+        }else if(node instanceof FloatLiteral){
+            return visit((FloatLiteral)node);
+        }else if(node instanceof TextLiteral){
+            return visit((TextLiteral)node);
+        }else if(node instanceof TruthLiteral){
+            return visit((TruthLiteral)node);
+        }else if(node instanceof Identifier){
+            return visit((Identifier)node);
+        }else if(node instanceof Parameter) {
+            return visit((Parameter)node);
+        }
+        return null;
+    };
     public abstract T visit(And node);
     public abstract T visit(ArithmOperator node);
     public abstract T visit(ArithmParenthesis node);

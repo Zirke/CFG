@@ -3,7 +3,7 @@ import astVisitor.AbstractNodeVisitor;
 
 public class PrettyPrintAST extends AbstractNodeVisitor<AbstractNode> {
 
-    @Override
+/*    @Override
     public AbstractNode visit(AbstractNode node) {
         if(node instanceof StatementList){
             visit((StatementList) node);
@@ -15,7 +15,7 @@ public class PrettyPrintAST extends AbstractNodeVisitor<AbstractNode> {
             visit((Type) node);
         }
         return null;
-    }
+    }*/
 
     @Override
     public AbstractNode visit(And node) {
