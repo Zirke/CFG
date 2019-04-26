@@ -1,10 +1,13 @@
+package symbolTable;
+
 import Exceptions.SymbolTableErrorExceptions.DublicateDeclaration;
 import Exceptions.SymbolTableErrorExceptions.IncompatibleTypes;
 import Exceptions.SymbolTableErrorExceptions.VariableMissing;
 import ast.*;
+import astVisitor.AbstractNodeVisitor;
 
-public class SymbolTableVisitor extends AbstractNodeVisitor{
-    private SymbolTable symbolTable = new SymbolTable();
+public class SymbolTableVisitor extends AbstractNodeVisitor<Object> {
+    public SymbolTable symbolTable = new SymbolTable();
 
 
     @Override

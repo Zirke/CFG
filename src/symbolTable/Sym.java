@@ -1,3 +1,5 @@
+package symbolTable;
+
 import ast.AbstractNode;
 
 public class Sym {

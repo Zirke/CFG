@@ -2,6 +2,8 @@ import ast.AbstractNode;
 import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
+import parser.PyTrun;
+import parser.PyTrunLexer;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -43,8 +45,8 @@ public class Main{
          visitor2.visit(ast);
         // System.out.println(ast);
 
-        /*SymbolTableVisitor symbolTableVisitor = new SymbolTableVisitor();
-        SymbolTable sym =(SymbolTable) symbolTableVisitor.visit(ast);
+        /*symbolTable.SymbolTableVisitor symbolTableVisitor = new symbolTable.SymbolTableVisitor();
+        symbolTable.SymbolTable sym =(symbolTable.SymbolTable) symbolTableVisitor.visit(ast);
 
         for (String s : sym.getIdTable().keySet()){
             System.out.println(s);

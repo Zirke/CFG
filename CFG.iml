@@ -19,7 +19,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$USER_HOME$/Desktop/artifacts/gen_jar/gen.jar!/" />
+          <root url="jar://$MODULE_DIR$/jar-files/gen.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />

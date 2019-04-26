@@ -1,3 +1,5 @@
+package astVisitor;
+
 import ast.*;
 
 public abstract class AbstractNodeVisitor<T>{

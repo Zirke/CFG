@@ -1,6 +1,7 @@
 import ast.*;
+import astVisitor.AbstractNodeVisitor;
 
-public class PrettyPrintAST extends AbstractNodeVisitor<AbstractNode>{
+public class PrettyPrintAST extends AbstractNodeVisitor<AbstractNode> {
 
     @Override
     public AbstractNode visit(AbstractNode node) {
