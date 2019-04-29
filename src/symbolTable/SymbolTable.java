@@ -6,9 +6,9 @@ public class SymbolTable {
 
     private Integer depth = 0;
 
-    private HashMap<String, Sym> IdTable = new HashMap<>();
+    private HashMap<String, Symbol> IdTable = new HashMap<>();
 
-    public void put(String key, Sym value) {
+    public void put(String key, Symbol value) {
         IdTable.put(key, value);
     }
 
@@ -32,7 +32,7 @@ public class SymbolTable {
 
         List<String> remove = new ArrayList<>();
         for (String id : IdTable.keySet()) {
-            Sym node = IdTable.get(id);
+            Symbol node = IdTable.get(id);
 
             if (depth == (node.getDepth())) {
                 remove.add(id);
@@ -46,7 +46,7 @@ public class SymbolTable {
         depth--;
     }
 
-    public HashMap<String, Sym> getIdTable() {
+    public HashMap<String, Symbol> getIdTable() {
         return IdTable;
     }
 }
