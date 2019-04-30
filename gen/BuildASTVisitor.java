@@ -521,11 +521,13 @@ public class BuildASTVisitor extends AbstractParseTreeVisitor<AbstractNode> impl
 
 	@Override public AbstractNode visitStmtblock(PyTrun.StmtblockContext ctx) {
 		ArrayList<Statement> statements = new ArrayList<>();
+		if(ctx != null){
+			for(PyTrun.StmtContext x : ctx.stmt()){
+				statements.add((Statement) visitStmt(x));
+			}
+			return new StatementList(statements);
+		}else return new StatementList(statements);
 
-		for(PyTrun.StmtContext x : ctx.stmt()){
-			statements.add((Statement) visitStmt(x));
-		}
-		return new StatementList(statements);
 	}
 
 	@Override public AbstractNode visitTruthpar(PyTrun.TruthparContext ctx) {
