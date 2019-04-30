@@ -294,7 +294,7 @@ public class SymbolTableVisitor extends AbstractNodeVisitor<Object> {
         return null;
     }
 
-    //returns integerliteral
+    // returns integerliteral
     @Override
     public Object visit(IntegerLiteral node) {
         return new IntegerLiteral(node.getSpelling());
