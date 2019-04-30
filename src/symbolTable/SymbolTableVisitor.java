@@ -10,11 +10,13 @@ import astVisitor.AbstractNodeVisitor;
 public class SymbolTableVisitor extends AbstractNodeVisitor<Object> {
 
 
-    public SymbolTable symbolTable = new SymbolTable();
 
+    private SymbolTable symbolTable = new SymbolTable();
+
+    //both left hand side and right hand side of the and node has to be truth literals
     @Override
     public Object visit(And node) {
-        if(node.getLhs() instanceof TruthLiteral && node.getRhs() instanceof TruthLiteral){
+        if(visit(node.getLhs()) instanceof TruthLiteral && visit(node.getRhs()) instanceof TruthLiteral){
             return new TruthLiteral(node.getSpelling());
         }else return new IncorrectOperatorUse("Operator " + node.spelling + " cannot be applied to " + node.getLhs() + " & " + node.getRhs());
     }
@@ -24,10 +26,12 @@ public class SymbolTableVisitor extends AbstractNodeVisitor<Object> {
         return null;
     }
 
+    //goes into the parenthesis and visits the nodes in there
     @Override
     public Object visit(ArithmParenthesis node) {
         return visit(node.getLeft());
     }
+
 
     @Override
     public Object visit(ArrayDeclaration node) {
@@ -53,16 +57,19 @@ public class SymbolTableVisitor extends AbstractNodeVisitor<Object> {
 
     @Override
     public Object visit(Divide node) {
-        if(node.getRight() instanceof IntegerLiteral && node.getLeft() instanceof IntegerLiteral){
+        AbstractNode leftValue = (AbstractNode) visit(node.getLeft());
+        AbstractNode rightValue = (AbstractNode) visit(node.getRight());
+
+        if(leftValue instanceof IntegerLiteral && rightValue instanceof IntegerLiteral){
             return new IntegerLiteral(node.getSpelling());
-        }else if(node.getLeft() instanceof FloatLiteral && node.getRight() instanceof FloatLiteral){
+        }else if(leftValue instanceof FloatLiteral && rightValue instanceof FloatLiteral){
             return new FloatLiteral(node.getSpelling());
-        }else if(node.getLeft() instanceof FloatLiteral && node.getRight() instanceof IntegerLiteral){
+        }else if(leftValue instanceof FloatLiteral && rightValue instanceof IntegerLiteral){
             return new FloatLiteral(node.getSpelling());
-        }else if(node.getLeft() instanceof IntegerLiteral && node.getRight() instanceof FloatLiteral){
+        }else if(leftValue instanceof IntegerLiteral && rightValue instanceof FloatLiteral){
             return new FloatLiteral(node.getSpelling());
         }else {
-            throw new IncorrectOperatorUse("Operator " + node.spelling + " cannot be applied to " + node.getLeft() + " & " + node.getRight());
+            throw new IncorrectOperatorUse("Operator " + node.getClass() + " cannot be applied to " + node.getLeft() + " & " + node.getRight());
         }
     }
 
@@ -101,7 +108,8 @@ public class SymbolTableVisitor extends AbstractNodeVisitor<Object> {
 
     @Override
     public Object visit(ValueAssignment node) {
-        ast.Type variableType;
+        Type variableType;
+        AbstractNode expressionType = (AbstractNode) visit(node.getValue());
         boolean isInSymbolTable = symbolTable.getIdTable().containsKey(node.getId().getSpelling());
 
         if(!isInSymbolTable){
@@ -110,12 +118,11 @@ public class SymbolTableVisitor extends AbstractNodeVisitor<Object> {
             variableType = symbolTable.getIdTable().get(node.getId().getSpelling()).getType();
         }
 
-        if(!(   variableType.getClass().equals((visit(node.getValue()).getClass())) ||
-                variableType instanceof ast.INTDCL && visit(node.getValue()) instanceof IntegerLiteral ||
-                variableType instanceof ast.FLOATDCL && visit(node.getValue()) instanceof FloatLiteral ||
-                variableType instanceof ast.TRUTHDCL && visit(node.getValue()) instanceof TruthLiteral ||
-                variableType instanceof ast.TEXTDCL && visit(node.getValue()) instanceof TextLiteral)){
-            throw new IncompatibleTypes(node.getValue().getClass().getName() + " cannot be assigned to " + node.getId().getSpelling());
+        if(!(   variableType.getClass().equals(expressionType.getClass()) ||
+                variableType instanceof ast.INTDCL && expressionType instanceof IntegerLiteral ||
+                variableType instanceof ast.FLOATDCL && expressionType instanceof FloatLiteral ||
+                variableType instanceof ast.TRUTHDCL && expressionType instanceof TruthLiteral )){
+            throw new IncompatibleTypes(expressionType.getClass().getName() + "  cannot be assigned to " + node.getId().getSpelling());
         }
 
         return null;
@@ -128,8 +135,10 @@ public class SymbolTableVisitor extends AbstractNodeVisitor<Object> {
 
     @Override
     public Object visit(FloatDeclaration node) {
-        if(node.getStm() != null && !(visit(node.getStm()) instanceof FloatLiteral)){
-            throw new IncompatibleTypes(node.getStm() + " cannot be assigned to " + node.getId().getSpelling());
+        AbstractNode value = (AbstractNode) visit(node.getStm());
+
+        if(node.getStm() != null && !(value instanceof FloatLiteral)){
+            throw new IncompatibleTypes(value + " cannot be assigned to " + node.getId().getSpelling());
         }
         if(symbolTable.getIdTable().get(node.getId().getSpelling()) == null && !symbolTable.getIdTable().containsKey(node.getId().getSpelling())){
             symbolTable.put(node.getId().getSpelling(), new Symbol(node, symbolTable.getDepth(), new FLOATDCL()));
@@ -151,6 +160,7 @@ public class SymbolTableVisitor extends AbstractNodeVisitor<Object> {
 
     @Override
     public Object visit(FromStatement node) {
+
         symbolTable.openScope();
         visit(node.getStmts());
         symbolTable.closeScope();
@@ -162,11 +172,17 @@ public class SymbolTableVisitor extends AbstractNodeVisitor<Object> {
         return null;
     }
 
-    
+
+    //function declaration for a function with no return, opens a scope within the function if the name declaration does not exist in the symbol table
     @Override
     public Object visit(FunctionDeclaration node) {
         if(symbolTable.getIdTable().get(node.getFunctionName().getSpelling()) == null && !symbolTable.getIdTable().containsKey(node.getFunctionName().getSpelling())){
             symbolTable.put(node.getFunctionName().getSpelling(), new Symbol(node, symbolTable.getDepth(), null));
+
+            for(Parameter parameter : node.getParameters()){
+                visit(parameter);
+            }
+
             symbolTable.openScope();
             visit(node.getStmtBody());
             symbolTable.closeScope();
@@ -179,13 +195,16 @@ public class SymbolTableVisitor extends AbstractNodeVisitor<Object> {
     //greater than can be performed on ints and floats, returns as a truthliteral
     @Override
     public Object visit(GreaterThan node) {
-        if(visit(node.getLhs()) instanceof IntegerLiteral && visit(node.getRhs()) instanceof IntegerLiteral){
+        AbstractNode leftValue = (AbstractNode) visit(node.getLhs());
+        AbstractNode rightValue = (AbstractNode) visit(node.getRhs());
+
+        if(leftValue instanceof IntegerLiteral && rightValue instanceof IntegerLiteral){
         return new TruthLiteral(node.getSpelling());
-    }else if(visit(node.getLhs()) instanceof FloatLiteral && visit(node.getRhs()) instanceof FloatLiteral){
+    }else if(leftValue instanceof FloatLiteral && rightValue instanceof FloatLiteral){
         return new TruthLiteral(node.getSpelling());
-    }else if(visit(node.getLhs()) instanceof FloatLiteral && visit(node.getRhs()) instanceof IntegerLiteral){
+    }else if(leftValue instanceof FloatLiteral && rightValue instanceof IntegerLiteral){
         return new TruthLiteral(node.getSpelling());
-    }else if(visit(node.getLhs()) instanceof IntegerLiteral && visit(node.getRhs()) instanceof FloatLiteral){
+    }else if(leftValue instanceof IntegerLiteral && rightValue instanceof FloatLiteral){
         return new TruthLiteral(node.getSpelling());
     }else {
         throw new IncorrectOperatorUse("Operator " + node.getClass().getName() + " cannot be applied to " + node.getLhs() + " & " + node.getRhs());
@@ -231,8 +250,9 @@ public class SymbolTableVisitor extends AbstractNodeVisitor<Object> {
     // when declaring a variable it checks if it already exists in the symbol table, if not, it is put in the symbol table
     @Override
     public Object visit(IntDeclaration node) {
-        if(node.getStm() != null && !(visit(node.getStm()) instanceof IntegerLiteral)){
-            throw new IncompatibleTypes(node.getStm().getClass().getName() + " cannot be assigned to " + node.getId().getSpelling());
+        AbstractNode value = (AbstractNode) visit(node.getStm());
+        if(node.getStm() != null && !(value instanceof IntegerLiteral)){
+            throw new IncompatibleTypes(value.getClass().getName() + " cannot be assigned to " + node.getId().getSpelling());
         }
         if(symbolTable.getIdTable().get(node.getId().getSpelling()) == null && !symbolTable.getIdTable().containsKey(node.getId().getSpelling())){
             symbolTable.put(node.getId().getSpelling(), new Symbol(node, symbolTable.getDepth(), new INTDCL()));
@@ -251,29 +271,35 @@ public class SymbolTableVisitor extends AbstractNodeVisitor<Object> {
     // less than can be performed on ints and floats, returns as a truthliteral
     @Override
     public Object visit(LessThan node) {
-        if(node.getLhs() instanceof IntegerLiteral && node.getRhs() instanceof IntegerLiteral){
+        AbstractNode leftValue = (AbstractNode) visit(node.getLhs());
+        AbstractNode rightValue = (AbstractNode) visit(node.getRhs());
+
+        if(leftValue instanceof IntegerLiteral && rightValue instanceof IntegerLiteral){
             return new TruthLiteral(node.getSpelling());
-        }else if(node.getLhs() instanceof FloatLiteral && node.getRhs() instanceof FloatLiteral){
+        }else if(leftValue instanceof FloatLiteral && rightValue instanceof FloatLiteral){
             return new TruthLiteral(node.getSpelling());
-        }else if(node.getLhs() instanceof FloatLiteral && node.getRhs() instanceof IntegerLiteral){
+        }else if(leftValue instanceof FloatLiteral && rightValue instanceof IntegerLiteral){
             return new TruthLiteral(node.getSpelling());
-        }else if(node.getLhs() instanceof IntegerLiteral && node.getRhs() instanceof FloatLiteral){
+        }else if(leftValue instanceof IntegerLiteral && rightValue instanceof FloatLiteral){
             return new TruthLiteral(node.getSpelling());
         }else {
-            throw new IncorrectOperatorUse("Operator " + node.getClass().getName() + " cannot be applied to " + node.getLhs() + " & " + node.getRhs());
+            throw new IncorrectOperatorUse("Operator " + node.getClass().getName() + " cannot be applied to " + leftValue.getClass().getName() + " & " + rightValue.getClass().getName());
         }
     }
 
     //minus can only be performed on ints and floats, returns float if they are mixed
     @Override
     public Object visit(Minus node) {
-        if(visit(node.getRight()) instanceof IntegerLiteral && visit(node.getLeft()) instanceof IntegerLiteral){
+        AbstractNode leftValue = (AbstractNode) visit(node.getLeft());
+        AbstractNode rightValue = (AbstractNode) visit(node.getRight());
+
+        if(leftValue instanceof IntegerLiteral && rightValue instanceof IntegerLiteral){
             return new IntegerLiteral(node.getSpelling());
-        }else if(visit(node.getLeft()) instanceof FloatLiteral && visit(node.getRight()) instanceof FloatLiteral){
+        }else if(leftValue instanceof FloatLiteral && rightValue instanceof FloatLiteral){
             return new FloatLiteral(node.getSpelling());
-        }else if(visit(node.getLeft()) instanceof FloatLiteral && visit(node.getRight()) instanceof IntegerLiteral){
+        }else if(leftValue instanceof FloatLiteral && rightValue instanceof IntegerLiteral){
             return new FloatLiteral(node.getSpelling());
-        }else if(visit(node.getLeft()) instanceof IntegerLiteral && visit(node.getRight()) instanceof FloatLiteral){
+        }else if(leftValue instanceof IntegerLiteral && rightValue instanceof FloatLiteral){
             return new FloatLiteral(node.getSpelling());
         }else {
             throw new IncorrectOperatorUse("Operator " + node.getClass().getName() + " cannot be applied to " + node.getLeft() + " & " + node.getRight());
@@ -303,9 +329,10 @@ public class SymbolTableVisitor extends AbstractNodeVisitor<Object> {
 
     @Override
     public Object visit(Parameter node) {
-        return null;
+        return visit(node.getParamType());
     }
 
+    //TODO
     @Override
     public Object visit(Plus node) {
 
@@ -329,6 +356,7 @@ public class SymbolTableVisitor extends AbstractNodeVisitor<Object> {
 
     @Override
     public Object visit(ReturnFunctionDeclaration node) {
+        System.out.println("hej");
         if(symbolTable.getIdTable().get(node.getFunctionName().getSpelling()) == null && !symbolTable.getIdTable().containsKey(node.getFunctionName().getSpelling())){
             symbolTable.put(node.getFunctionName().getSpelling(), new Symbol(node, symbolTable.getDepth(), node.getReturnType()));
             symbolTable.openScope();
@@ -394,13 +422,16 @@ public class SymbolTableVisitor extends AbstractNodeVisitor<Object> {
     // multiplicity can only be applied to floats and ints, if ints and floats are mixed the result is of type floatliteral
     @Override
     public Object visit(Times node) {
-        if(visit(node.getRight()) instanceof IntegerLiteral && visit(node.getLeft()) instanceof IntegerLiteral){
+        AbstractNode leftValue = (AbstractNode) visit(node.getLeft());
+        AbstractNode rightValue = (AbstractNode) visit(node.getRight());
+
+        if(leftValue instanceof IntegerLiteral && rightValue instanceof IntegerLiteral){
             return new IntegerLiteral(node.getSpelling());
-        }else if(visit(node.getLeft()) instanceof FloatLiteral && visit(node.getRight()) instanceof FloatLiteral){
+        }else if(leftValue instanceof FloatLiteral && rightValue instanceof FloatLiteral){
             return new FloatLiteral(node.getSpelling());
-        }else if(visit(node.getLeft()) instanceof FloatLiteral && visit(node.getRight()) instanceof IntegerLiteral){
+        }else if(leftValue instanceof FloatLiteral && rightValue instanceof IntegerLiteral){
             return new FloatLiteral(node.getSpelling());
-        }else if(visit(node.getLeft()) instanceof IntegerLiteral && visit(node.getRight()) instanceof FloatLiteral){
+        }else if(leftValue instanceof IntegerLiteral && rightValue instanceof FloatLiteral){
             return new FloatLiteral(node.getSpelling());
         }else {
             throw new IncorrectOperatorUse("Operator " + node.getSpelling() + " cannot be applied to " + node.getLeft() + " & " + node.getRight());
@@ -414,10 +445,12 @@ public class SymbolTableVisitor extends AbstractNodeVisitor<Object> {
 
     // if there is an assigment to be made, then that expression has to be a truthliteral,
     // when declaring a variable it checks if it already exists in the symbol table, if not, it is put in the symbol table
+    //TODO assigning big compound statements
     @Override
     public Object visit(TruthDeclaration node) {
-        if(node.getExpr() != null && !(visit(node.getExpr()) instanceof TruthLiteral)){
-            throw new IncompatibleTypes(node.getExpr() + " cannot be assigned to " + node.getId().getSpelling());
+        AbstractNode value = (AbstractNode) visit(node.getExpr());
+        if(node.getExpr() != null && !(value instanceof TruthLiteral)){
+            throw new IncompatibleTypes(value.getClass().getName() + " cannot be assigned to " + node.getId().getSpelling());
         }
         if(symbolTable.getIdTable().get(node.getId().getSpelling()) == null && !symbolTable.getIdTable().containsKey(node.getId().getSpelling())){
             symbolTable.put(node.getId().getSpelling(), new Symbol(node, symbolTable.getDepth(), new TRUTHDCL()));
@@ -478,22 +511,18 @@ public class SymbolTableVisitor extends AbstractNodeVisitor<Object> {
     //equal can be performed on floats ints and truth
     @Override
     public Object visit(Equal node) {
-        if(visit(node.getLhs()) instanceof IntegerLiteral && visit(node.getRhs()) instanceof IntegerLiteral){
+        AbstractNode leftValue = (AbstractNode) visit(node.getLhs());
+        AbstractNode rightValue = (AbstractNode) visit(node.getRhs());
+
+        if(leftValue instanceof IntegerLiteral && rightValue instanceof IntegerLiteral){
             return new TruthLiteral(node.getSpelling());
-        }else if(visit(node.getLhs()) instanceof FloatLiteral && visit(node.getRhs()) instanceof FloatLiteral){
+        }else if(leftValue instanceof FloatLiteral && rightValue instanceof FloatLiteral){
             return new TruthLiteral(node.getSpelling());
-        }else if(visit(node.getLhs()) instanceof FloatLiteral && visit(node.getRhs()) instanceof IntegerLiteral){
-            return new TruthLiteral(node.getSpelling());
-        }else if(visit(node.getLhs()) instanceof IntegerLiteral && visit(node.getRhs()) instanceof FloatLiteral){
-            return new TruthLiteral(node.getSpelling());
-        }else if(visit(node.getLhs()) instanceof TruthLiteral && visit(node.getRhs()) instanceof TruthLiteral) {
+        }else if(leftValue instanceof TruthLiteral && rightValue instanceof TruthLiteral) {
             return new TruthLiteral(node.getSpelling());
         }else{
             throw new IncorrectOperatorUse("Operator " + node.getClass().getName() + " cannot be applied to " + node.getLhs() + " & " + node.getRhs());
         }
     }
 
-    public SymbolTable getSymbolTable() {
-        return symbolTable;
-    }
 }
