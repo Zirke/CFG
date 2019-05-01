@@ -15,7 +15,7 @@ import java.io.IOException;
 public class Main{
 
     public static void main(String[] args) throws IOException {
-        File file = new File("C:\\Users\\Teodor\\Dropbox\\AAU\\4.Semester\\P4\\CFG\\src\\prog2");
+        File file = new File("src/prog2");
         String d = "";
         BufferedReader br = new BufferedReader(new FileReader(file));
 
@@ -43,8 +43,8 @@ public class Main{
 
         BuildASTVisitor visitor = new BuildASTVisitor();
         AbstractNode ast = visitor.visit(tree);
-        PrettyPrintAST visitor2 = new PrettyPrintAST();
-        visitor2.visit(ast);
+        //PrettyPrintAST visitor2 = new PrettyPrintAST();
+        //visitor2.visit(ast);
         // System.out.println(ast);
 
         /*symbolTable.SymbolTableVisitor symbolTableVisitor = new symbolTable.SymbolTableVisitor();

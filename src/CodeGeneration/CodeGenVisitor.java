@@ -117,6 +117,10 @@ public class CodeGenVisitor extends AbstractNodeVisitor {
     public Object visit(FloatDeclaration floatDeclaration) {
         emitter.emit("float ");
         visit(floatDeclaration.getId());
+        if(floatDeclaration.getStm() != null){
+            emitter.emit(" = ");
+            visit(floatDeclaration.getStm());
+        }
         emitter.emit(";\n");
         return null;
     }
@@ -142,22 +146,24 @@ public class CodeGenVisitor extends AbstractNodeVisitor {
     @Override
     public Object visit(FunctionCall functionCall) {
         visit(functionCall.getFunctionName());
-
+        emitter.emit("(");
         // Visit each argument in the functionCall argument list
         for(Value val : functionCall.getArguments()){
             visit(val);
         }
+        emitter.emit(");\n");
         return null;
     }
 
     @Override
     public Object visit(FunctionDeclaration functionDeclaration) {
-        emitter.emit("void ");
+        /* emitter.emit("void ");
         visit(functionDeclaration.getFunctionName());
         for(Value val : functionDeclaration.getParameters()){
             visit(val);
         }
         visit(functionDeclaration.getStmtBody());
+        */
         return null;
     }
 
@@ -204,6 +210,10 @@ public class CodeGenVisitor extends AbstractNodeVisitor {
     public Object visit(IntDeclaration intDeclaration) {
         emitter.emit("int ");
         visit(intDeclaration.getId());
+        if(intDeclaration.getStm() != null){
+            emitter.emit(" = ");
+            visit(intDeclaration.getStm());
+        }
         emitter.emit(";\n");
         return null;
     }
@@ -277,7 +287,7 @@ public class CodeGenVisitor extends AbstractNodeVisitor {
 
     @Override
     public Object visit(ReturnFunctionDeclaration returnFunctionDeclaration) {
-        visit(returnFunctionDeclaration.getReturnType());
+        /* visit(returnFunctionDeclaration.getReturnType());
         visit(returnFunctionDeclaration.getFunctionName());
         emitter.emit("(");
         for(Value val : returnFunctionDeclaration.getParameters()){
@@ -286,6 +296,7 @@ public class CodeGenVisitor extends AbstractNodeVisitor {
         emitter.emit("){\n");
         visit(returnFunctionDeclaration.getStmtBody());
         emitter.emit("}\n");
+        */
         return null;
     }
 
@@ -300,6 +311,7 @@ public class CodeGenVisitor extends AbstractNodeVisitor {
     //TODO Fix
     @Override
     public Object visit(SingleElementAssign singleElementAssign) {
+
         return null;
     }
 
@@ -363,6 +375,10 @@ public class CodeGenVisitor extends AbstractNodeVisitor {
     public Object visit(TruthDeclaration truthDeclaration) {
         emitter.emit("int ");
         visit(truthDeclaration.getId());
+        if(truthDeclaration.getExpr() != null){
+            emitter.emit(" = ");
+            visit(truthDeclaration.getExpr());
+        }
         emitter.emit(";\n");
         return null;
     }

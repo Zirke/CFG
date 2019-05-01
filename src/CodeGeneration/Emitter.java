@@ -11,7 +11,7 @@ public class Emitter {
 
     public Emitter() {
         try {
-            writer = new BufferedWriter(new FileWriter("C:\\Users\\Teodor\\Dropbox\\AAU\\4.Semester\\P4\\CFG\\src\\genFile.c"));
+            writer = new BufferedWriter(new FileWriter("src/genFile.c"));
         } catch (IOException e) {
             e.printStackTrace();
         }

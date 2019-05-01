@@ -59,7 +59,7 @@ function fibArray returns array(integer n){
 
 integer array fibNums is fibArray(10)
 
-integer fibNum1 is fibNumber(5) #test
+integer fibNum1 is 5 #test
 
 integer fibNum2 is fibNums element 10 #test
 
