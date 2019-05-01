@@ -14,7 +14,7 @@ import java.io.IOException;
 public class Main{
 
     public static void main(String[] args) throws IOException {
-        File file = new File("C:\\Users\\Abiram Mohanaraj\\Documents\\GitHub\\CFG\\src\\prog");
+        File file = new File("C:\\Users\\Christoffer\\Documents\\GitHub\\CFG1\\src\\prog");
         String d = "";
         BufferedReader br = new BufferedReader(new FileReader(file));
 
@@ -43,13 +43,12 @@ public class Main{
         BuildASTVisitor visitor = new BuildASTVisitor();
         AbstractNode ast = visitor.visit(tree);
         //AbstractNode ast = new ValueAssignment(new Identifier("he"), new IntegerLiteral("s"));
-        System.out.println(ast);
         PrettyPrintAST visitor2 = new PrettyPrintAST();
-        /*try {
+        try {
             visitor2.visit((visitable)ast);
         }catch (NoSuchMethodException e) {
 
-        }*/
+        }
         //ast.accept(visitor2);
         // System.out.println(ast);
 

@@ -21,13 +21,14 @@ public class BuildASTVisitor extends AbstractParseTreeVisitor<AbstractNode> impl
 			statements.add(d);
 
 		}
+		ArrayList<Statement> removestmts = new ArrayList<>();
 		for(Statement d : statements){
-			if(d==null){
-				statements.remove(d);
+			if(d != null){
+				removestmts.add(d);
 			}
-
 		}
-		return new StatementList(statements);
+
+		return new StatementList(removestmts);
 	}
 
 	@Override public AbstractNode visitStmts(PyTrun.StmtsContext ctx) {
