@@ -1,4 +1,5 @@
 package ast;
 
 //For all values
-public interface Value{}
+public interface Value extends visitable {
+}

@@ -2,7 +2,7 @@ package ast;
 
 import java.util.List;
 
-public class StatementList extends AbstractNode{
+public class StatementList extends AbstractNode implements visitable{
     List<Statement> stmts;
 
     public StatementList(List<Statement> stmts) {

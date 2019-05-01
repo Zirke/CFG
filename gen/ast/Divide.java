@@ -7,5 +7,4 @@ public class Divide extends ArithmOperator{
 
     public Divide() {
     }
-
 }

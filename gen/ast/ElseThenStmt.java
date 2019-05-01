@@ -1,6 +1,6 @@
 package ast;
 
-public class ElseThenStmt{
+public class ElseThenStmt implements visitable {
     StatementList stms;
 
     public ElseThenStmt(StatementList stms) {

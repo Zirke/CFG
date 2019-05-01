@@ -445,7 +445,6 @@ public class BuildASTVisitor extends AbstractParseTreeVisitor<AbstractNode> impl
 				}
 				i++;
 			}
-
 			return operators.get(0);
 		}
 	}

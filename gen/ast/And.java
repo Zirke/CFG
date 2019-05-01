@@ -11,5 +11,4 @@ public class And extends TruthOperator{
     public And() {
     }
 
-
 }

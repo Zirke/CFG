@@ -24,4 +24,5 @@ public class ArrayAssignment extends Statement{
     public void setValue(ArrayAsmValue value) {
         this.value = value;
     }
+
 }

@@ -34,4 +34,5 @@ public class ArrayDeclaration extends Statement{
     public void setValues(ArrayAsmValue values) {
         this.values = values;
     }
+
 }

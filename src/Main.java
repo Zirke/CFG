@@ -1,4 +1,5 @@
-import ast.AbstractNode;
+import Exceptions.SemanticException;
+import ast.*;
 import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
@@ -41,17 +42,25 @@ public class Main{
 
         BuildASTVisitor visitor = new BuildASTVisitor();
         AbstractNode ast = visitor.visit(tree);
+        //AbstractNode ast = new ValueAssignment(new Identifier("he"), new IntegerLiteral("s"));
+        System.out.println(ast);
         PrettyPrintAST visitor2 = new PrettyPrintAST();
-         visitor2.visit(ast);
+        /*try {
+            visitor2.visit((visitable)ast);
+        }catch (NoSuchMethodException e) {
+
+        }*/
+        //ast.accept(visitor2);
         // System.out.println(ast);
 
-        /*symbolTable.SymbolTableVisitor symbolTableVisitor = new symbolTable.SymbolTableVisitor();
-        symbolTable.SymbolTable sym =(symbolTable.SymbolTable) symbolTableVisitor.visit(ast);
+        symbolTable.SymbolTableVisitor symbolTableVisitor = new symbolTable.SymbolTableVisitor();
+       try {
+           symbolTable.SymbolTable sym = (symbolTable.SymbolTable) symbolTableVisitor.visit((visitable) ast);
 
-        for (String s : sym.getIdTable().keySet()){
-            System.out.println(s);
-        }*/
-
-
+       }catch(SemanticException e){
+           System.out.println("ex");
+       }
+       catch(NoSuchMethodException e){
+       }
     }
 }

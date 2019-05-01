@@ -1,5 +1,5 @@
 package ast;
 
-public abstract class Statement extends AbstractNode{
+public abstract class Statement extends AbstractNode implements visitable{
 
 }

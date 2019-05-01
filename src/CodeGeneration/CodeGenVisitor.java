@@ -1,9 +1,9 @@
 package CodeGeneration;
 
 import ast.*;
-import astVisitor.AbstractNodeVisitor;
+import astVisitor.BasicAbstractNodeVisitor;
 
-public class CodeGenVisitor extends AbstractNodeVisitor {
+public class CodeGenVisitor extends BasicAbstractNodeVisitor {
 
     Emitter emitter = new Emitter();
 
@@ -14,75 +14,75 @@ public class CodeGenVisitor extends AbstractNodeVisitor {
     }
 
     @Override
-    public Object visit(And and) {
-        visit(and.getLhs());
+    public Object visit(And and) throws NoSuchMethodException{
+        visit((visitable) and.getLhs());
         emitter.emit( " && ");
-        visit(and.getRhs());
+        visit((visitable)and.getRhs());
         return null;
     }
 
     @Override
-    public Object visit(ArithmParenthesis arithmParenthesis) {
+    public Object visit(ArithmParenthesis arithmParenthesis) throws NoSuchMethodException{
         emitter.emit("(");
         // only needs to visit left cause of sketchy implementation
-        visit(arithmParenthesis.getLeft());
+        visit((visitable) arithmParenthesis.getLeft());
         emitter.emit(")");
         return null;
     }
 
     //TODO fix pls
     @Override
-    public Object visit(ArrayAssignment arrayAssignment) {
+    public Object visit(ArrayAssignment arrayAssignment)throws NoSuchMethodException {
         return null;
     }
 
     // TODO weird, the array size is not know.
     @Override
-    public Object visit(ArrayDeclaration arrayDeclaration) {
+    public Object visit(ArrayDeclaration arrayDeclaration)throws NoSuchMethodException {
         return null;
     }
 
     //TODO Fix pls
     @Override
-    public Object visit(ArrayElementAddStatement arrayElementAddStatement) {
+    public Object visit(ArrayElementAddStatement arrayElementAddStatement)throws NoSuchMethodException {
         return null;
     }
 
     @Override
-    public Object visit(ArrayIndexStatement arrayIndexStatement) {
+    public Object visit(ArrayIndexStatement arrayIndexStatement)throws NoSuchMethodException {
         visit(arrayIndexStatement.getId());
         emitter.emit("[");
-        visit(arrayIndexStatement.getNumber());
+        visit((visitable)arrayIndexStatement.getNumber());
         emitter.emit("];\n");
         return null;
     }
 
     @Override
-    public Object visit(Divide divide) {
-        visit(divide.getLeft());
+    public Object visit(Divide divide)throws NoSuchMethodException {
+        visit((visitable)divide.getLeft());
         emitter.emit(" / ");
-        visit(divide.getRight());
+        visit((visitable)divide.getRight());
         return null;
     }
 
     //TODO Fix
     @Override
-    public Object visit(Downto downto) {
+    public Object visit(Downto downto)throws NoSuchMethodException {
         return null;
     }
 
     @Override
-    public Object visit(DriveStatement driveStatement) {
+    public Object visit(DriveStatement driveStatement) throws NoSuchMethodException{
         emitter.emit(" digitalWrite(leftMotor, HIGH);\ndigitalWrite(rightMotor, HIGH);\n delay(");
-        visit(driveStatement.getVal());
+        visit((visitable)driveStatement.getVal());
         emitter.emit(");\ndigitalWrite(leftMotor, LOW);\ndigitalWrite(rightMotor, LOW);\n");
         return null;
     }
 
     @Override
-    public Object visit(ElseIfStatement elseIfStatement) {
+    public Object visit(ElseIfStatement elseIfStatement)throws NoSuchMethodException {
         emitter.emit("else if(");
-        visit(elseIfStatement.getTruth());
+        visit((visitable)elseIfStatement.getTruth());
         emitter.emit("){");
         visit(elseIfStatement.getStms());
         emitter.emit("} ");
@@ -90,7 +90,7 @@ public class CodeGenVisitor extends AbstractNodeVisitor {
     }
 
     @Override
-    public Object visit(ElseThenStmt elseThenStmt) {
+    public Object visit(ElseThenStmt elseThenStmt) throws NoSuchMethodException{
         emitter.emit("else{\n");
         visit(elseThenStmt.getStms());
         emitter.emit("}\n");
@@ -99,85 +99,85 @@ public class CodeGenVisitor extends AbstractNodeVisitor {
 
     // Assuming ValueAssignment is only for ints and floats.
     @Override
-    public Object visit(ValueAssignment valueAssignment) {
+    public Object visit(ValueAssignment valueAssignment) throws NoSuchMethodException{
         visit(valueAssignment.getId());
         emitter.emit(" = ");
-        visit(valueAssignment.getValue());
+        visit((visitable)valueAssignment.getValue());
         return null;
     }
 
     @Override
-    public Object visit(FLOATDCL floatdcl) {
+    public Object visit(FLOATDCL floatdcl) throws NoSuchMethodException{
         emitter.emit("float ");
 
         return null;
     }
 
     @Override
-    public Object visit(FloatDeclaration floatDeclaration) {
+    public Object visit(FloatDeclaration floatDeclaration)throws NoSuchMethodException {
         emitter.emit("float ");
         visit(floatDeclaration.getId());
         return null;
     }
 
     @Override
-    public Object visit(FloatLiteral floatLiteral) {
+    public Object visit(FloatLiteral floatLiteral) throws NoSuchMethodException{
         emitter.emit(floatLiteral.getSpelling());
         return null;
     }
 
     //TODO Fix
     @Override
-    public Object visit(FromKeyword fromKeyword) {
+    public Object visit(FromKeyword fromKeyword)throws NoSuchMethodException {
         return null;
     }
 
     //TODO Fix
     @Override
-    public Object visit(FromStatement fromStatement) {
+    public Object visit(FromStatement fromStatement)throws NoSuchMethodException {
         return null;
     }
 
     @Override
-    public Object visit(FunctionCall functionCall) {
+    public Object visit(FunctionCall functionCall) throws NoSuchMethodException{
         visit(functionCall.getFunctionName());
 
         // Visit each argument in the functionCall argument list
         for(Value val : functionCall.getArguments()){
-            visit(val);
+            visit((visitable)val);
         }
         return null;
     }
 
     @Override
-    public Object visit(FunctionDeclaration functionDeclaration) {
+    public Object visit(FunctionDeclaration functionDeclaration)throws NoSuchMethodException {
         visit(functionDeclaration.getFunctionName());
         for(Value val : functionDeclaration.getParameters()){
-            visit(val);
+            visit((visitable)val);
         }
         visit(functionDeclaration.getStmtBody());
         return null;
     }
 
     @Override
-    public Object visit(GreaterThan greaterThan) {
-        visit(greaterThan.getLhs());
+    public Object visit(GreaterThan greaterThan) throws NoSuchMethodException{
+        visit((visitable)greaterThan.getLhs());
         emitter.emit(" > ");
-        visit(greaterThan.getRhs());
+        visit((visitable)greaterThan.getRhs());
         return null;
     }
 
     @Override
-    public Object visit(Identifier identifier) {
+    public Object visit(Identifier identifier) throws NoSuchMethodException{
         emitter.emit(identifier.getSpelling());
         return null;
     }
 
     @Override
-    public Object visit(IfStatement ifStatement) {
+    public Object visit(IfStatement ifStatement) throws NoSuchMethodException{
 
         emitter.emit("if(");
-        visit(ifStatement.getTruthVal());
+        visit((visitable)ifStatement.getTruthVal());
         emitter.emit("){\n");
         visit(ifStatement.getTrueStm());
 
@@ -192,90 +192,90 @@ public class CodeGenVisitor extends AbstractNodeVisitor {
     }
 
     @Override
-    public Object visit(INTDCL intdcl) {
+    public Object visit(INTDCL intdcl) throws NoSuchMethodException{
         emitter.emit("int ");
         return null;
     }
 
     @Override
-    public Object visit(IntDeclaration intDeclaration) {
+    public Object visit(IntDeclaration intDeclaration) throws NoSuchMethodException{
         emitter.emit("int ");
         visit(intDeclaration.getId());
         return null;
     }
 
     @Override
-    public Object visit(IntegerLiteral integerLiteral) {
+    public Object visit(IntegerLiteral integerLiteral) throws NoSuchMethodException{
         emitter.emit(integerLiteral.getSpelling());
         return null;
     }
 
     @Override
-    public Object visit(LessThan lessThan) {
-        visit(lessThan.getLhs());
+    public Object visit(LessThan lessThan) throws NoSuchMethodException{
+        visit((visitable)lessThan.getLhs());
         emitter.emit(" < ");
-        visit(lessThan.getRhs());
+        visit((visitable)lessThan.getRhs());
         return null;
     }
 
     @Override
-    public Object visit(Minus minus) {
-        visit(minus.getLeft());
+    public Object visit(Minus minus) throws NoSuchMethodException{
+        visit((visitable)minus.getLeft());
         emitter.emit(" - ");
-        visit(minus.getRight());
+        visit((visitable)minus.getRight());
         return null;
     }
 
     //TODO Fix
     @Override
-    public Object visit(MultipleElementAssign multipleElementAssign) {
+    public Object visit(MultipleElementAssign multipleElementAssign) throws NoSuchMethodException{
 
         return null;
     }
 
     @Override
-    public Object visit(Not not) {
+    public Object visit(Not not) throws NoSuchMethodException{
         emitter.emit("!");
-        visit(not.getTruth());
+        visit((visitable)not.getTruth());
         return null;
     }
 
     @Override
-    public Object visit(Or or) {
-        visit(or.getLhs());
+    public Object visit(Or or) throws NoSuchMethodException{
+        visit((visitable)or.getLhs());
         emitter.emit(" || ");
-        visit(or.getRhs());
+        visit((visitable)or.getRhs());
         return null;
     }
 
     @Override
-    public Object visit(Parameter parameter) {
-        visit(parameter.getParamType());
+    public Object visit(Parameter parameter) throws NoSuchMethodException{
+        visit((visitable)parameter.getParamType());
         visit(parameter.getId());
         return null;
     }
 
     @Override
-    public Object visit(Plus plus) {
-        visit(plus.getLeft());
+    public Object visit(Plus plus) throws NoSuchMethodException{
+        visit((visitable)plus.getLeft());
         emitter.emit(" + ");
-        visit(plus.getRight());
+        visit((visitable)plus.getRight());
         return null;
     }
 
     //TODO Fix
     @Override
-    public Object visit(RepeatStatement repeatStatement) {
+    public Object visit(RepeatStatement repeatStatement) throws NoSuchMethodException{
         return null;
     }
 
     @Override
-    public Object visit(ReturnFunctionDeclaration returnFunctionDeclaration) {
-        visit(returnFunctionDeclaration.getReturnType());
+    public Object visit(ReturnFunctionDeclaration returnFunctionDeclaration) throws NoSuchMethodException{
+        visit((visitable)returnFunctionDeclaration.getReturnType());
         visit(returnFunctionDeclaration.getFunctionName());
         emitter.emit("(");
         for(Value val : returnFunctionDeclaration.getParameters()){
-            visit(val);
+            visit((visitable)val);
         }
         emitter.emit("){\n");
         visit(returnFunctionDeclaration.getStmtBody());
@@ -284,25 +284,25 @@ public class CodeGenVisitor extends AbstractNodeVisitor {
     }
 
     @Override
-    public Object visit(ReturnStatement returnStatement) {
+    public Object visit(ReturnStatement returnStatement) throws NoSuchMethodException{
         emitter.emit("return ");
-        visit(returnStatement.getVal());
+        visit((visitable)returnStatement.getVal());
         return null;
     }
 
     //TODO Fix
     @Override
-    public Object visit(SingleElementAssign singleElementAssign) {
+    public Object visit(SingleElementAssign singleElementAssign) throws NoSuchMethodException{
         return null;
     }
 
     @Override
-    public Object visit(StatementList statementList) {
+    public Object visit(StatementList statementList) throws NoSuchMethodException{
 
         emitter.emit(setup.getInitialCode());
 
         for(Statement s : statementList.getStmts()){
-            visit(s);
+            visit((visitable)s);
         }
 
         emitter.emit("}\n");
@@ -313,77 +313,77 @@ public class CodeGenVisitor extends AbstractNodeVisitor {
 
     //TODO Fixes senere
     @Override
-    public Object visit(TextAssignment textAssignment) {
+    public Object visit(TextAssignment textAssignment) throws NoSuchMethodException{
 
         return null;
     }
 
     @Override
-    public Object visit(TEXTDCL textdcl) {
+    public Object visit(TEXTDCL textdcl) throws NoSuchMethodException{
         emitter.emit(textdcl.getId().getSpelling());
         return null;
     }
 
     //TODO weird when the size of the array is not yet known.
     @Override
-    public Object visit(TextDeclaration textDeclaration) {
+    public Object visit(TextDeclaration textDeclaration)throws NoSuchMethodException {
         return null;
     }
 
 
     @Override
-    public Object visit(TextLiteral textLiteral) {
+    public Object visit(TextLiteral textLiteral) throws NoSuchMethodException{
         emitter.emit(textLiteral.getSpelling());
         return null;
     }
 
     @Override
-    public Object visit(Times times) {
-        visit(times.getLeft());
+    public Object visit(Times times) throws NoSuchMethodException{
+        visit((visitable)times.getLeft());
         emitter.emit(" * ");
-        visit(times.getRight());
+        visit((visitable)times.getRight());
         return null;
     }
 
     @Override
-    public Object visit(TRUTHDCL truthdcl) {
+    public Object visit(TRUTHDCL truthdcl) throws NoSuchMethodException{
         emitter.emit(truthdcl.getId().getSpelling());
         return null;
     }
 
     @Override
-    public Object visit(TruthDeclaration truthDeclaration) {
+    public Object visit(TruthDeclaration truthDeclaration) throws NoSuchMethodException{
         emitter.emit("int ");
         visit(truthDeclaration.getId());
         return null;
     }
 
     @Override
-    public Object visit(TruthLiteral truthLiteral) {
+    public Object visit(TruthLiteral truthLiteral) throws NoSuchMethodException{
         emitter.emit(truthLiteral.getSpelling());
         return null;
     }
 
     @Override
-    public Object visit(TruthParenthesis truthParenthesis) {
+    public Object visit(TruthParenthesis truthParenthesis) throws NoSuchMethodException{
         emitter.emit("(");
-        visit(truthParenthesis.getExpr());
+        visit((visitable)truthParenthesis.getExpr());
         emitter.emit(")");
         return null;
     }
 
     @Override
-    public Object visit(TurnLeftStatement turnLeftStatement) {
+    public Object visit(TurnLeftStatement turnLeftStatement) throws NoSuchMethodException{
         emitter.emit("digitalWrite(leftMotor, LOW);\ndigitalWrite(rightMotor, HIGH);\ndelay(");
-        visit(turnLeftStatement.getVal());
+        visit((visitable)turnLeftStatement.getVal());
         emitter.emit(");\ndigitalWrite(lefMotor, LOW);\ndigitalWrite(rightMotor, LOW);\n");
         return null;
     }
 
     @Override
-    public Object visit(TurnRightStatement turnRightStatement) {
+    public Object visit(TurnRightStatement turnRightStatement) throws NoSuchMethodException{
         emitter.emit("digitalWrite(leftMotor, HIGH);\ndigitalWrite(rightMotor, LOW);\ndelay(");
-        visit(turnRightStatement.getVal());
+        visit((visitable)turnRightStatement.getVal());
         emitter.emit(");\ndigitalWrite(lefMotor, LOW);\ndigitalWrite(rightMotor, LOW);\n");
         return null;
     }
@@ -391,21 +391,21 @@ public class CodeGenVisitor extends AbstractNodeVisitor {
 
     //TODO Fix
     @Override
-    public Object visit(Upto upto) {
+    public Object visit(Upto upto)throws NoSuchMethodException {
         return null;
     }
 
     //TODO Fix
     @Override
-    public Object visit(WhileStatement whileStatement) {
+    public Object visit(WhileStatement whileStatement)throws NoSuchMethodException {
         return null;
     }
 
     @Override
-    public Object visit(Equal equal) {
-        visit(equal.getLhs());
+    public Object visit(Equal equal) throws NoSuchMethodException{
+        visit((visitable)equal.getLhs());
         emitter.emit(" = ");
-        visit(equal.getRhs());
+        visit((visitable)equal.getRhs());
         return null;
     }
 }

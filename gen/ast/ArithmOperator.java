@@ -30,4 +30,5 @@ public abstract class ArithmOperator extends Operator implements Value{
         this.right = right;
     }
 
+
 }
