@@ -5,5 +5,4 @@ public class ArithmParenthesis extends ArithmOperator{ //right should be null
         super(spelling, left, right);
     }
 
-
 }

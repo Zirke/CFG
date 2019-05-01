@@ -1,6 +1,6 @@
 package ast;
 
-public abstract class AbstractNode {
+public abstract class AbstractNode implements visitable{
 
 }
 

@@ -11,13 +11,24 @@ public class BuildASTVisitor extends AbstractParseTreeVisitor<AbstractNode> impl
 
 	@Override public AbstractNode visitStart(PyTrun.StartContext ctx) {
 		ArrayList<Statement> statements = new ArrayList<>();
-		for (PyTrun.StmtsContext x: ctx.stmts()) {
-			statements.addAll(((StatementList)visitStmts(x)).getStmts());
+		if(ctx.stmts() != null) {
+			for (PyTrun.StmtsContext x : ctx.stmts()) {
+				statements.addAll(((StatementList) visitStmts(x)).getStmts());
+			}
 		}
 		for (PyTrun.FunctiondclContext x: ctx.functiondcl()) {
-			statements.add((Statement) visitFunctiondcl(x));
+			Statement d =((Statement) visitFunctiondcl(x));
+			statements.add(d);
+
 		}
-		return new StatementList(statements);
+		ArrayList<Statement> removestmts = new ArrayList<>();
+		for(Statement d : statements){
+			if(d != null){
+				removestmts.add(d);
+			}
+		}
+
+		return new StatementList(removestmts);
 	}
 
 	@Override public AbstractNode visitStmts(PyTrun.StmtsContext ctx) {
@@ -57,8 +68,7 @@ public class BuildASTVisitor extends AbstractParseTreeVisitor<AbstractNode> impl
 			stmt = (Statement) visitTurnleft(ctx.turnleft());
 		}else if(ctx.turnright()!= null){
 			stmt = (Statement) visitTurnright(ctx.turnright());
-		}
-		/*else if(null != ctx.functiondcl()){
+		} /*else if(null != ctx.Functiondcl()){
 			stmt = (ast.Statement) visitFunctiondcl(ctx.functiondcl());
 		}*/
 		return stmt;
@@ -445,7 +455,6 @@ public class BuildASTVisitor extends AbstractParseTreeVisitor<AbstractNode> impl
 				}
 				i++;
 			}
-
 			return operators.get(0);
 		}
 	}
