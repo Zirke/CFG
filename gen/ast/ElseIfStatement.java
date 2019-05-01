@@ -2,17 +2,17 @@ package ast;
 
 public class ElseIfStatement implements visitable{
     Value truth;
-    Identifier truthVar;
+    //Identifier truthVar;
     StatementList stms;
 
     public ElseIfStatement(Value truth, StatementList stms) {
         this.truth = truth;
         this.stms = stms;
     }
-    public ElseIfStatement(Identifier truthVar, StatementList stms) {
+   /* public ElseIfStatement(Identifier truthVar, StatementList stms) {
         this.truthVar = truthVar;
         this.stms = stms;
-    }
+    }*/
 
     public Value getTruth() {
         return truth;
@@ -22,13 +22,13 @@ public class ElseIfStatement implements visitable{
         this.truth = truth;
     }
 
-    public Identifier getTruthVar() {
+    /*public Identifier getTruthVar() {
         return truthVar;
     }
 
     public void setTruthVar(Identifier truthVar) {
         this.truthVar = truthVar;
-    }
+    }*/
 
     public StatementList getStms() {
         return stms;

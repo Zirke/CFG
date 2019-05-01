@@ -319,7 +319,7 @@ public class BuildASTVisitor extends AbstractParseTreeVisitor<AbstractNode> impl
 			    plusMinus.get(1).left =  (ast.Value) visitMultexpr(exprs.get(0));
 			    exprs.remove(0);
 			}*/
-			while (i < (exprs.size())){
+			while (i < (plusMinus.size())){
 				if( (exprs.size()) == 2){
 					plusMinus.get(i).setRight((Value) visitMultexpr(exprs.get(0)));
 					//plusMinus.get(i).right = (Value) visitMultexpr(exprs.get(0));
@@ -328,9 +328,10 @@ public class BuildASTVisitor extends AbstractParseTreeVisitor<AbstractNode> impl
 					exprs.remove(1);
 					exprs.remove(0);
 				}else {
+					plusMinus.get(i).setLeft((Value) visitMultexpr(exprs.get(0)));
 					plusMinus.get(i).setRight(plusMinus.get(i + 1));
 					//plusMinus.get(i).right = plusMinus.get(i + 1);
-					plusMinus.get(i + 1).setLeft((Value) visitMultexpr(exprs.get(0)));
+					//plusMinus.get(i + 1).setLeft((Value) visitMultexpr(exprs.get(0)));
 					//plusMinus.get(i + 1).left = (Value) visitMultexpr(exprs.get(0));
 					exprs.remove(0);
 				}
@@ -363,7 +364,7 @@ public class BuildASTVisitor extends AbstractParseTreeVisitor<AbstractNode> impl
 			//timesDivide.get(0).left = (Value) visitParexpr (exprs.get(0)) ;
 			exprs.remove(0);
 			int i = 0; // moske 1 istedet
-			while (i < (exprs.size())){
+			while (i < (timesDivide.size())){
 				if( (exprs.size()) == 2){
 					timesDivide.get(i).setRight((Value) visitParexpr(exprs.get(0)));
 					//timesDivide.get(i).right = (Value) visitParexpr(exprs.get(0));
@@ -373,8 +374,9 @@ public class BuildASTVisitor extends AbstractParseTreeVisitor<AbstractNode> impl
 					exprs.remove(0);
 				}else {
 					timesDivide.get(i).setRight(timesDivide.get(i + 1));
+					timesDivide.get(i).setLeft((Value) visitParexpr(exprs.get(0)));
 					//timesDivide.get(i).right = timesDivide.get(i + 1);
-					timesDivide.get(i + 1).setLeft((Value) visitParexpr(exprs.get(0)));
+					//timesDivide.get(i + 1).setLeft((Value) visitParexpr(exprs.get(0)));
 					//timesDivide.get(i + 1).left = (Value) visitParexpr(exprs.get(0));
 					exprs.remove(0);
 				}
