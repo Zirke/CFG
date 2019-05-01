@@ -2,9 +2,9 @@ package Exceptions.SemanticCheckerExceptions;
 
 import Exceptions.SemanticException;
 
-public class DublicateDeclaration extends SemanticException {
+public class DuplicateDeclaration extends SemanticException {
 
-    public DublicateDeclaration(String msg) {
+    public DuplicateDeclaration(String msg) {
         super(msg);
     }
 }
