@@ -13,7 +13,7 @@ import java.io.IOException;
 public class Main{
 
     public static void main(String[] args) throws IOException {
-        File file = new File("C:\\Users\\Abiram Mohanaraj\\Documents\\GitHub\\CFG\\src\\prog");
+        File file = new File("C:\\Users\\Abiram Mohanaraj\\Documents\\GitHub\\CFG4\\src\\prog");
         String d = "";
         BufferedReader br = new BufferedReader(new FileReader(file));
 
