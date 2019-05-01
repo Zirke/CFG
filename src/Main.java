@@ -1,3 +1,5 @@
+import CodeGeneration.CodeGenVisitor;
+import CodeGeneration.Emitter;
 import ast.AbstractNode;
 import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CommonTokenStream;
@@ -13,7 +15,7 @@ import java.io.IOException;
 public class Main{
 
     public static void main(String[] args) throws IOException {
-        File file = new File("C:\\Users\\Abiram Mohanaraj\\Documents\\GitHub\\CFG\\src\\prog");
+        File file = new File("C:\\Users\\Teodor\\Dropbox\\AAU\\4.Semester\\P4\\CFG\\src\\prog2");
         String d = "";
         BufferedReader br = new BufferedReader(new FileReader(file));
 
@@ -42,7 +44,7 @@ public class Main{
         BuildASTVisitor visitor = new BuildASTVisitor();
         AbstractNode ast = visitor.visit(tree);
         PrettyPrintAST visitor2 = new PrettyPrintAST();
-         visitor2.visit(ast);
+        visitor2.visit(ast);
         // System.out.println(ast);
 
         /*symbolTable.SymbolTableVisitor symbolTableVisitor = new symbolTable.SymbolTableVisitor();
@@ -52,6 +54,10 @@ public class Main{
             System.out.println(s);
         }*/
 
-
+        Emitter emitter = new Emitter();
+        CodeGenVisitor genVisitor = new CodeGenVisitor(emitter);
+        genVisitor.setup();
+        genVisitor.visit(ast);
+        emitter.closeFile();
     }
 }

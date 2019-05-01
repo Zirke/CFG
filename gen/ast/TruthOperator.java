@@ -31,5 +31,4 @@ public abstract class TruthOperator extends Operator implements Value{
     public void setRhs(Value rhs) {
         this.rhs = rhs;
     }
-
 }

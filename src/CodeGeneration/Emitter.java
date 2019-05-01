@@ -8,7 +8,8 @@ public class Emitter {
 
     private BufferedWriter writer;
 
-    {
+
+    public Emitter() {
         try {
             writer = new BufferedWriter(new FileWriter("C:\\Users\\Teodor\\Dropbox\\AAU\\4.Semester\\P4\\CFG\\src\\genFile.c"));
         } catch (IOException e) {
@@ -16,11 +17,7 @@ public class Emitter {
         }
     }
 
-    public Emitter() {
-
-    }
-
-    void emit (String emitString){
+    void emit(String emitString) {
         try {
             writer.write(emitString);
         } catch (IOException e) {
@@ -28,7 +25,8 @@ public class Emitter {
         }
     }
 
-    void closeFile() {
+    public void closeFile() {
+        emit("}");
         try {
             writer.close();
         } catch (IOException e) {

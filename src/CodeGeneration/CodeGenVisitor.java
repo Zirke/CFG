@@ -5,12 +5,11 @@ import astVisitor.AbstractNodeVisitor;
 
 public class CodeGenVisitor extends AbstractNodeVisitor {
 
-    Emitter emitter = new Emitter();
+    private Emitter emitter;
 
-    GenSetup setup = new GenSetup();
-
-    public CodeGenVisitor() {
+    public CodeGenVisitor(Emitter emitter) {
         super();
+        this.emitter = emitter;
     }
 
     @Override
@@ -24,7 +23,7 @@ public class CodeGenVisitor extends AbstractNodeVisitor {
     @Override
     public Object visit(ArithmParenthesis arithmParenthesis) {
         emitter.emit("(");
-        // only needs to visit left cause of sketchy implementation
+        // only needs to visit left because of sketchy implementation
         visit(arithmParenthesis.getLeft());
         emitter.emit(")");
         return null;
@@ -62,6 +61,7 @@ public class CodeGenVisitor extends AbstractNodeVisitor {
         visit(divide.getLeft());
         emitter.emit(" / ");
         visit(divide.getRight());
+        emitter.emit(";\n");
         return null;
     }
 
@@ -117,6 +117,7 @@ public class CodeGenVisitor extends AbstractNodeVisitor {
     public Object visit(FloatDeclaration floatDeclaration) {
         emitter.emit("float ");
         visit(floatDeclaration.getId());
+        emitter.emit(";\n");
         return null;
     }
 
@@ -151,6 +152,7 @@ public class CodeGenVisitor extends AbstractNodeVisitor {
 
     @Override
     public Object visit(FunctionDeclaration functionDeclaration) {
+        emitter.emit("void ");
         visit(functionDeclaration.getFunctionName());
         for(Value val : functionDeclaration.getParameters()){
             visit(val);
@@ -180,6 +182,7 @@ public class CodeGenVisitor extends AbstractNodeVisitor {
         visit(ifStatement.getTruthVal());
         emitter.emit("){\n");
         visit(ifStatement.getTrueStm());
+        emitter.emit("}\n");
 
         if(!(ifStatement.getElseifs() == null)){
             for(ElseIfStatement elifStmt : ifStatement.getElseifs()) {
@@ -193,7 +196,7 @@ public class CodeGenVisitor extends AbstractNodeVisitor {
 
     @Override
     public Object visit(INTDCL intdcl) {
-        emitter.emit("int ");
+        emitter.emit(" int ");
         return null;
     }
 
@@ -201,6 +204,7 @@ public class CodeGenVisitor extends AbstractNodeVisitor {
     public Object visit(IntDeclaration intDeclaration) {
         emitter.emit("int ");
         visit(intDeclaration.getId());
+        emitter.emit(";\n");
         return null;
     }
 
@@ -223,6 +227,7 @@ public class CodeGenVisitor extends AbstractNodeVisitor {
         visit(minus.getLeft());
         emitter.emit(" - ");
         visit(minus.getRight());
+        emitter.emit(";\n");
         return null;
     }
 
@@ -260,6 +265,7 @@ public class CodeGenVisitor extends AbstractNodeVisitor {
         visit(plus.getLeft());
         emitter.emit(" + ");
         visit(plus.getRight());
+        emitter.emit(";\n");
         return null;
     }
 
@@ -287,6 +293,7 @@ public class CodeGenVisitor extends AbstractNodeVisitor {
     public Object visit(ReturnStatement returnStatement) {
         emitter.emit("return ");
         visit(returnStatement.getVal());
+        emitter.emit(";\n");
         return null;
     }
 
@@ -299,15 +306,15 @@ public class CodeGenVisitor extends AbstractNodeVisitor {
     @Override
     public Object visit(StatementList statementList) {
 
-        emitter.emit(setup.getInitialCode());
+        //emitter.emit(setup.getInitialCode());
 
         for(Statement s : statementList.getStmts()){
             visit(s);
         }
 
-        emitter.emit("}\n");
+        //emitter.emit("}\n");
 
-        emitter.closeFile();
+        //emitter.closeFile();
         return null;
     }
 
@@ -342,6 +349,7 @@ public class CodeGenVisitor extends AbstractNodeVisitor {
         visit(times.getLeft());
         emitter.emit(" * ");
         visit(times.getRight());
+        emitter.emit(";\n");
         return null;
     }
 
@@ -355,6 +363,7 @@ public class CodeGenVisitor extends AbstractNodeVisitor {
     public Object visit(TruthDeclaration truthDeclaration) {
         emitter.emit("int ");
         visit(truthDeclaration.getId());
+        emitter.emit(";\n");
         return null;
     }
 
@@ -407,5 +416,10 @@ public class CodeGenVisitor extends AbstractNodeVisitor {
         emitter.emit(" = ");
         visit(equal.getRhs());
         return null;
+    }
+
+    public void setup(){
+        GenSetup setup = new GenSetup();
+        emitter.emit(setup.getInitialCode());
     }
 }
