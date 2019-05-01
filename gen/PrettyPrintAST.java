@@ -166,7 +166,9 @@ public class PrettyPrintAST extends BasicAbstractNodeVisitor<AbstractNode> {
     @Override
     public AbstractNode visit(IfStatement node) throws NoSuchMethodException{
         visit(node.getTruthVal());
-        visit(node.getTrueStm());
+        if(node.getTrueStm() != null){
+            visit(node.getTrueStm());
+        }
         if(node.getElseifs() != null) {
             for (ElseIfStatement x : node.getElseifs()) {
                 visit(x);

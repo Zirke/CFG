@@ -32,12 +32,18 @@ public class BuildASTVisitor extends AbstractParseTreeVisitor<AbstractNode> impl
 	}
 
 	@Override public AbstractNode visitStmts(PyTrun.StmtsContext ctx) {
-		ArrayList<AbstractNode> stmts = new ArrayList();
+		ArrayList<Statement> stmts = new ArrayList();
 		List<PyTrun.StmtContext> bStmts = ctx.stmt();
 		for (PyTrun.StmtContext x : bStmts){
-			stmts.add(visitStmt(x));
+			stmts.add((Statement) visitStmt(x));
 		}
-		return new StatementList((ArrayList)stmts);
+		ArrayList<Statement> toadd = new ArrayList<>();
+		for(Statement s : stmts){
+			if(s != null){
+				toadd.add(s);
+			}
+		}
+		return new StatementList(toadd);
 	}
 
 	@Override public AbstractNode visitStmt(PyTrun.StmtContext ctx) {
@@ -86,14 +92,19 @@ public class BuildASTVisitor extends AbstractParseTreeVisitor<AbstractNode> impl
 		for(PyTrun.StmtContext x : ctx.stmt()){
 			statements.add((Statement) visitStmt(x));
 		}
-
+		ArrayList<Statement> noNulls = new ArrayList<>();
+		for(Statement s : statements){
+			if(s != null){
+				noNulls.add(s);
+			}
+		}
 		if(ctx.RETURNS() == null){
-			return new FunctionDeclaration(functionName, parameters, new StatementList(statements));
+			return new FunctionDeclaration(functionName, parameters, new StatementList(noNulls));
 		}else{
 			if(ctx.type() != null){
-				return new ReturnFunctionDeclaration(functionName, parameters, new StatementList(statements), (Type) visitType(ctx.type()));
+				return new ReturnFunctionDeclaration(functionName, parameters, new StatementList(noNulls), (Type) visitType(ctx.type()));
 			}else{
-				return new ReturnFunctionDeclaration(functionName, parameters, new StatementList(statements), null);
+				return new ReturnFunctionDeclaration(functionName, parameters, new StatementList(noNulls), null);
 			}
 
 		}
@@ -534,9 +545,14 @@ public class BuildASTVisitor extends AbstractParseTreeVisitor<AbstractNode> impl
 			for(PyTrun.StmtContext x : ctx.stmt()){
 				statements.add((Statement) visitStmt(x));
 			}
-			return new StatementList(statements);
+			ArrayList<Statement> noNullStmts = new ArrayList<>();
+			for(Statement s : statements){
+				if(s != null){
+					noNullStmts.add(s);
+				}
+			}
+			return new StatementList(noNullStmts);
 		}else return new StatementList(statements);
-
 	}
 
 	@Override public AbstractNode visitTruthpar(PyTrun.TruthparContext ctx) {
