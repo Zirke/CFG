@@ -423,7 +423,7 @@ public class BuildASTVisitor extends AbstractParseTreeVisitor<AbstractNode> impl
 			return visitRelationalexpr(ctx.relationalexpr(0));
 		}else if(operators.size() == 1){
 			if(operators.get(0) instanceof Not){
-				operators.get(0).setLhs((Value)visitRelationalexpr(ctx.relationalexpr(0)));
+                ((Not)operators.get(0)).setTruth((Value)visitRelationalexpr(ctx.relationalexpr(0)));
 				//operators.get(0).lhs = (Value)visitRelationalexpr(ctx.relationalexpr(0));
 				return operators.get(0);
 			}else{
