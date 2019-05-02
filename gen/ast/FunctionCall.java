@@ -6,9 +6,10 @@ public class FunctionCall extends Statement implements Value, ArrayAsmValue{
     Identifier functionName;
     List<Value> arguments;
 
-    public FunctionCall(Identifier functionName, List<Value> arguments) {
+    public FunctionCall(Identifier functionName, List<Value> arguments, int linenr) {
         this.functionName = functionName;
         this.arguments = arguments;
+        this.setLineNumber(linenr);
     }
 
     public Identifier getFunctionName() {

@@ -6,11 +6,12 @@ public class FromStatement extends Statement{
     FromKeyword uptoOrDownto;
     StatementList stmts;
 
-    public FromStatement(Value fromVal, Value toVal, FromKeyword uptoOrDownto, StatementList stmts) {
+    public FromStatement(Value fromVal, Value toVal, FromKeyword uptoOrDownto, StatementList stmts, int linenr) {
         this.fromVal = fromVal;
         this.toVal = toVal;
         this.uptoOrDownto = uptoOrDownto;
         this.stmts = stmts;
+        this.setLineNumber(linenr);
     }
 
     public Value getFromVal() {

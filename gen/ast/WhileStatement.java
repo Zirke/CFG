@@ -5,9 +5,10 @@ public class WhileStatement extends Statement{
     Value expr;
     StatementList stmts;
 
-    public WhileStatement(Value expr, StatementList stmts) {
+    public WhileStatement(Value expr, StatementList stmts, int linenr) {
         this.expr = expr;
         this.stmts = stmts;
+        this.setLineNumber(linenr);
     }
 
     public Value getExpr() {

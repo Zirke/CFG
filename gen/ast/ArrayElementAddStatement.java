@@ -5,10 +5,11 @@ public class ArrayElementAddStatement extends Statement{
     Value elementNumber;
     Value value;
 
-    public ArrayElementAddStatement(Identifier arrayName, Value elementNumber, Value value) {
+    public ArrayElementAddStatement(Identifier arrayName, Value elementNumber, Value value, int linenr) {
         this.arrayName = arrayName;
         this.elementNumber = elementNumber;
         this.value = value;
+        this.setLineNumber(linenr);
     }
 
     public Identifier getArrayName() {

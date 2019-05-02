@@ -4,8 +4,9 @@ package ast;
 public class DriveStatement extends Statement{
     Value val;
 
-    public DriveStatement(Value val) {
+    public DriveStatement(Value val, int linenr) {
         this.val = val;
+        this.setLineNumber(linenr);
     }
 
     public Value getVal() {

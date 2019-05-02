@@ -4,9 +4,10 @@ public class RepeatStatement extends Statement{
     StatementList stmts;
     Value expr;
 
-    public RepeatStatement(StatementList stmts, Value expr) {
+    public RepeatStatement(StatementList stmts, Value expr, int linenr) {
         this.stmts = stmts;
         this.expr = expr;
+        this.setLineNumber(linenr);
     }
 
     public StatementList getStmts() {

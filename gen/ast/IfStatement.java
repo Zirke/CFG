@@ -8,28 +8,32 @@ public class IfStatement extends Statement{
     List<ElseIfStatement> elseifs;
     ElseThenStmt elsethen;
 
-    public IfStatement(Value truthVal, StatementList trueStm, List<ElseIfStatement> elseifs, ElseThenStmt elsethen) {
+    public IfStatement(Value truthVal, StatementList trueStm, List<ElseIfStatement> elseifs, ElseThenStmt elsethen, int linenr) {
         this.truthVal = truthVal;
         this.trueStm = trueStm;
         this.elseifs = elseifs;
         this.elsethen = elsethen;
+        this.setLineNumber(linenr);
     }
 
-    public IfStatement(Value truthVal, StatementList trueStm) {
+    public IfStatement(Value truthVal, StatementList trueStm, int linenr) {
         this.truthVal = truthVal;
         this.trueStm = trueStm;
+        this.setLineNumber(linenr);
     }
 
-    public IfStatement(Value truthVal, StatementList trueStm, List<ElseIfStatement> elseifs) {
+    public IfStatement(Value truthVal, StatementList trueStm, List<ElseIfStatement> elseifs, int linenr) {
         this.truthVal = truthVal;
         this.trueStm = trueStm;
         this.elseifs = elseifs;
+        this.setLineNumber(linenr);
     }
 
-    public IfStatement(Value truthVal, StatementList trueStm, ElseThenStmt elsethen) {
+    public IfStatement(Value truthVal, StatementList trueStm, ElseThenStmt elsethen, int linenr) {
         this.truthVal = truthVal;
         this.trueStm = trueStm;
         this.elsethen = elsethen;
+        this.setLineNumber(linenr);
     }
 
     public Value getTruthVal() {

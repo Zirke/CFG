@@ -27,7 +27,14 @@ public class BuildASTVisitor extends AbstractParseTreeVisitor<AbstractNode> impl
 				removestmts.add(d);
 			}
 		}
-
+		try{
+		if(ctx.EOF() == null){
+			throw new RuntimeException("Check last symbol");
+		}
+		}catch(RuntimeException e){
+			System.err.println(e.getLocalizedMessage());
+			System.exit(0);
+		}
 		return new StatementList(removestmts);
 	}
 
@@ -99,12 +106,18 @@ public class BuildASTVisitor extends AbstractParseTreeVisitor<AbstractNode> impl
 			}
 		}
 		if(ctx.RETURNS() == null){
-			return new FunctionDeclaration(functionName, parameters, new StatementList(noNulls));
+			FunctionDeclaration i =new FunctionDeclaration(functionName, parameters, new StatementList(noNulls), ctx.getStart().getLine());
+			i.setLineNumber(ctx.getStart().getLine());
+			return i;
 		}else{
 			if(ctx.type() != null){
-				return new ReturnFunctionDeclaration(functionName, parameters, new StatementList(noNulls), (Type) visitType(ctx.type()));
+				ReturnFunctionDeclaration i = new ReturnFunctionDeclaration(functionName, parameters, new StatementList(noNulls), (Type) visitType(ctx.type()),ctx.getStart().getLine());
+				i.setLineNumber(ctx.getStart().getLine());
+				return i;
 			}else{
-				return new ReturnFunctionDeclaration(functionName, parameters, new StatementList(noNulls), null);
+				ReturnFunctionDeclaration i = new ReturnFunctionDeclaration(functionName, parameters, new StatementList(noNulls), null,ctx.getStart().getLine());
+				i.setLineNumber(ctx.getStart().getLine());
+				return i;
 			}
 
 		}
@@ -115,39 +128,64 @@ public class BuildASTVisitor extends AbstractParseTreeVisitor<AbstractNode> impl
 
 		if(ctx.ARRDCL() != null){
 			if(ctx.functioncall() != null){
-				return new ArrayDeclaration(new Identifier(ctx.ID().getText()) , (ArrayAsmValue) visitFunctioncall(ctx.functioncall()),(Type) visitType(ctx.type()));
+				ArrayDeclaration i =new ArrayDeclaration(new Identifier(ctx.ID().getText()) , (ArrayAsmValue) visitFunctioncall(ctx.functioncall()),(Type) visitType(ctx.type()));
+				i.setLineNumber(ctx.getStart().getLine());
+				return i;
 			}else if(ctx.types() != null){
 				ArrayList<Value> values = new ArrayList<>();
 				for (PyTrun.TypesContext x :ctx.types()){
 					values.add( (Value) visitTypes(x));
 				}
-				return new ArrayDeclaration(new Identifier(ctx.ID().getText()) , new MultipleElementAssign(values),(Type) visitType(ctx.type()));
+				ArrayDeclaration i = new ArrayDeclaration(new Identifier(ctx.ID().getText()) , new MultipleElementAssign(values),(Type) visitType(ctx.type()));
+				i.setLineNumber(ctx.getStart().getLine());
+				return i;
 			}else{
-				return new ArrayDeclaration(new Identifier(ctx.ID().getText()) , null,(Type) visitType(ctx.type()));
+				ArrayDeclaration i = new ArrayDeclaration(new Identifier(ctx.ID().getText()) , null,(Type) visitType(ctx.type()));
+				i.setLineNumber(ctx.getStart().getLine());
+				return i;
 			}
 		}else if(ctx.FLOATDCL() != null){
 			if(null != ctx.dclValue()){
-				return new FloatDeclaration(varName,(Value) visitDclValue(ctx.dclValue()));
-			}else
-				return new FloatDeclaration(varName,null);
-
+				FloatDeclaration i = new FloatDeclaration(varName,(Value) visitDclValue(ctx.dclValue()));
+				i.setLineNumber(ctx.start.getLine());
+				return i;
+			}else {
+				FloatDeclaration i = new FloatDeclaration(varName, null);
+				i.setLineNumber(ctx.start.getLine());
+				return i;
+			}
 
 		} else if(ctx.INTDCL() != null){
 			if(null != ctx.dclValue()){
-				return new IntDeclaration(varName, (Value) visitDclValue(ctx.dclValue()));
-			}else
-				return new IntDeclaration(varName, null);
-
+				IntDeclaration i =new IntDeclaration(varName, (Value) visitDclValue(ctx.dclValue()));
+				i.setLineNumber(ctx.getStart().getLine());
+				return i;
+			}else{
+				IntDeclaration i =new IntDeclaration(varName, null);
+				i.setLineNumber(ctx.getStart().getLine());
+				return i;
+			}
 		}else if(ctx.TEXTDCL() != null){
-			if(ctx.dclValue() != null)
-				return new TextDeclaration(varName, (Value)visitDclValue(ctx.dclValue()));
-			else
-				return new TextDeclaration(varName, null);
+			if(ctx.dclValue() != null){
+				TextDeclaration i = new TextDeclaration(varName, (Value)visitDclValue(ctx.dclValue()));
+				i.setLineNumber(ctx.getStart().getLine());
+				return i;
+			}else{
+				TextDeclaration i = new TextDeclaration(varName,null);
+				i.setLineNumber(ctx.getStart().getLine());
+				return i;
+			}
 		}else if(ctx.TRUTHDCL() != null){
-			if(ctx.truthexpr() != null)
-				return new TruthDeclaration(varName, (Value) visitTruthexpr(ctx.truthexpr()));
-			else
-				return new TruthDeclaration(varName, null);
+			if(ctx.truthexpr() != null){
+				TruthDeclaration i =new TruthDeclaration(varName, (Value) visitTruthexpr(ctx.truthexpr()));
+				i.setLineNumber(ctx.getStart().getLine());
+				return i;
+			}
+			else{
+				TruthDeclaration i =new TruthDeclaration(varName, null);
+				i.setLineNumber(ctx.getStart().getLine());
+				return i;
+			}
 		}else{
 			return null;
 		}
@@ -155,13 +193,13 @@ public class BuildASTVisitor extends AbstractParseTreeVisitor<AbstractNode> impl
 
 	@Override public AbstractNode visitTruedcl(PyTrun.TruedclContext ctx) {
 		if(ctx.INTDCL() != null){
-			return new Parameter( new INTDCL(new Identifier( ctx.ID().getText())), new Identifier(ctx.ID().getText()));
+			return new Parameter( new INTDCL(new Identifier( ctx.ID().getText())), new Identifier(ctx.ID().getText()),ctx.getStart().getLine());
 		}else if(ctx.FLOATDCL() != null){
-			return new Parameter( new FLOATDCL(new Identifier( ctx.ID().getText())), new Identifier(ctx.ID().getText()));
+			return new Parameter( new FLOATDCL(new Identifier( ctx.ID().getText())), new Identifier(ctx.ID().getText()),ctx.getStart().getLine());
 		}else if(ctx.TEXTDCL() != null){
-			return new Parameter( new TEXTDCL(new Identifier( ctx.ID().getText())), new Identifier(ctx.ID().getText()));
+			return new Parameter( new TEXTDCL(new Identifier( ctx.ID().getText())), new Identifier(ctx.ID().getText()),ctx.getStart().getLine());
 		}else if(ctx.TRUTHDCL() != null){
-			return new Parameter( new TRUTHDCL(new Identifier( ctx.ID().getText())), new Identifier(ctx.ID().getText()));
+			return new Parameter( new TRUTHDCL(new Identifier( ctx.ID().getText())), new Identifier(ctx.ID().getText()),ctx.getStart().getLine());
 		}else
 			return null;
 	}
@@ -173,12 +211,12 @@ public class BuildASTVisitor extends AbstractParseTreeVisitor<AbstractNode> impl
 		for(PyTrun.TypesContext x : ctx.types()){
 			arguments.add((Value) visitTypes(x));
 		}
-		return new FunctionCall(functionName, arguments);
+		return new FunctionCall(functionName, arguments,ctx.getStart().getLine());
 	}
 
 	@Override public AbstractNode visitIfstmt(PyTrun.IfstmtContext ctx) {
 		if(ctx.ELSE() == null){
-			return new IfStatement((TruthOperator) visitTruthpar( ctx.truthpar(0)),(StatementList) visitStmtblock(ctx.stmtblock(0)));
+			return new IfStatement((TruthOperator) visitTruthpar( ctx.truthpar(0)),(StatementList) visitStmtblock(ctx.stmtblock(0)),ctx.getStart().getLine());
 		}else if(ctx.IF().size() > 1){
 			ArrayList<ElseIfStatement> elseIfStatements = new ArrayList<>();
 
@@ -187,10 +225,10 @@ public class BuildASTVisitor extends AbstractParseTreeVisitor<AbstractNode> impl
 
 				if(visitTruthpar(ctx.truthpar(i)) instanceof Identifier){
 					elseIfStatements.add(new ElseIfStatement((Identifier) visitTruthpar(ctx.truthpar(i)),
-							(StatementList) visitStmtblock(ctx.stmtblock(i))));
+							(StatementList) visitStmtblock(ctx.stmtblock(i)), ctx.stmtblock(i).getStart().getLine()));
 				}else{
 					elseIfStatements.add(new ElseIfStatement((Value) visitTruthpar(ctx.truthpar(i)),
-							(StatementList) visitStmtblock(ctx.stmtblock(i))));
+							(StatementList) visitStmtblock(ctx.stmtblock(i)), ctx.stmtblock(i).getStart().getLine()));
 				}
 
 				/*elseIfStatements.add(new ast.ElseIfStatement((ast.TruthOperator) visitTruthpar( ctx.truthpar(i)),
@@ -201,45 +239,49 @@ public class BuildASTVisitor extends AbstractParseTreeVisitor<AbstractNode> impl
 				return new IfStatement((Value) visitTruthpar( ctx.truthpar(0)),
 						(StatementList) visitStmtblock(ctx.stmtblock(0)),
 						elseIfStatements,
-						new ElseThenStmt((StatementList) visitStmtblock(ctx.stmtblock(ctx.stmtblock().size() -1))));
+						new ElseThenStmt((StatementList) visitStmtblock(ctx.stmtblock(ctx.stmtblock().size() -1)),
+								ctx.stmtblock(ctx.stmtblock().size() -1).getStart().getLine()), //line nr for else then.
+						ctx.getStart().getLine()); //Line nr for if stmt.
 			}else{
 				return new IfStatement((Value) visitTruthpar( ctx.truthpar(0)),
 						(StatementList) visitStmtblock(ctx.stmtblock(0)),
-						elseIfStatements);
+						elseIfStatements,
+						ctx.getStart().getLine());
 			}
 
 		}else{
 			return new IfStatement((Value) visitTruthpar( ctx.truthpar(0)),(StatementList) visitStmtblock(ctx.stmtblock(0)),
-					new ElseThenStmt((StatementList) visitStmtblock(ctx.stmtblock( 1))));
+					new ElseThenStmt((StatementList) visitStmtblock(ctx.stmtblock( 1)), ctx.stmtblock( 1).getStart().getLine())
+					,ctx.getStart().getLine());
 		}
 	}
 
 	@Override public AbstractNode visitWhilestmt(PyTrun.WhilestmtContext ctx) {
 		return new WhileStatement((Value) visitTruthpar(ctx.truthpar()),
-				(StatementList) visitStmtblock(ctx.stmtblock()));
+				(StatementList) visitStmtblock(ctx.stmtblock()), ctx.getStart().getLine());
 	}
 
 	@Override public AbstractNode visitRepeatuntilstmt(PyTrun.RepeatuntilstmtContext ctx) {
 		return new RepeatStatement((StatementList) visitStmtblock(ctx.stmtblock()),
-				(Value) visitTruthpar(ctx.truthpar()));
+				(Value) visitTruthpar(ctx.truthpar()), ctx.getStart().getLine());
 	}
 
 	@Override public AbstractNode visitFromstmt(PyTrun.FromstmtContext ctx) {
 		if(ctx.UPTO() != null){
 			return new FromStatement( (Value) visitValue(ctx.value(0)), (Value)visitValue(ctx.value(1)), new Upto("upto"),
-					(StatementList) visitStmtblock(ctx.stmtblock()));
+					(StatementList) visitStmtblock(ctx.stmtblock()), ctx.getStart().getLine());
 		}else if(ctx.DOWNTO() != null){
 			return new FromStatement( (Value) visitValue(ctx.value(0)), (Value)visitValue(ctx.value(1)), new Downto("ast.Downto"),
-					(StatementList) visitStmtblock(ctx.stmtblock()));
+					(StatementList) visitStmtblock(ctx.stmtblock()), ctx.getStart().getLine());
 		}else
 			return null;
 	}
 
 	@Override public AbstractNode visitReturnstmt(PyTrun.ReturnstmtContext ctx) {
 		if(ctx.value() != null){
-			return new ReturnStatement((Value) visitValue(ctx.value()));
+			return new ReturnStatement((Value) visitValue(ctx.value()), ctx.getStart().getLine());
 		}else if(ctx.truthexpr() != null){
-			return new ReturnStatement((Value) visitTruthexpr(ctx.truthexpr()));
+			return new ReturnStatement((Value) visitTruthexpr(ctx.truthexpr()), ctx.getStart().getLine());
 		}else{
 			return null;
 		}
@@ -247,20 +289,20 @@ public class BuildASTVisitor extends AbstractParseTreeVisitor<AbstractNode> impl
 
 	@Override public AbstractNode visitAssignment(PyTrun.AssignmentContext ctx) {
 		if(ctx.TEXT() != null){
-			return new TextAssignment(new Identifier(ctx.ID().getText()), new TextLiteral(ctx.TEXT().getText()));
+			return new TextAssignment(new Identifier(ctx.ID().getText()), new TextLiteral(ctx.TEXT().getText()), ctx.getStart().getLine());
 		}else if(ctx.ELEMENT() != null){
 			return new ArrayAssignment(new Identifier(ctx.ID().getText()), new SingleElementAssign(
-					new IntegerLiteral(ctx.INUM().getText()),(Value) visitValue(ctx.value())));
+					new IntegerLiteral(ctx.INUM().getText()),(Value) visitValue(ctx.value())), ctx.getStart().getLine());
 		}else if (ctx.value() != null){
-			return new ValueAssignment(new Identifier(ctx.ID().getText()), (Value) visitValue(ctx.value()));
+			return new ValueAssignment(new Identifier(ctx.ID().getText()), (Value) visitValue(ctx.value()), ctx.getStart().getLine());
 		}else if(ctx.types() != null){
 			ArrayList<Value> values = new ArrayList<>();
 			for (PyTrun.TypesContext x :ctx.types()){
 				values.add( (Value) visitTypes(x));
 			}
-			return new ArrayAssignment(new Identifier(ctx.ID().getText()) , new MultipleElementAssign(values));
+			return new ArrayAssignment(new Identifier(ctx.ID().getText()) , new MultipleElementAssign(values), ctx.getStart().getLine());
 		}else if(ctx.expr() != null){
-			return new ValueAssignment(new Identifier(ctx.ID().getText()), (Value) visitExpr(ctx.expr()));
+			return new ValueAssignment(new Identifier(ctx.ID().getText()), (Value) visitExpr(ctx.expr()), ctx.getStart().getLine());
 		}else
 			return null;
 	}
@@ -272,6 +314,8 @@ public class BuildASTVisitor extends AbstractParseTreeVisitor<AbstractNode> impl
 			return visitFunctioncall(ctx.functioncall());
 		}else if(ctx.ID() != null){
 			return new Identifier(ctx.ID().getText());
+		}else if(ctx.arrindex() != null){
+			return visitArrindex(ctx.arrindex());
 		}
 		return null;
 	}
@@ -294,9 +338,9 @@ public class BuildASTVisitor extends AbstractParseTreeVisitor<AbstractNode> impl
 		List<PyTrun.MultexprContext> exprs = ctx.multexpr();
 		for(ParseTree x : ctx.children){
 				 if(x.getText().equals("+")){
-					 plusMinus.add(new Plus());
+					 plusMinus.add(new Plus(ctx.getStart().getLine()));
 				 }else if(x.getText().equals("-")){
-				 	 plusMinus.add(new Minus());
+				 	 plusMinus.add(new Minus(ctx.getStart().getLine()));
 				 }
 		}
 		if(plusMinus.isEmpty()){
@@ -345,9 +389,9 @@ public class BuildASTVisitor extends AbstractParseTreeVisitor<AbstractNode> impl
 		List<PyTrun.ParexprContext> exprs = ctx.parexpr();
 		for(ParseTree x : ctx.children){
 			if(x.getText().equals("*")){
-				timesDivide.add(new Times());
+				timesDivide.add(new Times(ctx.getStart().getLine()));
 			}else if(x.getText().equals("/")){
-				timesDivide.add(new Divide());
+				timesDivide.add(new Divide(ctx.getStart().getLine()));
 			}
 		}
 
@@ -388,7 +432,7 @@ public class BuildASTVisitor extends AbstractParseTreeVisitor<AbstractNode> impl
 
 	@Override public AbstractNode visitParexpr(PyTrun.ParexprContext ctx) {
 		if(ctx.LPAR() != null){
-			return new ArithmParenthesis("parenthesis", (Value)visitArithmexpr(ctx.arithmexpr()),null);
+			return new ArithmParenthesis("parenthesis", (Value)visitArithmexpr(ctx.arithmexpr()),null, ctx.getStart().getLine());
 		}else if(ctx.nums() != null){
 			return visitNums(ctx.nums());
 		}else if(ctx.functioncall() != null){
@@ -410,13 +454,13 @@ public class BuildASTVisitor extends AbstractParseTreeVisitor<AbstractNode> impl
 		for(ParseTree x : ctx.children){
 			switch (x.getText()) {
 				case "NOT":
-					operators.add(new Not());
+					operators.add(new Not(ctx.getStart().getLine()));
 					break;
 				case "OR":
-					operators.add(new Or());
+					operators.add(new Or(ctx.getStart().getLine()));
 					break;
 				case "AND":
-					operators.add(new And());
+					operators.add(new And(ctx.getStart().getLine()));
 					break;
 			}
 		}
@@ -425,8 +469,7 @@ public class BuildASTVisitor extends AbstractParseTreeVisitor<AbstractNode> impl
 			return visitRelationalexpr(ctx.relationalexpr(0));
 		}else if(operators.size() == 1){
 			if(operators.get(0) instanceof Not){
-                ((Not)operators.get(0)).setTruth((Value)visitRelationalexpr(ctx.relationalexpr(0)));
-				//operators.get(0).lhs = (Value)visitRelationalexpr(ctx.relationalexpr(0));
+				((Not)operators.get(0)).setTruth((Value)visitRelationalexpr(exprs.get(0)));
 				return operators.get(0);
 			}else{
 				operators.get(0).setRhs((Value)visitRelationalexpr(ctx.relationalexpr(0)));
@@ -436,32 +479,40 @@ public class BuildASTVisitor extends AbstractParseTreeVisitor<AbstractNode> impl
 				return operators.get(0);
 			}
 		}else{
-			operators.get(0).setLhs((Value) visitRelationalexpr (exprs.get(0)));
+			if(operators.get(0) instanceof Not){
+				((Not)operators.get(0)).setTruth(operators.get(1));
+			}else{
+				operators.get(0).setRhs(operators.get(1));
+				operators.get(0).setLhs((Value)visitRelationalexpr(exprs.get(0)));
+				exprs.remove(0);
+			}
+
 			//operators.get(0).lhs = (Value) visitRelationalexpr (exprs.get(0)) ;
-			exprs.remove(0);
-			operators.get(0).setRhs(operators.get(1));
+			//exprs.remove(0);
+			//operators.get(0).setRhs(operators.get(1));
 			//operators.get(0).rhs = operators.get(1);
-			int i = 0;
-			while (i < (exprs.size())){
+			int i = 1;
+			while (i < (operators.size())){
 				if( ((exprs.size()) == 2) && (! (operators.get(i) instanceof Not)) ){
-					operators.get(i+1).setRhs((Value) visitRelationalexpr(exprs.get(0)));
+					operators.get(i).setLhs ((Value) visitRelationalexpr(exprs.get(0)));
 					//operators.get(i+1).rhs = (Value) visitRelationalexpr(exprs.get(0));
-					operators.get(i+1).setLhs((Value) visitRelationalexpr(exprs.get(1)));
+					operators.get(i).setRhs((Value) visitRelationalexpr(exprs.get(1)));
 					//operators.get(i+1).lhs = (Value) visitRelationalexpr(exprs.get(1));
 					exprs.remove(1);
 					exprs.remove(0);
 				}else if(((exprs.size()) == 1) && (operators.get(i) instanceof Not)){
-					operators.get(i).setLhs((Value) visitRelationalexpr(exprs.get(0)));
+					((Not)operators.get(i)).setTruth((Value) visitRelationalexpr(exprs.get(0)));
 					//operators.get(i).lhs = (Value) visitRelationalexpr(exprs.get(0));
 					exprs.remove(0);
 				}else {
 					if(operators.get(i) instanceof Not){
-						operators.get(i).setRhs(operators.get(i + 1));
+						((Not) operators.get(i)).setTruth(operators.get(i + 1));
 						//operators.get(i).rhs = operators.get(i + 1);
 					}else {
 						operators.get(i).setRhs(operators.get(i + 1));
 						//operators.get(i).rhs = operators.get(i + 1);
-						operators.get(i + 1).setLhs((Value) visitRelationalexpr(exprs.get(0)));
+						operators.get(i).setLhs((Value) visitRelationalexpr(exprs.get(0)));
+						//operators.get(i + 1).setLhs((Value) visitRelationalexpr(exprs.get(0)));
 						//operators.get(i + 1).lhs = (Value) visitRelationalexpr(exprs.get(0));
 						exprs.remove(0);
 					}
@@ -476,14 +527,14 @@ public class BuildASTVisitor extends AbstractParseTreeVisitor<AbstractNode> impl
 		if(ctx.truth() != null){
 			return visitTruth(ctx.truth());
 		}else if(ctx.LPAR() != null){
-			return new TruthParenthesis("truth parenthesis",(Value) visitLogicalexpr(ctx.logicalexpr()));
+			return new TruthParenthesis("truth parenthesis",(Value) visitLogicalexpr(ctx.logicalexpr()), ctx.getStart().getLine());
 		}else{
 			if(ctx.EQUALS() != null){
-				return new Equal((Value) visitValue( ctx.value(0)),(Value) visitValue( ctx.value(1)));
+				return new Equal((Value) visitValue( ctx.value(0)),(Value) visitValue( ctx.value(1)), ctx.getStart().getLine());
 			}else if(ctx.LESSTHAN() != null){
-				return new LessThan("less than",(Value)visitValue( ctx.value(0)), (Value) visitValue( ctx.value(1)));
+				return new LessThan("less than",(Value)visitValue( ctx.value(0)), (Value) visitValue( ctx.value(1)), ctx.getStart().getLine());
 			}else if(ctx.GRTHAN() != null){
-				return new GreaterThan("less than",(Value) visitValue( ctx.value(0)), (Value) visitValue( ctx.value(1)));
+				return new GreaterThan("less than",(Value) visitValue( ctx.value(0)), (Value) visitValue( ctx.value(1)), ctx.getStart().getLine());
 			}
 			return null;
 		}
@@ -496,10 +547,10 @@ public class BuildASTVisitor extends AbstractParseTreeVisitor<AbstractNode> impl
 			left = new TextLiteral( ctx.TEXT().get(0).getText());
 			if(ctx.TEXT().size() == 2){
 				right = new TextLiteral( ctx.TEXT().get(1).getText());
-				return new Plus("Append", left, right);
+				return new Plus("Append", left, right, ctx.getStart().getLine());
 			}else{
 				right = new Identifier(ctx.ID(0).toString());
-				return new Plus("Append", left, right);
+				return new Plus("Append", left, right, ctx.getStart().getLine());
 			}
 		}/*else if(ctx.ID() != null){   //this will never happen as an arithmetic expression instead.
 			   left = new ast.Identifier(ctx.ID().get(0).getText());
@@ -512,20 +563,20 @@ public class BuildASTVisitor extends AbstractParseTreeVisitor<AbstractNode> impl
 
 	@Override public AbstractNode visitArrindex(PyTrun.ArrindexContext ctx) {
 		if(ctx.ID().size() == 2){
-			return new ArrayIndexStatement(new Identifier(ctx.ID().get(0).getText()), new Identifier(ctx.ID().get(1).getText()));
+			return new ArrayIndexStatement(new Identifier(ctx.ID().get(0).getText()), new Identifier(ctx.ID().get(1).getText()), ctx.getStart().getLine());
 		}else
-			return new ArrayIndexStatement(new Identifier(ctx.ID().get(0).getText()), new IntegerLiteral(ctx.INUM().getText()));
+			return new ArrayIndexStatement(new Identifier(ctx.ID().get(0).getText()), new IntegerLiteral(ctx.INUM().getText()), ctx.getStart().getLine());
 	}
 
 	@Override public AbstractNode visitArradd(PyTrun.ArraddContext ctx) {
 		if(ctx.INUM() != null){
 			return new ArrayElementAddStatement(new Identifier(ctx.ID().get(0).getText()),
 					new IntegerLiteral(ctx.INUM().getText()),
-					(Value) visitTypes(ctx.types()));
+					(Value) visitTypes(ctx.types()), ctx.getStart().getLine());
 		}else if(ctx.ID().size() == 2){
 			return new ArrayElementAddStatement(new Identifier(ctx.ID().get(0).getText()),
 					new Identifier(ctx.ID().get(1).getText()),
-					(Value) visitTypes(ctx.types()));
+					(Value) visitTypes(ctx.types()), ctx.getStart().getLine());
 		}else
 			return null;
 	}
@@ -613,16 +664,16 @@ public class BuildASTVisitor extends AbstractParseTreeVisitor<AbstractNode> impl
 
 	@Override
 	public AbstractNode visitDrive(PyTrun.DriveContext ctx) {
-		return new DriveStatement((Value) visitValue(ctx.value()));
+		return new DriveStatement((Value) visitValue(ctx.value()), ctx.getStart().getLine());
 	}
 
 	@Override
 	public AbstractNode visitTurnleft(PyTrun.TurnleftContext ctx) {
-		return new TurnLeftStatement((Value) visitValue(ctx.value()));
+		return new TurnLeftStatement((Value) visitValue(ctx.value()), ctx.getStart().getLine());
 	}
 
 	@Override
 	public AbstractNode visitTurnright(PyTrun.TurnrightContext ctx) {
-		return new TurnRightStatement((Value) visitValue(ctx.value()));
+		return new TurnRightStatement((Value) visitValue(ctx.value()), ctx.getStart().getLine());
 	}
 }

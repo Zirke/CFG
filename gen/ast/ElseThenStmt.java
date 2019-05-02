@@ -2,9 +2,11 @@ package ast;
 
 public class ElseThenStmt implements visitable {
     StatementList stms;
+    public int lineNumber;
 
-    public ElseThenStmt(StatementList stms) {
+    public ElseThenStmt(StatementList stms, int lineNr) {
         this.stms = stms;
+        this.lineNumber = lineNr;
     }
 
     public StatementList getStms() {

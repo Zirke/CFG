@@ -8,10 +8,11 @@ public class FunctionDeclaration extends Statement{
     List<Parameter> parameters;
     StatementList stmtBody;
 
-    public FunctionDeclaration(Identifier functionName, List<Parameter> parameters, StatementList stmtBody) {
+    public FunctionDeclaration(Identifier functionName, List<Parameter> parameters, StatementList stmtBody, int linenr) {
         this.functionName = functionName;
         this.parameters = parameters;
         this.stmtBody = stmtBody;
+        this.setLineNumber(linenr);
     }
 
     public Identifier getFunctionName() {

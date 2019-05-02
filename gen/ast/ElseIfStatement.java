@@ -4,10 +4,13 @@ public class ElseIfStatement implements visitable{
     Value truth;
     //Identifier truthVar;
     StatementList stms;
+    public int lineNumber;
 
-    public ElseIfStatement(Value truth, StatementList stms) {
+    public ElseIfStatement(Value truth, StatementList stms, int linenr) {
         this.truth = truth;
         this.stms = stms;
+        this.lineNumber = linenr;
+
     }
    /* public ElseIfStatement(Identifier truthVar, StatementList stms) {
         this.truthVar = truthVar;

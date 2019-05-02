@@ -4,9 +4,10 @@ public class ArrayAssignment extends Statement{
     Identifier id;
     ArrayAsmValue value;
 
-    public ArrayAssignment(Identifier id, ArrayAsmValue value) {
+    public ArrayAssignment(Identifier id, ArrayAsmValue value, int linenr) {
         this.id = id;
         this.value = value;
+        this.setLineNumber(linenr);
     }
 
     public Identifier getId() {

@@ -6,9 +6,10 @@ public class Parameter extends Terminal implements Value{
     //ast.Identifier paramName;
 
 
-    public Parameter(Type paramType, Identifier id) {
+    public Parameter(Type paramType, Identifier id, int linenr) {
         this.paramType = paramType;
         this.id = id;
+        this.setLineNumber(linenr);
         //this.paramName = paramName;
     }
 

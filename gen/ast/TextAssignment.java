@@ -4,9 +4,10 @@ public class TextAssignment extends Statement{
     Identifier id;
     TextLiteral text;
 
-    public TextAssignment(Identifier id, TextLiteral text) {
+    public TextAssignment(Identifier id, TextLiteral text, int linenr) {
         this.id = id;
         this.text = text;
+        this.setLineNumber(linenr);
     }
 
     public Identifier getId() {

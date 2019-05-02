@@ -3,9 +3,10 @@ package ast;
 public class TruthParenthesis extends TruthOperator{
     Value expr;
 
-    public TruthParenthesis(String spelling, Value expr) {
+    public TruthParenthesis(String spelling, Value expr, int linenr) {
         super(spelling);
         this.expr = expr;
+        this.setLineNumber(linenr);
     }
 
     public TruthParenthesis() {

@@ -1,7 +1,15 @@
 package ast;
 
 public abstract class AbstractNode implements visitable{
+    public int lineNumber;
 
+    public int getLineNumber() {
+        return lineNumber;
+    }
+
+    public void setLineNumber(int lineNumber) {
+        this.lineNumber = lineNumber;
+    }
 }
 
 
