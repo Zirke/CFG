@@ -5,59 +5,61 @@ public class PrettyPrintAST extends BasicAbstractNodeVisitor<AbstractNode> {
 
     @Override
     public AbstractNode visit(And node) throws NoSuchMethodException {
+        System.out.println("ast.And Node");
         visit(node.getLhs());
         visit(node.getRhs());
-        System.out.println("ast.And Node");
         return null;
     }
 
     @Override
     public AbstractNode visit(ArithmParenthesis node) throws NoSuchMethodException{
-        visit(node.getLeft());
         System.out.println("Arithmetic Parenthesis");
+        visit(node.getLeft());
         return null;
     }
 
     @Override
     public AbstractNode visit(ArrayAssignment node) throws NoSuchMethodException{
-        System.out.println("before");
+        System.out.println("Array assignment node");
         visit(node.getId());
         visit(node.getValue());
-        System.out.println("Array assignment node");
         return null;
     }
 
     @Override
     public AbstractNode visit(ArrayDeclaration node) throws NoSuchMethodException{
+        System.out.println("Array declaration node");
         visit(node.getId());
         visit(node.getType());
         visit(node.getValues());
-        System.out.println("Array declaration node");
         return null;
     }
 
     @Override
     public AbstractNode visit(ArrayElementAddStatement node) throws NoSuchMethodException{
+        System.out.println("Array element add statement node");
         visit(node.getArrayName());
         visit(node.getElementNumber());
         visit(node.getValue());
-        System.out.println("Array element add statement node");
+        System.out.println("Array element add statement node DONE");
         return null;
     }
 
     @Override
     public AbstractNode visit(ArrayIndexStatement node) throws NoSuchMethodException{
+        System.out.println("ast.ArrayIndexStatement node");
         visit(node.getId());
         visit(node.getNumber());
-        System.out.println("ast.ArrayIndexStatement node");
+        System.out.println("ast.ArrayIndexStatement node END");
         return null;
     }
 
     @Override
     public AbstractNode visit(Divide node) throws NoSuchMethodException{
+        System.out.println("ast.Divide node");
         visit(node.getLeft());
         visit(node.getRight());
-        System.out.println("ast.Divide node");
+        System.out.println("ast.Divide node END");
         return null;
     }
 
@@ -69,25 +71,27 @@ public class PrettyPrintAST extends BasicAbstractNodeVisitor<AbstractNode> {
 
     @Override
     public AbstractNode visit(ElseIfStatement node) throws NoSuchMethodException{
+        System.out.println("Else if statement node");
         visit(node.getTruth());
         visit(node.getStms());
-        System.out.println("Else if statement node");
+        System.out.println("Else if statement node END");
         return null;
     }
 
     @Override
     public AbstractNode visit(ElseThenStmt node) throws NoSuchMethodException{
-        visit(node.getStms());
         System.out.println("Else then statement node");
+        visit(node.getStms());
+        System.out.println("Else then statement node END");
         return null;
     }
 
     @Override
     public AbstractNode visit(ValueAssignment node) throws NoSuchMethodException{
-
+        System.out.println("ast.Value assignment node");
         visit(node.getId());
         visit(node.getValue());
-        System.out.println("ast.Value assignment node");
+        System.out.println("ast.Value assignment node END");
         return null;
     }
 
@@ -99,9 +103,10 @@ public class PrettyPrintAST extends BasicAbstractNodeVisitor<AbstractNode> {
 
     @Override
     public AbstractNode visit(FloatDeclaration node) throws NoSuchMethodException{
+        System.out.println("Float Declaration node");
         visit(node.getId());
         visit(node.getStm());
-        System.out.println("Float Declaration node");
+        System.out.println("Float Declaration node END");
         return null;
     }
 
@@ -165,6 +170,7 @@ public class PrettyPrintAST extends BasicAbstractNodeVisitor<AbstractNode> {
 
     @Override
     public AbstractNode visit(IfStatement node) throws NoSuchMethodException{
+        System.out.println("If statement node");
         visit(node.getTruthVal());
         if(node.getTrueStm() != null){
             visit(node.getTrueStm());
@@ -176,7 +182,7 @@ public class PrettyPrintAST extends BasicAbstractNodeVisitor<AbstractNode> {
         }
         if(node.getElsethen() != null)
             visit(node.getElsethen());
-        System.out.println("If statement node");
+        System.out.println("If statement node END");
         return null;
     }
 
@@ -188,9 +194,11 @@ public class PrettyPrintAST extends BasicAbstractNodeVisitor<AbstractNode> {
 
     @Override
     public AbstractNode visit(IntDeclaration node) throws NoSuchMethodException{
-        visit(node.getId());
-        visit(node.getStm());
         System.out.println("Integer declaration node");
+        visit(node.getId());
+        if(node.getStm() != null)
+            visit(node.getStm());
+        System.out.println("Integer declaration node END");
         return null;
     }
 
