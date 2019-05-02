@@ -1,0 +1,6 @@
+p is 1 + 2 + 3 + 4 + 5
+q is 5 - 4 - 3 - 2 - 1
+r is 5 * 4 * 3 * 2 * 1
+s is 5 / 4 / 3 / 2 / 1
+t is 5 / 4 * 3 + 2 - 1
+u is true AND false OR true AND n OR n AND n OR n
