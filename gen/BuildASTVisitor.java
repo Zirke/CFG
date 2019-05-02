@@ -346,8 +346,8 @@ public class BuildASTVisitor extends AbstractParseTreeVisitor<AbstractNode> impl
 		if(plusMinus.isEmpty()){
 			return visitMultexpr(ctx.multexpr(0));
 		}else if(plusMinus.size() == 1){
-			plusMinus.get(0).setRight ((Value)visitMultexpr(ctx.multexpr(0)));
-			plusMinus.get(0).setLeft((Value)visitMultexpr(ctx.multexpr(1)));
+			plusMinus.get(0).setRight ((Value)visitMultexpr(ctx.multexpr(1)));
+			plusMinus.get(0).setLeft((Value)visitMultexpr(ctx.multexpr(0)));
 			//plusMinus.get(0).left =(Value)visitMultexpr(ctx.multexpr(0));
 			//plusMinus.get(0).right =(Value)visitMultexpr(ctx.multexpr(1));
 			return plusMinus.get(0);
@@ -365,9 +365,9 @@ public class BuildASTVisitor extends AbstractParseTreeVisitor<AbstractNode> impl
 			}*/
 			while (i < (plusMinus.size())){
 				if( (exprs.size()) == 2){
-					plusMinus.get(i).setRight((Value) visitMultexpr(exprs.get(0)));
+					plusMinus.get(i).setRight((Value) visitMultexpr(exprs.get(1)));
 					//plusMinus.get(i).right = (Value) visitMultexpr(exprs.get(0));
-					plusMinus.get(i).setLeft((Value) visitMultexpr(exprs.get(1)));
+					plusMinus.get(i).setLeft((Value) visitMultexpr(exprs.get(0)));
 					//plusMinus.get(i).left =  (Value) visitMultexpr(exprs.get(1));
 					exprs.remove(1);
 					exprs.remove(0);
