@@ -348,35 +348,22 @@ public class BuildASTVisitor extends AbstractParseTreeVisitor<AbstractNode> impl
 		}else if(plusMinus.size() == 1){
 			plusMinus.get(0).setRight ((Value)visitMultexpr(ctx.multexpr(1)));
 			plusMinus.get(0).setLeft((Value)visitMultexpr(ctx.multexpr(0)));
-			//plusMinus.get(0).left =(Value)visitMultexpr(ctx.multexpr(0));
-			//plusMinus.get(0).right =(Value)visitMultexpr(ctx.multexpr(1));
 			return plusMinus.get(0);
 		}else{
 			plusMinus.get(0).setLeft((Value) visitMultexpr(exprs.get(0)));
-			//plusMinus.get(0).left = (Value) visitMultexpr(exprs.get(0)) ;
 			exprs.remove(0);
 			plusMinus.get(0).setRight(plusMinus.get(1));
-			//plusMinus.get(0).right = plusMinus.get(1);
 			int i = 1;
-			/*if(plusMinus.size() > 1){
-			    plusMinus.get(0).right = plusMinus.get(1);
-			    plusMinus.get(1).left =  (ast.Value) visitMultexpr(exprs.get(0));
-			    exprs.remove(0);
-			}*/
 			while (i < (plusMinus.size())){
-				if( (exprs.size()) == 2){
+				if( exprs.size() == 2){
 					plusMinus.get(i).setRight((Value) visitMultexpr(exprs.get(1)));
-					//plusMinus.get(i).right = (Value) visitMultexpr(exprs.get(0));
 					plusMinus.get(i).setLeft((Value) visitMultexpr(exprs.get(0)));
-					//plusMinus.get(i).left =  (Value) visitMultexpr(exprs.get(1));
 					exprs.remove(1);
 					exprs.remove(0);
+					break;
 				}else {
 					plusMinus.get(i).setLeft((Value) visitMultexpr(exprs.get(0)));
 					plusMinus.get(i).setRight(plusMinus.get(i + 1));
-					//plusMinus.get(i).right = plusMinus.get(i + 1);
-					//plusMinus.get(i + 1).setLeft((Value) visitMultexpr(exprs.get(0)));
-					//plusMinus.get(i + 1).left = (Value) visitMultexpr(exprs.get(0));
 					exprs.remove(0);
 				}
 				i++;
@@ -399,29 +386,23 @@ public class BuildASTVisitor extends AbstractParseTreeVisitor<AbstractNode> impl
 			return visitParexpr(ctx.parexpr(0));
 		}else if(timesDivide.size() == 1){
 			timesDivide.get(0).setLeft((Value)visitParexpr(ctx.parexpr(0)));
-			//timesDivide.get(0).left =(Value)visitParexpr(ctx.parexpr(0));
 			timesDivide.get(0).setRight((Value)visitParexpr(ctx.parexpr(1)));
-			//timesDivide.get(0).right =(Value)visitParexpr(ctx.parexpr(1));
 			return timesDivide.get(0);
 		}else{
 			timesDivide.get(0).setLeft((Value) visitParexpr (exprs.get(0)));
-			//timesDivide.get(0).left = (Value) visitParexpr (exprs.get(0)) ;
+			timesDivide.get(0).setRight(timesDivide.get(1));
 			exprs.remove(0);
-			int i = 0; // moske 1 istedet
+			int i = 1;
 			while (i < (timesDivide.size())){
-				if( (exprs.size()) == 2){
-					timesDivide.get(i).setRight((Value) visitParexpr(exprs.get(0)));
-					//timesDivide.get(i).right = (Value) visitParexpr(exprs.get(0));
-					timesDivide.get(i).setLeft((Value) visitParexpr(exprs.get(1)));
-					//timesDivide.get(i).left =  (Value) visitParexpr(exprs.get(1));
+				if( exprs.size() == 2){
+					timesDivide.get(i).setRight((Value) visitParexpr(exprs.get(1)));
+					timesDivide.get(i).setLeft((Value) visitParexpr(exprs.get(0)));
 					exprs.remove(1);
 					exprs.remove(0);
+					break;
 				}else {
 					timesDivide.get(i).setRight(timesDivide.get(i + 1));
 					timesDivide.get(i).setLeft((Value) visitParexpr(exprs.get(0)));
-					//timesDivide.get(i).right = timesDivide.get(i + 1);
-					//timesDivide.get(i + 1).setLeft((Value) visitParexpr(exprs.get(0)));
-					//timesDivide.get(i + 1).left = (Value) visitParexpr(exprs.get(0));
 					exprs.remove(0);
 				}
 				i++;
@@ -434,9 +415,9 @@ public class BuildASTVisitor extends AbstractParseTreeVisitor<AbstractNode> impl
 		if(ctx.LPAR() != null){
 			return new ArithmParenthesis("parenthesis", (Value)visitArithmexpr(ctx.arithmexpr()),null, ctx.getStart().getLine());
 		}else if(ctx.nums() != null){
-			return visitNums(ctx.nums());
+			return new ArithmParenthesis("parenthesis",(Value) visitNums(ctx.nums()), null,ctx.getStart().getLine()) ;
 		}else if(ctx.functioncall() != null){
-			return visitFunctioncall(ctx.functioncall());
+			return new ArithmParenthesis("parenthesis",(Value)  visitFunctioncall(ctx.functioncall()), null,ctx.getStart().getLine());
 		}else
 			return null;
 	}
