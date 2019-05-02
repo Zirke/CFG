@@ -346,8 +346,8 @@ public class BuildASTVisitor extends AbstractParseTreeVisitor<AbstractNode> impl
 		if(plusMinus.isEmpty()){
 			return visitMultexpr(ctx.multexpr(0));
 		}else if(plusMinus.size() == 1){
-			plusMinus.get(0).setLeft((Value)visitMultexpr(ctx.multexpr(0)));
-			plusMinus.get(0).setRight((Value)visitMultexpr(ctx.multexpr(1)));
+			plusMinus.get(0).setRight ((Value)visitMultexpr(ctx.multexpr(0)));
+			plusMinus.get(0).setLeft((Value)visitMultexpr(ctx.multexpr(1)));
 			//plusMinus.get(0).left =(Value)visitMultexpr(ctx.multexpr(0));
 			//plusMinus.get(0).right =(Value)visitMultexpr(ctx.multexpr(1));
 			return plusMinus.get(0);
