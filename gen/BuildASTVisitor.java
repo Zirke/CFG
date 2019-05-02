@@ -295,14 +295,14 @@ public class BuildASTVisitor extends AbstractParseTreeVisitor<AbstractNode> impl
 					new IntegerLiteral(ctx.INUM().getText()),(Value) visitValue(ctx.value())), ctx.getStart().getLine());
 		}else if (ctx.value() != null){
 			return new ValueAssignment(new Identifier(ctx.ID().getText()), (Value) visitValue(ctx.value()), ctx.getStart().getLine());
+		}else if(ctx.expr() != null){
+			return new ValueAssignment(new Identifier(ctx.ID().getText()), (Value) visitExpr(ctx.expr()), ctx.getStart().getLine());
 		}else if(ctx.types() != null){
 			ArrayList<Value> values = new ArrayList<>();
 			for (PyTrun.TypesContext x :ctx.types()){
 				values.add( (Value) visitTypes(x));
 			}
 			return new ArrayAssignment(new Identifier(ctx.ID().getText()) , new MultipleElementAssign(values), ctx.getStart().getLine());
-		}else if(ctx.expr() != null){
-			return new ValueAssignment(new Identifier(ctx.ID().getText()), (Value) visitExpr(ctx.expr()), ctx.getStart().getLine());
 		}else
 			return null;
 	}
