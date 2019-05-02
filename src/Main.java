@@ -9,6 +9,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+
 public class Main{
 
     public static void main(String[] args) throws IOException {
@@ -29,7 +30,7 @@ public class Main{
         PyTrun parser = new PyTrun(tokens);
         ParseTree tree = parser.start();
 
-        System.out.println(tree.toStringTree(parser));
+        //System.out.println(tree.toStringTree(parser));
         // System.out.println(((PyTrun.DclContext) tree).ASSIGN());
         /*for(ParseTree i : ((PyTrun.StmtContext) tree).children){
             System.out.println(i.toStringTree(parser));
@@ -40,26 +41,28 @@ public class Main{
 
         BuildASTVisitor visitor = new BuildASTVisitor();
         AbstractNode ast = visitor.visit(tree);
-        PrettyPrintAST visitor2 = new PrettyPrintAST();
+       /*   PrettyPrintAST visitor2 = new PrettyPrintAST();
         try {
             visitor2.visit(ast);
-        }catch(NoSuchMethodException e){
-
-        }
+        }catch (NoSuchMethodException e){
+            System.out.println(e);
+        }*/
         // System.out.println(ast);
 
-        /*symbolTable.SymbolTableVisitor symbolTableVisitor = new symbolTable.SymbolTableVisitor();
-        symbolTable.SymbolTable sym =(symbolTable.SymbolTable) symbolTableVisitor.visit(ast);
-
-        for (String s : sym.getIdTable().keySet()){
-            System.out.println(s);
-        }*/
-        /*Emitter emitter = new Emitter();
-        CodeGenVisitor genVisitor = new CodeGenVisitor(emitter);
-        genVisitor.setup();
+        symbolTable.SymbolTableVisitor symbolTableVisitor = new symbolTable.SymbolTableVisitor();
         try {
-            genVisitor.visit(ast);
-        }catch(NoSuchMethodException e){}
-        emitter.closeFile();*/
+            symbolTableVisitor.visit(ast);
+            symbolTableVisitor.putTogetherArrayHashMap();
+
+            for(String s: symbolTableVisitor.getSizeOfArrays().keySet()){
+                System.out.println("array " + s + " has size " + symbolTableVisitor.getSizeOfArrays().get(s));
+            }
+
+        }catch (NoSuchMethodException e){
+            System.out.println(e);
+        }
+
+
+
     }
 }
