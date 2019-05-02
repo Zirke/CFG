@@ -415,9 +415,9 @@ public class BuildASTVisitor extends AbstractParseTreeVisitor<AbstractNode> impl
 		if(ctx.LPAR() != null){
 			return new ArithmParenthesis("parenthesis", (Value)visitArithmexpr(ctx.arithmexpr()),null, ctx.getStart().getLine());
 		}else if(ctx.nums() != null){
-			return new ArithmParenthesis("parenthesis",(Value) visitNums(ctx.nums()), null,ctx.getStart().getLine()) ;
+			return visitNums(ctx.nums()) ;
 		}else if(ctx.functioncall() != null){
-			return new ArithmParenthesis("parenthesis",(Value)  visitFunctioncall(ctx.functioncall()), null,ctx.getStart().getLine());
+			return visitFunctioncall(ctx.functioncall());
 		}else
 			return null;
 	}
