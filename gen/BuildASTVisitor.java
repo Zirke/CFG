@@ -136,7 +136,7 @@ public class BuildASTVisitor extends AbstractParseTreeVisitor<AbstractNode> impl
 				for (PyTrun.TypesContext x :ctx.types()){
 					values.add( (Value) visitTypes(x));
 				}
-				ArrayDeclaration i = new ArrayDeclaration(new Identifier(ctx.ID().getText()) , new MultipleElementAssign(values),(Type) visitType(ctx.type()));
+				ArrayDeclaration i = new ArrayDeclaration(new Identifier(ctx.ID().getText()) , new MultipleElementAssign(values, ctx.getStart().getLine()),(Type) visitType(ctx.type()));
 				i.setLineNumber(ctx.getStart().getLine());
 				return i;
 			}else{
@@ -292,7 +292,7 @@ public class BuildASTVisitor extends AbstractParseTreeVisitor<AbstractNode> impl
 			return new TextAssignment(new Identifier(ctx.ID().getText()), new TextLiteral(ctx.TEXT().getText()), ctx.getStart().getLine());
 		}else if(ctx.ELEMENT() != null){
 			return new ArrayAssignment(new Identifier(ctx.ID().getText()), new SingleElementAssign(
-					new IntegerLiteral(ctx.INUM().getText()),(Value) visitValue(ctx.value())), ctx.getStart().getLine());
+					new IntegerLiteral(ctx.INUM().getText()),(Value) visitValue(ctx.value()), ctx.getStart().getLine()), ctx.getStart().getLine());
 		}else if (ctx.value() != null){
 			return new ValueAssignment(new Identifier(ctx.ID().getText()), (Value) visitValue(ctx.value()), ctx.getStart().getLine());
 		}else if(ctx.expr() != null){
@@ -302,7 +302,7 @@ public class BuildASTVisitor extends AbstractParseTreeVisitor<AbstractNode> impl
 			for (PyTrun.TypesContext x :ctx.types()){
 				values.add( (Value) visitTypes(x));
 			}
-			return new ArrayAssignment(new Identifier(ctx.ID().getText()) , new MultipleElementAssign(values), ctx.getStart().getLine());
+			return new ArrayAssignment(new Identifier(ctx.ID().getText()) , new MultipleElementAssign(values, ctx.getStart().getLine()), ctx.getStart().getLine());
 		}else
 			return null;
 	}

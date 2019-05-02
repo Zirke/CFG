@@ -16,4 +16,8 @@ public class ElseThenStmt implements visitable {
     public void setStms(StatementList stms) {
         this.stms = stms;
     }
+
+    public int getLineNumber() {
+        return lineNumber;
+    }
 }

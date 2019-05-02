@@ -40,4 +40,8 @@ public class ElseIfStatement implements visitable{
     public void setStms(StatementList stms) {
         this.stms = stms;
     }
+
+    public int getLineNumber() {
+        return lineNumber;
+    }
 }
