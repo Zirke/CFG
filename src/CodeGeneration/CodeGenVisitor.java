@@ -14,14 +14,14 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
 
     @Override
     public Object visit(And and) throws NoSuchMethodException{
-        emitter.emit(""+visit(and.getLhs()));
+/*        emitter.emit(""+visit(and.getLhs()));
         emitter.emit( " && ");
         if(and.getRhs() instanceof Operator){
             visit(and.getRhs());
         }else{
             emitter.emit(""+visit(and.getRhs()));
             emitter.emit(";\n");
-        }
+        }*/
 
         return null;
     }
@@ -64,14 +64,14 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
 
     @Override
     public Object visit(Divide divide)throws NoSuchMethodException {
-        emitter.emit(""+visit(divide.getLeft()));
+/*        emitter.emit(""+visit(divide.getLeft()));
         emitter.emit(" / ");
         if(divide.getRight() instanceof Operator){
             visit(divide.getRight());
         }else{
             emitter.emit(""+visit(divide.getRight()));
             emitter.emit(";\n");
-        }
+        }*/
         return null;
     }
 
@@ -217,7 +217,7 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
 
     @Override
     public Object visit(GreaterThan greaterThan) throws NoSuchMethodException{
-        emitter.emit(""+visit(greaterThan.getLhs()));
+/*        emitter.emit(""+visit(greaterThan.getLhs()));
         emitter.emit(" > ");
         if(greaterThan.getRhs() instanceof Operator){
             visit(greaterThan.getRhs());
@@ -225,7 +225,7 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
             emitter.emit(""+visit(greaterThan.getRhs()));
             emitter.emit(";\n");
         }
-        //emitter.emit(";\n");
+        //emitter.emit(";\n");*/
         return null;
     }
 
@@ -280,7 +280,7 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
 
     @Override
     public Object visit(LessThan lessThan) throws NoSuchMethodException{
-        emitter.emit(""+visit(lessThan.getLhs()));
+/*        emitter.emit(""+visit(lessThan.getLhs()));
         emitter.emit(" < ");
         if(lessThan.getRhs() instanceof Operator){
             visit(lessThan.getRhs());
@@ -288,13 +288,13 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
             emitter.emit(""+visit(lessThan.getRhs()));
             emitter.emit(";\n");
         }
-        //emitter.emit(";\n");
+        //emitter.emit(";\n");*/
         return null;
     }
 
     @Override
     public Object visit(Minus minus) throws NoSuchMethodException{
-        emitter.emit(""+visit(minus.getLeft()));
+/*        emitter.emit(""+visit(minus.getLeft()));
         emitter.emit(" - ");
         if(minus.getRight() instanceof Operator){
             visit(minus.getRight());
@@ -302,7 +302,7 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
             emitter.emit(""+visit(minus.getRight()));
             emitter.emit(";\n");
         }
-        //emitter.emit(";\n");
+        //emitter.emit(";\n");*/
         return null;
     }
 
@@ -322,7 +322,7 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
 
     @Override
     public Object visit(Or or) throws NoSuchMethodException{
-        emitter.emit(""+visit(or.getLhs()));
+/*        emitter.emit(""+visit(or.getLhs()));
         emitter.emit(" || ");
         if(or.getRhs() instanceof Operator){
             visit(or.getRhs());
@@ -330,7 +330,7 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
             emitter.emit(""+visit(or.getRhs()));
             emitter.emit(";\n");
         }
-        //emitter.emit(";\n");
+        //emitter.emit(";\n");*/
         return null;
     }
 
@@ -343,15 +343,18 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
 
     @Override
     public Object visit(Plus plus)throws NoSuchMethodException {
-        emitter.emit(""+visit(plus.getLeft()));
-        emitter.emit(" + ");
+/*        if(plus.getLeft() instanceof Operator){
+            visit(plus.getLeft());
+        }else{
+            emitter.emit(""+visit(plus.getLeft()));
+            emitter.emit(" + ");
+        }
         if(plus.getRight() instanceof Operator){
             visit(plus.getRight());
         }else{
             emitter.emit(""+visit(plus.getRight()));
             emitter.emit(";\n");
-        }
-        //emitter.emit(";\n");
+        }*/
         return null;
     }
 
@@ -434,14 +437,18 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
 
     @Override
     public Object visit(Times times) throws NoSuchMethodException{
-        emitter.emit(""+visit(times.getLeft()));
-        emitter.emit(" * ");
+/*        if(times.getLeft() instanceof Operator){
+            visit(times.getLeft());
+        }else{
+            emitter.emit(""+visit(times.getLeft()));
+            emitter.emit(" * ");
+        }
         if(times.getRight() instanceof Operator){
             visit(times.getRight());
         }else{
             emitter.emit(""+visit(times.getRight()));
             emitter.emit(";\n");
-        }
+        }*/
         return null;
     }
 
