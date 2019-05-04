@@ -8,14 +8,7 @@ import Exceptions.SemanticException;
 import ast.*;
 import astVisitor.BasicAbstractNodeVisitor;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
 public class SymbolTableVisitor extends BasicAbstractNodeVisitor<Object> {
-    private HashMap<String, Integer> sizeOfArrays = new HashMap<>();
-    private List<Integer> listOfNumbers = new ArrayList<>();
-    private List<String> listOfKeys = new ArrayList<>();
     public SymbolTable symbolTable = new SymbolTable();
 
     //both left hand side and right hand side of the and node has to be truth literals
@@ -43,7 +36,6 @@ public class SymbolTableVisitor extends BasicAbstractNodeVisitor<Object> {
                 variableType instanceof TEXTDCL && expressionType instanceof TextLiteral)) {
             errorCallArrayIncompatibleTypes(arrayAssignment.getValue(), arrayAssignment.getId().getSpelling(),arrayAssignment.getLineNumber());
         }
-        orderOfArrays(arrayAssignment.getId().getSpelling());
         return null;
     }
 
@@ -73,20 +65,26 @@ public class SymbolTableVisitor extends BasicAbstractNodeVisitor<Object> {
         } else {
             errorCallDuplicateDeclaration(node.getId().getSpelling(),node.getLineNumber());
         }
-        if(value == null){
-            arraySize(0);
-        }
-        orderOfArrays(node.getId().getSpelling());
         return null;
     }
 
-    //TODO
+    //TODO This one gets used when the syntax (arrayId element var is inum) while the other one gets used when the syntax is (arrayId element inum is inum)
     @Override
     public Object visit(ArrayElementAddStatement node) throws NoSuchMethodException {
-        System.out.println(node.getArrayName());
-        System.out.println(node.getElementNumber());
-        System.out.println(node.getValue());
-        return null;
+        AbstractNode elementNumber = (AbstractNode) visit((visitable) node.getElementNumber());
+        AbstractNode valueElement = (AbstractNode) visit((visitable) node.getValue());
+
+        if (!(elementNumber instanceof INTDCL)) {
+            try {
+                throw new IncompatibleTypes("line: " + node.getLineNumber()  + " -- " + " Element index number is not an integer");
+            } catch (SemanticException e) {
+                System.err.println(e);
+                System.exit(0);
+            }
+        }
+        symbolTable.getIdTable().get(elementNumber);
+        //arraySize(Integer.valueOf(node.getElementNumber())));
+        return valueElement;
     }
 
     //TODO
@@ -304,7 +302,6 @@ public class SymbolTableVisitor extends BasicAbstractNodeVisitor<Object> {
         Value firstElement = null;
         if (!node.getElements().isEmpty()) {
             firstElement = node.getElements().get(0);
-            arraySize(node.getElements().size());
             for (Value x : node.getElements()) {
 
                 if (!(x.getClass().equals(firstElement.getClass()))) {
@@ -312,6 +309,7 @@ public class SymbolTableVisitor extends BasicAbstractNodeVisitor<Object> {
                         throw new IncompatibleTypes("line: " + node.getLinenumber() + " -- " + " Array elements are not of the same types");
                     } catch (SemanticException e) {
                         System.err.println(e);
+                        System.exit(0);
                     }
                 }
             }
@@ -421,9 +419,9 @@ public class SymbolTableVisitor extends BasicAbstractNodeVisitor<Object> {
                 throw new IncompatibleTypes("line: " + node.getLinenumber() + " -- " + " Element index number is not an integer");
             } catch (SemanticException e) {
                 System.err.println(e);
+                System.exit(0);
             }
         }
-        arraySize(Integer.valueOf(node.getElementNr().getSpelling()));
         return valueElement;
     }
 
@@ -587,6 +585,7 @@ public class SymbolTableVisitor extends BasicAbstractNodeVisitor<Object> {
             }
         } catch (SemanticException e) {
             System.err.println(e);
+            System.exit(0);
         }
     }
 
@@ -595,6 +594,7 @@ public class SymbolTableVisitor extends BasicAbstractNodeVisitor<Object> {
             throw new DuplicateDeclaration("line: " + linenumber + " -- " + " Variable " + identifier + " is already declared");
         } catch (SemanticException e) {
             System.err.println(e);
+            System.exit(0);
         }
     }
 
@@ -603,6 +603,7 @@ public class SymbolTableVisitor extends BasicAbstractNodeVisitor<Object> {
             throw new VariableMissing("line: " + linenumber + " -- " + " Variable " + identifier + " is not declared");
         } catch (SemanticException e) {
             System.err.println(e);
+            System.exit(0);
         }
     }
 
@@ -611,6 +612,7 @@ public class SymbolTableVisitor extends BasicAbstractNodeVisitor<Object> {
             throw new IncompatibleTypes("line: " + linenumber + " -- " + node.getClass().getName() + " cannot be assigned to " + identifier);
         } catch (SemanticException e) {
             System.err.println(e);
+            System.exit(0);
         }
     }
 
@@ -619,6 +621,7 @@ public class SymbolTableVisitor extends BasicAbstractNodeVisitor<Object> {
             throw new IncompatibleTypes("line: " + linenumber + " -- " +node.getClass().getName() + " cannot be assigned to " + identifier);
         } catch (SemanticException e) {
             System.err.println(e);
+            System.exit(0);
         }
     }
 
@@ -627,6 +630,7 @@ public class SymbolTableVisitor extends BasicAbstractNodeVisitor<Object> {
             throw new IncompatibleTypes("line: " + linenumber + " -- " + " Expression is not a truth expression");
         } catch (SemanticException e) {
             System.err.println(e.getLocalizedMessage());
+            System.exit(0);
         }
     }
 
@@ -635,6 +639,7 @@ public class SymbolTableVisitor extends BasicAbstractNodeVisitor<Object> {
             throw new IncompatibleTypes("line: " + linenumber + " -- " + node + " needs an integer as input");
         } catch (SemanticException e) {
             System.err.println(e);
+            System.exit(0);
         }
     }
 
@@ -680,36 +685,5 @@ public class SymbolTableVisitor extends BasicAbstractNodeVisitor<Object> {
     //is in symbol table
     private boolean isInSymbolTable(String nodeName) {
         return symbolTable.getIdTable().containsKey(nodeName);
-    }
-
-    //creates map of arrays and their sizes for code gen.
-    public void putTogetherArrayHashMap(){
-        for (int i=0; i<getListOfKeys().size(); i++) {
-            if(!getSizeOfArrays().containsKey(i)) {
-                getSizeOfArrays().put(getListOfKeys().get(i),getListOfNumbers().get(i));
-            }else if(getSizeOfArrays().get(i) > getListOfNumbers().get(i)) {
-                getSizeOfArrays().replace(getListOfKeys().get(i), getListOfNumbers().get(i));
-            }
-        }
-    }
-
-    private void arraySize(int i){
-        listOfNumbers.add(i);
-    }
-
-    private void orderOfArrays(String key){
-        listOfKeys.add(key);
-    }
-
-    private List<Integer> getListOfNumbers() {
-        return listOfNumbers;
-    }
-
-    private List<String> getListOfKeys() {
-        return listOfKeys;
-    }
-
-    public HashMap<String, Integer> getSizeOfArrays() {
-        return sizeOfArrays;
     }
 }

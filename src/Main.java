@@ -4,6 +4,7 @@ import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
 import parser.PyTrun;
 import parser.PyTrunLexer;
+import semanticAnalysis.semanticVisitor;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -50,12 +51,13 @@ public class Main{
         // System.out.println(ast);
 
         symbolTable.SymbolTableVisitor symbolTableVisitor = new symbolTable.SymbolTableVisitor();
+        semanticVisitor sV = new semanticVisitor();
         try {
             symbolTableVisitor.visit(ast);
-            symbolTableVisitor.putTogetherArrayHashMap();
-
-            for(String s: symbolTableVisitor.getSizeOfArrays().keySet()){
-                System.out.println("array " + s + " has size " + symbolTableVisitor.getSizeOfArrays().get(s));
+            sV.visit(ast);
+            sV.putTogetherArrayHashMap();
+            for(String s: sV.getSizeOfArrays().keySet()){
+                System.out.println("array " + s + " has size " + sV.getSizeOfArrays().get(s));
             }
 
         }catch (NoSuchMethodException e){
