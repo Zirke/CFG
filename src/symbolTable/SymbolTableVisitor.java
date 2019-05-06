@@ -111,7 +111,7 @@ public class SymbolTableVisitor extends BasicAbstractNodeVisitor<Object> {
 
     @Override
     public Object visit(DriveStatement node) throws NoSuchMethodException {
-        if (!(visit((visitable) node.getVal()) instanceof IntegerLiteral)) {
+        if (!(visit((visitable) node.getVal()) instanceof IntegerLiteral || visit((visitable)node.getVal()) instanceof INTDCL)) {
             errorCallIntegerIncompatibleTypes(node,node.getLineNumber());
         }
         return null;
@@ -179,15 +179,16 @@ public class SymbolTableVisitor extends BasicAbstractNodeVisitor<Object> {
         return null;
     }
 
+    //TODO
     @Override
     public Object visit(FromStatement node) throws NoSuchMethodException {
-
         symbolTable.openScope();
         visit(node.getStmts());
         symbolTable.closeScope();
         return null;
     }
 
+    //TODO
     @Override
     public Object visit(FunctionCall node) throws NoSuchMethodException {
         return null;
@@ -198,6 +199,7 @@ public class SymbolTableVisitor extends BasicAbstractNodeVisitor<Object> {
     @Override
     public Object visit(FunctionDeclaration node) throws NoSuchMethodException {
             if (!isInSymbolTable(node.getFunctionName().getSpelling())) {
+
             symbolTable.put(node.getFunctionName().getSpelling(), new Symbol(node, symbolTable.getDepth(), null));
 
             for (Parameter parameter : node.getParameters()) {
@@ -264,6 +266,7 @@ public class SymbolTableVisitor extends BasicAbstractNodeVisitor<Object> {
             errorCallAssignIncompatibleTypes(node.getStm(), node.getId().getSpelling(),node.getLineNumber());
         }
 
+
         if (!(isInSymbolTable(node.getId().getSpelling()))){
             symbolTable.put(node.getId().getSpelling(), new Symbol(node, symbolTable.getDepth(), new INTDCL()));
         } else {
@@ -320,7 +323,7 @@ public class SymbolTableVisitor extends BasicAbstractNodeVisitor<Object> {
     //has to be of type truth literal
     @Override
     public Object visit(Not node) throws NoSuchMethodException {
-        if (visit((visitable) node.getTruth()) instanceof TruthLiteral) {
+        if (visit((visitable) node.getTruth()) instanceof TruthLiteral || visit((visitable)node.getTruth()) instanceof TRUTHDCL) {
             return new TruthLiteral(node.getSpelling());
         } else {
             errorCallIncorrectOperatorUse(node, node.getTruth().toString(), null,node.getLineNumber());
