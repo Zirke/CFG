@@ -1,21 +1,21 @@
 package symbolTable;
-
 import ast.AbstractNode;
+import ast.Value;
 
 public class Symbol {
     private AbstractNode node;
     private int depth;
-    private ast.Type type;
+    private Value vType;
 
-    public Symbol(AbstractNode node, int depth, ast.Type type) {
+    public Symbol(AbstractNode node, int depth, Value vType) {
         this.node = node;
         this.depth = depth;
-        this.type = type;
+        this.vType = vType;
     }
 
 
-    public ast.Type getType() {
-        return type;
+    public Value getType() {
+        return vType;
     }
 
     public AbstractNode getNode() {
