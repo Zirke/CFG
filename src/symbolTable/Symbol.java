@@ -1,11 +1,16 @@
 package symbolTable;
+
 import ast.AbstractNode;
 import ast.Value;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Symbol {
     private AbstractNode node;
     private int depth;
     private Value vType;
+    private List<Value> parameters = new ArrayList<>();
 
     public Symbol(AbstractNode node, int depth, Value vType) {
         this.node = node;
@@ -13,6 +18,12 @@ public class Symbol {
         this.vType = vType;
     }
 
+    public Symbol(AbstractNode node, int depth, Value vType, List<Value> parameters) {
+        this.node = node;
+        this.depth = depth;
+        this.vType = vType;
+        this.parameters = parameters;
+    }
 
     public Value getType() {
         return vType;
@@ -26,4 +37,7 @@ public class Symbol {
         return depth;
     }
 
+    public List<Value> getParameters() {
+        return parameters;
+    }
 }

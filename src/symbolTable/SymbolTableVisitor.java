@@ -1,14 +1,15 @@
 package symbolTable;
 
-import Exceptions.SemanticCheckerExceptions.DuplicateDeclaration;
-import Exceptions.SemanticCheckerExceptions.IncompatibleTypes;
-import Exceptions.SemanticCheckerExceptions.IncorrectOperatorUse;
-import Exceptions.SemanticCheckerExceptions.VariableMissing;
+import Exceptions.SemanticCheckerExceptions.*;
 import Exceptions.SemanticException;
 import ast.*;
 import astVisitor.BasicAbstractNodeVisitor;
 
-import static java.lang.System.*;
+import java.util.ArrayList;
+import java.util.List;
+
+import static java.lang.System.err;
+import static java.lang.System.exit;
 
 public class SymbolTableVisitor extends BasicAbstractNodeVisitor<Object> {
     SymbolTable symbolTable = new SymbolTable();
@@ -29,7 +30,7 @@ public class SymbolTableVisitor extends BasicAbstractNodeVisitor<Object> {
     @Override
     public Object visit(ArrayAssignment arrayAssignment) throws NoSuchMethodException {
         Value variableType = variableTypeCheck(arrayAssignment.getId().getSpelling(), arrayAssignment.getLineNumber());
-        AbstractNode expressionType = (AbstractNode) visit(arrayAssignment.getValue());
+        Value expressionType = (Value) visit(arrayAssignment.getValue());
 
         if (!(variableType.getClass().equals(expressionType.getClass()))) {
             errorCallArrayIncompatibleTypes(arrayAssignment.getValue(), arrayAssignment.getId().getSpelling(), arrayAssignment.getLineNumber());
@@ -99,7 +100,7 @@ public class SymbolTableVisitor extends BasicAbstractNodeVisitor<Object> {
     public Object visit(Downto node) throws NoSuchMethodException {
         return null;
     }
-
+    
     @Override
     public Object visit(DriveStatement node) throws NoSuchMethodException {
         if (!(visit(node.getVal()) instanceof IntegerLiteral)) {
@@ -108,6 +109,7 @@ public class SymbolTableVisitor extends BasicAbstractNodeVisitor<Object> {
         return null;
     }
 
+    //checks if the value is a truth literal, then opens a scope and goes through the statements, then closes the scope
     @Override
     public Object visit(ElseIfStatement node) throws NoSuchMethodException {
         if (!(visit(node.getTruth()) instanceof TruthLiteral)) {
@@ -119,7 +121,7 @@ public class SymbolTableVisitor extends BasicAbstractNodeVisitor<Object> {
         }
         return null;
     }
-
+    //opens scopes and visits statements then closes scopes.
     @Override
     public Object visit(ElseThenStmt node) throws NoSuchMethodException {
         symbolTable.openScope();
@@ -128,7 +130,7 @@ public class SymbolTableVisitor extends BasicAbstractNodeVisitor<Object> {
         return null;
     }
 
-    //assigns
+    //assigns the value of ints, floats or truths, it is firstly type checked.
     @Override
     public Object visit(ValueAssignment node) throws NoSuchMethodException {
         Value variableType = variableTypeCheck(node.getId().getSpelling(), node.getLineNumber());
@@ -141,13 +143,14 @@ public class SymbolTableVisitor extends BasicAbstractNodeVisitor<Object> {
     }
 
     @Override
-    public Object visit(FLOATDCL node) {
+    public Object visit(FLOATDCL node) throws NoSuchMethodException {
         return null;
     }
 
+    //float declaration checks if the declaration has any value and that has to be a float literal. afterwards it is put in the symbol table
     @Override
     public Object visit(FloatDeclaration node) throws NoSuchMethodException {
-        if (node.getStm() != null && !(visit((visitable) node.getStm()) instanceof FloatLiteral)) {
+        if (node.getStm() != null && !(visit(node.getStm()) instanceof FloatLiteral)) {
             errorCallAssignIncompatibleTypes(node.getStm().getClass().getName(), node.getId().getSpelling(), node.getLineNumber());
         }
         if (!isInSymbolTable(node.getId().getSpelling())) {
@@ -158,6 +161,7 @@ public class SymbolTableVisitor extends BasicAbstractNodeVisitor<Object> {
         return null;
     }
 
+    //returns as a float literal
     @Override
     public Object visit(FloatLiteral node) {
         return new FloatLiteral(node.getSpelling());
@@ -168,7 +172,7 @@ public class SymbolTableVisitor extends BasicAbstractNodeVisitor<Object> {
         return null;
     }
 
-    //TODO Does upto and downto matter for typechecking?
+    //from statement checks if the values are of type integer literal
     @Override
     public Object visit(FromStatement node) throws NoSuchMethodException {
         Value fromValue = (Value) visit(node.getFromVal());
@@ -184,19 +188,34 @@ public class SymbolTableVisitor extends BasicAbstractNodeVisitor<Object> {
         return null;
     }
 
-    //TODO
+    //function call checks if the parameters are the same type as the ones in the function name also checks if the right amount of parameters are present
     @Override
     public Object visit(FunctionCall node) throws NoSuchMethodException {
-
-        return null;
+        List<Value> parameters = symbolTable.getIdTable().get(node.getFunctionName().getSpelling()).getParameters();
+        if(parameters != null){
+            if(parameters.size() == node.getArguments().size()) {
+                for (int i = 0; i < node.getArguments().size(); i++) {
+                    if (!(node.getArguments().get(i).getClass().equals(parameters.get(i).getClass()))) {
+                        errorCallFunctionCallIncorrectTypes(node.getClass().getName(),node.getLineNumber());
+                    }
+                }
+            }else{
+                errorCallTooFewParamters(node.getClass().getName(), node.getLineNumber());
+            }
+        }
+        return symbolTable.getIdTable().get(node.getFunctionName().getSpelling()).getType();
     }
 
 
     //function declaration for a function with no return, opens a scope within the function if the name declaration does not exist in the symbol table
     @Override
     public Object visit(FunctionDeclaration node) throws NoSuchMethodException {
+        List<Value> parameters = new ArrayList<>();
         if (!isInSymbolTable(node.getFunctionName().getSpelling())) {
-            symbolTable.put(node.getFunctionName().getSpelling(), new Symbol(node, symbolTable.getDepth(), null));
+            for (Parameter parameter : node.getParameters()) {
+                parameters.add((Value)visit(parameter));
+            }
+            symbolTable.put(node.getFunctionName().getSpelling(), new Symbol(node, symbolTable.getDepth(), null,parameters));
             for (Parameter parameter : node.getParameters()) {
                 visit(parameter);
             }
@@ -210,7 +229,7 @@ public class SymbolTableVisitor extends BasicAbstractNodeVisitor<Object> {
         return null;
     }
 
-    //greater than can be performed on ints and floats, returns as a truthliteral
+    //greater than can be performed on ints and floats, returns as a truth literal
     @Override
     public Object visit(GreaterThan node) throws NoSuchMethodException {
         Value leftValue = (Value) visit(node.getLhs());
@@ -257,7 +276,6 @@ public class SymbolTableVisitor extends BasicAbstractNodeVisitor<Object> {
     // when declaring a variable it checks if it already exists in the symbol table, if not, it is put in the symbol table
     @Override
     public Object visit(IntDeclaration node) throws NoSuchMethodException {
-
         if (node.getStm() != null && !(visit(node.getStm()) instanceof IntegerLiteral)) {
             errorCallAssignIncompatibleTypes(node.getStm().getClass().getName(), node.getId().getSpelling(), node.getLineNumber());
         }
@@ -267,7 +285,7 @@ public class SymbolTableVisitor extends BasicAbstractNodeVisitor<Object> {
         } else {
             errorCallDuplicateDeclaration(node.getId().getSpelling(), node.getLineNumber());
         }
-        return null;
+        return new IntegerLiteral(node.getId().getSpelling());
     }
 
     // returns integer literal
@@ -337,18 +355,19 @@ public class SymbolTableVisitor extends BasicAbstractNodeVisitor<Object> {
         return null;
     }
 
+    //depending on which parameter type it is, it is declared in the symbol table
     @Override
     public Object visit(Parameter node) throws NoSuchMethodException {
         AbstractNode typeOfDCL = node.getParamType();
 
         if (typeOfDCL instanceof INTDCL) {
-            visit(new IntDeclaration(node.getId(), null));
+            return visit(new IntDeclaration(node.getId(), null));
         } else if (typeOfDCL instanceof FLOATDCL) {
-            visit(new FloatDeclaration(node.getId(), null));
+            return visit(new FloatDeclaration(node.getId(), null));
         } else if (typeOfDCL instanceof TRUTHDCL) {
-            visit(new TruthDeclaration(node.getId(), null));
+            return visit(new TruthDeclaration(node.getId(), null));
         } else if (typeOfDCL instanceof TEXTDCL) {
-            visit(new TextDeclaration(node.getId(), null));
+            return visit(new TextDeclaration(node.getId(), null));
         }
         return null;
     }
@@ -387,11 +406,12 @@ public class SymbolTableVisitor extends BasicAbstractNodeVisitor<Object> {
     //checks if the variable name for the function is taken, then goes through all the parameters and lastly goes through the body. Also opens and closes scopes.
     @Override
     public Object visit(ReturnFunctionDeclaration node) throws NoSuchMethodException {
+        List<Value> parameters = new ArrayList<>();
         if (!isInSymbolTable(node.getFunctionName().getSpelling())) {
-            symbolTable.put(node.getFunctionName().getSpelling(), new Symbol(node, symbolTable.getDepth(), typeCasting(node.getReturnType())));
             for (Parameter parameter : node.getParameters()) {
-                visit(parameter);
+                parameters.add((Value)visit(parameter));
             }
+            symbolTable.put(node.getFunctionName().getSpelling(), new Symbol(node, symbolTable.getDepth(), typeCasting(node.getReturnType()),parameters));
 
             symbolTable.openScope();
             visit(node.getStmtBody());
@@ -409,15 +429,17 @@ public class SymbolTableVisitor extends BasicAbstractNodeVisitor<Object> {
         return null;
     }
 
+    //checks the node that the value in the return statement, will be used higher up for type checking
     @Override
     public Object visit(ReturnStatement node) throws NoSuchMethodException {
         return visit(node.getVal());
     }
 
+    //checks if the element number is an integer literal
     @Override
     public Object visit(SingleElementAssign node) throws NoSuchMethodException {
-        AbstractNode elementNumber = (AbstractNode) visit((visitable) node.getElementNr());
-        AbstractNode valueElement = (AbstractNode) visit(node.getAssignemntVal());
+        Value elementNumber = (Value) visit((visitable) node.getElementNr());
+        Value valueElement = (Value) visit(node.getAssignemntVal());
 
         if (!(elementNumber instanceof IntegerLiteral)) {
             try {
@@ -574,6 +596,7 @@ public class SymbolTableVisitor extends BasicAbstractNodeVisitor<Object> {
      *                                                    DuplicateDeclaration
      *                                                    VariableMissing
      *                                                    IncompatibleTypes
+     *                                                    FunctionCallParameters
      */
     private void errorCallIncorrectOperatorUse(AbstractNode node, String leftHand, String rightHand, int linenumber) {
         try {
@@ -637,6 +660,22 @@ public class SymbolTableVisitor extends BasicAbstractNodeVisitor<Object> {
         try {
             throw new IncompatibleTypes("line: " + linenumber + " -- " + node + " requires an integer");
         } catch (SemanticException e) {
+            err.println(e);
+            exit(0);
+        }
+    }
+    private void errorCallTooFewParamters(String node, int linenumber){
+        try{
+            throw new FunctionCallParameter("line: " + linenumber + " -- " + node + " has incorrect amount of paramters");
+        }catch (SemanticException e){
+            err.println(e);
+            exit(0);
+        }
+    }
+    private void errorCallFunctionCallIncorrectTypes(String node, int linenumber){
+        try{
+            throw new FunctionCallParameter("line: " + linenumber + " -- " + node + " the parameters are not correct");
+        }catch (SemanticException e){
             err.println(e);
             exit(0);
         }

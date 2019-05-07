@@ -11,16 +11,19 @@ public class BuildASTVisitor extends AbstractParseTreeVisitor<AbstractNode> impl
 
 	@Override public AbstractNode visitStart(PyTrun.StartContext ctx) {
 		ArrayList<Statement> statements = new ArrayList<>();
-		if(ctx.stmts() != null) {
-			for (PyTrun.StmtsContext x : ctx.stmts()) {
-				statements.addAll(((StatementList) visitStmts(x)).getStmts());
-			}
-		}
+
 		for (PyTrun.FunctiondclContext x: ctx.functiondcl()) {
 			Statement d =((Statement) visitFunctiondcl(x));
 			statements.add(d);
 
 		}
+
+		if(ctx.stmts() != null) {
+			for (PyTrun.StmtsContext x : ctx.stmts()) {
+				statements.addAll(((StatementList) visitStmts(x)).getStmts());
+			}
+		}
+
 		ArrayList<Statement> removestmts = new ArrayList<>();
 		for(Statement d : statements){
 			if(d != null){

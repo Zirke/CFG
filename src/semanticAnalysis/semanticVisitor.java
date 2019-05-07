@@ -303,7 +303,7 @@ public class semanticVisitor extends BasicAbstractNodeVisitor {
     }
 
     //creates map of arrays and their sizes for code gen.
-    public void putTogetherArrayHashMap(){
+    public void establishArrayHashMap(){
         for (int i=0; i<getListOfKeys().size(); i++) {
             if(!getSizeOfArrays().containsKey(i)) {
                 getSizeOfArrays().put(getListOfKeys().get(i),getListOfNumbers().get(i));
