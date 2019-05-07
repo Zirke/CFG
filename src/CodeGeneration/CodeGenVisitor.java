@@ -230,7 +230,8 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
 
     @Override
     public Object visit(Identifier identifier)throws NoSuchMethodException {
-        return identifier.getSpelling();
+        emitter.emit(identifier.getSpelling());
+        return null;
     }
 
     @Override
@@ -255,7 +256,7 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
 
     @Override
     public Object visit(INTDCL intdcl) throws NoSuchMethodException{
-        emitter.emit(" int ");
+        emitter.emit("int ");
         return null;
     }
 
@@ -274,7 +275,8 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
 
     @Override
     public Object visit(IntegerLiteral integerLiteral)throws NoSuchMethodException {
-        return integerLiteral.getSpelling();
+        emitter.emit(integerLiteral.getSpelling());
+        return null;
     }
 
     @Override
@@ -342,7 +344,7 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
 
     @Override
     public Object visit(Plus plus)throws NoSuchMethodException {
-/*        if(plus.getLeft() instanceof Operator){
+        if(plus.getLeft() instanceof Operator){
             visit(plus.getLeft());
         }else{
             emitter.emit(""+visit(plus.getLeft()));
@@ -353,7 +355,7 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
         }else{
             emitter.emit(""+visit(plus.getRight()));
             emitter.emit(";\n");
-        }*/
+        }
         return null;
     }
 
@@ -460,7 +462,7 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
     @Override
     public Object visit(TruthDeclaration truthDeclaration) throws NoSuchMethodException{
         emitter.emit("int ");
-        emitter.emit(""+visit(truthDeclaration.getId()));
+        visit(truthDeclaration.getId());
         if(truthDeclaration.getExpr() != null){
             emitter.emit(" = ");
             visit(truthDeclaration.getExpr());
