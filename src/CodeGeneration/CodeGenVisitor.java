@@ -3,6 +3,9 @@ package CodeGeneration;
 import ast.*;
 import astVisitor.BasicAbstractNodeVisitor;
 
+import java.nio.charset.Charset;
+import java.util.Random;
+
 public class CodeGenVisitor extends BasicAbstractNodeVisitor {
 
     private Emitter emitter;
@@ -107,8 +110,10 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
     // Assuming ValueAssignment is only for ints and floats.
     @Override
     public String visit(ValueAssignment valueAssignment) throws NoSuchMethodException {
-        emitter.emit(visit(valueAssignment.getId()) + " = ");
-        return "" + visit(valueAssignment.getValue());
+        visit(valueAssignment.getId());
+        emitter.emit(" = ");
+        visit(valueAssignment.getValue());
+        return null;
     }
 
     @Override
@@ -142,40 +147,58 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
         return null;
     }
 
-    //TODO Fix
+    //Works by generating a random string with 8 length if from value is just an integer in TRUN
     @Override
     public Object visit(FromStatement fromStatement) throws NoSuchMethodException {
         boolean fromValInt = false;
-        //boolean toValInt = false;
         boolean isUpto = false;
+        String generatedString = null;
+
+        //Check if upto or downto
         if (fromStatement.getUptoOrDownto().spelling.contains("upto")) {
             isUpto = true;
         }
+
+        //Check if from value is an integer or variable, if it is an integer, create random string for int name in C
         if (fromStatement.getFromVal() instanceof IntegerLiteral) {
             fromValInt = true;
+            Random random = new Random();
+            StringBuilder buffer = new StringBuilder(8);
+            for (int i = 0; i < 8; i++) {
+                int randomLimitedInt = 97 + (int)
+                        (random.nextFloat() * (122 - 97 + 1));
+                buffer.append((char) randomLimitedInt);
+            }
+            generatedString = buffer.toString();
         }
 
+        //Start formatting
         emitter.emit("for (");
 
+        //Init expression
         if (fromValInt) {
-            emitter.emit("int forcounter = ");
+            emitter.emit("int "+generatedString+"= ");
             visit(fromStatement.getFromVal());
         } else {
             visit(fromStatement.getFromVal());
         }
         emitter.emit("; ");
+
+        //Continue/Update expression if from value is integer
         if (fromValInt) {
-            emitter.emit("forcounter");
+            emitter.emit(generatedString);
             if (isUpto) {
                 emitter.emit(" < ");
                 visit(fromStatement.getToVal());
-                emitter.emit("; forcounter++");
+                emitter.emit("; "+generatedString+"++");
             } else {
                 emitter.emit(" > ");
                 visit(fromStatement.getToVal());
-                emitter.emit("; forcounter--");
+                emitter.emit("; "+generatedString+"--");
             }
-        } else {
+        }
+        //Continue/Update expression if from value is variable
+        else {
             visit(fromStatement.getFromVal());
             if (isUpto) {
                 emitter.emit(" < ");
@@ -191,6 +214,8 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
                 emitter.emit("--");
             }
         }
+
+        //Open for loop body and print statements + close body and newline TODO: maybe remove newline and format only in statement visitor
         emitter.emit(") {\n");
         emitter.emit("\t");
         visit(fromStatement.getStmts());
@@ -212,13 +237,17 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
 
     @Override
     public Object visit(FunctionDeclaration functionDeclaration) throws NoSuchMethodException {
-        /* emitter.emit("void ");
+        emitter.emit("void ");
         visit(functionDeclaration.getFunctionName());
+        emitter.emit("(");
         for(Value val : functionDeclaration.getParameters()){
             visit(val);
+            emitter.emit(",");
         }
+        emitter.emit(") {\n");
         visit(functionDeclaration.getStmtBody());
-        */
+        emitter.emit("\n}");
+
         return null;
     }
 
@@ -341,7 +370,7 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
 
     @Override
     public Object visit(ReturnFunctionDeclaration returnFunctionDeclaration) throws NoSuchMethodException {
-        /* visit(returnFunctionDeclaration.getReturnType());
+        visit(returnFunctionDeclaration.getReturnType());
         visit(returnFunctionDeclaration.getFunctionName());
         emitter.emit("(");
         for(Value val : returnFunctionDeclaration.getParameters()){
@@ -350,7 +379,6 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
         emitter.emit("){\n");
         visit(returnFunctionDeclaration.getStmtBody());
         emitter.emit("}\n");
-        */
         return null;
     }
 
@@ -481,16 +509,21 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
         return null;
     }
 
-    //TODO Fix
+    //Needs testing, getting nullpointer in BuildASTVisitor
     @Override
     public Object visit(WhileStatement whileStatement) throws NoSuchMethodException {
+        emitter.emit("while(");
+        visit(whileStatement.getExpr());
+        emitter.emit(") {\n");
+        visit(whileStatement.getStmts());
+        emitter.emit("\n}");
         return null;
     }
 
     @Override
     public Object visit(Equal equal) throws NoSuchMethodException {
         visit(equal.getLhs());
-        emitter.emit(" = ");
+        emitter.emit(" == ");
         visit(equal.getRhs());
         return null;
     }
