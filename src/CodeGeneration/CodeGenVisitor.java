@@ -14,13 +14,9 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
 
     @Override
     public Object visit(And and) throws NoSuchMethodException {
-        emitter.emit((String) visit(and.getLhs()));
+        visit(and.getLhs());
         emitter.emit(" && ");
-        if (and.getRhs() instanceof Operator) {
-            visit(and.getRhs());
-        } else {
-            emitter.emit((String) visit(and.getRhs()));
-        }
+        visit(and.getRhs());
         return null;
     }
 
@@ -70,14 +66,9 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
 
     @Override
     public Object visit(Divide divide) throws NoSuchMethodException {
-/*        emitter.emit(""+visit(divide.getLeft()));
+        visit(divide.getLeft());
         emitter.emit(" / ");
-        if(divide.getRight() instanceof Operator){
-            visit(divide.getRight());
-        }else{
-            emitter.emit(""+visit(divide.getRight()));
-            emitter.emit(";\n");
-        }*/
+        visit(divide.getRight());
         return null;
     }
 
@@ -167,24 +158,37 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
         emitter.emit("for (");
 
         if (fromValInt) {
-            emitter.emit("int forcounter = " + visit(fromStatement.getFromVal()));
+            emitter.emit("int forcounter = ");
+            visit(fromStatement.getFromVal());
         } else {
-            emitter.emit("" + visit(fromStatement.getFromVal()));
+            visit(fromStatement.getFromVal());
         }
         emitter.emit("; ");
         if (fromValInt) {
             emitter.emit("forcounter");
             if (isUpto) {
-                emitter.emit(" < " + visit(fromStatement.getToVal()) + "; forcounter++");
+                emitter.emit(" < ");
+                visit(fromStatement.getToVal());
+                emitter.emit("; forcounter++");
             } else {
-                emitter.emit(" > " + visit(fromStatement.getToVal()) + "; forcounter--");
+                emitter.emit(" > ");
+                visit(fromStatement.getToVal());
+                emitter.emit("; forcounter--");
             }
         } else {
-            emitter.emit("" + visit(fromStatement.getFromVal()));
+            visit(fromStatement.getFromVal());
             if (isUpto) {
-                emitter.emit(" < " + visit(fromStatement.getToVal()) + "; " + visit(fromStatement.getFromVal()) + "++");
+                emitter.emit(" < ");
+                visit(fromStatement.getToVal());
+                emitter.emit("; ");
+                visit(fromStatement.getFromVal());
+                emitter.emit("++");
             } else {
-                emitter.emit(" > " + visit(fromStatement.getToVal()) + "; " + visit(fromStatement.getFromVal()) + "--");
+                emitter.emit(" > ");
+                visit(fromStatement.getToVal());
+                emitter.emit("; ");
+                visit(fromStatement.getFromVal());
+                emitter.emit("--");
             }
         }
         emitter.emit(") {\n");
@@ -220,15 +224,9 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
 
     @Override
     public Object visit(GreaterThan greaterThan) throws NoSuchMethodException {
-/*        emitter.emit(""+visit(greaterThan.getLhs()));
+        visit(greaterThan.getLhs());
         emitter.emit(" > ");
-        if(greaterThan.getRhs() instanceof Operator){
-            visit(greaterThan.getRhs());
-        }else{
-            emitter.emit(""+visit(greaterThan.getRhs()));
-            emitter.emit(";\n");
-        }
-        //emitter.emit(";\n");*/
+        visit(greaterThan.getRhs());
         return null;
     }
 
@@ -267,10 +265,10 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
     @Override
     public Object visit(IntDeclaration intDeclaration) throws NoSuchMethodException {
         emitter.emit("int ");
-        emitter.emit((String) visit(intDeclaration.getId()));
+        visit(intDeclaration.getId());
         if(intDeclaration.getStm() != null) {
             emitter.emit(" = ");
-            emitter.emit((String) visit(intDeclaration.getStm()));
+            visit(intDeclaration.getStm());
         }
 
         return null;
@@ -284,29 +282,17 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
 
     @Override
     public Object visit(LessThan lessThan) throws NoSuchMethodException {
-/*        emitter.emit(""+visit(lessThan.getLhs()));
+        visit(lessThan.getLhs());
         emitter.emit(" < ");
-        if(lessThan.getRhs() instanceof Operator){
-            visit(lessThan.getRhs());
-        }else{
-            emitter.emit(""+visit(lessThan.getRhs()));
-            emitter.emit(";\n");
-        }
-        //emitter.emit(";\n");*/
+        visit(lessThan.getRhs());
         return null;
     }
 
     @Override
     public Object visit(Minus minus) throws NoSuchMethodException {
-/*        emitter.emit(""+visit(minus.getLeft()));
+        visit(minus.getLeft());
         emitter.emit(" - ");
-        if(minus.getRight() instanceof Operator){
-            visit(minus.getRight());
-        }else{
-            emitter.emit(""+visit(minus.getRight()));
-            emitter.emit(";\n");
-        }
-        //emitter.emit(";\n");*/
+        visit(minus.getRight());
         return null;
     }
 
@@ -320,21 +306,15 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
     @Override
     public Object visit(Not not) throws NoSuchMethodException {
         emitter.emit("!");
-        emitter.emit((String) visit(not.getTruth()));
+        visit(not.getTruth());
         return null;
     }
 
     @Override
     public Object visit(Or or) throws NoSuchMethodException {
-/*        emitter.emit(""+visit(or.getLhs()));
+        visit(or.getLhs());
         emitter.emit(" || ");
-        if(or.getRhs() instanceof Operator){
-            visit(or.getRhs());
-        }else{
-            emitter.emit(""+visit(or.getRhs()));
-            emitter.emit(";\n");
-        }
-        //emitter.emit(";\n");*/
+        visit(or.getRhs());
         return null;
     }
 
@@ -347,17 +327,9 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
 
     @Override
     public Object visit(Plus plus) throws NoSuchMethodException {
-        if (plus.getLeft() instanceof Operator) {
-            visit(plus.getLeft());
-        } else {
-            emitter.emit((String) visit(plus.getLeft()));
-            emitter.emit(" + ");
-        }
-        if (plus.getRight() instanceof Operator) {
-            visit(plus.getRight());
-        } else {
-            emitter.emit((String) visit(plus.getRight()));
-        }
+        visit(plus.getLeft());
+        emitter.emit(" + ");
+        visit(plus.getRight());
         return null;
     }
 
@@ -442,24 +414,16 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
 
     @Override
     public Object visit(Times times) throws NoSuchMethodException {
-/*        if(times.getLeft() instanceof Operator){
-            visit(times.getLeft());
-        }else{
-            emitter.emit(""+visit(times.getLeft()));
-            emitter.emit(" * ");
-        }
-        if(times.getRight() instanceof Operator){
-            visit(times.getRight());
-        }else{
-            emitter.emit(""+visit(times.getRight()));
-            emitter.emit(";\n");
-        }*/
+        visit(times.getLeft());
+        emitter.emit(" * ");
+        visit(times.getRight());
         return null;
+
     }
 
     @Override
     public Object visit(TRUTHDCL truthdcl) throws NoSuchMethodException {
-        emitter.emit(truthdcl.getId().getSpelling());
+        visit(truthdcl.getId());
         return null;
     }
 
@@ -477,13 +441,13 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
     @Override
     public Object visit(TruthLiteral truthLiteral) throws NoSuchMethodException {
         if (truthLiteral.getSpelling().equals("true")) {
-            return "1";
+            emitter.emit("1");
         } else if (truthLiteral.getSpelling().equals("false")) {
-            return "0";
+            emitter.emit("0");
         } else {
-            return truthLiteral.getSpelling();
+            emitter.emit(truthLiteral.getSpelling());
         }
-
+        return null;
     }
 
     @Override
