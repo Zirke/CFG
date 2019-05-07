@@ -1,3 +1,5 @@
+import CodeGeneration.CodeGenVisitor;
+import CodeGeneration.Emitter;
 import ast.AbstractNode;
 import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CommonTokenStream;
@@ -66,5 +68,13 @@ public class Main{
 
 
 
+        CodeGenVisitor codeGenVisitor = new CodeGenVisitor(new Emitter());
+        codeGenVisitor.setup();
+        try {
+            codeGenVisitor.visit(ast);
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        }
+        codeGenVisitor.closeEmitter();
     }
 }

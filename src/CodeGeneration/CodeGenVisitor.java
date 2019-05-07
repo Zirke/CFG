@@ -14,15 +14,14 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
 
     @Override
     public Object visit(And and) throws NoSuchMethodException{
-/*        emitter.emit(""+visit(and.getLhs()));
+        emitter.emit((String) visit(and.getLhs()));
         emitter.emit( " && ");
         if(and.getRhs() instanceof Operator){
             visit(and.getRhs());
         }else{
             emitter.emit(""+visit(and.getRhs()));
             emitter.emit(";\n");
-        }*/
-
+        }
         return null;
     }
 
@@ -531,5 +530,9 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
     public void setup(){
         GenSetup setup = new GenSetup();
         emitter.emit(setup.getInitialCode());
+    }
+
+    public void closeEmitter(){
+        emitter.closeFile();
     }
 }
