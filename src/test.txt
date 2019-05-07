@@ -1,7 +1,3 @@
-truth n is true
-integer a is 2
-integer t is 8 + 7 * 6 - 5 / 4 * 3 + 2 - 1
-truth u is (true AND false) OR (10 > a AND n) OR n AND n OR n
-
-from (2 upto 20) {
-}
+p is 1 + 2 + 3 + 4 + 5
+q is 5 - 4 - 3 - 2 - 1
+u is true AND false OR true AND n OR n AND n OR n

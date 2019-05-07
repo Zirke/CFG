@@ -59,9 +59,13 @@ function fibArray returns array(integer n){
 
 integer array fibNums is fibArray(10)
 
-integer fibNum1 is 5 #test
+
+
+integer fibNum1 is intPower(5) #test
 
 integer fibNum2 is fibNums element 10 #test
+
+integer test is fibNum1 * fibNum2
 
 integer result is intSquared(fibNum1) + intPower(fibNum2, 3)  /# Square the 5th fibonacci number and add to it the 10th fibonacci number to the power of 3
                                                               and assign the result to an int #/
@@ -73,4 +77,4 @@ if (5=2) then {
     } else then {
         # else body
     }
-
+}

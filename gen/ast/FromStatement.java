@@ -1,6 +1,6 @@
 package ast;
 
-public class FromStatement extends Statement{
+public class FromStatement extends Statement implements Iterative{
     Value fromVal;
     Value toVal;
     FromKeyword uptoOrDownto;

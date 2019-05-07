@@ -1,6 +1,6 @@
 package ast;
 
-public class RepeatStatement extends Statement{
+public class RepeatStatement extends Statement implements Iterative{
     StatementList stmts;
     Value expr;
 

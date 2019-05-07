@@ -33,31 +33,16 @@ public class Main{
         PyTrun parser = new PyTrun(tokens);
         ParseTree tree = parser.start();
 
-        //System.out.println(tree.toStringTree(parser));
-        // System.out.println(((PyTrun.DclContext) tree).ASSIGN());
-        /*for(ParseTree i : ((PyTrun.StmtContext) tree).children){
-            System.out.println(i.toStringTree(parser));
-            System.out.println(i.getChildCount());
-            System.out.println(tree.getChildCount());
-        }*/
-
-
         BuildASTVisitor visitor = new BuildASTVisitor();
         AbstractNode ast = visitor.visit(tree);
-       /*   PrettyPrintAST visitor2 = new PrettyPrintAST();
-        try {
-            visitor2.visit(ast);
-        }catch (NoSuchMethodException e){
-            System.out.println(e);
-        }*/
-        // System.out.println(ast);
 
         symbolTable.SymbolTableVisitor symbolTableVisitor = new symbolTable.SymbolTableVisitor();
         semanticVisitor sV = new semanticVisitor();
+
         try {
             symbolTableVisitor.visit(ast);
             sV.visit(ast);
-            sV.putTogetherArrayHashMap();
+            //sV.putTogetherArrayHashMap();
             for(String s: sV.getSizeOfArrays().keySet()){
                 System.out.println("array " + s + " has size " + sV.getSizeOfArrays().get(s));
             }

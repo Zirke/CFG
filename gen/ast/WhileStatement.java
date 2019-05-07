@@ -1,7 +1,7 @@
 package ast;
 
 //Iterative control structure(s)
-public class WhileStatement extends Statement{
+public class WhileStatement extends Statement implements Iterative{
     Value expr;
     StatementList stmts;
 
