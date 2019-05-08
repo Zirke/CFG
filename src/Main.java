@@ -57,7 +57,7 @@ public class Main{
         try {
             symbolTableVisitor.visit(ast);
             sV.visit(ast);
-            sV.putTogetherArrayHashMap();
+            sV.establishArrayHashMap();
             for(String s: sV.getSizeOfArrays().keySet()){
                 System.out.println("array " + s + " has size " + sV.getSizeOfArrays().get(s));
             }
@@ -65,7 +65,6 @@ public class Main{
         }catch (NoSuchMethodException e){
             System.out.println(e);
         }
-
 
 
         CodeGenVisitor codeGenVisitor = new CodeGenVisitor(new Emitter());

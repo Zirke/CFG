@@ -34,6 +34,9 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
     //TODO fix pls
     @Override
     public Object visit(ArrayAssignment arrayAssignment) throws NoSuchMethodException {
+        visit(arrayAssignment.getId());
+        emitter.emit("[");
+        visit(arrayAssignment.getValue());
         return null;
     }
 
@@ -51,9 +54,14 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
         return null;
     }
 
-    //TODO Fix pls
+    //TODO This does not work?
     @Override
     public Object visit(ArrayElementAddStatement arrayElementAddStatement) throws NoSuchMethodException {
+        visit(arrayElementAddStatement.getArrayName());
+        emitter.emit("[");
+        visit(arrayElementAddStatement.getElementNumber());
+        emitter.emit("] = ");
+        visit(arrayElementAddStatement.getValue());
         return null;
     }
 
@@ -394,7 +402,9 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
     //TODO Fix
     @Override
     public Object visit(SingleElementAssign singleElementAssign) throws NoSuchMethodException {
-
+        visit(singleElementAssign.getElementNr());
+        emitter.emit("] = ");
+        visit(singleElementAssign.getAssignemntVal());
         return null;
     }
 
