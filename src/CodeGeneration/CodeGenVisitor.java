@@ -74,7 +74,7 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
         return null;
     }
 
-    //TODO Fix
+
     @Override
     public Object visit(Downto downto) throws NoSuchMethodException {
         return "downto";
@@ -82,9 +82,9 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
 
     @Override
     public Object visit(DriveStatement driveStatement) throws NoSuchMethodException {
-        emitter.emit("\ndigitalWrite(leftMotor, HIGH);\ndigitalWrite(rightMotor, HIGH);\ndelay(");
-        emitter.emit("1000*" + visit(driveStatement.getVal()));
-        emitter.emit(");\ndigitalWrite(leftMotor, LOW);\ndigitalWrite(rightMotor, LOW);\n");
+        emitter.emit("\ndigitalWrite(leftMotor, HIGH);\ndigitalWrite(rightMotor, HIGH);\ndelay(1000*");
+        visit(driveStatement.getVal());
+        emitter.emit(");\ndigitalWrite(leftMotor, LOW);\ndigitalWrite(rightMotor, LOW)");
         return null;
     }
 
@@ -139,7 +139,6 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
         return null;
     }
 
-    //TODO Fix
     @Override
     public Object visit(FromKeyword fromKeyword) throws NoSuchMethodException {
         return null;
@@ -213,11 +212,11 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
             }
         }
 
-        //Open for loop body and print statements + close body and newline TODO: maybe remove newline and format only in statement visitor
+        //Open for loop body and print statements + close body and newline
         emitter.emit(") {\n");
         emitter.emit("\t");
         visit(fromStatement.getStmts());
-        emitter.emit("\n}\n");
+        emitter.emit("\n}");
         return null;
     }
 
@@ -409,6 +408,9 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
             if(!((s instanceof FunctionDeclaration) || (s instanceof WhileStatement) || (s instanceof FromStatement))) {
                 emitter.emit(";\n");
             }
+            else {
+                emitter.emit("\n");
+            }
         }
 
         //emitter.emit("}\n");
@@ -420,7 +422,9 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
     //TODO Fixes senere
     @Override
     public Object visit(TextAssignment textAssignment) throws NoSuchMethodException {
-
+        visit(textAssignment.getId());
+        emitter.emit(" = ");
+        visit(textAssignment.getText());
         return null;
     }
 
@@ -433,6 +437,14 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
     //TODO weird when the size of the array is not yet known.
     @Override
     public Object visit(TextDeclaration textDeclaration) throws NoSuchMethodException {
+        emitter.emit("char *");
+        visit(textDeclaration.getId());
+        emitter.emit(" = (char*)calloc(128, sizeof(char));\n");
+        if(textDeclaration.getVal() != null){
+            visit(textDeclaration.getId());
+            emitter.emit(" = ");
+            visit(textDeclaration.getVal());
+        }
         return null;
     }
 
@@ -491,28 +503,27 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
 
     @Override
     public Object visit(TurnLeftStatement turnLeftStatement) throws NoSuchMethodException {
-        emitter.emit("digitalWrite(leftMotor, LOW);\ndigitalWrite(rightMotor, HIGH);\ndelay(");
+        emitter.emit("digitalWrite(leftMotor, LOW);\ndigitalWrite(rightMotor, HIGH);\ndelay(1000*");
         visit(turnLeftStatement.getVal());
-        emitter.emit(");\ndigitalWrite(lefMotor, LOW);\ndigitalWrite(rightMotor, LOW);\n");
+        emitter.emit(");\ndigitalWrite(lefMotor, LOW);\ndigitalWrite(rightMotor, LOW)");
         return null;
     }
 
     @Override
     public Object visit(TurnRightStatement turnRightStatement) throws NoSuchMethodException {
-        emitter.emit("digitalWrite(leftMotor, HIGH);\ndigitalWrite(rightMotor, LOW);\ndelay(");
+        emitter.emit("digitalWrite(leftMotor, HIGH);\ndigitalWrite(rightMotor, LOW);\ndelay(1000*");
         visit(turnRightStatement.getVal());
-        emitter.emit(");\ndigitalWrite(lefMotor, LOW);\ndigitalWrite(rightMotor, LOW);\n");
+        emitter.emit(");\ndigitalWrite(lefMotor, LOW);\ndigitalWrite(rightMotor, LOW)");
         return null;
     }
 
 
-    //TODO Fix
+
     @Override
     public Object visit(Upto upto) throws NoSuchMethodException {
         return "upto";
     }
 
-    //Needs testing, getting nullpointer in BuildASTVisitor
     @Override
     public Object visit(WhileStatement whileStatement) throws NoSuchMethodException {
         emitter.emit("while(");
