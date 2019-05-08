@@ -41,4 +41,3 @@ if (true) then {
     i is 5
 }
 #/
-integer b is 4 + (3))

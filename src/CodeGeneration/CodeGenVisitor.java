@@ -3,13 +3,17 @@ package CodeGeneration;
 import ast.*;
 import astVisitor.BasicAbstractNodeVisitor;
 
+import java.util.Random;
+
 public class CodeGenVisitor extends BasicAbstractNodeVisitor {
 
     private Emitter emitter;
+    private boolean isFunctionGen;
 
-    public CodeGenVisitor(Emitter emitter) {
+    public CodeGenVisitor(Emitter emitter, boolean isFunctionGen) {
         super();
         this.emitter = emitter;
+        this.isFunctionGen = isFunctionGen;
     }
 
     @Override
@@ -32,6 +36,9 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
     //TODO fix pls
     @Override
     public Object visit(ArrayAssignment arrayAssignment) throws NoSuchMethodException {
+        visit(arrayAssignment.getId());
+        emitter.emit("[");
+        visit(arrayAssignment.getValue());
         return null;
     }
 
@@ -39,19 +46,28 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
     // Current size is 128 but not checked if the source array is bigger.
     @Override
     public Object visit(ArrayDeclaration arrayDeclaration) throws NoSuchMethodException {
-        visit(arrayDeclaration.getType());
         visit(arrayDeclaration.getId());
-        emitter.emit("[128]");
+        emitter.emit(" = (");
+        visit(arrayDeclaration.getType());
+        emitter.emit("*) calloc(128, sizeof(");
+        visit(arrayDeclaration.getType());
+        emitter.emit(")");
+
         if (arrayDeclaration.getValues() != null) {
-            emitter.emit(" = ");
+            //TODO what happens when we use calloc and there is an assignment list?
             visit(arrayDeclaration.getValues());
         }
         return null;
     }
 
-    //TODO Fix pls
+    //TODO This does not work?
     @Override
     public Object visit(ArrayElementAddStatement arrayElementAddStatement) throws NoSuchMethodException {
+        visit(arrayElementAddStatement.getArrayName());
+        emitter.emit("[");
+        visit(arrayElementAddStatement.getElementNumber());
+        emitter.emit("] = ");
+        visit(arrayElementAddStatement.getValue());
         return null;
     }
 
@@ -72,17 +88,17 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
         return null;
     }
 
-    //TODO Fix
+
     @Override
     public Object visit(Downto downto) throws NoSuchMethodException {
-        return null;
+        return "downto";
     }
 
     @Override
     public Object visit(DriveStatement driveStatement) throws NoSuchMethodException {
-        emitter.emit("\ndigitalWrite(leftMotor, HIGH);\ndigitalWrite(rightMotor, HIGH);\ndelay(");
-        emitter.emit("1000*" + visit(driveStatement.getVal()));
-        emitter.emit(");\ndigitalWrite(leftMotor, LOW);\ndigitalWrite(rightMotor, LOW);\n");
+        emitter.emit("\ndigitalWrite(leftMotor, HIGH);\ndigitalWrite(rightMotor, HIGH);\ndelay(1000*");
+        visit(driveStatement.getVal());
+        emitter.emit(");\ndigitalWrite(leftMotor, LOW);\ndigitalWrite(rightMotor, LOW)");
         return null;
     }
 
@@ -107,8 +123,10 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
     // Assuming ValueAssignment is only for ints and floats.
     @Override
     public String visit(ValueAssignment valueAssignment) throws NoSuchMethodException {
-        emitter.emit(visit(valueAssignment.getId()) + " = ");
-        return "" + visit(valueAssignment.getValue());
+        visit(valueAssignment.getId());
+        emitter.emit(" = ");
+        visit(valueAssignment.getValue());
+        return null;
     }
 
     @Override
@@ -135,47 +153,63 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
         return null;
     }
 
-    //TODO Fix
     @Override
     public Object visit(FromKeyword fromKeyword) throws NoSuchMethodException {
-
         return null;
     }
 
-    //TODO Fix
+    //Works by generating a random string with 8 length if from value is just an integer in TRUN
     @Override
     public Object visit(FromStatement fromStatement) throws NoSuchMethodException {
         boolean fromValInt = false;
-        //boolean toValInt = false;
         boolean isUpto = false;
-        if (fromStatement.getUptoOrDownto().spelling.contains("upto")) {
+        String generatedString = null;
+
+        //Check if upto or downto
+        if (fromStatement.getUptoOrDownto().spelling.equals("upto")) {
             isUpto = true;
         }
+
+        //Check if from value is an integer or variable, if it is an integer, create random string for int name in C
         if (fromStatement.getFromVal() instanceof IntegerLiteral) {
             fromValInt = true;
+            Random random = new Random();
+            StringBuilder buffer = new StringBuilder(10);
+            for (int i = 0; i < 10; i++) {
+                int randomLimitedInt = 97 + (int)
+                        (random.nextFloat() * (122 - 97 + 1));
+                buffer.append((char) randomLimitedInt);
+            }
+            generatedString = buffer.toString();
         }
 
+        //Start formatting
         emitter.emit("for (");
 
+        //Init expression
         if (fromValInt) {
-            emitter.emit("int forcounter = ");
+            emitter.emit("int "+generatedString+" = ");
             visit(fromStatement.getFromVal());
         } else {
             visit(fromStatement.getFromVal());
         }
         emitter.emit("; ");
+
+        //Continue/Update expression if from value is integer
         if (fromValInt) {
-            emitter.emit("forcounter");
+            emitter.emit(generatedString);
             if (isUpto) {
                 emitter.emit(" < ");
                 visit(fromStatement.getToVal());
-                emitter.emit("; forcounter++");
+                emitter.emit("; "+generatedString+"++");
             } else {
                 emitter.emit(" > ");
                 visit(fromStatement.getToVal());
-                emitter.emit("; forcounter--");
+                emitter.emit("; "+generatedString+"--");
             }
-        } else {
+        }
+        //Continue/Update expression if from value is variable
+        else {
             visit(fromStatement.getFromVal());
             if (isUpto) {
                 emitter.emit(" < ");
@@ -191,10 +225,12 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
                 emitter.emit("--");
             }
         }
+
+        //Open for loop body and print statements + close body and newline
         emitter.emit(") {\n");
         emitter.emit("\t");
         visit(fromStatement.getStmts());
-        emitter.emit("\n}\n");
+        emitter.emit("\n}");
         return null;
     }
 
@@ -212,13 +248,17 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
 
     @Override
     public Object visit(FunctionDeclaration functionDeclaration) throws NoSuchMethodException {
-        /* emitter.emit("void ");
+/*        emitter.emit("void ");
         visit(functionDeclaration.getFunctionName());
+        emitter.emit("(");
         for(Value val : functionDeclaration.getParameters()){
             visit(val);
+            emitter.emit(",");
         }
+        emitter.emit(") {\n");
         visit(functionDeclaration.getStmtBody());
-        */
+        emitter.emit("\n}");*/
+
         return null;
     }
 
@@ -336,12 +376,17 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
     //TODO Fix
     @Override
     public Object visit(RepeatStatement repeatStatement) throws NoSuchMethodException {
+        emitter.emit("do {\n");
+        visit(repeatStatement.getStmts());
+        emitter.emit("} while (");
+        visit(repeatStatement.getExpr());
+        emitter.emit(")");
         return null;
     }
 
     @Override
     public Object visit(ReturnFunctionDeclaration returnFunctionDeclaration) throws NoSuchMethodException {
-        /* visit(returnFunctionDeclaration.getReturnType());
+/*        visit(returnFunctionDeclaration.getReturnType());
         visit(returnFunctionDeclaration.getFunctionName());
         emitter.emit("(");
         for(Value val : returnFunctionDeclaration.getParameters()){
@@ -349,8 +394,7 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
         }
         emitter.emit("){\n");
         visit(returnFunctionDeclaration.getStmtBody());
-        emitter.emit("}\n");
-        */
+        emitter.emit("}\n");*/
         return null;
     }
 
@@ -364,7 +408,9 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
     //TODO Fix
     @Override
     public Object visit(SingleElementAssign singleElementAssign) throws NoSuchMethodException {
-
+        visit(singleElementAssign.getElementNr());
+        emitter.emit("] = ");
+        visit(singleElementAssign.getAssignemntVal());
         return null;
     }
 
@@ -374,9 +420,20 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
         //emitter.emit(setup.getInitialCode());
 
         for (Statement s : statementList.getStmts()) {
-            visit(s);
-            if(!(s instanceof FunctionDeclaration)) {
-                emitter.emit(";\n");
+            if (!isFunctionGen) {
+                if(!((s instanceof FunctionDeclaration) || (s instanceof ReturnFunctionDeclaration))){
+                    visit(s);
+                    if (!((s instanceof WhileStatement) || (s instanceof FromStatement))) {
+                        emitter.emit(";\n");
+                    } else {
+                        emitter.emit("\n");
+                    }
+                }
+            }else{
+                if((s instanceof FunctionDeclaration) || (s instanceof ReturnFunctionDeclaration)){
+                    visit(s);
+                    emitter.emit("\n");
+                }
             }
         }
 
@@ -389,7 +446,9 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
     //TODO Fixes senere
     @Override
     public Object visit(TextAssignment textAssignment) throws NoSuchMethodException {
-
+        visit(textAssignment.getId());
+        emitter.emit(" = ");
+        visit(textAssignment.getText());
         return null;
     }
 
@@ -402,6 +461,14 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
     //TODO weird when the size of the array is not yet known.
     @Override
     public Object visit(TextDeclaration textDeclaration) throws NoSuchMethodException {
+        emitter.emit("char *");
+        visit(textDeclaration.getId());
+        emitter.emit(" = (char*)calloc(128, sizeof(char));\n");
+        if(textDeclaration.getVal() != null){
+            visit(textDeclaration.getId());
+            emitter.emit(" = ");
+            visit(textDeclaration.getVal());
+        }
         return null;
     }
 
@@ -460,37 +527,41 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
 
     @Override
     public Object visit(TurnLeftStatement turnLeftStatement) throws NoSuchMethodException {
-        emitter.emit("digitalWrite(leftMotor, LOW);\ndigitalWrite(rightMotor, HIGH);\ndelay(");
+        emitter.emit("digitalWrite(leftMotor, LOW);\ndigitalWrite(rightMotor, HIGH);\ndelay(1000*");
         visit(turnLeftStatement.getVal());
-        emitter.emit(");\ndigitalWrite(lefMotor, LOW);\ndigitalWrite(rightMotor, LOW);\n");
+        emitter.emit(");\ndigitalWrite(lefMotor, LOW);\ndigitalWrite(rightMotor, LOW)");
         return null;
     }
 
     @Override
     public Object visit(TurnRightStatement turnRightStatement) throws NoSuchMethodException {
-        emitter.emit("digitalWrite(leftMotor, HIGH);\ndigitalWrite(rightMotor, LOW);\ndelay(");
+        emitter.emit("digitalWrite(leftMotor, HIGH);\ndigitalWrite(rightMotor, LOW);\ndelay(1000*");
         visit(turnRightStatement.getVal());
-        emitter.emit(");\ndigitalWrite(lefMotor, LOW);\ndigitalWrite(rightMotor, LOW);\n");
+        emitter.emit(");\ndigitalWrite(lefMotor, LOW);\ndigitalWrite(rightMotor, LOW)");
         return null;
     }
 
 
-    //TODO Fix
+
     @Override
     public Object visit(Upto upto) throws NoSuchMethodException {
-        return null;
+        return "upto";
     }
 
-    //TODO Fix
     @Override
     public Object visit(WhileStatement whileStatement) throws NoSuchMethodException {
+        emitter.emit("while(");
+        visit(whileStatement.getExpr());
+        emitter.emit(") {\n");
+        visit(whileStatement.getStmts());
+        emitter.emit("\n}");
         return null;
     }
 
     @Override
     public Object visit(Equal equal) throws NoSuchMethodException {
         visit(equal.getLhs());
-        emitter.emit(" = ");
+        emitter.emit(" == ");
         visit(equal.getRhs());
         return null;
     }

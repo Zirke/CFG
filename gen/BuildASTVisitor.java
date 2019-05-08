@@ -1,8 +1,8 @@
 import ast.*;
 import org.antlr.v4.runtime.tree.AbstractParseTreeVisitor;
 import org.antlr.v4.runtime.tree.ParseTree;
-import parser.PyTrun;
-import parser.PyTrunVisitor;
+import cfg.PyTrun;
+import cfg.PyTrunVisitor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -218,8 +218,12 @@ public class BuildASTVisitor extends AbstractParseTreeVisitor<AbstractNode> impl
 	}
 
 	@Override public AbstractNode visitIfstmt(PyTrun.IfstmtContext ctx) {
-		if(ctx.ELSE() == null){
-			return new IfStatement((TruthOperator) visitTruthpar( ctx.truthpar(0)),(StatementList) visitStmtblock(ctx.stmtblock(0)),ctx.getStart().getLine());
+		if(ctx.ELSE().isEmpty() && ctx.IF().size() == 1){
+			if(visitTruthpar(ctx.truthpar(0)) instanceof Identifier){
+				return new IfStatement((Identifier) visitTruthpar( ctx.truthpar(0)),(StatementList) visitStmtblock(ctx.stmtblock(0)),ctx.getStart().getLine());
+			}else{
+				return new IfStatement((TruthOperator) visitTruthpar( ctx.truthpar(0)),(StatementList) visitStmtblock(ctx.stmtblock(0)),ctx.getStart().getLine());
+			}
 		}else if(ctx.IF().size() > 1){
 			ArrayList<ElseIfStatement> elseIfStatements = new ArrayList<>();
 
