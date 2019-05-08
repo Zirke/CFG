@@ -13,7 +13,7 @@ public class semanticVisitor extends BasicAbstractNodeVisitor {
     private List<Integer> listOfNumbers = new ArrayList<>();
     private List<String> listOfKeys = new ArrayList<>();
 
-    private void arraySize(int i){
+    private void arraySize(Integer i){
         listOfNumbers.add(i);
     }
 
@@ -52,7 +52,9 @@ public class semanticVisitor extends BasicAbstractNodeVisitor {
 
     @Override
     public Object visit(ArrayDeclaration arrayDeclaration) throws NoSuchMethodException {
-        AbstractNode value = (AbstractNode) visit((visitable) arrayDeclaration.getValues());
+        Value value = (Value) visit((visitable) arrayDeclaration.getValues());
+
+
         if(value == null){
             arraySize(0);
         }
