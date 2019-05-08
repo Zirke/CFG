@@ -125,7 +125,7 @@ turnright   : TURNRIGHT LPAR value RPAR;
 nums
         : INUM
         | FNUM
-        | ID ;
+        | ID | MINUS nums;
 
 stmtblock
         : LCB stmt* RCB ;
