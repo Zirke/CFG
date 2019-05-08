@@ -44,7 +44,7 @@ public class Main{
 
         BuildASTVisitor visitor = new BuildASTVisitor();
         AbstractNode ast = visitor.visit(tree);
-        System.out.println(ast);
+        //System.out.println(ast);
        /*   PrettyPrintAST visitor2 = new PrettyPrintAST();
         try {
             visitor2.visit(ast);
@@ -66,6 +66,7 @@ public class Main{
         }catch (NoSuchMethodException e){
             System.out.println(e);
         }
+
         Emitter emitter = new Emitter();
         CodeGenVisitor codeGenFunctionVisitor = new CodeGenVisitor(emitter, true);
         try {
@@ -81,6 +82,6 @@ public class Main{
         } catch (NoSuchMethodException e) {
             e.printStackTrace();
         }
-        codeGenVisitor.closeEmitter();
+        codeGenFunctionVisitor.closeEmitter();
     }
 }

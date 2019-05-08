@@ -1,17 +1,17 @@
 package CodeGeneration;
 
-import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Writer;
 
 public class Emitter {
 
-    private BufferedWriter writer;
+    private Writer writer;
 
 
     public Emitter() {
         try {
-            writer = new BufferedWriter(new FileWriter("src/genFile.c"));
+            writer = new FileWriter("src/genFile.c");
         } catch (IOException e) {
             e.printStackTrace();
         }

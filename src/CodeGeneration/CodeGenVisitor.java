@@ -242,22 +242,24 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
         for (Value val : functionCall.getArguments()) {
             visit(val);
         }
-        emitter.emit(");\n");
+        emitter.emit(")");
         return null;
     }
 
     @Override
     public Object visit(FunctionDeclaration functionDeclaration) throws NoSuchMethodException {
-/*        emitter.emit("void ");
+        emitter.emit("void ");
         visit(functionDeclaration.getFunctionName());
         emitter.emit("(");
-        for(Value val : functionDeclaration.getParameters()){
-            visit(val);
-            emitter.emit(",");
+        for(int i = 0; i < functionDeclaration.getParameters().size(); i++){
+            visit(functionDeclaration.getParameters().get(i));
+            if(functionDeclaration.getParameters().size() > 1 && functionDeclaration.getParameters().size() != i+1){
+                emitter.emit(",");
+            }
         }
         emitter.emit(") {\n");
         visit(functionDeclaration.getStmtBody());
-        emitter.emit("\n}");*/
+        emitter.emit("\n}");
 
         return null;
     }
@@ -386,15 +388,18 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
 
     @Override
     public Object visit(ReturnFunctionDeclaration returnFunctionDeclaration) throws NoSuchMethodException {
-/*        visit(returnFunctionDeclaration.getReturnType());
+        visit(returnFunctionDeclaration.getReturnType());
         visit(returnFunctionDeclaration.getFunctionName());
         emitter.emit("(");
-        for(Value val : returnFunctionDeclaration.getParameters()){
-            visit(val);
+        for(int i = 0; i < returnFunctionDeclaration.getParameters().size(); i++){
+            visit(returnFunctionDeclaration.getParameters().get(i));
+            if(returnFunctionDeclaration.getParameters().size() > 1 && returnFunctionDeclaration.getParameters().size() != i+1){
+                emitter.emit(",");
+            }
         }
         emitter.emit("){\n");
         visit(returnFunctionDeclaration.getStmtBody());
-        emitter.emit("}\n");*/
+        emitter.emit("}\n");
         return null;
     }
 

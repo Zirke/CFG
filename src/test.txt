@@ -1,7 +1,5 @@
-truth n is true
-integer a is 2
-integer t is 8 + 7 * 6 - 5 / 4 * 3 + 2 - 1
-truth u is (true AND false) OR (10 > a AND n) OR n AND n OR n
+truth t is true
 
-from (2 upto 20) {
+function lollern returns integer(integer x, integer y){
+    return x
 }
