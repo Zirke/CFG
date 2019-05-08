@@ -3,7 +3,6 @@ package CodeGeneration;
 import ast.*;
 import astVisitor.BasicAbstractNodeVisitor;
 
-import java.nio.charset.Charset;
 import java.util.Random;
 
 public class CodeGenVisitor extends BasicAbstractNodeVisitor {
@@ -78,7 +77,7 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
     //TODO Fix
     @Override
     public Object visit(Downto downto) throws NoSuchMethodException {
-        return null;
+        return "downto";
     }
 
     @Override
@@ -143,7 +142,6 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
     //TODO Fix
     @Override
     public Object visit(FromKeyword fromKeyword) throws NoSuchMethodException {
-
         return null;
     }
 
@@ -155,7 +153,7 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
         String generatedString = null;
 
         //Check if upto or downto
-        if (fromStatement.getUptoOrDownto().spelling.contains("upto")) {
+        if (fromStatement.getUptoOrDownto().spelling.equals("upto")) {
             isUpto = true;
         }
 
@@ -163,8 +161,8 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
         if (fromStatement.getFromVal() instanceof IntegerLiteral) {
             fromValInt = true;
             Random random = new Random();
-            StringBuilder buffer = new StringBuilder(8);
-            for (int i = 0; i < 8; i++) {
+            StringBuilder buffer = new StringBuilder(10);
+            for (int i = 0; i < 10; i++) {
                 int randomLimitedInt = 97 + (int)
                         (random.nextFloat() * (122 - 97 + 1));
                 buffer.append((char) randomLimitedInt);
@@ -177,7 +175,7 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
 
         //Init expression
         if (fromValInt) {
-            emitter.emit("int "+generatedString+"= ");
+            emitter.emit("int "+generatedString+" = ");
             visit(fromStatement.getFromVal());
         } else {
             visit(fromStatement.getFromVal());
@@ -365,6 +363,11 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
     //TODO Fix
     @Override
     public Object visit(RepeatStatement repeatStatement) throws NoSuchMethodException {
+        emitter.emit("do {\n");
+        visit(repeatStatement.getStmts());
+        emitter.emit("} while (");
+        visit(repeatStatement.getExpr());
+        emitter.emit(")");
         return null;
     }
 
@@ -403,7 +406,7 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
 
         for (Statement s : statementList.getStmts()) {
             visit(s);
-            if(!(s instanceof FunctionDeclaration)) {
+            if(!((s instanceof FunctionDeclaration) || (s instanceof WhileStatement) || (s instanceof FromStatement))) {
                 emitter.emit(";\n");
             }
         }
@@ -506,7 +509,7 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
     //TODO Fix
     @Override
     public Object visit(Upto upto) throws NoSuchMethodException {
-        return null;
+        return "upto";
     }
 
     //Needs testing, getting nullpointer in BuildASTVisitor
