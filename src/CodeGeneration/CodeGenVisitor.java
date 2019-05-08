@@ -44,11 +44,15 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
     // Current size is 128 but not checked if the source array is bigger.
     @Override
     public Object visit(ArrayDeclaration arrayDeclaration) throws NoSuchMethodException {
-        visit(arrayDeclaration.getType());
         visit(arrayDeclaration.getId());
-        emitter.emit("[128]");
+        emitter.emit(" = (");
+        visit(arrayDeclaration.getType());
+        emitter.emit("*) calloc(128, sizeof(");
+        visit(arrayDeclaration.getType());
+        emitter.emit(")");
+
         if (arrayDeclaration.getValues() != null) {
-            emitter.emit(" = ");
+            //TODO what happens when we use calloc and there is an assignment list?
             visit(arrayDeclaration.getValues());
         }
         return null;
