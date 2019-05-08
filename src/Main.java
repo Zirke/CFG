@@ -16,7 +16,7 @@ import java.io.IOException;
 public class Main{
 
     public static void main(String[] args) throws IOException {
-        File file = new File("src/prog");
+        File file = new File("src/test.txt");
         String d = "";
         BufferedReader br = new BufferedReader(new FileReader(file));
 
@@ -44,6 +44,7 @@ public class Main{
 
         BuildASTVisitor visitor = new BuildASTVisitor();
         AbstractNode ast = visitor.visit(tree);
+        System.out.println(ast);
        /*   PrettyPrintAST visitor2 = new PrettyPrintAST();
         try {
             visitor2.visit(ast);
@@ -65,9 +66,15 @@ public class Main{
         }catch (NoSuchMethodException e){
             System.out.println(e);
         }
+        Emitter emitter = new Emitter();
+        CodeGenVisitor codeGenFunctionVisitor = new CodeGenVisitor(emitter, true);
+        try {
+            codeGenFunctionVisitor.visit(ast);
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        }
 
-
-        CodeGenVisitor codeGenVisitor = new CodeGenVisitor(new Emitter());
+        CodeGenVisitor codeGenVisitor = new CodeGenVisitor(emitter, false);
         codeGenVisitor.setup();
         try {
             codeGenVisitor.visit(ast);
