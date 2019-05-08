@@ -7,7 +7,7 @@ start
 stmts
         : stmt (EOL stmt)*;
 stmt
-        : dcl
+        : dcl //TODO : move to stmts
         | ifstmt
         | whilestmt
         | returnstmt
