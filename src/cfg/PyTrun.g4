@@ -25,7 +25,7 @@ stmt
 
 functiondcl
 
-        : FUNCTION ID RETURNS (type | ARRDCL) LPAR (truedcl (COMMA truedcl)*)? RPAR LCB stmt* RCB //TODO: FIxed superfluous asterisk here
+        : FUNCTION ID RETURNS (type | ARRDCL) LPAR (truedcl (COMMA truedcl)*)? RPAR LCB stmt* RCB //TODO: FIxed superfluous asterisk hereh
         | FUNCTION ID LPAR (truedcl (COMMA truedcl)*)? RPAR LCB stmt* RCB ;
 
 
