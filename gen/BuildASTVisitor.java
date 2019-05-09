@@ -84,7 +84,10 @@ public class BuildASTVisitor extends AbstractParseTreeVisitor<AbstractNode> impl
 			stmt = (Statement) visitTurnleft(ctx.turnleft());
 		}else if(ctx.turnright()!= null){
 			stmt = (Statement) visitTurnright(ctx.turnright());
-		} /*else if(null != ctx.Functiondcl()){
+		}else if(ctx.pause() != null) {
+			stmt = (Statement) visitPause(ctx.pause());
+		}
+		/*else if(null != ctx.Functiondcl()){
 			stmt = (ast.Statement) visitFunctiondcl(ctx.functiondcl());
 		}*/
 		return stmt;
@@ -667,6 +670,6 @@ public class BuildASTVisitor extends AbstractParseTreeVisitor<AbstractNode> impl
 
 	@Override
 	public AbstractNode visitPause(PyTrun.PauseContext ctx) {
-		return new WaitStatement((Value) visitValue(ctx.value()), ctx.getStart().getLine());
+		return new PauseStatement((Value) visitValue(ctx.value()), ctx.getStart().getLine());
 	}
 }

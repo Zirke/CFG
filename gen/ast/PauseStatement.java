@@ -1,9 +1,9 @@
 package ast;
 
-public class WaitStatement extends Statement{
+public class PauseStatement extends Statement{
     Value val;
 
-    public WaitStatement(Value val, int linenr) {
+    public PauseStatement(Value val, int linenr) {
         this.val = val;
         this.setLineNumber(linenr);
     }
