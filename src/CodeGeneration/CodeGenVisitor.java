@@ -455,9 +455,14 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
 
     @Override
     public Object visit(TextAssignment textAssignment) throws NoSuchMethodException {
-        visit(textAssignment.getId());
+        /*visit(textAssignment.getId());
         emitter.emit(" = ");
+        visit(textAssignment.getText());*/
+        emitter.emit("strcpy(");
+        visit(textAssignment.getId());
+        emitter.emit(", ");
         visit(textAssignment.getText());
+        emitter.emit(")");
         return null;
     }
 
@@ -473,9 +478,14 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
         visit(textDeclaration.getId());
         emitter.emit(" = (char*)calloc(128, sizeof(char));\n");
         if(textDeclaration.getVal() != null){
-            visit(textDeclaration.getId());
+/*            visit(textDeclaration.getId());
             emitter.emit(" = ");
+            visit(textDeclaration.getVal());*/
+            emitter.emit("strcpy(");
+            visit(textDeclaration.getId());
+            emitter.emit(", ");
             visit(textDeclaration.getVal());
+            emitter.emit(")");
         }
         return null;
     }
@@ -566,6 +576,17 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
 
     @Override
     public Object visit(Equal equal) throws NoSuchMethodException {
+        if (!(equal.getLhs() instanceof TextLiteral)){
+            visit(equal.getLhs());
+            emitter.emit(" == ");
+            visit(equal.getRhs());
+        } else {
+            emitter.emit("stringEquals(");
+            visit(equal.getLhs());
+            emitter.emit(", ");
+            visit(equal.getRhs());
+            emitter.emit(")");
+        }
         visit(equal.getLhs());
         emitter.emit(" == ");
         visit(equal.getRhs());
@@ -577,6 +598,11 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
         visit(pauseStatement.getVal());
         emitter.emit(")");
         return null;
+    }
+
+    public void setupStringCompare(){
+        GenSetup stringSetup = new GenSetup();
+        emitter.emit(stringSetup.stringCompare());
     }
 
     public void setup() {
