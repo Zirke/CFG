@@ -131,16 +131,18 @@ public class SymbolTableVisitor extends BasicAbstractNodeVisitor<Object> {
     }
 
     //assigns the value of ints, floats or truths, it is firstly type checked.
-    @Override
-    public Object visit(ValueAssignment node) throws NoSuchMethodException {
-        Value variableType = variableTypeCheck(node.getId().getSpelling(), node.getLineNumber());
-        Value expressionType = (Value) visit(node.getValue());
+        @Override
+        public Object visit(ValueAssignment node) throws NoSuchMethodException {
+            Value variableType = variableTypeCheck(node.getId().getSpelling(), node.getLineNumber());
+            Value expressionType = (Value) visit(node.getValue());
 
-        if (!(variableType.getClass().equals(expressionType.getClass()))) {
-            errorCallAssignIncompatibleTypes(node.getValue().getClass().getName(), node.getId().getSpelling(), node.getLineNumber());
+            if (!(variableType.getClass().equals(expressionType.getClass()))) {
+                errorCallAssignIncompatibleTypes(node.getValue().getClass().getName(), node.getId().getSpelling(), node.getLineNumber());
+            }
+            symbolTable.getIdTable().get(node.getId().getSpelling()).setNodes(node);
+
+            return null;
         }
-        return null;
-    }
 
     @Override
     public Object visit(FLOATDCL node) throws NoSuchMethodException {
@@ -195,7 +197,6 @@ public class SymbolTableVisitor extends BasicAbstractNodeVisitor<Object> {
     @Override
     public Object visit(FunctionCall node) throws NoSuchMethodException {
         List<Value> parameters = symbolTable.getIdTable().get(node.getFunctionName().getSpelling()).getParameters();
-
         if (parameters != null) {
             if (parameters.size() == node.getArguments().size()) {
                 for (int i = 0; i < node.getArguments().size(); i++) {
@@ -495,7 +496,7 @@ public class SymbolTableVisitor extends BasicAbstractNodeVisitor<Object> {
         if (node.getVal() != null) {
             Value value = (Value) visit(node.getVal());
             if (!(value instanceof TextLiteral)) {
-                if (value.getClass().getName().equals("ast.FloatLiteral")) {
+                if (value instanceof FloatLiteral) {
                     errorCallAssignIncompatibleTypes("Decimal", node.getId().getSpelling(), node.getLineNumber());
                 } else {
                     errorCallAssignIncompatibleTypes(value.getClass().getName().substring(4, value.getClass().getName().length() - 7), node.getId().getSpelling(), node.getLineNumber());
@@ -538,7 +539,7 @@ public class SymbolTableVisitor extends BasicAbstractNodeVisitor<Object> {
         if (node.getExpr() != null) {
             Value value = (Value) visit(node.getExpr());
             if (!(value instanceof TruthLiteral)) {
-                if (value.getClass().getName().equals("ast.FloatLiteral")) {
+                if (value instanceof FloatLiteral) {
                     errorCallAssignIncompatibleTypes("Decimal", node.getId().getSpelling(), node.getLineNumber());
                 } else {
                     errorCallAssignIncompatibleTypes(value.getClass().getName().substring(4, value.getClass().getName().length() - 7), node.getId().getSpelling(), node.getLineNumber());
@@ -609,7 +610,7 @@ public class SymbolTableVisitor extends BasicAbstractNodeVisitor<Object> {
         return null;
     }
 
-    //equal can be performed on floats ints and truth
+    //equal can be performed on floats ints, truth and text
     @Override
     public Object visit(Equal node) throws NoSuchMethodException {
         Value leftValue = (Value) visit(node.getLhs());

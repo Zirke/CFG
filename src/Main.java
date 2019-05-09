@@ -1,18 +1,22 @@
+import CodeGeneration.CodeGenVisitor;
+import CodeGeneration.Emitter;
 import ast.AbstractNode;
 import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
-import cfg.PyTrun;
-import cfg.PyTrunLexer;
+import parser.PyTrun;
+import parser.PyTrunLexer;
+import semanticAnalysis.semanticVisitor;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+
 public class Main{
 
     public static void main(String[] args) throws IOException {
-        File file = new File("src/test.txt");
+        File file = new File("src/prog");
         String d = "";
         BufferedReader br = new BufferedReader(new FileReader(file));
 
@@ -40,31 +44,45 @@ public class Main{
 
         BuildASTVisitor visitor = new BuildASTVisitor();
         AbstractNode ast = visitor.visit(tree);
-        PrettyPrintAST visitor2 = new PrettyPrintAST();
+        //System.out.println(ast);
+       /*   PrettyPrintAST visitor2 = new PrettyPrintAST();
         try {
             visitor2.visit(ast);
-        }catch(NoSuchMethodException e){
-
-        }
+        }catch (NoSuchMethodException e){
+            System.out.println(e);
+        }*/
         // System.out.println(ast);
 
         symbolTable.SymbolTableVisitor symbolTableVisitor = new symbolTable.SymbolTableVisitor();
-        symbolTable.SymbolTable sym = null;
+        semanticVisitor sV = new semanticVisitor();
         try {
-            sym = (symbolTable.SymbolTable) symbolTableVisitor.visit(ast);
+            symbolTableVisitor.visit(ast);
+            sV.visit(ast);
+            sV.establishArrayHashMap();
+            for(String s: sV.getSizeOfArrays().keySet()){
+                System.out.println("array " + s + " has size " + sV.getSizeOfArrays().get(s));
+            }
+
+        }catch (NoSuchMethodException e){
+            System.out.println(e);
+        }
+
+        Emitter emitter = new Emitter();
+        CodeGenVisitor codeGenFunctionVisitor = new CodeGenVisitor(emitter, true);
+        codeGenFunctionVisitor.setupStringCompare();
+        try {
+            codeGenFunctionVisitor.visit(ast);
         } catch (NoSuchMethodException e) {
             e.printStackTrace();
         }
 
-        /*for (String s : sym.getIdTable().keySet()){
-            System.out.println(s);
-        }*/
-        /*Emitter emitter = new Emitter();
-        CodeGenVisitor genVisitor = new CodeGenVisitor(emitter);
-        genVisitor.setup();
+        CodeGenVisitor codeGenVisitor = new CodeGenVisitor(emitter, false);
+        codeGenVisitor.setup();
         try {
-            genVisitor.visit(ast);
-        }catch(NoSuchMethodException e){}
-        emitter.closeFile();*/
+            codeGenVisitor.visit(ast);
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        }
+        codeGenFunctionVisitor.closeEmitter();
     }
 }

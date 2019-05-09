@@ -6,6 +6,10 @@ import astVisitor.BasicAbstractNodeVisitor;
 import java.util.Random;
 
 public class CodeGenVisitor extends BasicAbstractNodeVisitor {
+    @Override
+    public Object visit(PauseStatement pauseStatement) throws NoSuchMethodException {
+        return null;
+    }
 
     private Emitter emitter;
     private boolean isFunctionGen;
@@ -578,10 +582,7 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
         return null;
     }
 
-    public Object visit(PauseStatement equal) throws NoSuchMethodException {
 
-        return null;
-    }
     public void setup() {
         GenSetup setup = new GenSetup();
         emitter.emit(setup.getInitialCode());
