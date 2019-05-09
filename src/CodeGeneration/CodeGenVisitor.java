@@ -572,7 +572,10 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
         return null;
     }
 
-    public Object visit(PauseStatement equal) throws NoSuchMethodException {
+    public Object visit(PauseStatement pauseStatement) throws NoSuchMethodException {
+        emitter.emit("delay(");
+        visit(pauseStatement.getVal());
+        emitter.emit(")");
         return null;
     }
 
