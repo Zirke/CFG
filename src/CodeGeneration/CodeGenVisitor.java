@@ -380,7 +380,6 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
         return null;
     }
 
-    //TODO Fix
     @Override
     public Object visit(RepeatStatement repeatStatement) throws NoSuchMethodException {
         emitter.emit("do {\n");
@@ -417,7 +416,6 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
         return null;
     }
 
-    //TODO Fix
     @Override
     public Object visit(SingleElementAssign singleElementAssign) throws NoSuchMethodException {
         visit(singleElementAssign.getElementNr());
@@ -455,7 +453,6 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
         return null;
     }
 
-    //TODO Fixes senere
     @Override
     public Object visit(TextAssignment textAssignment) throws NoSuchMethodException {
         visit(textAssignment.getId());
@@ -470,7 +467,6 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
         return null;
     }
 
-    //TODO weird when the size of the array is not yet known.
     @Override
     public Object visit(TextDeclaration textDeclaration) throws NoSuchMethodException {
         emitter.emit("char *");
@@ -553,8 +549,6 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
         return null;
     }
 
-
-
     @Override
     public Object visit(Upto upto) throws NoSuchMethodException {
         return "upto";
@@ -579,9 +573,9 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
     }
 
     public Object visit(PauseStatement equal) throws NoSuchMethodException {
-
         return null;
     }
+
     public void setup() {
         GenSetup setup = new GenSetup();
         emitter.emit(setup.getInitialCode());
