@@ -1,0 +1,1 @@
+Exceptions.SemanticCheckerExceptions.IncorrectOperatorUse: line: 3 --  Operator ast.And cannot be applied to ast.FloatLiteral@6cc7b4de & ast.IntegerLiteral@32cf48b7

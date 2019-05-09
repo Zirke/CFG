@@ -584,7 +584,7 @@ public class SymbolTableVisitor extends BasicAbstractNodeVisitor<Object> {
     }
 
     @Override
-    public Object visit(WaitStatement node) throws NoSuchMethodException {
+    public Object visit(PauseStatement node) throws NoSuchMethodException {
         if(!(visit(node.getVal()) instanceof IntegerLiteral)){
             errorCallIntegerIncompatibleTypes(node.getClass().getName(), node.getLineNumber());
         }

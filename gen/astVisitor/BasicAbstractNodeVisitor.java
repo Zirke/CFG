@@ -52,7 +52,7 @@ abstract public class BasicAbstractNodeVisitor<T> extends AbstractNodeVisitor  {
     public abstract T visit(TruthParenthesis node) throws NoSuchMethodException;
     public abstract T visit(TurnLeftStatement node)throws NoSuchMethodException;
     public abstract T visit(TurnRightStatement node)throws NoSuchMethodException;
-    public abstract T visit(WaitStatement node)throws NoSuchMethodException;
+    public abstract T visit(PauseStatement node)throws NoSuchMethodException;
     public abstract T visit(Upto node) throws NoSuchMethodException;
     public abstract T visit(WhileStatement node) throws NoSuchMethodException;
     public abstract T visit(Equal node) throws NoSuchMethodException;

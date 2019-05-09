@@ -414,7 +414,7 @@ public class PrettyPrintAST extends BasicAbstractNodeVisitor<AbstractNode> {
     }
 
     @Override
-    public AbstractNode visit(WaitStatement node) throws NoSuchMethodException{
+    public AbstractNode visit(PauseStatement node) throws NoSuchMethodException{
         visit(node.getVal());
         System.out.println("Wait Statement node");
         return null;

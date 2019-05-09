@@ -12,15 +12,22 @@
   <component name="ChangeListManager">
     <list default="true" id="08c3367c-482c-43b2-9911-903cc53e1dc6" name="Default Changelist" comment="Default Changelist">
       <change beforePath="$PROJECT_DIR$/.idea/artifacts/gen_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/gen_jar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/parser_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/parser_jar.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CFG.iml" beforeDir="false" afterPath="$PROJECT_DIR$/CFG.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/gen.iml" beforeDir="false" afterPath="$PROJECT_DIR$/gen/gen.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jar-files/gen.jar" beforeDir="false" afterPath="$PROJECT_DIR$/jar-files/gen.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/genFile.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/genFile.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/semanticAnalysis/semanticVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/semanticAnalysis/semanticVisitor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gen/PrettyPrintAST.java" beforeDir="false" afterPath="$PROJECT_DIR$/gen/PrettyPrintAST.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gen/astVisitor/BasicAbstractNodeVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/gen/astVisitor/BasicAbstractNodeVisitor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gen/cfg/PyTrun.java" beforeDir="false" afterPath="$PROJECT_DIR$/gen/cfg/PyTrun.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gen/cfg/PyTrunBaseListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/gen/cfg/PyTrunBaseListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gen/cfg/PyTrunBaseVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/gen/cfg/PyTrunBaseVisitor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gen/cfg/PyTrunLexer.java" beforeDir="false" afterPath="$PROJECT_DIR$/gen/cfg/PyTrunLexer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gen/cfg/PyTrunListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/gen/cfg/PyTrunListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gen/cfg/PyTrunVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/gen/cfg/PyTrunVisitor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CodeGeneration/CodeGenVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CodeGeneration/CodeGenVisitor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CodeGeneration/CodeGenVisitorFunctions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CodeGeneration/CodeGenVisitorFunctions.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/prog" beforeDir="false" afterPath="$PROJECT_DIR$/src/prog" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/symbolTable/SymbolTableVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/symbolTable/SymbolTableVisitor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/test.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/symbolTable/SymbolTableVisitorTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/symbolTable/SymbolTableVisitorTest.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -41,8 +48,26 @@
       <file leaf-file-name="PrettyPrintAST.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/gen/PrettyPrintAST.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="933">
-              <caret line="420" column="5" selection-start-line="420" selection-start-column="5" selection-end-line="420" selection-end-column="5" />
+            <state relative-caret-position="322">
+              <caret line="417" column="29" lean-forward="true" selection-start-line="417" selection-start-column="29" selection-end-line="417" selection-end-column="29" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="test.txt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="68">
+              <caret line="4" column="1" lean-forward="true" selection-start-line="4" selection-start-column="1" selection-end-line="4" selection-end-column="1" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BasicAbstractNodeVisitor.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/gen/astVisitor/BasicAbstractNodeVisitor.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="271">
+              <caret line="54" column="42" selection-start-line="54" selection-start-column="42" selection-end-line="54" selection-end-column="42" />
             </state>
           </provider>
         </entry>
@@ -50,20 +75,53 @@
       <file leaf-file-name="SymbolTableVisitor.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/symbolTable/SymbolTableVisitor.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="466">
-              <caret line="590" column="20" selection-start-line="590" selection-start-column="20" selection-end-line="590" selection-end-column="20" />
+            <state relative-caret-position="147">
+              <caret line="586" column="38" selection-start-line="586" selection-start-column="38" selection-end-line="586" selection-end-column="38" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="semanticVisitor.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/semanticAnalysis/semanticVisitor.java">
+      <file leaf-file-name="CodeGenVisitorFunctions.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/CodeGeneration/CodeGenVisitorFunctions.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-5287">
-              <caret line="10" column="23" selection-start-line="10" selection-start-column="23" selection-end-line="10" selection-end-column="23" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="119">
+              <caret line="8" column="38" selection-start-line="8" selection-start-column="38" selection-end-line="8" selection-end-column="38" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PyTrunLexer.g4" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/cfg/PyTrunLexer.g4">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="124">
+              <caret line="41" column="18" selection-start-line="41" selection-start-column="18" selection-end-line="41" selection-end-column="18" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PyTrun.g4" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/cfg/PyTrun.g4">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2074">
+              <caret line="131" selection-start-line="131" selection-end-line="131" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BuildASTVisitor.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/gen/BuildASTVisitor.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="9930">
+              <caret line="669" selection-start-line="669" selection-end-line="669" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CodeGenVisitor.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/CodeGeneration/CodeGenVisitor.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="392">
+              <caret line="580" column="38" selection-start-line="580" selection-start-column="38" selection-end-line="580" selection-end-column="38" />
             </state>
           </provider>
         </entry>
@@ -71,8 +129,8 @@
       <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="315">
-              <caret line="56" column="8" selection-start-line="56" selection-start-column="8" selection-end-line="56" selection-end-column="8" />
+            <state relative-caret-position="68">
+              <caret line="14" column="42" selection-start-line="14" selection-start-column="42" selection-end-line="14" selection-end-column="42" />
             </state>
           </provider>
         </entry>
@@ -127,7 +185,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/gen/ast/ArithmOperator.java" />
         <option value="$PROJECT_DIR$/gen/ast/ArithmParenthesis.java" />
         <option value="$PROJECT_DIR$/gen/ast/ArrayAssignment.java" />
         <option value="$PROJECT_DIR$/gen/ast/ArrayDeclaration.java" />
@@ -165,19 +222,20 @@
         <option value="$PROJECT_DIR$/gen/ast/ValueAssignment.java" />
         <option value="$PROJECT_DIR$/gen/ast/WhileStatement.java" />
         <option value="$PROJECT_DIR$/src/SymbolTableVisitor.java" />
-        <option value="$PROJECT_DIR$/src/CodeGeneration/CodeGenVisitor.java" />
         <option value="$PROJECT_DIR$/src/genFile.c" />
-        <option value="$PROJECT_DIR$/src/test.txt" />
         <option value="$PROJECT_DIR$/gen/ast/TurnLeftStatement.java" />
         <option value="$PROJECT_DIR$/src/cfg/PyTrunLexer.g4" />
         <option value="$PROJECT_DIR$/src/cfg/PyTrun.g4" />
         <option value="$PROJECT_DIR$/gen/ast/WaitStatement.java" />
         <option value="$PROJECT_DIR$/gen/BuildASTVisitor.java" />
-        <option value="$PROJECT_DIR$/gen/astVisitor/BasicAbstractNodeVisitor.java" />
-        <option value="$PROJECT_DIR$/gen/PrettyPrintAST.java" />
-        <option value="$PROJECT_DIR$/src/symbolTable/SymbolTableVisitor.java" />
-        <option value="$PROJECT_DIR$/src/Main.java" />
         <option value="$PROJECT_DIR$/src/semanticAnalysis/semanticVisitor.java" />
+        <option value="$PROJECT_DIR$/src/symbolTable/SymbolTableVisitor.java" />
+        <option value="$PROJECT_DIR$/src/CodeGeneration/CodeGenVisitorFunctions.java" />
+        <option value="$PROJECT_DIR$/src/CodeGeneration/CodeGenVisitor.java" />
+        <option value="$PROJECT_DIR$/src/Main.java" />
+        <option value="$PROJECT_DIR$/src/test.txt" />
+        <option value="$PROJECT_DIR$/gen/PrettyPrintAST.java" />
+        <option value="$PROJECT_DIR$/gen/astVisitor/BasicAbstractNodeVisitor.java" />
       </list>
     </option>
   </component>
@@ -202,6 +260,9 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
+      <pane id="AndroidView" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -213,6 +274,12 @@
               <item name="CFG" type="b2602c69:ProjectViewProjectNode" />
               <item name="CFG" type="462c0819:PsiDirectoryNode" />
               <item name="gen" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CFG" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CFG" type="462c0819:PsiDirectoryNode" />
+              <item name="gen" type="462c0819:PsiDirectoryNode" />
+              <item name="astVisitor" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="CFG" type="b2602c69:ProjectViewProjectNode" />
@@ -252,9 +319,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
-      <pane id="AndroidView" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -297,7 +361,9 @@
           <option name="mySupportsDeletion" value="false" />
           <option name="myCanBeAbsent" value="false" />
           <option name="myId" value="UPDATED" />
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/CodeGeneration/CodeGenVisitor.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/gen/BuildASTVisitor.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/gen/cfg/PyTrunLexer.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/jar-files/gen.jar</PATH>
         </FILE-GROUP>
         <FILE-GROUP>
           <option name="myUpdateName" value="Created" />
@@ -305,6 +371,7 @@
           <option name="mySupportsDeletion" value="false" />
           <option name="myCanBeAbsent" value="false" />
           <option name="myId" value="CREATED" />
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/gen/ast/PauseStatement.java</PATH>
         </FILE-GROUP>
         <FILE-GROUP>
           <option name="myUpdateName" value="Deleted" />
@@ -312,6 +379,7 @@
           <option name="mySupportsDeletion" value="false" />
           <option name="myCanBeAbsent" value="true" />
           <option name="myId" value="REMOVED_FROM_REPOSITORY" />
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/gen/ast/WaitStatement.java</PATH>
         </FILE-GROUP>
         <FILE-GROUP>
           <option name="myUpdateName" value="Restored" />
@@ -491,6 +559,7 @@
       <workItem from="1555256125475" duration="31388000" />
       <workItem from="1555757840904" duration="45051000" />
       <workItem from="1557304378572" duration="14317000" />
+      <workItem from="1557391346447" duration="2152000" />
     </task>
     <task id="LOCAL-00001" summary="Hejsa changes to Arrays.">
       <created>1557310430606</created>
@@ -517,39 +586,40 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="230173000" />
+    <option name="totallyTimeSpent" value="232325000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="-6" y="-6" width="1549" height="837" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
+      <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Tool Output" order="12" weight="0.32731137" />
+      <window_info anchor="bottom" id="Messages" order="15" visible="true" weight="0.32786885" />
+      <window_info anchor="right" id="Palette&#9;" order="8" />
+      <window_info id="Image Layers" order="2" />
+      <window_info anchor="right" id="Capture Analysis" order="7" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" weight="0.32943678" />
       <window_info anchor="right" id="Maven Projects" order="2" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
+      <window_info anchor="bottom" id="Version Control" order="8" weight="0.32943678" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32786885" />
+      <window_info anchor="bottom" id="Terminal" order="10" weight="0.32955405" />
       <window_info id="Capture Tool" order="5" />
       <window_info id="Designer" order="3" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.13012362" />
       <window_info anchor="right" id="Database" order="9" />
       <window_info anchor="bottom" id="ANTLR Preview" order="13" weight="0.6967213" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info id="UI Designer" order="4" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.3989071" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Messages" order="15" weight="0.32837406" />
-      <window_info anchor="right" id="Palette&#9;" order="8" />
-      <window_info id="Image Layers" order="2" />
-      <window_info anchor="right" id="Capture Analysis" order="7" />
-      <window_info anchor="bottom" id="Version Control" order="8" weight="0.32943678" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.32837406" />
-      <window_info anchor="bottom" id="Terminal" order="10" weight="0.32955405" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.13072917" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32837406" />
       <window_info anchor="right" id="Theme Preview" order="5" />
       <window_info id="Favorites" order="6" side_tool="true" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.3989071" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32837406" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="right" id="Maven" order="6" />
@@ -575,22 +645,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/gen/ast/RepeatStatement.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="37" selection-start-line="11" selection-start-column="37" selection-end-line="11" selection-end-column="37" />
-          <folding>
-            <element signature="e#291#292#0" expanded="true" />
-            <element signature="e#340#341#0" expanded="true" />
-            <element signature="e#374#375#0" expanded="true" />
-            <element signature="e#404#405#0" expanded="true" />
-            <element signature="e#431#432#0" expanded="true" />
-            <element signature="e#470#471#0" expanded="true" />
-            <element signature="e#502#503#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/gen/ast/ReturnFunctionDeclaration.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="221">
@@ -892,20 +946,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="527">
-          <caret line="38" column="12" selection-start-line="38" selection-start-column="12" selection-end-line="38" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/CodeGeneration/CodeGenVisitor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="372">
-          <caret line="257" column="13" lean-forward="true" selection-start-line="257" selection-start-column="13" selection-end-line="257" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/genFile.c">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="796">
@@ -954,90 +994,86 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/gen/BuildASTVisitor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="673">
-          <caret line="666" selection-start-line="666" selection-end-line="666" />
-          <folding>
-            <element signature="method#visitIfstmt#0;class#BuildASTVisitor#0" />
-            <element signature="method#visitWhilestmt#0;class#BuildASTVisitor#0" />
-            <element signature="method#visitRepeatuntilstmt#0;class#BuildASTVisitor#0" />
-            <element signature="method#visitFromstmt#0;class#BuildASTVisitor#0" />
-            <element signature="method#visitReturnstmt#0;class#BuildASTVisitor#0" />
-            <element signature="method#visitAssignment#0;class#BuildASTVisitor#0" />
-            <element signature="method#visitValue#0;class#BuildASTVisitor#0" />
-            <element signature="method#visitExpr#0;class#BuildASTVisitor#0" />
-            <element signature="method#visitArithmexpr#0;class#BuildASTVisitor#0" />
-            <element signature="method#visitMultexpr#0;class#BuildASTVisitor#0" />
-            <element signature="method#visitParexpr#0;class#BuildASTVisitor#0" />
-            <element signature="method#visitTruthexpr#0;class#BuildASTVisitor#0" />
-            <element signature="method#visitLogicalexpr#0;class#BuildASTVisitor#0" />
-            <element signature="method#visitRelationalexpr#0;class#BuildASTVisitor#0" />
-            <element signature="method#visitAppend#0;class#BuildASTVisitor#0" />
-            <element signature="method#visitArrindex#0;class#BuildASTVisitor#0" />
-            <element signature="method#visitArradd#0;class#BuildASTVisitor#0" />
-            <element signature="method#visitNums#0;class#BuildASTVisitor#0" />
-            <element signature="method#visitStmtblock#0;class#BuildASTVisitor#0" />
-            <element signature="method#visitTruth#0;class#BuildASTVisitor#0" />
-            <element signature="method#visitType#0;class#BuildASTVisitor#0" />
-            <element signature="method#visitTypes#0;class#BuildASTVisitor#0" />
-            <element signature="method#visitDclValue#0;class#BuildASTVisitor#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/gen/gen.iml">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/gen/astVisitor/BasicAbstractNodeVisitor.java">
+    <entry file="file://$PROJECT_DIR$/src/semanticAnalysis/semanticVisitor.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="673">
-          <caret line="54" column="76" selection-start-line="54" selection-start-column="76" selection-end-line="54" selection-end-column="76" />
+        <state relative-caret-position="17">
+          <caret line="10" column="23" selection-start-line="10" selection-start-column="23" selection-end-line="10" selection-end-column="23" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/cfg/PyTrunLexer.g4">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="820">
+        <state relative-caret-position="124">
           <caret line="41" column="18" selection-start-line="41" selection-start-column="18" selection-end-line="41" selection-end-column="18" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/cfg/PyTrun.g4">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2620">
+        <state relative-caret-position="2074">
           <caret line="131" selection-start-line="131" selection-end-line="131" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/gen/PrettyPrintAST.java">
+    <entry file="file://$PROJECT_DIR$/gen/BuildASTVisitor.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="933">
-          <caret line="420" column="5" selection-start-line="420" selection-start-column="5" selection-end-line="420" selection-end-column="5" />
+        <state relative-caret-position="9930">
+          <caret line="669" selection-start-line="669" selection-end-line="669" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/symbolTable/SymbolTableVisitor.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="466">
-          <caret line="590" column="20" selection-start-line="590" selection-start-column="20" selection-end-line="590" selection-end-column="20" />
+        <state relative-caret-position="147">
+          <caret line="586" column="38" selection-start-line="586" selection-start-column="38" selection-end-line="586" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/CodeGeneration/CodeGenVisitorFunctions.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="8" column="38" selection-start-line="8" selection-start-column="38" selection-end-line="8" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/CodeGeneration/CodeGenVisitor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="392">
+          <caret line="580" column="38" selection-start-line="580" selection-start-column="38" selection-end-line="580" selection-end-column="38" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="56" column="8" selection-start-line="56" selection-start-column="8" selection-end-line="56" selection-end-column="8" />
+        <state relative-caret-position="68">
+          <caret line="14" column="42" selection-start-line="14" selection-start-column="42" selection-end-line="14" selection-end-column="42" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/semanticAnalysis/semanticVisitor.java">
+    <entry file="file://$PROJECT_DIR$/src/test.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-5287">
-          <caret line="10" column="23" selection-start-line="10" selection-start-column="23" selection-end-line="10" selection-end-column="23" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="68">
+          <caret line="4" column="1" lean-forward="true" selection-start-line="4" selection-start-column="1" selection-end-line="4" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gen/PrettyPrintAST.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="322">
+          <caret line="417" column="29" lean-forward="true" selection-start-line="417" selection-start-column="29" selection-end-line="417" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gen/astVisitor/BasicAbstractNodeVisitor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="271">
+          <caret line="54" column="42" selection-start-line="54" selection-start-column="42" selection-end-line="54" selection-end-column="42" />
         </state>
       </provider>
     </entry>

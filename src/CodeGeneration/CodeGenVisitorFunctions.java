@@ -5,6 +5,10 @@ import astVisitor.BasicAbstractNodeVisitor;
 
 public class CodeGenVisitorFunctions extends BasicAbstractNodeVisitor {
 
+    @Override
+    public Object visit(PauseStatement waitStatement) throws NoSuchMethodException {
+        return null;
+    }
 
     @Override
     public Object visit(And and) throws NoSuchMethodException {

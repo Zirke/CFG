@@ -317,7 +317,7 @@ public class semanticVisitor extends BasicAbstractNodeVisitor {
     }
 
     @Override
-    public Object visit(WaitStatement v) throws NoSuchMethodException {
+    public Object visit(PauseStatement v) throws NoSuchMethodException {
         return null;
     }
 }
