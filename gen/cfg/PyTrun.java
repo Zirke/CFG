@@ -1,4 +1,4 @@
-// Generated from C:/Users/Zirke/Documents/JavaProjects/CFG/src/cfg\PyTrun.g4 by ANTLR 4.7.2
+// Generated from C:/Users/Teodor/Dropbox/AAU/4.Semester/P4/CFG/src/cfg\PyTrun.g4 by ANTLR 4.7.2
 package cfg;
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
@@ -22,8 +22,8 @@ public class PyTrun extends Parser {
 		EQUALS=16, GRTHAN=17, LESSTHAN=18, IF=19, ELSE=20, WHILE=21, DO=22, FROM=23, 
 		REPEAT=24, UNTIL=25, THEN=26, UPTO=27, DOWNTO=28, COMMA=29, RETURN=30, 
 		RETURNS=31, FUNCTION=32, ELEMENT=33, ASSIGN=34, LCB=35, RCB=36, DRIVE=37, 
-		TURNLEFT=38, TURNRIGHT=39, EOL=40, FNUM=41, INUM=42, ID=43, TEXT=44, WS=45, 
-		COMMENT=46, LINE_COMMENT=47;
+		TURNLEFT=38, TURNRIGHT=39, PAUSE=40, EOL=41, FNUM=42, INUM=43, ID=44, 
+		TEXT=45, WS=46, COMMENT=47, LINE_COMMENT=48;
 	public static final int
 		RULE_start = 0, RULE_stmts = 1, RULE_stmt = 2, RULE_functiondcl = 3, RULE_dcl = 4, 
 		RULE_dclValue = 5, RULE_truedcl = 6, RULE_functioncall = 7, RULE_ifstmt = 8, 
@@ -31,17 +31,17 @@ public class PyTrun extends Parser {
 		RULE_assignment = 13, RULE_value = 14, RULE_expr = 15, RULE_arithmexpr = 16, 
 		RULE_multexpr = 17, RULE_parexpr = 18, RULE_truthexpr = 19, RULE_logicalexpr = 20, 
 		RULE_relationalexpr = 21, RULE_append = 22, RULE_arrindex = 23, RULE_arradd = 24, 
-		RULE_drive = 25, RULE_turnleft = 26, RULE_turnright = 27, RULE_nums = 28, 
-		RULE_stmtblock = 29, RULE_truthpar = 30, RULE_truth = 31, RULE_type = 32, 
-		RULE_types = 33;
+		RULE_drive = 25, RULE_turnleft = 26, RULE_turnright = 27, RULE_pause = 28, 
+		RULE_nums = 29, RULE_stmtblock = 30, RULE_truthpar = 31, RULE_truth = 32, 
+		RULE_type = 33, RULE_types = 34;
 	private static String[] makeRuleNames() {
 		return new String[] {
 			"start", "stmts", "stmt", "functiondcl", "dcl", "dclValue", "truedcl", 
 			"functioncall", "ifstmt", "whilestmt", "repeatuntilstmt", "fromstmt", 
 			"returnstmt", "assignment", "value", "expr", "arithmexpr", "multexpr", 
 			"parexpr", "truthexpr", "logicalexpr", "relationalexpr", "append", "arrindex", 
-			"arradd", "drive", "turnleft", "turnright", "nums", "stmtblock", "truthpar", 
-			"truth", "type", "types"
+			"arradd", "drive", "turnleft", "turnright", "pause", "nums", "stmtblock", 
+			"truthpar", "truth", "type", "types"
 		};
 	}
 	public static final String[] ruleNames = makeRuleNames();
@@ -53,7 +53,7 @@ public class PyTrun extends Parser {
 			"'>'", "'<'", "'if'", "'else'", "'while'", "'do'", "'from'", "'repeat'", 
 			"'until'", "'then'", "'upto'", "'downto'", "','", "'return'", "'returns'", 
 			"'function'", "'element'", "'is'", "'{'", "'}'", "'drive'", "'turnleft'", 
-			"'turnright'"
+			"'turnright'", "'pause'"
 		};
 	}
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();
@@ -64,7 +64,7 @@ public class PyTrun extends Parser {
 			"EQUALS", "GRTHAN", "LESSTHAN", "IF", "ELSE", "WHILE", "DO", "FROM", 
 			"REPEAT", "UNTIL", "THEN", "UPTO", "DOWNTO", "COMMA", "RETURN", "RETURNS", 
 			"FUNCTION", "ELEMENT", "ASSIGN", "LCB", "RCB", "DRIVE", "TURNLEFT", "TURNRIGHT", 
-			"EOL", "FNUM", "INUM", "ID", "TEXT", "WS", "COMMENT", "LINE_COMMENT"
+			"PAUSE", "EOL", "FNUM", "INUM", "ID", "TEXT", "WS", "COMMENT", "LINE_COMMENT"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -163,29 +163,29 @@ public class PyTrun extends Parser {
 			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(71);
+			setState(73);
 			_errHandler.sync(this);
 			_alt = getInterpreter().adaptivePredict(_input,0,_ctx);
 			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
 				if ( _alt==1 ) {
 					{
 					{
-					setState(68);
+					setState(70);
 					match(EOL);
 					}
 					} 
 				}
-				setState(73);
+				setState(75);
 				_errHandler.sync(this);
 				_alt = getInterpreter().adaptivePredict(_input,0,_ctx);
 			}
-			setState(78);
+			setState(80);
 			_errHandler.sync(this);
 			_alt = getInterpreter().adaptivePredict(_input,2,_ctx);
 			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
 				if ( _alt==1 ) {
 					{
-					setState(76);
+					setState(78);
 					_errHandler.sync(this);
 					switch (_input.LA(1)) {
 					case INTDCL:
@@ -200,16 +200,17 @@ public class PyTrun extends Parser {
 					case DRIVE:
 					case TURNLEFT:
 					case TURNRIGHT:
+					case PAUSE:
 					case EOL:
 					case ID:
 						{
-						setState(74);
+						setState(76);
 						stmts();
 						}
 						break;
 					case FUNCTION:
 						{
-						setState(75);
+						setState(77);
 						functiondcl();
 						}
 						break;
@@ -218,30 +219,30 @@ public class PyTrun extends Parser {
 					}
 					} 
 				}
-				setState(80);
+				setState(82);
 				_errHandler.sync(this);
 				_alt = getInterpreter().adaptivePredict(_input,2,_ctx);
 			}
-			setState(84);
+			setState(86);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while (_la==EOL) {
 				{
 				{
-				setState(81);
+				setState(83);
 				match(EOL);
 				}
 				}
-				setState(86);
+				setState(88);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
-			setState(88);
+			setState(90);
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,4,_ctx) ) {
 			case 1:
 				{
-				setState(87);
+				setState(89);
 				match(EOF);
 				}
 				break;
@@ -296,23 +297,23 @@ public class PyTrun extends Parser {
 			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(90);
+			setState(92);
 			stmt();
-			setState(95);
+			setState(97);
 			_errHandler.sync(this);
 			_alt = getInterpreter().adaptivePredict(_input,5,_ctx);
 			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
 				if ( _alt==1 ) {
 					{
 					{
-					setState(91);
+					setState(93);
 					match(EOL);
-					setState(92);
+					setState(94);
 					stmt();
 					}
 					} 
 				}
-				setState(97);
+				setState(99);
 				_errHandler.sync(this);
 				_alt = getInterpreter().adaptivePredict(_input,5,_ctx);
 			}
@@ -369,6 +370,9 @@ public class PyTrun extends Parser {
 		public TurnrightContext turnright() {
 			return getRuleContext(TurnrightContext.class,0);
 		}
+		public PauseContext pause() {
+			return getRuleContext(PauseContext.class,0);
+		}
 		public TerminalNode EOL() { return getToken(PyTrun.EOL, 0); }
 		public StmtContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -393,104 +397,111 @@ public class PyTrun extends Parser {
 		StmtContext _localctx = new StmtContext(_ctx, getState());
 		enterRule(_localctx, 4, RULE_stmt);
 		try {
-			setState(112);
+			setState(115);
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,6,_ctx) ) {
 			case 1:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(98);
+				setState(100);
 				dcl();
 				}
 				break;
 			case 2:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(99);
+				setState(101);
 				ifstmt();
 				}
 				break;
 			case 3:
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(100);
+				setState(102);
 				whilestmt();
 				}
 				break;
 			case 4:
 				enterOuterAlt(_localctx, 4);
 				{
-				setState(101);
+				setState(103);
 				returnstmt();
 				}
 				break;
 			case 5:
 				enterOuterAlt(_localctx, 5);
 				{
-				setState(102);
+				setState(104);
 				functioncall();
 				}
 				break;
 			case 6:
 				enterOuterAlt(_localctx, 6);
 				{
-				setState(103);
+				setState(105);
 				repeatuntilstmt();
 				}
 				break;
 			case 7:
 				enterOuterAlt(_localctx, 7);
 				{
-				setState(104);
+				setState(106);
 				fromstmt();
 				}
 				break;
 			case 8:
 				enterOuterAlt(_localctx, 8);
 				{
-				setState(105);
+				setState(107);
 				assignment();
 				}
 				break;
 			case 9:
 				enterOuterAlt(_localctx, 9);
 				{
-				setState(106);
+				setState(108);
 				arradd();
 				}
 				break;
 			case 10:
 				enterOuterAlt(_localctx, 10);
 				{
-				setState(107);
+				setState(109);
 				arrindex();
 				}
 				break;
 			case 11:
 				enterOuterAlt(_localctx, 11);
 				{
-				setState(108);
+				setState(110);
 				drive();
 				}
 				break;
 			case 12:
 				enterOuterAlt(_localctx, 12);
 				{
-				setState(109);
+				setState(111);
 				turnleft();
 				}
 				break;
 			case 13:
 				enterOuterAlt(_localctx, 13);
 				{
-				setState(110);
+				setState(112);
 				turnright();
 				}
 				break;
 			case 14:
 				enterOuterAlt(_localctx, 14);
 				{
-				setState(111);
+				setState(113);
+				pause();
+				}
+				break;
+			case 15:
+				enterOuterAlt(_localctx, 15);
+				{
+				setState(114);
 				match(EOL);
 				}
 				break;
@@ -559,19 +570,19 @@ public class PyTrun extends Parser {
 		enterRule(_localctx, 6, RULE_functiondcl);
 		int _la;
 		try {
-			setState(163);
+			setState(166);
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,14,_ctx) ) {
 			case 1:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(114);
+				setState(117);
 				match(FUNCTION);
-				setState(115);
+				setState(118);
 				match(ID);
-				setState(116);
-				match(RETURNS);
 				setState(119);
+				match(RETURNS);
+				setState(122);
 				_errHandler.sync(this);
 				switch (_input.LA(1)) {
 				case INTDCL:
@@ -579,123 +590,123 @@ public class PyTrun extends Parser {
 				case TRUTHDCL:
 				case TEXTDCL:
 					{
-					setState(117);
+					setState(120);
 					type();
 					}
 					break;
 				case ARRDCL:
 					{
-					setState(118);
+					setState(121);
 					match(ARRDCL);
 					}
 					break;
 				default:
 					throw new NoViableAltException(this);
 				}
-				setState(121);
+				setState(124);
 				match(LPAR);
-				setState(130);
+				setState(133);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << INTDCL) | (1L << FLOATDCL) | (1L << TRUTHDCL) | (1L << TEXTDCL))) != 0)) {
 					{
-					setState(122);
+					setState(125);
 					truedcl();
-					setState(127);
+					setState(130);
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 					while (_la==COMMA) {
 						{
 						{
-						setState(123);
+						setState(126);
 						match(COMMA);
-						setState(124);
+						setState(127);
 						truedcl();
 						}
 						}
-						setState(129);
+						setState(132);
 						_errHandler.sync(this);
 						_la = _input.LA(1);
 					}
 					}
 				}
 
-				setState(132);
+				setState(135);
 				match(RPAR);
-				setState(133);
+				setState(136);
 				match(LCB);
-				setState(137);
+				setState(140);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-				while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << INTDCL) | (1L << FLOATDCL) | (1L << TRUTHDCL) | (1L << TEXTDCL) | (1L << IF) | (1L << WHILE) | (1L << FROM) | (1L << REPEAT) | (1L << RETURN) | (1L << DRIVE) | (1L << TURNLEFT) | (1L << TURNRIGHT) | (1L << EOL) | (1L << ID))) != 0)) {
+				while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << INTDCL) | (1L << FLOATDCL) | (1L << TRUTHDCL) | (1L << TEXTDCL) | (1L << IF) | (1L << WHILE) | (1L << FROM) | (1L << REPEAT) | (1L << RETURN) | (1L << DRIVE) | (1L << TURNLEFT) | (1L << TURNRIGHT) | (1L << PAUSE) | (1L << EOL) | (1L << ID))) != 0)) {
 					{
 					{
-					setState(134);
+					setState(137);
 					stmt();
 					}
 					}
-					setState(139);
+					setState(142);
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 				}
-				setState(140);
+				setState(143);
 				match(RCB);
 				}
 				break;
 			case 2:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(141);
+				setState(144);
 				match(FUNCTION);
-				setState(142);
+				setState(145);
 				match(ID);
-				setState(143);
+				setState(146);
 				match(LPAR);
-				setState(152);
+				setState(155);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << INTDCL) | (1L << FLOATDCL) | (1L << TRUTHDCL) | (1L << TEXTDCL))) != 0)) {
 					{
-					setState(144);
+					setState(147);
 					truedcl();
-					setState(149);
+					setState(152);
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 					while (_la==COMMA) {
 						{
 						{
-						setState(145);
+						setState(148);
 						match(COMMA);
-						setState(146);
+						setState(149);
 						truedcl();
 						}
 						}
-						setState(151);
+						setState(154);
 						_errHandler.sync(this);
 						_la = _input.LA(1);
 					}
 					}
 				}
 
-				setState(154);
+				setState(157);
 				match(RPAR);
-				setState(155);
+				setState(158);
 				match(LCB);
-				setState(159);
+				setState(162);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-				while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << INTDCL) | (1L << FLOATDCL) | (1L << TRUTHDCL) | (1L << TEXTDCL) | (1L << IF) | (1L << WHILE) | (1L << FROM) | (1L << REPEAT) | (1L << RETURN) | (1L << DRIVE) | (1L << TURNLEFT) | (1L << TURNRIGHT) | (1L << EOL) | (1L << ID))) != 0)) {
+				while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << INTDCL) | (1L << FLOATDCL) | (1L << TRUTHDCL) | (1L << TEXTDCL) | (1L << IF) | (1L << WHILE) | (1L << FROM) | (1L << REPEAT) | (1L << RETURN) | (1L << DRIVE) | (1L << TURNLEFT) | (1L << TURNRIGHT) | (1L << PAUSE) | (1L << EOL) | (1L << ID))) != 0)) {
 					{
 					{
-					setState(156);
+					setState(159);
 					stmt();
 					}
 					}
-					setState(161);
+					setState(164);
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 				}
-				setState(162);
+				setState(165);
 				match(RCB);
 				}
 				break;
@@ -768,22 +779,22 @@ public class PyTrun extends Parser {
 		enterRule(_localctx, 8, RULE_dcl);
 		int _la;
 		try {
-			setState(206);
+			setState(209);
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,22,_ctx) ) {
 			case 1:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(165);
-				match(INTDCL);
-				setState(166);
-				match(ID);
 				setState(168);
+				match(INTDCL);
+				setState(169);
+				match(ID);
+				setState(171);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				if (_la==ASSIGN) {
 					{
-					setState(167);
+					setState(170);
 					dclValue();
 					}
 				}
@@ -793,16 +804,16 @@ public class PyTrun extends Parser {
 			case 2:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(170);
-				match(FLOATDCL);
-				setState(171);
-				match(ID);
 				setState(173);
+				match(FLOATDCL);
+				setState(174);
+				match(ID);
+				setState(176);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				if (_la==ASSIGN) {
 					{
-					setState(172);
+					setState(175);
 					dclValue();
 					}
 				}
@@ -812,16 +823,16 @@ public class PyTrun extends Parser {
 			case 3:
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(175);
-				match(TEXTDCL);
-				setState(176);
-				match(ID);
 				setState(178);
+				match(TEXTDCL);
+				setState(179);
+				match(ID);
+				setState(181);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				if (_la==ASSIGN) {
 					{
-					setState(177);
+					setState(180);
 					dclValue();
 					}
 				}
@@ -831,18 +842,18 @@ public class PyTrun extends Parser {
 			case 4:
 				enterOuterAlt(_localctx, 4);
 				{
-				setState(180);
+				setState(183);
 				match(TRUTHDCL);
-				setState(181);
-				match(ID);
 				setState(184);
+				match(ID);
+				setState(187);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				if (_la==ASSIGN) {
 					{
-					setState(182);
+					setState(185);
 					match(ASSIGN);
-					setState(183);
+					setState(186);
 					truthexpr();
 					}
 				}
@@ -852,55 +863,55 @@ public class PyTrun extends Parser {
 			case 5:
 				enterOuterAlt(_localctx, 5);
 				{
-				setState(186);
+				setState(189);
 				type();
-				setState(187);
+				setState(190);
 				match(ARRDCL);
-				setState(188);
+				setState(191);
 				match(ID);
-				setState(204);
+				setState(207);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				if (_la==ASSIGN) {
 					{
-					setState(189);
+					setState(192);
 					match(ASSIGN);
-					setState(202);
+					setState(205);
 					_errHandler.sync(this);
 					switch (_input.LA(1)) {
 					case ID:
 						{
 						{
-						setState(190);
+						setState(193);
 						functioncall();
 						}
 						}
 						break;
 					case LCB:
 						{
-						setState(191);
+						setState(194);
 						match(LCB);
 						{
-						setState(192);
+						setState(195);
 						types();
-						setState(197);
+						setState(200);
 						_errHandler.sync(this);
 						_la = _input.LA(1);
 						while (_la==COMMA) {
 							{
 							{
-							setState(193);
+							setState(196);
 							match(COMMA);
-							setState(194);
+							setState(197);
 							types();
 							}
 							}
-							setState(199);
+							setState(202);
 							_errHandler.sync(this);
 							_la = _input.LA(1);
 						}
 						}
-						setState(200);
+						setState(203);
 						match(RCB);
 						}
 						break;
@@ -959,30 +970,30 @@ public class PyTrun extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(214);
+			setState(217);
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,23,_ctx) ) {
 			case 1:
 				{
-				setState(208);
+				setState(211);
 				match(ASSIGN);
-				setState(209);
+				setState(212);
 				value();
 				}
 				break;
 			case 2:
 				{
-				setState(210);
+				setState(213);
 				match(ASSIGN);
-				setState(211);
+				setState(214);
 				match(TEXT);
 				}
 				break;
 			case 3:
 				{
-				setState(212);
+				setState(215);
 				match(ASSIGN);
-				setState(213);
+				setState(216);
 				expr();
 				}
 				break;
@@ -1029,42 +1040,42 @@ public class PyTrun extends Parser {
 		TruedclContext _localctx = new TruedclContext(_ctx, getState());
 		enterRule(_localctx, 12, RULE_truedcl);
 		try {
-			setState(224);
+			setState(227);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case INTDCL:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(216);
+				setState(219);
 				match(INTDCL);
-				setState(217);
+				setState(220);
 				match(ID);
 				}
 				break;
 			case FLOATDCL:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(218);
+				setState(221);
 				match(FLOATDCL);
-				setState(219);
+				setState(222);
 				match(ID);
 				}
 				break;
 			case TEXTDCL:
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(220);
+				setState(223);
 				match(TEXTDCL);
-				setState(221);
+				setState(224);
 				match(ID);
 				}
 				break;
 			case TRUTHDCL:
 				enterOuterAlt(_localctx, 4);
 				{
-				setState(222);
+				setState(225);
 				match(TRUTHDCL);
-				setState(223);
+				setState(226);
 				match(ID);
 				}
 				break;
@@ -1123,37 +1134,37 @@ public class PyTrun extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(226);
+			setState(229);
 			match(ID);
-			setState(227);
+			setState(230);
 			match(LPAR);
-			setState(236);
+			setState(239);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << MINUS) | (1L << TRUTHVAL) | (1L << FNUM) | (1L << INUM) | (1L << ID) | (1L << TEXT))) != 0)) {
 				{
-				setState(228);
+				setState(231);
 				types();
-				setState(233);
+				setState(236);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				while (_la==COMMA) {
 					{
 					{
-					setState(229);
+					setState(232);
 					match(COMMA);
-					setState(230);
+					setState(233);
 					types();
 					}
 					}
-					setState(235);
+					setState(238);
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 				}
 				}
 			}
 
-			setState(238);
+			setState(241);
 			match(RPAR);
 			}
 		}
@@ -1224,80 +1235,80 @@ public class PyTrun extends Parser {
 			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(240);
-			match(IF);
-			setState(241);
-			truthpar();
-			setState(242);
-			match(THEN);
 			setState(243);
+			match(IF);
+			setState(244);
+			truthpar();
+			setState(245);
+			match(THEN);
+			setState(246);
 			stmtblock();
-			setState(247);
+			setState(250);
 			_errHandler.sync(this);
 			_alt = getInterpreter().adaptivePredict(_input,27,_ctx);
 			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
 				if ( _alt==1 ) {
 					{
 					{
-					setState(244);
+					setState(247);
 					match(EOL);
 					}
 					} 
 				}
-				setState(249);
+				setState(252);
 				_errHandler.sync(this);
 				_alt = getInterpreter().adaptivePredict(_input,27,_ctx);
 			}
-			setState(263);
+			setState(266);
 			_errHandler.sync(this);
 			_alt = getInterpreter().adaptivePredict(_input,29,_ctx);
 			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
 				if ( _alt==1 ) {
 					{
 					{
-					setState(250);
-					match(ELSE);
-					setState(251);
-					match(IF);
-					setState(252);
-					truthpar();
 					setState(253);
-					match(THEN);
+					match(ELSE);
 					setState(254);
+					match(IF);
+					setState(255);
+					truthpar();
+					setState(256);
+					match(THEN);
+					setState(257);
 					stmtblock();
-					setState(258);
+					setState(261);
 					_errHandler.sync(this);
 					_alt = getInterpreter().adaptivePredict(_input,28,_ctx);
 					while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
 						if ( _alt==1 ) {
 							{
 							{
-							setState(255);
+							setState(258);
 							match(EOL);
 							}
 							} 
 						}
-						setState(260);
+						setState(263);
 						_errHandler.sync(this);
 						_alt = getInterpreter().adaptivePredict(_input,28,_ctx);
 					}
 					}
 					} 
 				}
-				setState(265);
+				setState(268);
 				_errHandler.sync(this);
 				_alt = getInterpreter().adaptivePredict(_input,29,_ctx);
 			}
-			setState(269);
+			setState(272);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if (_la==ELSE) {
 				{
-				setState(266);
+				setState(269);
 				match(ELSE);
-				setState(267);
+				setState(270);
 				match(THEN);
-				setState(268);
+				setState(271);
 				stmtblock();
 				}
 			}
@@ -1349,13 +1360,13 @@ public class PyTrun extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(271);
-			match(WHILE);
-			setState(272);
-			truthpar();
-			setState(273);
-			match(DO);
 			setState(274);
+			match(WHILE);
+			setState(275);
+			truthpar();
+			setState(276);
+			match(DO);
+			setState(277);
 			stmtblock();
 			}
 		}
@@ -1404,13 +1415,13 @@ public class PyTrun extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(276);
-			match(REPEAT);
-			setState(277);
-			stmtblock();
-			setState(278);
-			match(UNTIL);
 			setState(279);
+			match(REPEAT);
+			setState(280);
+			stmtblock();
+			setState(281);
+			match(UNTIL);
+			setState(282);
 			truthpar();
 			}
 		}
@@ -1466,13 +1477,13 @@ public class PyTrun extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(281);
-			match(FROM);
-			setState(282);
-			match(LPAR);
-			setState(283);
-			value();
 			setState(284);
+			match(FROM);
+			setState(285);
+			match(LPAR);
+			setState(286);
+			value();
+			setState(287);
 			_la = _input.LA(1);
 			if ( !(_la==UPTO || _la==DOWNTO) ) {
 			_errHandler.recoverInline(this);
@@ -1482,11 +1493,11 @@ public class PyTrun extends Parser {
 				_errHandler.reportMatch(this);
 				consume();
 			}
-			setState(285);
+			setState(288);
 			value();
-			setState(286);
+			setState(289);
 			match(RPAR);
-			setState(287);
+			setState(290);
 			stmtblock();
 			}
 		}
@@ -1539,37 +1550,37 @@ public class PyTrun extends Parser {
 			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(289);
-			match(RETURN);
 			setState(292);
+			match(RETURN);
+			setState(295);
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,31,_ctx) ) {
 			case 1:
 				{
-				setState(290);
+				setState(293);
 				value();
 				}
 				break;
 			case 2:
 				{
-				setState(291);
+				setState(294);
 				truthexpr();
 				}
 				break;
 			}
-			setState(297);
+			setState(300);
 			_errHandler.sync(this);
 			_alt = getInterpreter().adaptivePredict(_input,32,_ctx);
 			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
 				if ( _alt==1 ) {
 					{
 					{
-					setState(294);
+					setState(297);
 					match(EOL);
 					}
 					} 
 				}
-				setState(299);
+				setState(302);
 				_errHandler.sync(this);
 				_alt = getInterpreter().adaptivePredict(_input,32,_ctx);
 			}
@@ -1636,74 +1647,74 @@ public class PyTrun extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(300);
+			setState(303);
 			match(ID);
-			setState(323);
+			setState(326);
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,34,_ctx) ) {
 			case 1:
 				{
-				setState(301);
+				setState(304);
 				match(ASSIGN);
-				setState(302);
+				setState(305);
 				value();
 				}
 				break;
 			case 2:
 				{
-				setState(303);
-				match(ELEMENT);
-				setState(304);
-				match(INUM);
-				setState(305);
-				match(ASSIGN);
 				setState(306);
+				match(ELEMENT);
+				setState(307);
+				match(INUM);
+				setState(308);
+				match(ASSIGN);
+				setState(309);
 				value();
 				}
 				break;
 			case 3:
 				{
-				setState(307);
+				setState(310);
 				match(ASSIGN);
-				setState(308);
+				setState(311);
 				match(TEXT);
 				}
 				break;
 			case 4:
 				{
-				setState(309);
+				setState(312);
 				match(ASSIGN);
-				setState(310);
+				setState(313);
 				expr();
 				}
 				break;
 			case 5:
 				{
-				setState(311);
+				setState(314);
 				match(ASSIGN);
-				setState(312);
+				setState(315);
 				match(LCB);
 				{
-				setState(313);
+				setState(316);
 				types();
-				setState(318);
+				setState(321);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				while (_la==COMMA) {
 					{
 					{
-					setState(314);
+					setState(317);
 					match(COMMA);
-					setState(315);
+					setState(318);
 					types();
 					}
 					}
-					setState(320);
+					setState(323);
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 				}
 				}
-				setState(321);
+				setState(324);
 				match(RCB);
 				}
 				break;
@@ -1755,34 +1766,34 @@ public class PyTrun extends Parser {
 		ValueContext _localctx = new ValueContext(_ctx, getState());
 		enterRule(_localctx, 28, RULE_value);
 		try {
-			setState(329);
+			setState(332);
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,35,_ctx) ) {
 			case 1:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(325);
+				setState(328);
 				arithmexpr();
 				}
 				break;
 			case 2:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(326);
+				setState(329);
 				functioncall();
 				}
 				break;
 			case 3:
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(327);
+				setState(330);
 				arrindex();
 				}
 				break;
 			case 4:
 				enterOuterAlt(_localctx, 4);
 				{
-				setState(328);
+				setState(331);
 				match(ID);
 				}
 				break;
@@ -1832,27 +1843,27 @@ public class PyTrun extends Parser {
 		ExprContext _localctx = new ExprContext(_ctx, getState());
 		enterRule(_localctx, 30, RULE_expr);
 		try {
-			setState(334);
+			setState(337);
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,36,_ctx) ) {
 			case 1:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(331);
+				setState(334);
 				arithmexpr();
 				}
 				break;
 			case 2:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(332);
+				setState(335);
 				truthexpr();
 				}
 				break;
 			case 3:
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(333);
+				setState(336);
 				append();
 				}
 				break;
@@ -1910,15 +1921,15 @@ public class PyTrun extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(336);
+			setState(339);
 			multexpr();
-			setState(341);
+			setState(344);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while (_la==PLUS || _la==MINUS) {
 				{
 				{
-				setState(337);
+				setState(340);
 				_la = _input.LA(1);
 				if ( !(_la==PLUS || _la==MINUS) ) {
 				_errHandler.recoverInline(this);
@@ -1928,11 +1939,11 @@ public class PyTrun extends Parser {
 					_errHandler.reportMatch(this);
 					consume();
 				}
-				setState(338);
+				setState(341);
 				multexpr();
 				}
 				}
-				setState(343);
+				setState(346);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
@@ -1990,15 +2001,15 @@ public class PyTrun extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(344);
+			setState(347);
 			parexpr();
-			setState(349);
+			setState(352);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while (_la==TIMES || _la==DIVIDES) {
 				{
 				{
-				setState(345);
+				setState(348);
 				_la = _input.LA(1);
 				if ( !(_la==TIMES || _la==DIVIDES) ) {
 				_errHandler.recoverInline(this);
@@ -2008,11 +2019,11 @@ public class PyTrun extends Parser {
 					_errHandler.reportMatch(this);
 					consume();
 				}
-				setState(346);
+				setState(349);
 				parexpr();
 				}
 				}
-				setState(351);
+				setState(354);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
@@ -2064,31 +2075,31 @@ public class PyTrun extends Parser {
 		ParexprContext _localctx = new ParexprContext(_ctx, getState());
 		enterRule(_localctx, 36, RULE_parexpr);
 		try {
-			setState(358);
+			setState(361);
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,39,_ctx) ) {
 			case 1:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(352);
+				setState(355);
 				nums();
 				}
 				break;
 			case 2:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(353);
+				setState(356);
 				functioncall();
 				}
 				break;
 			case 3:
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(354);
+				setState(357);
 				match(LPAR);
-				setState(355);
+				setState(358);
 				arithmexpr();
-				setState(356);
+				setState(359);
 				match(RPAR);
 				}
 				break;
@@ -2134,7 +2145,7 @@ public class PyTrun extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(360);
+			setState(363);
 			logicalexpr();
 			}
 		}
@@ -2194,25 +2205,25 @@ public class PyTrun extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(363);
+			setState(366);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if (_la==NOT) {
 				{
-				setState(362);
+				setState(365);
 				match(NOT);
 				}
 			}
 
-			setState(365);
+			setState(368);
 			relationalexpr();
-			setState(373);
+			setState(376);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while (_la==AND || _la==OR) {
 				{
 				{
-				setState(366);
+				setState(369);
 				_la = _input.LA(1);
 				if ( !(_la==AND || _la==OR) ) {
 				_errHandler.recoverInline(this);
@@ -2222,21 +2233,21 @@ public class PyTrun extends Parser {
 					_errHandler.reportMatch(this);
 					consume();
 				}
-				setState(368);
+				setState(371);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				if (_la==NOT) {
 					{
-					setState(367);
+					setState(370);
 					match(NOT);
 					}
 				}
 
-				setState(370);
+				setState(373);
 				relationalexpr();
 				}
 				}
-				setState(375);
+				setState(378);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
@@ -2295,16 +2306,16 @@ public class PyTrun extends Parser {
 		enterRule(_localctx, 42, RULE_relationalexpr);
 		int _la;
 		try {
-			setState(385);
+			setState(388);
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,43,_ctx) ) {
 			case 1:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(376);
+				setState(379);
 				value();
 				{
-				setState(377);
+				setState(380);
 				_la = _input.LA(1);
 				if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << EQUALS) | (1L << GRTHAN) | (1L << LESSTHAN))) != 0)) ) {
 				_errHandler.recoverInline(this);
@@ -2314,7 +2325,7 @@ public class PyTrun extends Parser {
 					_errHandler.reportMatch(this);
 					consume();
 				}
-				setState(378);
+				setState(381);
 				value();
 				}
 				}
@@ -2322,18 +2333,18 @@ public class PyTrun extends Parser {
 			case 2:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(380);
+				setState(383);
 				match(LPAR);
-				setState(381);
+				setState(384);
 				logicalexpr();
-				setState(382);
+				setState(385);
 				match(RPAR);
 				}
 				break;
 			case 3:
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(384);
+				setState(387);
 				truth();
 				}
 				break;
@@ -2386,7 +2397,7 @@ public class PyTrun extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(387);
+			setState(390);
 			_la = _input.LA(1);
 			if ( !(_la==ID || _la==TEXT) ) {
 			_errHandler.recoverInline(this);
@@ -2396,9 +2407,9 @@ public class PyTrun extends Parser {
 				_errHandler.reportMatch(this);
 				consume();
 			}
-			setState(388);
+			setState(391);
 			match(PLUS);
-			setState(389);
+			setState(392);
 			_la = _input.LA(1);
 			if ( !(_la==ID || _la==TEXT) ) {
 			_errHandler.recoverInline(this);
@@ -2454,11 +2465,11 @@ public class PyTrun extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(391);
+			setState(394);
 			match(ID);
-			setState(392);
+			setState(395);
 			match(ELEMENT);
-			setState(393);
+			setState(396);
 			_la = _input.LA(1);
 			if ( !(_la==INUM || _la==ID) ) {
 			_errHandler.recoverInline(this);
@@ -2518,11 +2529,11 @@ public class PyTrun extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(395);
+			setState(398);
 			match(ID);
-			setState(396);
+			setState(399);
 			match(ELEMENT);
-			setState(397);
+			setState(400);
 			_la = _input.LA(1);
 			if ( !(_la==INUM || _la==ID) ) {
 			_errHandler.recoverInline(this);
@@ -2532,9 +2543,9 @@ public class PyTrun extends Parser {
 				_errHandler.reportMatch(this);
 				consume();
 			}
-			setState(398);
+			setState(401);
 			match(ASSIGN);
-			setState(399);
+			setState(402);
 			types();
 			}
 		}
@@ -2581,13 +2592,13 @@ public class PyTrun extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(401);
-			match(DRIVE);
-			setState(402);
-			match(LPAR);
-			setState(403);
-			value();
 			setState(404);
+			match(DRIVE);
+			setState(405);
+			match(LPAR);
+			setState(406);
+			value();
+			setState(407);
 			match(RPAR);
 			}
 		}
@@ -2634,13 +2645,13 @@ public class PyTrun extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(406);
-			match(TURNLEFT);
-			setState(407);
-			match(LPAR);
-			setState(408);
-			value();
 			setState(409);
+			match(TURNLEFT);
+			setState(410);
+			match(LPAR);
+			setState(411);
+			value();
+			setState(412);
 			match(RPAR);
 			}
 		}
@@ -2687,13 +2698,66 @@ public class PyTrun extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(411);
-			match(TURNRIGHT);
-			setState(412);
-			match(LPAR);
-			setState(413);
-			value();
 			setState(414);
+			match(TURNRIGHT);
+			setState(415);
+			match(LPAR);
+			setState(416);
+			value();
+			setState(417);
+			match(RPAR);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class PauseContext extends ParserRuleContext {
+		public TerminalNode PAUSE() { return getToken(PyTrun.PAUSE, 0); }
+		public TerminalNode LPAR() { return getToken(PyTrun.LPAR, 0); }
+		public ValueContext value() {
+			return getRuleContext(ValueContext.class,0);
+		}
+		public TerminalNode RPAR() { return getToken(PyTrun.RPAR, 0); }
+		public PauseContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_pause; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof PyTrunListener ) ((PyTrunListener)listener).enterPause(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof PyTrunListener ) ((PyTrunListener)listener).exitPause(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PyTrunVisitor ) return ((PyTrunVisitor<? extends T>)visitor).visitPause(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final PauseContext pause() throws RecognitionException {
+		PauseContext _localctx = new PauseContext(_ctx, getState());
+		enterRule(_localctx, 56, RULE_pause);
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(419);
+			match(PAUSE);
+			setState(420);
+			match(LPAR);
+			setState(421);
+			value();
+			setState(422);
 			match(RPAR);
 			}
 		}
@@ -2737,38 +2801,38 @@ public class PyTrun extends Parser {
 
 	public final NumsContext nums() throws RecognitionException {
 		NumsContext _localctx = new NumsContext(_ctx, getState());
-		enterRule(_localctx, 56, RULE_nums);
+		enterRule(_localctx, 58, RULE_nums);
 		try {
-			setState(421);
+			setState(429);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case INUM:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(416);
+				setState(424);
 				match(INUM);
 				}
 				break;
 			case FNUM:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(417);
+				setState(425);
 				match(FNUM);
 				}
 				break;
 			case ID:
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(418);
+				setState(426);
 				match(ID);
 				}
 				break;
 			case MINUS:
 				enterOuterAlt(_localctx, 4);
 				{
-				setState(419);
+				setState(427);
 				match(MINUS);
-				setState(420);
+				setState(428);
 				nums();
 				}
 				break;
@@ -2817,28 +2881,28 @@ public class PyTrun extends Parser {
 
 	public final StmtblockContext stmtblock() throws RecognitionException {
 		StmtblockContext _localctx = new StmtblockContext(_ctx, getState());
-		enterRule(_localctx, 58, RULE_stmtblock);
+		enterRule(_localctx, 60, RULE_stmtblock);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(423);
+			setState(431);
 			match(LCB);
-			setState(427);
+			setState(435);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << INTDCL) | (1L << FLOATDCL) | (1L << TRUTHDCL) | (1L << TEXTDCL) | (1L << IF) | (1L << WHILE) | (1L << FROM) | (1L << REPEAT) | (1L << RETURN) | (1L << DRIVE) | (1L << TURNLEFT) | (1L << TURNRIGHT) | (1L << EOL) | (1L << ID))) != 0)) {
+			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << INTDCL) | (1L << FLOATDCL) | (1L << TRUTHDCL) | (1L << TEXTDCL) | (1L << IF) | (1L << WHILE) | (1L << FROM) | (1L << REPEAT) | (1L << RETURN) | (1L << DRIVE) | (1L << TURNLEFT) | (1L << TURNRIGHT) | (1L << PAUSE) | (1L << EOL) | (1L << ID))) != 0)) {
 				{
 				{
-				setState(424);
+				setState(432);
 				stmt();
 				}
 				}
-				setState(429);
+				setState(437);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
-			setState(430);
+			setState(438);
 			match(RCB);
 			}
 		}
@@ -2880,15 +2944,15 @@ public class PyTrun extends Parser {
 
 	public final TruthparContext truthpar() throws RecognitionException {
 		TruthparContext _localctx = new TruthparContext(_ctx, getState());
-		enterRule(_localctx, 60, RULE_truthpar);
+		enterRule(_localctx, 62, RULE_truthpar);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(432);
+			setState(440);
 			match(LPAR);
-			setState(433);
+			setState(441);
 			truthexpr();
-			setState(434);
+			setState(442);
 			match(RPAR);
 			}
 		}
@@ -2927,12 +2991,12 @@ public class PyTrun extends Parser {
 
 	public final TruthContext truth() throws RecognitionException {
 		TruthContext _localctx = new TruthContext(_ctx, getState());
-		enterRule(_localctx, 62, RULE_truth);
+		enterRule(_localctx, 64, RULE_truth);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(436);
+			setState(444);
 			_la = _input.LA(1);
 			if ( !(_la==TRUTHVAL || _la==ID) ) {
 			_errHandler.recoverInline(this);
@@ -2981,12 +3045,12 @@ public class PyTrun extends Parser {
 
 	public final TypeContext type() throws RecognitionException {
 		TypeContext _localctx = new TypeContext(_ctx, getState());
-		enterRule(_localctx, 64, RULE_type);
+		enterRule(_localctx, 66, RULE_type);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(438);
+			setState(446);
 			_la = _input.LA(1);
 			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << INTDCL) | (1L << FLOATDCL) | (1L << TRUTHDCL) | (1L << TEXTDCL))) != 0)) ) {
 			_errHandler.recoverInline(this);
@@ -3036,9 +3100,9 @@ public class PyTrun extends Parser {
 
 	public final TypesContext types() throws RecognitionException {
 		TypesContext _localctx = new TypesContext(_ctx, getState());
-		enterRule(_localctx, 66, RULE_types);
+		enterRule(_localctx, 68, RULE_types);
 		try {
-			setState(443);
+			setState(451);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case MINUS:
@@ -3047,21 +3111,21 @@ public class PyTrun extends Parser {
 			case ID:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(440);
+				setState(448);
 				nums();
 				}
 				break;
 			case TEXT:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(441);
+				setState(449);
 				match(TEXT);
 				}
 				break;
 			case TRUTHVAL:
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(442);
+				setState(450);
 				match(TRUTHVAL);
 				}
 				break;
@@ -3081,169 +3145,172 @@ public class PyTrun extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\61\u01c0\4\2\t\2"+
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\62\u01c8\4\2\t\2"+
 		"\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13"+
 		"\t\13\4\f\t\f\4\r\t\r\4\16\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22"+
 		"\4\23\t\23\4\24\t\24\4\25\t\25\4\26\t\26\4\27\t\27\4\30\t\30\4\31\t\31"+
 		"\4\32\t\32\4\33\t\33\4\34\t\34\4\35\t\35\4\36\t\36\4\37\t\37\4 \t \4!"+
-		"\t!\4\"\t\"\4#\t#\3\2\7\2H\n\2\f\2\16\2K\13\2\3\2\3\2\7\2O\n\2\f\2\16"+
-		"\2R\13\2\3\2\7\2U\n\2\f\2\16\2X\13\2\3\2\5\2[\n\2\3\3\3\3\3\3\7\3`\n\3"+
-		"\f\3\16\3c\13\3\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3"+
-		"\4\5\4s\n\4\3\5\3\5\3\5\3\5\3\5\5\5z\n\5\3\5\3\5\3\5\3\5\7\5\u0080\n\5"+
-		"\f\5\16\5\u0083\13\5\5\5\u0085\n\5\3\5\3\5\3\5\7\5\u008a\n\5\f\5\16\5"+
-		"\u008d\13\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\7\5\u0096\n\5\f\5\16\5\u0099\13"+
-		"\5\5\5\u009b\n\5\3\5\3\5\3\5\7\5\u00a0\n\5\f\5\16\5\u00a3\13\5\3\5\5\5"+
-		"\u00a6\n\5\3\6\3\6\3\6\5\6\u00ab\n\6\3\6\3\6\3\6\5\6\u00b0\n\6\3\6\3\6"+
-		"\3\6\5\6\u00b5\n\6\3\6\3\6\3\6\3\6\5\6\u00bb\n\6\3\6\3\6\3\6\3\6\3\6\3"+
-		"\6\3\6\3\6\3\6\7\6\u00c6\n\6\f\6\16\6\u00c9\13\6\3\6\3\6\5\6\u00cd\n\6"+
-		"\5\6\u00cf\n\6\5\6\u00d1\n\6\3\7\3\7\3\7\3\7\3\7\3\7\5\7\u00d9\n\7\3\b"+
-		"\3\b\3\b\3\b\3\b\3\b\3\b\3\b\5\b\u00e3\n\b\3\t\3\t\3\t\3\t\3\t\7\t\u00ea"+
-		"\n\t\f\t\16\t\u00ed\13\t\5\t\u00ef\n\t\3\t\3\t\3\n\3\n\3\n\3\n\3\n\7\n"+
-		"\u00f8\n\n\f\n\16\n\u00fb\13\n\3\n\3\n\3\n\3\n\3\n\3\n\7\n\u0103\n\n\f"+
-		"\n\16\n\u0106\13\n\7\n\u0108\n\n\f\n\16\n\u010b\13\n\3\n\3\n\3\n\5\n\u0110"+
-		"\n\n\3\13\3\13\3\13\3\13\3\13\3\f\3\f\3\f\3\f\3\f\3\r\3\r\3\r\3\r\3\r"+
-		"\3\r\3\r\3\r\3\16\3\16\3\16\5\16\u0127\n\16\3\16\7\16\u012a\n\16\f\16"+
-		"\16\16\u012d\13\16\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3"+
-		"\17\3\17\3\17\3\17\3\17\3\17\7\17\u013f\n\17\f\17\16\17\u0142\13\17\3"+
-		"\17\3\17\5\17\u0146\n\17\3\20\3\20\3\20\3\20\5\20\u014c\n\20\3\21\3\21"+
-		"\3\21\5\21\u0151\n\21\3\22\3\22\3\22\7\22\u0156\n\22\f\22\16\22\u0159"+
-		"\13\22\3\23\3\23\3\23\7\23\u015e\n\23\f\23\16\23\u0161\13\23\3\24\3\24"+
-		"\3\24\3\24\3\24\3\24\5\24\u0169\n\24\3\25\3\25\3\26\5\26\u016e\n\26\3"+
-		"\26\3\26\3\26\5\26\u0173\n\26\3\26\7\26\u0176\n\26\f\26\16\26\u0179\13"+
-		"\26\3\27\3\27\3\27\3\27\3\27\3\27\3\27\3\27\3\27\5\27\u0184\n\27\3\30"+
-		"\3\30\3\30\3\30\3\31\3\31\3\31\3\31\3\32\3\32\3\32\3\32\3\32\3\32\3\33"+
-		"\3\33\3\33\3\33\3\33\3\34\3\34\3\34\3\34\3\34\3\35\3\35\3\35\3\35\3\35"+
-		"\3\36\3\36\3\36\3\36\3\36\5\36\u01a8\n\36\3\37\3\37\7\37\u01ac\n\37\f"+
-		"\37\16\37\u01af\13\37\3\37\3\37\3 \3 \3 \3 \3!\3!\3\"\3\"\3#\3#\3#\5#"+
-		"\u01be\n#\3#\2\2$\2\4\6\b\n\f\16\20\22\24\26\30\32\34\36 \"$&(*,.\60\62"+
-		"\64\668:<>@BD\2\13\3\2\35\36\3\2\f\r\3\2\n\13\3\2\16\17\3\2\22\24\3\2"+
-		"-.\3\2,-\4\2\21\21--\3\2\3\6\2\u01e9\2I\3\2\2\2\4\\\3\2\2\2\6r\3\2\2\2"+
-		"\b\u00a5\3\2\2\2\n\u00d0\3\2\2\2\f\u00d8\3\2\2\2\16\u00e2\3\2\2\2\20\u00e4"+
-		"\3\2\2\2\22\u00f2\3\2\2\2\24\u0111\3\2\2\2\26\u0116\3\2\2\2\30\u011b\3"+
-		"\2\2\2\32\u0123\3\2\2\2\34\u012e\3\2\2\2\36\u014b\3\2\2\2 \u0150\3\2\2"+
-		"\2\"\u0152\3\2\2\2$\u015a\3\2\2\2&\u0168\3\2\2\2(\u016a\3\2\2\2*\u016d"+
-		"\3\2\2\2,\u0183\3\2\2\2.\u0185\3\2\2\2\60\u0189\3\2\2\2\62\u018d\3\2\2"+
-		"\2\64\u0193\3\2\2\2\66\u0198\3\2\2\28\u019d\3\2\2\2:\u01a7\3\2\2\2<\u01a9"+
-		"\3\2\2\2>\u01b2\3\2\2\2@\u01b6\3\2\2\2B\u01b8\3\2\2\2D\u01bd\3\2\2\2F"+
-		"H\7*\2\2GF\3\2\2\2HK\3\2\2\2IG\3\2\2\2IJ\3\2\2\2JP\3\2\2\2KI\3\2\2\2L"+
-		"O\5\4\3\2MO\5\b\5\2NL\3\2\2\2NM\3\2\2\2OR\3\2\2\2PN\3\2\2\2PQ\3\2\2\2"+
-		"QV\3\2\2\2RP\3\2\2\2SU\7*\2\2TS\3\2\2\2UX\3\2\2\2VT\3\2\2\2VW\3\2\2\2"+
-		"WZ\3\2\2\2XV\3\2\2\2Y[\7\2\2\3ZY\3\2\2\2Z[\3\2\2\2[\3\3\2\2\2\\a\5\6\4"+
-		"\2]^\7*\2\2^`\5\6\4\2_]\3\2\2\2`c\3\2\2\2a_\3\2\2\2ab\3\2\2\2b\5\3\2\2"+
-		"\2ca\3\2\2\2ds\5\n\6\2es\5\22\n\2fs\5\24\13\2gs\5\32\16\2hs\5\20\t\2i"+
-		"s\5\26\f\2js\5\30\r\2ks\5\34\17\2ls\5\62\32\2ms\5\60\31\2ns\5\64\33\2"+
-		"os\5\66\34\2ps\58\35\2qs\7*\2\2rd\3\2\2\2re\3\2\2\2rf\3\2\2\2rg\3\2\2"+
-		"\2rh\3\2\2\2ri\3\2\2\2rj\3\2\2\2rk\3\2\2\2rl\3\2\2\2rm\3\2\2\2rn\3\2\2"+
-		"\2ro\3\2\2\2rp\3\2\2\2rq\3\2\2\2s\7\3\2\2\2tu\7\"\2\2uv\7-\2\2vy\7!\2"+
-		"\2wz\5B\"\2xz\7\7\2\2yw\3\2\2\2yx\3\2\2\2z{\3\2\2\2{\u0084\7\b\2\2|\u0081"+
-		"\5\16\b\2}~\7\37\2\2~\u0080\5\16\b\2\177}\3\2\2\2\u0080\u0083\3\2\2\2"+
-		"\u0081\177\3\2\2\2\u0081\u0082\3\2\2\2\u0082\u0085\3\2\2\2\u0083\u0081"+
-		"\3\2\2\2\u0084|\3\2\2\2\u0084\u0085\3\2\2\2\u0085\u0086\3\2\2\2\u0086"+
-		"\u0087\7\t\2\2\u0087\u008b\7%\2\2\u0088\u008a\5\6\4\2\u0089\u0088\3\2"+
-		"\2\2\u008a\u008d\3\2\2\2\u008b\u0089\3\2\2\2\u008b\u008c\3\2\2\2\u008c"+
-		"\u008e\3\2\2\2\u008d\u008b\3\2\2\2\u008e\u00a6\7&\2\2\u008f\u0090\7\""+
-		"\2\2\u0090\u0091\7-\2\2\u0091\u009a\7\b\2\2\u0092\u0097\5\16\b\2\u0093"+
-		"\u0094\7\37\2\2\u0094\u0096\5\16\b\2\u0095\u0093\3\2\2\2\u0096\u0099\3"+
-		"\2\2\2\u0097\u0095\3\2\2\2\u0097\u0098\3\2\2\2\u0098\u009b\3\2\2\2\u0099"+
-		"\u0097\3\2\2\2\u009a\u0092\3\2\2\2\u009a\u009b\3\2\2\2\u009b\u009c\3\2"+
-		"\2\2\u009c\u009d\7\t\2\2\u009d\u00a1\7%\2\2\u009e\u00a0\5\6\4\2\u009f"+
-		"\u009e\3\2\2\2\u00a0\u00a3\3\2\2\2\u00a1\u009f\3\2\2\2\u00a1\u00a2\3\2"+
-		"\2\2\u00a2\u00a4\3\2\2\2\u00a3\u00a1\3\2\2\2\u00a4\u00a6\7&\2\2\u00a5"+
-		"t\3\2\2\2\u00a5\u008f\3\2\2\2\u00a6\t\3\2\2\2\u00a7\u00a8\7\3\2\2\u00a8"+
-		"\u00aa\7-\2\2\u00a9\u00ab\5\f\7\2\u00aa\u00a9\3\2\2\2\u00aa\u00ab\3\2"+
-		"\2\2\u00ab\u00d1\3\2\2\2\u00ac\u00ad\7\4\2\2\u00ad\u00af\7-\2\2\u00ae"+
-		"\u00b0\5\f\7\2\u00af\u00ae\3\2\2\2\u00af\u00b0\3\2\2\2\u00b0\u00d1\3\2"+
-		"\2\2\u00b1\u00b2\7\6\2\2\u00b2\u00b4\7-\2\2\u00b3\u00b5\5\f\7\2\u00b4"+
-		"\u00b3\3\2\2\2\u00b4\u00b5\3\2\2\2\u00b5\u00d1\3\2\2\2\u00b6\u00b7\7\5"+
-		"\2\2\u00b7\u00ba\7-\2\2\u00b8\u00b9\7$\2\2\u00b9\u00bb\5(\25\2\u00ba\u00b8"+
-		"\3\2\2\2\u00ba\u00bb\3\2\2\2\u00bb\u00d1\3\2\2\2\u00bc\u00bd\5B\"\2\u00bd"+
-		"\u00be\7\7\2\2\u00be\u00ce\7-\2\2\u00bf\u00cc\7$\2\2\u00c0\u00cd\5\20"+
-		"\t\2\u00c1\u00c2\7%\2\2\u00c2\u00c7\5D#\2\u00c3\u00c4\7\37\2\2\u00c4\u00c6"+
-		"\5D#\2\u00c5\u00c3\3\2\2\2\u00c6\u00c9\3\2\2\2\u00c7\u00c5\3\2\2\2\u00c7"+
-		"\u00c8\3\2\2\2\u00c8\u00ca\3\2\2\2\u00c9\u00c7\3\2\2\2\u00ca\u00cb\7&"+
-		"\2\2\u00cb\u00cd\3\2\2\2\u00cc\u00c0\3\2\2\2\u00cc\u00c1\3\2\2\2\u00cd"+
-		"\u00cf\3\2\2\2\u00ce\u00bf\3\2\2\2\u00ce\u00cf\3\2\2\2\u00cf\u00d1\3\2"+
-		"\2\2\u00d0\u00a7\3\2\2\2\u00d0\u00ac\3\2\2\2\u00d0\u00b1\3\2\2\2\u00d0"+
-		"\u00b6\3\2\2\2\u00d0\u00bc\3\2\2\2\u00d1\13\3\2\2\2\u00d2\u00d3\7$\2\2"+
-		"\u00d3\u00d9\5\36\20\2\u00d4\u00d5\7$\2\2\u00d5\u00d9\7.\2\2\u00d6\u00d7"+
-		"\7$\2\2\u00d7\u00d9\5 \21\2\u00d8\u00d2\3\2\2\2\u00d8\u00d4\3\2\2\2\u00d8"+
-		"\u00d6\3\2\2\2\u00d9\r\3\2\2\2\u00da\u00db\7\3\2\2\u00db\u00e3\7-\2\2"+
-		"\u00dc\u00dd\7\4\2\2\u00dd\u00e3\7-\2\2\u00de\u00df\7\6\2\2\u00df\u00e3"+
-		"\7-\2\2\u00e0\u00e1\7\5\2\2\u00e1\u00e3\7-\2\2\u00e2\u00da\3\2\2\2\u00e2"+
-		"\u00dc\3\2\2\2\u00e2\u00de\3\2\2\2\u00e2\u00e0\3\2\2\2\u00e3\17\3\2\2"+
-		"\2\u00e4\u00e5\7-\2\2\u00e5\u00ee\7\b\2\2\u00e6\u00eb\5D#\2\u00e7\u00e8"+
-		"\7\37\2\2\u00e8\u00ea\5D#\2\u00e9\u00e7\3\2\2\2\u00ea\u00ed\3\2\2\2\u00eb"+
-		"\u00e9\3\2\2\2\u00eb\u00ec\3\2\2\2\u00ec\u00ef\3\2\2\2\u00ed\u00eb\3\2"+
-		"\2\2\u00ee\u00e6\3\2\2\2\u00ee\u00ef\3\2\2\2\u00ef\u00f0\3\2\2\2\u00f0"+
-		"\u00f1\7\t\2\2\u00f1\21\3\2\2\2\u00f2\u00f3\7\25\2\2\u00f3\u00f4\5> \2"+
-		"\u00f4\u00f5\7\34\2\2\u00f5\u00f9\5<\37\2\u00f6\u00f8\7*\2\2\u00f7\u00f6"+
-		"\3\2\2\2\u00f8\u00fb\3\2\2\2\u00f9\u00f7\3\2\2\2\u00f9\u00fa\3\2\2\2\u00fa"+
-		"\u0109\3\2\2\2\u00fb\u00f9\3\2\2\2\u00fc\u00fd\7\26\2\2\u00fd\u00fe\7"+
-		"\25\2\2\u00fe\u00ff\5> \2\u00ff\u0100\7\34\2\2\u0100\u0104\5<\37\2\u0101"+
-		"\u0103\7*\2\2\u0102\u0101\3\2\2\2\u0103\u0106\3\2\2\2\u0104\u0102\3\2"+
-		"\2\2\u0104\u0105\3\2\2\2\u0105\u0108\3\2\2\2\u0106\u0104\3\2\2\2\u0107"+
-		"\u00fc\3\2\2\2\u0108\u010b\3\2\2\2\u0109\u0107\3\2\2\2\u0109\u010a\3\2"+
-		"\2\2\u010a\u010f\3\2\2\2\u010b\u0109\3\2\2\2\u010c\u010d\7\26\2\2\u010d"+
-		"\u010e\7\34\2\2\u010e\u0110\5<\37\2\u010f\u010c\3\2\2\2\u010f\u0110\3"+
-		"\2\2\2\u0110\23\3\2\2\2\u0111\u0112\7\27\2\2\u0112\u0113\5> \2\u0113\u0114"+
-		"\7\30\2\2\u0114\u0115\5<\37\2\u0115\25\3\2\2\2\u0116\u0117\7\32\2\2\u0117"+
-		"\u0118\5<\37\2\u0118\u0119\7\33\2\2\u0119\u011a\5> \2\u011a\27\3\2\2\2"+
-		"\u011b\u011c\7\31\2\2\u011c\u011d\7\b\2\2\u011d\u011e\5\36\20\2\u011e"+
-		"\u011f\t\2\2\2\u011f\u0120\5\36\20\2\u0120\u0121\7\t\2\2\u0121\u0122\5"+
-		"<\37\2\u0122\31\3\2\2\2\u0123\u0126\7 \2\2\u0124\u0127\5\36\20\2\u0125"+
-		"\u0127\5(\25\2\u0126\u0124\3\2\2\2\u0126\u0125\3\2\2\2\u0127\u012b\3\2"+
-		"\2\2\u0128\u012a\7*\2\2\u0129\u0128\3\2\2\2\u012a\u012d\3\2\2\2\u012b"+
-		"\u0129\3\2\2\2\u012b\u012c\3\2\2\2\u012c\33\3\2\2\2\u012d\u012b\3\2\2"+
-		"\2\u012e\u0145\7-\2\2\u012f\u0130\7$\2\2\u0130\u0146\5\36\20\2\u0131\u0132"+
-		"\7#\2\2\u0132\u0133\7,\2\2\u0133\u0134\7$\2\2\u0134\u0146\5\36\20\2\u0135"+
-		"\u0136\7$\2\2\u0136\u0146\7.\2\2\u0137\u0138\7$\2\2\u0138\u0146\5 \21"+
-		"\2\u0139\u013a\7$\2\2\u013a\u013b\7%\2\2\u013b\u0140\5D#\2\u013c\u013d"+
-		"\7\37\2\2\u013d\u013f\5D#\2\u013e\u013c\3\2\2\2\u013f\u0142\3\2\2\2\u0140"+
-		"\u013e\3\2\2\2\u0140\u0141\3\2\2\2\u0141\u0143\3\2\2\2\u0142\u0140\3\2"+
-		"\2\2\u0143\u0144\7&\2\2\u0144\u0146\3\2\2\2\u0145\u012f\3\2\2\2\u0145"+
-		"\u0131\3\2\2\2\u0145\u0135\3\2\2\2\u0145\u0137\3\2\2\2\u0145\u0139\3\2"+
-		"\2\2\u0146\35\3\2\2\2\u0147\u014c\5\"\22\2\u0148\u014c\5\20\t\2\u0149"+
-		"\u014c\5\60\31\2\u014a\u014c\7-\2\2\u014b\u0147\3\2\2\2\u014b\u0148\3"+
-		"\2\2\2\u014b\u0149\3\2\2\2\u014b\u014a\3\2\2\2\u014c\37\3\2\2\2\u014d"+
-		"\u0151\5\"\22\2\u014e\u0151\5(\25\2\u014f\u0151\5.\30\2\u0150\u014d\3"+
-		"\2\2\2\u0150\u014e\3\2\2\2\u0150\u014f\3\2\2\2\u0151!\3\2\2\2\u0152\u0157"+
-		"\5$\23\2\u0153\u0154\t\3\2\2\u0154\u0156\5$\23\2\u0155\u0153\3\2\2\2\u0156"+
-		"\u0159\3\2\2\2\u0157\u0155\3\2\2\2\u0157\u0158\3\2\2\2\u0158#\3\2\2\2"+
-		"\u0159\u0157\3\2\2\2\u015a\u015f\5&\24\2\u015b\u015c\t\4\2\2\u015c\u015e"+
-		"\5&\24\2\u015d\u015b\3\2\2\2\u015e\u0161\3\2\2\2\u015f\u015d\3\2\2\2\u015f"+
-		"\u0160\3\2\2\2\u0160%\3\2\2\2\u0161\u015f\3\2\2\2\u0162\u0169\5:\36\2"+
-		"\u0163\u0169\5\20\t\2\u0164\u0165\7\b\2\2\u0165\u0166\5\"\22\2\u0166\u0167"+
-		"\7\t\2\2\u0167\u0169\3\2\2\2\u0168\u0162\3\2\2\2\u0168\u0163\3\2\2\2\u0168"+
-		"\u0164\3\2\2\2\u0169\'\3\2\2\2\u016a\u016b\5*\26\2\u016b)\3\2\2\2\u016c"+
-		"\u016e\7\20\2\2\u016d\u016c\3\2\2\2\u016d\u016e\3\2\2\2\u016e\u016f\3"+
-		"\2\2\2\u016f\u0177\5,\27\2\u0170\u0172\t\5\2\2\u0171\u0173\7\20\2\2\u0172"+
-		"\u0171\3\2\2\2\u0172\u0173\3\2\2\2\u0173\u0174\3\2\2\2\u0174\u0176\5,"+
-		"\27\2\u0175\u0170\3\2\2\2\u0176\u0179\3\2\2\2\u0177\u0175\3\2\2\2\u0177"+
-		"\u0178\3\2\2\2\u0178+\3\2\2\2\u0179\u0177\3\2\2\2\u017a\u017b\5\36\20"+
-		"\2\u017b\u017c\t\6\2\2\u017c\u017d\5\36\20\2\u017d\u0184\3\2\2\2\u017e"+
-		"\u017f\7\b\2\2\u017f\u0180\5*\26\2\u0180\u0181\7\t\2\2\u0181\u0184\3\2"+
-		"\2\2\u0182\u0184\5@!\2\u0183\u017a\3\2\2\2\u0183\u017e\3\2\2\2\u0183\u0182"+
-		"\3\2\2\2\u0184-\3\2\2\2\u0185\u0186\t\7\2\2\u0186\u0187\7\f\2\2\u0187"+
-		"\u0188\t\7\2\2\u0188/\3\2\2\2\u0189\u018a\7-\2\2\u018a\u018b\7#\2\2\u018b"+
-		"\u018c\t\b\2\2\u018c\61\3\2\2\2\u018d\u018e\7-\2\2\u018e\u018f\7#\2\2"+
-		"\u018f\u0190\t\b\2\2\u0190\u0191\7$\2\2\u0191\u0192\5D#\2\u0192\63\3\2"+
-		"\2\2\u0193\u0194\7\'\2\2\u0194\u0195\7\b\2\2\u0195\u0196\5\36\20\2\u0196"+
-		"\u0197\7\t\2\2\u0197\65\3\2\2\2\u0198\u0199\7(\2\2\u0199\u019a\7\b\2\2"+
-		"\u019a\u019b\5\36\20\2\u019b\u019c\7\t\2\2\u019c\67\3\2\2\2\u019d\u019e"+
-		"\7)\2\2\u019e\u019f\7\b\2\2\u019f\u01a0\5\36\20\2\u01a0\u01a1\7\t\2\2"+
-		"\u01a19\3\2\2\2\u01a2\u01a8\7,\2\2\u01a3\u01a8\7+\2\2\u01a4\u01a8\7-\2"+
-		"\2\u01a5\u01a6\7\r\2\2\u01a6\u01a8\5:\36\2\u01a7\u01a2\3\2\2\2\u01a7\u01a3"+
-		"\3\2\2\2\u01a7\u01a4\3\2\2\2\u01a7\u01a5\3\2\2\2\u01a8;\3\2\2\2\u01a9"+
-		"\u01ad\7%\2\2\u01aa\u01ac\5\6\4\2\u01ab\u01aa\3\2\2\2\u01ac\u01af\3\2"+
-		"\2\2\u01ad\u01ab\3\2\2\2\u01ad\u01ae\3\2\2\2\u01ae\u01b0\3\2\2\2\u01af"+
-		"\u01ad\3\2\2\2\u01b0\u01b1\7&\2\2\u01b1=\3\2\2\2\u01b2\u01b3\7\b\2\2\u01b3"+
-		"\u01b4\5(\25\2\u01b4\u01b5\7\t\2\2\u01b5?\3\2\2\2\u01b6\u01b7\t\t\2\2"+
-		"\u01b7A\3\2\2\2\u01b8\u01b9\t\n\2\2\u01b9C\3\2\2\2\u01ba\u01be\5:\36\2"+
-		"\u01bb\u01be\7.\2\2\u01bc\u01be\7\21\2\2\u01bd\u01ba\3\2\2\2\u01bd\u01bb"+
-		"\3\2\2\2\u01bd\u01bc\3\2\2\2\u01beE\3\2\2\2\61INPVZary\u0081\u0084\u008b"+
-		"\u0097\u009a\u00a1\u00a5\u00aa\u00af\u00b4\u00ba\u00c7\u00cc\u00ce\u00d0"+
-		"\u00d8\u00e2\u00eb\u00ee\u00f9\u0104\u0109\u010f\u0126\u012b\u0140\u0145"+
-		"\u014b\u0150\u0157\u015f\u0168\u016d\u0172\u0177\u0183\u01a7\u01ad\u01bd";
+		"\t!\4\"\t\"\4#\t#\4$\t$\3\2\7\2J\n\2\f\2\16\2M\13\2\3\2\3\2\7\2Q\n\2\f"+
+		"\2\16\2T\13\2\3\2\7\2W\n\2\f\2\16\2Z\13\2\3\2\5\2]\n\2\3\3\3\3\3\3\7\3"+
+		"b\n\3\f\3\16\3e\13\3\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3"+
+		"\4\3\4\3\4\5\4v\n\4\3\5\3\5\3\5\3\5\3\5\5\5}\n\5\3\5\3\5\3\5\3\5\7\5\u0083"+
+		"\n\5\f\5\16\5\u0086\13\5\5\5\u0088\n\5\3\5\3\5\3\5\7\5\u008d\n\5\f\5\16"+
+		"\5\u0090\13\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\7\5\u0099\n\5\f\5\16\5\u009c"+
+		"\13\5\5\5\u009e\n\5\3\5\3\5\3\5\7\5\u00a3\n\5\f\5\16\5\u00a6\13\5\3\5"+
+		"\5\5\u00a9\n\5\3\6\3\6\3\6\5\6\u00ae\n\6\3\6\3\6\3\6\5\6\u00b3\n\6\3\6"+
+		"\3\6\3\6\5\6\u00b8\n\6\3\6\3\6\3\6\3\6\5\6\u00be\n\6\3\6\3\6\3\6\3\6\3"+
+		"\6\3\6\3\6\3\6\3\6\7\6\u00c9\n\6\f\6\16\6\u00cc\13\6\3\6\3\6\5\6\u00d0"+
+		"\n\6\5\6\u00d2\n\6\5\6\u00d4\n\6\3\7\3\7\3\7\3\7\3\7\3\7\5\7\u00dc\n\7"+
+		"\3\b\3\b\3\b\3\b\3\b\3\b\3\b\3\b\5\b\u00e6\n\b\3\t\3\t\3\t\3\t\3\t\7\t"+
+		"\u00ed\n\t\f\t\16\t\u00f0\13\t\5\t\u00f2\n\t\3\t\3\t\3\n\3\n\3\n\3\n\3"+
+		"\n\7\n\u00fb\n\n\f\n\16\n\u00fe\13\n\3\n\3\n\3\n\3\n\3\n\3\n\7\n\u0106"+
+		"\n\n\f\n\16\n\u0109\13\n\7\n\u010b\n\n\f\n\16\n\u010e\13\n\3\n\3\n\3\n"+
+		"\5\n\u0113\n\n\3\13\3\13\3\13\3\13\3\13\3\f\3\f\3\f\3\f\3\f\3\r\3\r\3"+
+		"\r\3\r\3\r\3\r\3\r\3\r\3\16\3\16\3\16\5\16\u012a\n\16\3\16\7\16\u012d"+
+		"\n\16\f\16\16\16\u0130\13\16\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3"+
+		"\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\7\17\u0142\n\17\f\17\16\17\u0145"+
+		"\13\17\3\17\3\17\5\17\u0149\n\17\3\20\3\20\3\20\3\20\5\20\u014f\n\20\3"+
+		"\21\3\21\3\21\5\21\u0154\n\21\3\22\3\22\3\22\7\22\u0159\n\22\f\22\16\22"+
+		"\u015c\13\22\3\23\3\23\3\23\7\23\u0161\n\23\f\23\16\23\u0164\13\23\3\24"+
+		"\3\24\3\24\3\24\3\24\3\24\5\24\u016c\n\24\3\25\3\25\3\26\5\26\u0171\n"+
+		"\26\3\26\3\26\3\26\5\26\u0176\n\26\3\26\7\26\u0179\n\26\f\26\16\26\u017c"+
+		"\13\26\3\27\3\27\3\27\3\27\3\27\3\27\3\27\3\27\3\27\5\27\u0187\n\27\3"+
+		"\30\3\30\3\30\3\30\3\31\3\31\3\31\3\31\3\32\3\32\3\32\3\32\3\32\3\32\3"+
+		"\33\3\33\3\33\3\33\3\33\3\34\3\34\3\34\3\34\3\34\3\35\3\35\3\35\3\35\3"+
+		"\35\3\36\3\36\3\36\3\36\3\36\3\37\3\37\3\37\3\37\3\37\5\37\u01b0\n\37"+
+		"\3 \3 \7 \u01b4\n \f \16 \u01b7\13 \3 \3 \3!\3!\3!\3!\3\"\3\"\3#\3#\3"+
+		"$\3$\3$\5$\u01c6\n$\3$\2\2%\2\4\6\b\n\f\16\20\22\24\26\30\32\34\36 \""+
+		"$&(*,.\60\62\64\668:<>@BDF\2\13\3\2\35\36\3\2\f\r\3\2\n\13\3\2\16\17\3"+
+		"\2\22\24\3\2./\3\2-.\4\2\21\21..\3\2\3\6\2\u01f1\2K\3\2\2\2\4^\3\2\2\2"+
+		"\6u\3\2\2\2\b\u00a8\3\2\2\2\n\u00d3\3\2\2\2\f\u00db\3\2\2\2\16\u00e5\3"+
+		"\2\2\2\20\u00e7\3\2\2\2\22\u00f5\3\2\2\2\24\u0114\3\2\2\2\26\u0119\3\2"+
+		"\2\2\30\u011e\3\2\2\2\32\u0126\3\2\2\2\34\u0131\3\2\2\2\36\u014e\3\2\2"+
+		"\2 \u0153\3\2\2\2\"\u0155\3\2\2\2$\u015d\3\2\2\2&\u016b\3\2\2\2(\u016d"+
+		"\3\2\2\2*\u0170\3\2\2\2,\u0186\3\2\2\2.\u0188\3\2\2\2\60\u018c\3\2\2\2"+
+		"\62\u0190\3\2\2\2\64\u0196\3\2\2\2\66\u019b\3\2\2\28\u01a0\3\2\2\2:\u01a5"+
+		"\3\2\2\2<\u01af\3\2\2\2>\u01b1\3\2\2\2@\u01ba\3\2\2\2B\u01be\3\2\2\2D"+
+		"\u01c0\3\2\2\2F\u01c5\3\2\2\2HJ\7+\2\2IH\3\2\2\2JM\3\2\2\2KI\3\2\2\2K"+
+		"L\3\2\2\2LR\3\2\2\2MK\3\2\2\2NQ\5\4\3\2OQ\5\b\5\2PN\3\2\2\2PO\3\2\2\2"+
+		"QT\3\2\2\2RP\3\2\2\2RS\3\2\2\2SX\3\2\2\2TR\3\2\2\2UW\7+\2\2VU\3\2\2\2"+
+		"WZ\3\2\2\2XV\3\2\2\2XY\3\2\2\2Y\\\3\2\2\2ZX\3\2\2\2[]\7\2\2\3\\[\3\2\2"+
+		"\2\\]\3\2\2\2]\3\3\2\2\2^c\5\6\4\2_`\7+\2\2`b\5\6\4\2a_\3\2\2\2be\3\2"+
+		"\2\2ca\3\2\2\2cd\3\2\2\2d\5\3\2\2\2ec\3\2\2\2fv\5\n\6\2gv\5\22\n\2hv\5"+
+		"\24\13\2iv\5\32\16\2jv\5\20\t\2kv\5\26\f\2lv\5\30\r\2mv\5\34\17\2nv\5"+
+		"\62\32\2ov\5\60\31\2pv\5\64\33\2qv\5\66\34\2rv\58\35\2sv\5:\36\2tv\7+"+
+		"\2\2uf\3\2\2\2ug\3\2\2\2uh\3\2\2\2ui\3\2\2\2uj\3\2\2\2uk\3\2\2\2ul\3\2"+
+		"\2\2um\3\2\2\2un\3\2\2\2uo\3\2\2\2up\3\2\2\2uq\3\2\2\2ur\3\2\2\2us\3\2"+
+		"\2\2ut\3\2\2\2v\7\3\2\2\2wx\7\"\2\2xy\7.\2\2y|\7!\2\2z}\5D#\2{}\7\7\2"+
+		"\2|z\3\2\2\2|{\3\2\2\2}~\3\2\2\2~\u0087\7\b\2\2\177\u0084\5\16\b\2\u0080"+
+		"\u0081\7\37\2\2\u0081\u0083\5\16\b\2\u0082\u0080\3\2\2\2\u0083\u0086\3"+
+		"\2\2\2\u0084\u0082\3\2\2\2\u0084\u0085\3\2\2\2\u0085\u0088\3\2\2\2\u0086"+
+		"\u0084\3\2\2\2\u0087\177\3\2\2\2\u0087\u0088\3\2\2\2\u0088\u0089\3\2\2"+
+		"\2\u0089\u008a\7\t\2\2\u008a\u008e\7%\2\2\u008b\u008d\5\6\4\2\u008c\u008b"+
+		"\3\2\2\2\u008d\u0090\3\2\2\2\u008e\u008c\3\2\2\2\u008e\u008f\3\2\2\2\u008f"+
+		"\u0091\3\2\2\2\u0090\u008e\3\2\2\2\u0091\u00a9\7&\2\2\u0092\u0093\7\""+
+		"\2\2\u0093\u0094\7.\2\2\u0094\u009d\7\b\2\2\u0095\u009a\5\16\b\2\u0096"+
+		"\u0097\7\37\2\2\u0097\u0099\5\16\b\2\u0098\u0096\3\2\2\2\u0099\u009c\3"+
+		"\2\2\2\u009a\u0098\3\2\2\2\u009a\u009b\3\2\2\2\u009b\u009e\3\2\2\2\u009c"+
+		"\u009a\3\2\2\2\u009d\u0095\3\2\2\2\u009d\u009e\3\2\2\2\u009e\u009f\3\2"+
+		"\2\2\u009f\u00a0\7\t\2\2\u00a0\u00a4\7%\2\2\u00a1\u00a3\5\6\4\2\u00a2"+
+		"\u00a1\3\2\2\2\u00a3\u00a6\3\2\2\2\u00a4\u00a2\3\2\2\2\u00a4\u00a5\3\2"+
+		"\2\2\u00a5\u00a7\3\2\2\2\u00a6\u00a4\3\2\2\2\u00a7\u00a9\7&\2\2\u00a8"+
+		"w\3\2\2\2\u00a8\u0092\3\2\2\2\u00a9\t\3\2\2\2\u00aa\u00ab\7\3\2\2\u00ab"+
+		"\u00ad\7.\2\2\u00ac\u00ae\5\f\7\2\u00ad\u00ac\3\2\2\2\u00ad\u00ae\3\2"+
+		"\2\2\u00ae\u00d4\3\2\2\2\u00af\u00b0\7\4\2\2\u00b0\u00b2\7.\2\2\u00b1"+
+		"\u00b3\5\f\7\2\u00b2\u00b1\3\2\2\2\u00b2\u00b3\3\2\2\2\u00b3\u00d4\3\2"+
+		"\2\2\u00b4\u00b5\7\6\2\2\u00b5\u00b7\7.\2\2\u00b6\u00b8\5\f\7\2\u00b7"+
+		"\u00b6\3\2\2\2\u00b7\u00b8\3\2\2\2\u00b8\u00d4\3\2\2\2\u00b9\u00ba\7\5"+
+		"\2\2\u00ba\u00bd\7.\2\2\u00bb\u00bc\7$\2\2\u00bc\u00be\5(\25\2\u00bd\u00bb"+
+		"\3\2\2\2\u00bd\u00be\3\2\2\2\u00be\u00d4\3\2\2\2\u00bf\u00c0\5D#\2\u00c0"+
+		"\u00c1\7\7\2\2\u00c1\u00d1\7.\2\2\u00c2\u00cf\7$\2\2\u00c3\u00d0\5\20"+
+		"\t\2\u00c4\u00c5\7%\2\2\u00c5\u00ca\5F$\2\u00c6\u00c7\7\37\2\2\u00c7\u00c9"+
+		"\5F$\2\u00c8\u00c6\3\2\2\2\u00c9\u00cc\3\2\2\2\u00ca\u00c8\3\2\2\2\u00ca"+
+		"\u00cb\3\2\2\2\u00cb\u00cd\3\2\2\2\u00cc\u00ca\3\2\2\2\u00cd\u00ce\7&"+
+		"\2\2\u00ce\u00d0\3\2\2\2\u00cf\u00c3\3\2\2\2\u00cf\u00c4\3\2\2\2\u00d0"+
+		"\u00d2\3\2\2\2\u00d1\u00c2\3\2\2\2\u00d1\u00d2\3\2\2\2\u00d2\u00d4\3\2"+
+		"\2\2\u00d3\u00aa\3\2\2\2\u00d3\u00af\3\2\2\2\u00d3\u00b4\3\2\2\2\u00d3"+
+		"\u00b9\3\2\2\2\u00d3\u00bf\3\2\2\2\u00d4\13\3\2\2\2\u00d5\u00d6\7$\2\2"+
+		"\u00d6\u00dc\5\36\20\2\u00d7\u00d8\7$\2\2\u00d8\u00dc\7/\2\2\u00d9\u00da"+
+		"\7$\2\2\u00da\u00dc\5 \21\2\u00db\u00d5\3\2\2\2\u00db\u00d7\3\2\2\2\u00db"+
+		"\u00d9\3\2\2\2\u00dc\r\3\2\2\2\u00dd\u00de\7\3\2\2\u00de\u00e6\7.\2\2"+
+		"\u00df\u00e0\7\4\2\2\u00e0\u00e6\7.\2\2\u00e1\u00e2\7\6\2\2\u00e2\u00e6"+
+		"\7.\2\2\u00e3\u00e4\7\5\2\2\u00e4\u00e6\7.\2\2\u00e5\u00dd\3\2\2\2\u00e5"+
+		"\u00df\3\2\2\2\u00e5\u00e1\3\2\2\2\u00e5\u00e3\3\2\2\2\u00e6\17\3\2\2"+
+		"\2\u00e7\u00e8\7.\2\2\u00e8\u00f1\7\b\2\2\u00e9\u00ee\5F$\2\u00ea\u00eb"+
+		"\7\37\2\2\u00eb\u00ed\5F$\2\u00ec\u00ea\3\2\2\2\u00ed\u00f0\3\2\2\2\u00ee"+
+		"\u00ec\3\2\2\2\u00ee\u00ef\3\2\2\2\u00ef\u00f2\3\2\2\2\u00f0\u00ee\3\2"+
+		"\2\2\u00f1\u00e9\3\2\2\2\u00f1\u00f2\3\2\2\2\u00f2\u00f3\3\2\2\2\u00f3"+
+		"\u00f4\7\t\2\2\u00f4\21\3\2\2\2\u00f5\u00f6\7\25\2\2\u00f6\u00f7\5@!\2"+
+		"\u00f7\u00f8\7\34\2\2\u00f8\u00fc\5> \2\u00f9\u00fb\7+\2\2\u00fa\u00f9"+
+		"\3\2\2\2\u00fb\u00fe\3\2\2\2\u00fc\u00fa\3\2\2\2\u00fc\u00fd\3\2\2\2\u00fd"+
+		"\u010c\3\2\2\2\u00fe\u00fc\3\2\2\2\u00ff\u0100\7\26\2\2\u0100\u0101\7"+
+		"\25\2\2\u0101\u0102\5@!\2\u0102\u0103\7\34\2\2\u0103\u0107\5> \2\u0104"+
+		"\u0106\7+\2\2\u0105\u0104\3\2\2\2\u0106\u0109\3\2\2\2\u0107\u0105\3\2"+
+		"\2\2\u0107\u0108\3\2\2\2\u0108\u010b\3\2\2\2\u0109\u0107\3\2\2\2\u010a"+
+		"\u00ff\3\2\2\2\u010b\u010e\3\2\2\2\u010c\u010a\3\2\2\2\u010c\u010d\3\2"+
+		"\2\2\u010d\u0112\3\2\2\2\u010e\u010c\3\2\2\2\u010f\u0110\7\26\2\2\u0110"+
+		"\u0111\7\34\2\2\u0111\u0113\5> \2\u0112\u010f\3\2\2\2\u0112\u0113\3\2"+
+		"\2\2\u0113\23\3\2\2\2\u0114\u0115\7\27\2\2\u0115\u0116\5@!\2\u0116\u0117"+
+		"\7\30\2\2\u0117\u0118\5> \2\u0118\25\3\2\2\2\u0119\u011a\7\32\2\2\u011a"+
+		"\u011b\5> \2\u011b\u011c\7\33\2\2\u011c\u011d\5@!\2\u011d\27\3\2\2\2\u011e"+
+		"\u011f\7\31\2\2\u011f\u0120\7\b\2\2\u0120\u0121\5\36\20\2\u0121\u0122"+
+		"\t\2\2\2\u0122\u0123\5\36\20\2\u0123\u0124\7\t\2\2\u0124\u0125\5> \2\u0125"+
+		"\31\3\2\2\2\u0126\u0129\7 \2\2\u0127\u012a\5\36\20\2\u0128\u012a\5(\25"+
+		"\2\u0129\u0127\3\2\2\2\u0129\u0128\3\2\2\2\u012a\u012e\3\2\2\2\u012b\u012d"+
+		"\7+\2\2\u012c\u012b\3\2\2\2\u012d\u0130\3\2\2\2\u012e\u012c\3\2\2\2\u012e"+
+		"\u012f\3\2\2\2\u012f\33\3\2\2\2\u0130\u012e\3\2\2\2\u0131\u0148\7.\2\2"+
+		"\u0132\u0133\7$\2\2\u0133\u0149\5\36\20\2\u0134\u0135\7#\2\2\u0135\u0136"+
+		"\7-\2\2\u0136\u0137\7$\2\2\u0137\u0149\5\36\20\2\u0138\u0139\7$\2\2\u0139"+
+		"\u0149\7/\2\2\u013a\u013b\7$\2\2\u013b\u0149\5 \21\2\u013c\u013d\7$\2"+
+		"\2\u013d\u013e\7%\2\2\u013e\u0143\5F$\2\u013f\u0140\7\37\2\2\u0140\u0142"+
+		"\5F$\2\u0141\u013f\3\2\2\2\u0142\u0145\3\2\2\2\u0143\u0141\3\2\2\2\u0143"+
+		"\u0144\3\2\2\2\u0144\u0146\3\2\2\2\u0145\u0143\3\2\2\2\u0146\u0147\7&"+
+		"\2\2\u0147\u0149\3\2\2\2\u0148\u0132\3\2\2\2\u0148\u0134\3\2\2\2\u0148"+
+		"\u0138\3\2\2\2\u0148\u013a\3\2\2\2\u0148\u013c\3\2\2\2\u0149\35\3\2\2"+
+		"\2\u014a\u014f\5\"\22\2\u014b\u014f\5\20\t\2\u014c\u014f\5\60\31\2\u014d"+
+		"\u014f\7.\2\2\u014e\u014a\3\2\2\2\u014e\u014b\3\2\2\2\u014e\u014c\3\2"+
+		"\2\2\u014e\u014d\3\2\2\2\u014f\37\3\2\2\2\u0150\u0154\5\"\22\2\u0151\u0154"+
+		"\5(\25\2\u0152\u0154\5.\30\2\u0153\u0150\3\2\2\2\u0153\u0151\3\2\2\2\u0153"+
+		"\u0152\3\2\2\2\u0154!\3\2\2\2\u0155\u015a\5$\23\2\u0156\u0157\t\3\2\2"+
+		"\u0157\u0159\5$\23\2\u0158\u0156\3\2\2\2\u0159\u015c\3\2\2\2\u015a\u0158"+
+		"\3\2\2\2\u015a\u015b\3\2\2\2\u015b#\3\2\2\2\u015c\u015a\3\2\2\2\u015d"+
+		"\u0162\5&\24\2\u015e\u015f\t\4\2\2\u015f\u0161\5&\24\2\u0160\u015e\3\2"+
+		"\2\2\u0161\u0164\3\2\2\2\u0162\u0160\3\2\2\2\u0162\u0163\3\2\2\2\u0163"+
+		"%\3\2\2\2\u0164\u0162\3\2\2\2\u0165\u016c\5<\37\2\u0166\u016c\5\20\t\2"+
+		"\u0167\u0168\7\b\2\2\u0168\u0169\5\"\22\2\u0169\u016a\7\t\2\2\u016a\u016c"+
+		"\3\2\2\2\u016b\u0165\3\2\2\2\u016b\u0166\3\2\2\2\u016b\u0167\3\2\2\2\u016c"+
+		"\'\3\2\2\2\u016d\u016e\5*\26\2\u016e)\3\2\2\2\u016f\u0171\7\20\2\2\u0170"+
+		"\u016f\3\2\2\2\u0170\u0171\3\2\2\2\u0171\u0172\3\2\2\2\u0172\u017a\5,"+
+		"\27\2\u0173\u0175\t\5\2\2\u0174\u0176\7\20\2\2\u0175\u0174\3\2\2\2\u0175"+
+		"\u0176\3\2\2\2\u0176\u0177\3\2\2\2\u0177\u0179\5,\27\2\u0178\u0173\3\2"+
+		"\2\2\u0179\u017c\3\2\2\2\u017a\u0178\3\2\2\2\u017a\u017b\3\2\2\2\u017b"+
+		"+\3\2\2\2\u017c\u017a\3\2\2\2\u017d\u017e\5\36\20\2\u017e\u017f\t\6\2"+
+		"\2\u017f\u0180\5\36\20\2\u0180\u0187\3\2\2\2\u0181\u0182\7\b\2\2\u0182"+
+		"\u0183\5*\26\2\u0183\u0184\7\t\2\2\u0184\u0187\3\2\2\2\u0185\u0187\5B"+
+		"\"\2\u0186\u017d\3\2\2\2\u0186\u0181\3\2\2\2\u0186\u0185\3\2\2\2\u0187"+
+		"-\3\2\2\2\u0188\u0189\t\7\2\2\u0189\u018a\7\f\2\2\u018a\u018b\t\7\2\2"+
+		"\u018b/\3\2\2\2\u018c\u018d\7.\2\2\u018d\u018e\7#\2\2\u018e\u018f\t\b"+
+		"\2\2\u018f\61\3\2\2\2\u0190\u0191\7.\2\2\u0191\u0192\7#\2\2\u0192\u0193"+
+		"\t\b\2\2\u0193\u0194\7$\2\2\u0194\u0195\5F$\2\u0195\63\3\2\2\2\u0196\u0197"+
+		"\7\'\2\2\u0197\u0198\7\b\2\2\u0198\u0199\5\36\20\2\u0199\u019a\7\t\2\2"+
+		"\u019a\65\3\2\2\2\u019b\u019c\7(\2\2\u019c\u019d\7\b\2\2\u019d\u019e\5"+
+		"\36\20\2\u019e\u019f\7\t\2\2\u019f\67\3\2\2\2\u01a0\u01a1\7)\2\2\u01a1"+
+		"\u01a2\7\b\2\2\u01a2\u01a3\5\36\20\2\u01a3\u01a4\7\t\2\2\u01a49\3\2\2"+
+		"\2\u01a5\u01a6\7*\2\2\u01a6\u01a7\7\b\2\2\u01a7\u01a8\5\36\20\2\u01a8"+
+		"\u01a9\7\t\2\2\u01a9;\3\2\2\2\u01aa\u01b0\7-\2\2\u01ab\u01b0\7,\2\2\u01ac"+
+		"\u01b0\7.\2\2\u01ad\u01ae\7\r\2\2\u01ae\u01b0\5<\37\2\u01af\u01aa\3\2"+
+		"\2\2\u01af\u01ab\3\2\2\2\u01af\u01ac\3\2\2\2\u01af\u01ad\3\2\2\2\u01b0"+
+		"=\3\2\2\2\u01b1\u01b5\7%\2\2\u01b2\u01b4\5\6\4\2\u01b3\u01b2\3\2\2\2\u01b4"+
+		"\u01b7\3\2\2\2\u01b5\u01b3\3\2\2\2\u01b5\u01b6\3\2\2\2\u01b6\u01b8\3\2"+
+		"\2\2\u01b7\u01b5\3\2\2\2\u01b8\u01b9\7&\2\2\u01b9?\3\2\2\2\u01ba\u01bb"+
+		"\7\b\2\2\u01bb\u01bc\5(\25\2\u01bc\u01bd\7\t\2\2\u01bdA\3\2\2\2\u01be"+
+		"\u01bf\t\t\2\2\u01bfC\3\2\2\2\u01c0\u01c1\t\n\2\2\u01c1E\3\2\2\2\u01c2"+
+		"\u01c6\5<\37\2\u01c3\u01c6\7/\2\2\u01c4\u01c6\7\21\2\2\u01c5\u01c2\3\2"+
+		"\2\2\u01c5\u01c3\3\2\2\2\u01c5\u01c4\3\2\2\2\u01c6G\3\2\2\2\61KPRX\\c"+
+		"u|\u0084\u0087\u008e\u009a\u009d\u00a4\u00a8\u00ad\u00b2\u00b7\u00bd\u00ca"+
+		"\u00cf\u00d1\u00d3\u00db\u00e5\u00ee\u00f1\u00fc\u0107\u010c\u0112\u0129"+
+		"\u012e\u0143\u0148\u014e\u0153\u015a\u0162\u016b\u0170\u0175\u017a\u0186"+
+		"\u01af\u01b5\u01c5";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

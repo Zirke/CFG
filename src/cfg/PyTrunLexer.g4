@@ -37,8 +37,9 @@ ASSIGN   : 'is' ;
 LCB      : '{' ;
 RCB      : '}' ;
 DRIVE    : 'drive';
-TURNLEFT    : 'turnleft';
-TURNRIGHT    : 'turnright';
+TURNLEFT : 'turnleft';
+TURNRIGHT: 'turnright';
+PAUSE     : 'pause';
 EOL      : NEWLINE+ ; //for newline
 FNUM     : ([0-9])+ '.' ([0-9])+ ;
 INUM     : ([0-9])+ ;

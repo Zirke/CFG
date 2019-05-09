@@ -388,7 +388,7 @@ public class PrettyPrintAST extends BasicAbstractNodeVisitor<AbstractNode> {
     @Override
     public AbstractNode visit(DriveStatement node) throws NoSuchMethodException{
         visit(node.getVal());
-        System.out.println("Drive Statmenet node");
+        System.out.println("Drive Statement node");
         return null;
     }
 
@@ -410,6 +410,13 @@ public class PrettyPrintAST extends BasicAbstractNodeVisitor<AbstractNode> {
     public AbstractNode visit(TurnRightStatement node) throws NoSuchMethodException{
         visit(node.getVal());
         System.out.println("Turn Right ast.Statement");
+        return null;
+    }
+
+    @Override
+    public AbstractNode visit(WaitStatement node) throws NoSuchMethodException{
+        visit(node.getVal());
+        System.out.println("Wait Statement node");
         return null;
     }
 }

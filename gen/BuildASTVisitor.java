@@ -664,4 +664,9 @@ public class BuildASTVisitor extends AbstractParseTreeVisitor<AbstractNode> impl
 	public AbstractNode visitTurnright(PyTrun.TurnrightContext ctx) {
 		return new TurnRightStatement((Value) visitValue(ctx.value()), ctx.getStart().getLine());
 	}
+
+	@Override
+	public AbstractNode visitPause(PyTrun.PauseContext ctx) {
+		return new WaitStatement((Value) visitValue(ctx.value()), ctx.getStart().getLine());
+	}
 }

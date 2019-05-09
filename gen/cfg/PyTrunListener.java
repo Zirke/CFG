@@ -1,4 +1,4 @@
-// Generated from C:/Users/Zirke/Documents/JavaProjects/CFG/src/cfg\PyTrun.g4 by ANTLR 4.7.2
+// Generated from C:/Users/Teodor/Dropbox/AAU/4.Semester/P4/CFG/src/cfg\PyTrun.g4 by ANTLR 4.7.2
 package cfg;
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
@@ -287,6 +287,16 @@ public interface PyTrunListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitTurnright(PyTrun.TurnrightContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link PyTrun#pause}.
+	 * @param ctx the parse tree
+	 */
+	void enterPause(PyTrun.PauseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PyTrun#pause}.
+	 * @param ctx the parse tree
+	 */
+	void exitPause(PyTrun.PauseContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link PyTrun#nums}.
 	 * @param ctx the parse tree

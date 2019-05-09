@@ -20,6 +20,7 @@ stmt
         | drive
         | turnleft
         | turnright
+        | pause
         //| BLOCKCOMMENT
         | EOL ;
 
@@ -121,6 +122,8 @@ drive   : DRIVE LPAR value RPAR;
 turnleft   : TURNLEFT LPAR value RPAR;
 
 turnright   : TURNRIGHT LPAR value RPAR;
+
+pause    : PAUSE LPAR value RPAR;
 
 nums
         : INUM

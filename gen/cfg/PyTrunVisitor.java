@@ -1,4 +1,4 @@
-// Generated from C:/Users/Zirke/Documents/JavaProjects/CFG/src/cfg\PyTrun.g4 by ANTLR 4.7.2
+// Generated from C:/Users/Teodor/Dropbox/AAU/4.Semester/P4/CFG/src/cfg\PyTrun.g4 by ANTLR 4.7.2
 package cfg;
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
@@ -178,6 +178,12 @@ public interface PyTrunVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitTurnright(PyTrun.TurnrightContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link PyTrun#pause}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPause(PyTrun.PauseContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link PyTrun#nums}.
 	 * @param ctx the parse tree
