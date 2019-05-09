@@ -2,6 +2,7 @@ package semanticAnalysis;
 
 import ast.*;
 import astVisitor.BasicAbstractNodeVisitor;
+import com.sun.jdi.Value;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -313,5 +314,10 @@ public class semanticVisitor extends BasicAbstractNodeVisitor {
                 getSizeOfArrays().replace(getListOfKeys().get(i), getListOfNumbers().get(i));
             }
         }
+    }
+
+    @Override
+    public Object visit(WaitStatement v) throws NoSuchMethodException {
+        return null;
     }
 }

@@ -3,3 +3,37 @@ truth t is true
 function lollern returns integer(integer x, integer y){
     return x
 }
+
+integer i is 042
+
+decimal d is 012390132.041020
+
+repeat {
+    i is 42 + 2
+    d is d + 1
+} until (i = 50)
+
+
+from(1 upto 5){
+
+    d is d + 1
+
+    from(1 upto 19){
+
+        d is d + 1
+
+        from (19 downto 2){
+
+            d is d + 1
+
+        }
+
+    }
+
+}
+
+drive(9)
+
+turnright(12)
+
+turnleft(14)

@@ -10,84 +10,17 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="08c3367c-482c-43b2-9911-903cc53e1dc6" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/artifacts/gen_jar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gen/ast/And.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gen/ast/ArithmOperator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gen/ast/ArithmParenthesis.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gen/ast/ArrayAsmValue.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gen/ast/ArrayAssignment.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gen/ast/ArrayDeclaration.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gen/ast/ArrayElementAddStatement.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gen/ast/ArrayIndexStatement.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gen/ast/Divide.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gen/ast/Downto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gen/ast/DriveStatement.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gen/ast/ElseIfStatement.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gen/ast/ElseThenStmt.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gen/ast/Equal.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gen/ast/FLOATDCL.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gen/ast/FloatDeclaration.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gen/ast/FloatLiteral.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gen/ast/FromKeyword.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gen/ast/FromStatement.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gen/ast/FunctionCall.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gen/ast/FunctionDeclaration.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gen/ast/GreaterThan.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gen/ast/INTDCL.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gen/ast/Identifier.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gen/ast/IfStatement.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gen/ast/IntDeclaration.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gen/ast/IntegerLiteral.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gen/ast/LessThan.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gen/ast/Minus.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gen/ast/MultipleElementAssign.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gen/ast/Not.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gen/ast/Operator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gen/ast/Or.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gen/ast/Parameter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gen/ast/Plus.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gen/ast/RepeatStatement.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gen/ast/ReturnFunctionDeclaration.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gen/ast/ReturnStatement.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gen/ast/SingleElementAssign.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gen/ast/Statement.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gen/ast/StatementList.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gen/ast/TEXTDCL.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gen/ast/TRUTHDCL.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gen/ast/Terminal.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gen/ast/TextAssignment.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gen/ast/TextDeclaration.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gen/ast/TextLiteral.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gen/ast/Times.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gen/ast/TruthDeclaration.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gen/ast/TruthLiteral.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gen/ast/TruthOperator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gen/ast/TruthParenthesis.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gen/ast/TurnLeftStatement.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gen/ast/TurnRightStatement.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gen/ast/Type.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gen/ast/Upto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gen/ast/Value.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gen/ast/ValueAssignment.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gen/ast/WhileStatement.java" afterDir="false" />
+    <list default="true" id="08c3367c-482c-43b2-9911-903cc53e1dc6" name="Default Changelist" comment="Default Changelist">
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/gen_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/gen_jar.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/parser_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/parser_jar.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CFG.iml" beforeDir="false" afterPath="$PROJECT_DIR$/CFG.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/AbstractNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/gen/ast/AbstractNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/AbstractNodeVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/gen/AbstractNodeVisitor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/BuildASTVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/gen/BuildASTVisitor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/PrettyPrintAST.java" beforeDir="false" afterPath="$PROJECT_DIR$/gen/PrettyPrintAST.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/PyTrun.interp" beforeDir="false" afterPath="$PROJECT_DIR$/gen/PyTrun.interp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/PyTrun.java" beforeDir="false" afterPath="$PROJECT_DIR$/gen/PyTrun.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/PyTrun.tokens" beforeDir="false" afterPath="$PROJECT_DIR$/gen/PyTrun.tokens" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/PyTrunLexer.interp" beforeDir="false" afterPath="$PROJECT_DIR$/gen/PyTrunLexer.interp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/PyTrunLexer.java" beforeDir="false" afterPath="$PROJECT_DIR$/gen/PyTrunLexer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/PyTrunLexer.tokens" beforeDir="false" afterPath="$PROJECT_DIR$/gen/PyTrunLexer.tokens" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PyTrunLexer.g4" beforeDir="false" afterPath="$PROJECT_DIR$/src/PyTrunLexer.g4" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Sym.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Sym.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SymbolTableVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SymbolTableVisitor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/program.trun" beforeDir="false" afterPath="$PROJECT_DIR$/src/program.trun" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gen/gen.iml" beforeDir="false" afterPath="$PROJECT_DIR$/gen/gen.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jar-files/gen.jar" beforeDir="false" afterPath="$PROJECT_DIR$/jar-files/gen.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/genFile.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/genFile.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/semanticAnalysis/semanticVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/semanticAnalysis/semanticVisitor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/symbolTable/SymbolTableVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/symbolTable/SymbolTableVisitor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/test.txt" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -108,35 +41,26 @@
       <file leaf-file-name="PrettyPrintAST.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/gen/PrettyPrintAST.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-4538">
-              <caret line="250" column="31" selection-start-line="250" selection-start-column="31" selection-end-line="250" selection-end-column="31" />
+            <state relative-caret-position="933">
+              <caret line="420" column="5" selection-start-line="420" selection-start-column="5" selection-end-line="420" selection-end-column="5" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Sym.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Sym.java">
+      <file leaf-file-name="SymbolTableVisitor.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/symbolTable/SymbolTableVisitor.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34">
-              <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+            <state relative-caret-position="466">
+              <caret line="590" column="20" selection-start-line="590" selection-start-column="20" selection-end-line="590" selection-end-column="20" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SymbolTable.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/SymbolTable.java">
+      <file leaf-file-name="semanticVisitor.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/semanticAnalysis/semanticVisitor.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-33">
-              <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SymbolTableVisitor.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/SymbolTableVisitor.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-170">
-              <caret line="2" selection-start-line="2" selection-end-line="2" />
+            <state relative-caret-position="-5287">
+              <caret line="10" column="23" selection-start-line="10" selection-start-column="23" selection-end-line="10" selection-end-column="23" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -144,64 +68,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PyTrun.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/gen/PyTrun.java">
+      <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-8347">
-              <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AbstractNodeVisitor.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/gen/AbstractNodeVisitor.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34">
-              <caret line="2" column="22" selection-start-line="2" selection-start-column="22" selection-end-line="2" selection-end-column="22" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="BuildASTVisitor.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/gen/BuildASTVisitor.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-407">
-              <caret line="191" selection-start-line="191" selection-end-line="191" />
-              <folding>
-                <element signature="method#visitStart#0;class#BuildASTVisitor#0" />
-                <element signature="method#visitStmts#0;class#BuildASTVisitor#0" />
-                <element signature="method#visitStmt#0;class#BuildASTVisitor#0" />
-                <element signature="method#visitFunctiondcl#0;class#BuildASTVisitor#0" />
-                <element signature="method#visitDcl#0;class#BuildASTVisitor#0" />
-                <element signature="method#visitTruedcl#0;class#BuildASTVisitor#0" />
-                <element signature="method#visitFunctioncall#0;class#BuildASTVisitor#0" />
-                <element signature="method#visitIfstmt#0;class#BuildASTVisitor#0" />
-                <element signature="method#visitWhilestmt#0;class#BuildASTVisitor#0" />
-                <element signature="method#visitRepeatuntilstmt#0;class#BuildASTVisitor#0" />
-                <element signature="method#visitFromstmt#0;class#BuildASTVisitor#0" />
-                <element signature="method#visitReturnstmt#0;class#BuildASTVisitor#0" />
-                <element signature="method#visitAssignment#0;class#BuildASTVisitor#0" />
-                <element signature="method#visitValue#0;class#BuildASTVisitor#0" />
-                <element signature="method#visitExpr#0;class#BuildASTVisitor#0" />
-                <element signature="method#visitArithmexpr#0;class#BuildASTVisitor#0" />
-                <element signature="e#11020#11083#0" />
-                <element signature="method#visitMultexpr#0;class#BuildASTVisitor#0" />
-                <element signature="method#visitParexpr#0;class#BuildASTVisitor#0" />
-                <element signature="method#visitTruthexpr#0;class#BuildASTVisitor#0" />
-                <element signature="method#visitLogicalexpr#0;class#BuildASTVisitor#0" />
-                <element signature="method#visitRelationalexpr#0;class#BuildASTVisitor#0" />
-                <element signature="method#visitAppend#0;class#BuildASTVisitor#0" />
-                <element signature="method#visitArrindex#0;class#BuildASTVisitor#0" />
-                <element signature="method#visitArradd#0;class#BuildASTVisitor#0" />
-                <element signature="method#visitNums#0;class#BuildASTVisitor#0" />
-                <element signature="method#visitStmtblock#0;class#BuildASTVisitor#0" />
-                <element signature="method#visitTruth#0;class#BuildASTVisitor#0" />
-                <element signature="method#visitType#0;class#BuildASTVisitor#0" />
-                <element signature="method#visitTypes#0;class#BuildASTVisitor#0" />
-                <element signature="method#visitDclValue#0;class#BuildASTVisitor#0" />
-                <element signature="method#visitTurnleft#0;class#BuildASTVisitor#0" />
-                <element signature="method#visitTurnright#0;class#BuildASTVisitor#0" />
-              </folding>
+            <state relative-caret-position="315">
+              <caret line="56" column="8" selection-start-line="56" selection-start-column="8" selection-end-line="56" selection-end-column="8" />
             </state>
           </provider>
         </entry>
@@ -218,22 +89,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>Value ass</find>
-      <find>returnS</find>
-      <find>dclVa</find>
-      <find>TruthOperator</find>
-      <find>truthopera</find>
-      <find>elseif</find>
-      <find>#te</find>
-      <find>ifst</find>
-      <find>arrayinde</find>
-      <find>arrinde</find>
-      <find>arra</find>
-      <find>returnsta</find>
-      <find>truthde</find>
-      <find>arrayInde</find>
-      <find>arrayde</find>
-      <find>truthdec</find>
       <find>ifsta</find>
       <find>Drive</find>
       <find>while</find>
@@ -248,6 +103,22 @@
       <find>swit</find>
       <find>para</find>
       <find>Not</find>
+      <find>singlee</find>
+      <find>upto</find>
+      <find>arrayassignme</find>
+      <find>arrayas</find>
+      <find>single</find>
+      <find>textdec</find>
+      <find>statement</find>
+      <find>returnfun</find>
+      <find>statementli</find>
+      <find>body</find>
+      <find>functiondec</find>
+      <find>drive</find>
+      <find>turnright</find>
+      <find>waut</find>
+      <find>seman</find>
+      <find>waits</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -256,16 +127,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/gen/ast/FromKeyword.java" />
-        <option value="$PROJECT_DIR$/gen/ast/Upto.java" />
-        <option value="$PROJECT_DIR$/gen/ast/Downto.java" />
-        <option value="$PROJECT_DIR$/gen/ast/Operator.java" />
-        <option value="$PROJECT_DIR$/gen/ast/INTDCL.java" />
-        <option value="$PROJECT_DIR$/gen/ast/TRUTHDCL.java" />
-        <option value="$PROJECT_DIR$/gen/ast/TEXTDCL.java" />
-        <option value="$PROJECT_DIR$/gen/ast/AbstractNode.java" />
-        <option value="$PROJECT_DIR$/gen/ast/Statement.java" />
-        <option value="$PROJECT_DIR$/gen/ast/And.java" />
         <option value="$PROJECT_DIR$/gen/ast/ArithmOperator.java" />
         <option value="$PROJECT_DIR$/gen/ast/ArithmParenthesis.java" />
         <option value="$PROJECT_DIR$/gen/ast/ArrayAssignment.java" />
@@ -299,14 +160,24 @@
         <option value="$PROJECT_DIR$/gen/ast/TruthDeclaration.java" />
         <option value="$PROJECT_DIR$/gen/ast/TruthOperator.java" />
         <option value="$PROJECT_DIR$/gen/ast/TruthParenthesis.java" />
-        <option value="$PROJECT_DIR$/gen/ast/TurnLeftStatement.java" />
         <option value="$PROJECT_DIR$/gen/ast/TurnRightStatement.java" />
         <option value="$PROJECT_DIR$/gen/ast/Type.java" />
         <option value="$PROJECT_DIR$/gen/ast/ValueAssignment.java" />
         <option value="$PROJECT_DIR$/gen/ast/WhileStatement.java" />
-        <option value="$PROJECT_DIR$/gen/PrettyPrintAST.java" />
-        <option value="$PROJECT_DIR$/gen/BuildASTVisitor.java" />
         <option value="$PROJECT_DIR$/src/SymbolTableVisitor.java" />
+        <option value="$PROJECT_DIR$/src/CodeGeneration/CodeGenVisitor.java" />
+        <option value="$PROJECT_DIR$/src/genFile.c" />
+        <option value="$PROJECT_DIR$/src/test.txt" />
+        <option value="$PROJECT_DIR$/gen/ast/TurnLeftStatement.java" />
+        <option value="$PROJECT_DIR$/src/cfg/PyTrunLexer.g4" />
+        <option value="$PROJECT_DIR$/src/cfg/PyTrun.g4" />
+        <option value="$PROJECT_DIR$/gen/ast/WaitStatement.java" />
+        <option value="$PROJECT_DIR$/gen/BuildASTVisitor.java" />
+        <option value="$PROJECT_DIR$/gen/astVisitor/BasicAbstractNodeVisitor.java" />
+        <option value="$PROJECT_DIR$/gen/PrettyPrintAST.java" />
+        <option value="$PROJECT_DIR$/src/symbolTable/SymbolTableVisitor.java" />
+        <option value="$PROJECT_DIR$/src/Main.java" />
+        <option value="$PROJECT_DIR$/src/semanticAnalysis/semanticVisitor.java" />
       </list>
     </option>
   </component>
@@ -331,7 +202,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -347,14 +217,44 @@
             <path>
               <item name="CFG" type="b2602c69:ProjectViewProjectNode" />
               <item name="CFG" type="462c0819:PsiDirectoryNode" />
+              <item name="jar-files" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CFG" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CFG" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CFG" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CFG" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="cfg" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CFG" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CFG" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="CodeGeneration" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CFG" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CFG" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="semanticAnalysis" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CFG" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CFG" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="symbolTable" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="AndroidView" />
       <pane id="PackagesPane" />
+      <pane id="AndroidView" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -362,11 +262,11 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1554191057844" />
-    <property name="last_opened_file_path" value="$USER_HOME$/Desktop/artifacts/gen_jar/gen.jar!/" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/jar-files" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
-    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
@@ -397,11 +297,7 @@
           <option name="mySupportsDeletion" value="false" />
           <option name="myCanBeAbsent" value="false" />
           <option name="myId" value="UPDATED" />
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Main.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/PyTrun.g4</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Sym.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/SymbolTable.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/SymbolTableVisitor.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/CodeGeneration/CodeGenVisitor.java</PATH>
         </FILE-GROUP>
         <FILE-GROUP>
           <option name="myUpdateName" value="Created" />
@@ -594,24 +490,45 @@
       <workItem from="1554987135117" duration="10578000" />
       <workItem from="1555256125475" duration="31388000" />
       <workItem from="1555757840904" duration="45051000" />
+      <workItem from="1557304378572" duration="14317000" />
     </task>
+    <task id="LOCAL-00001" summary="Hejsa changes to Arrays.">
+      <created>1557310430606</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1557310430606</updated>
+    </task>
+    <task id="LOCAL-00002" summary="calloc code gen for arraydcl">
+      <created>1557313255475</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1557313255475</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Default Changelist">
+      <created>1557389460313</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1557389460313</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="215856000" />
+    <option name="totallyTimeSpent" value="230173000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-6" y="-6" width="1549" height="837" extended-state="6" />
-    <editor active="true" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
-      <window_info anchor="bottom" id="Tool Output" order="12" weight="0.32786885" />
-      <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
+      <window_info anchor="bottom" id="Tool Output" order="12" weight="0.32731137" />
+      <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" weight="0.32943678" />
       <window_info anchor="right" id="Maven Projects" order="2" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info id="Capture Tool" order="5" />
       <window_info id="Designer" order="3" />
-      <window_info anchor="bottom" id="Inspection Results" weight="0.329235" />
       <window_info anchor="right" id="Database" order="9" />
       <window_info anchor="bottom" id="ANTLR Preview" order="13" weight="0.6967213" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -619,15 +536,15 @@
       <window_info id="UI Designer" order="4" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3989071" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Messages" order="14" weight="0.329235" />
+      <window_info anchor="bottom" id="Messages" order="15" weight="0.32837406" />
       <window_info anchor="right" id="Palette&#9;" order="8" />
       <window_info id="Image Layers" order="2" />
       <window_info anchor="right" id="Capture Analysis" order="7" />
-      <window_info anchor="bottom" id="Version Control" order="8" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.329235" />
+      <window_info anchor="bottom" id="Version Control" order="8" weight="0.32943678" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32837406" />
       <window_info anchor="bottom" id="Terminal" order="10" weight="0.32955405" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24983734" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.329235" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.13072917" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32837406" />
       <window_info anchor="right" id="Theme Preview" order="5" />
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -637,41 +554,8 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="right" id="Maven" order="6" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection Results" order="14" weight="0.329235" />
     </layout>
-    <layout-to-restore>
-      <window_info anchor="right" id="Maven" order="6" />
-      <window_info id="Designer" order="3" />
-      <window_info anchor="right" id="Palette" order="3" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.329235" />
-      <window_info id="Image Layers" order="2" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info id="Capture Tool" order="5" />
-      <window_info id="UI Designer" order="4" />
-      <window_info id="Favorites" order="6" side_tool="true" />
-      <window_info anchor="bottom" id="Terminal" order="10" weight="0.32955405" />
-      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="right" id="Capture Analysis" order="7" />
-      <window_info anchor="bottom" id="Tool Output" order="12" weight="0.32786885" />
-      <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
-      <window_info anchor="bottom" id="Messages" order="14" weight="0.329235" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Database Changes" order="9" />
-      <window_info anchor="bottom" id="Version Control" order="8" />
-      <window_info anchor="right" id="Maven Projects" order="2" />
-      <window_info anchor="bottom" id="ANTLR Preview" order="13" weight="0.6967213" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.329235" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24983734" />
-      <window_info anchor="right" id="Database" order="9" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="right" id="Palette&#9;" order="8" />
-      <window_info anchor="right" id="Theme Preview" order="5" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.3989071" />
-    </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
@@ -679,245 +563,18 @@
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Hejsa changes to Arrays." />
+    <MESSAGE value="calloc code gen for arraydcl" />
+    <MESSAGE value="Default Changelist" />
+    <option name="LAST_COMMIT_MESSAGE" value="Default Changelist" />
+  </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <option name="time" value="2" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/gen/ast/FloatDeclaration.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="31" selection-start-line="11" selection-start-column="31" selection-end-line="11" selection-end-column="31" />
-          <folding>
-            <element signature="e#262#263#0" expanded="true" />
-            <element signature="e#302#303#0" expanded="true" />
-            <element signature="e#330#331#0" expanded="true" />
-            <element signature="e#359#360#0" expanded="true" />
-            <element signature="e#385#386#0" expanded="true" />
-            <element signature="e#422#423#0" expanded="true" />
-            <element signature="e#452#453#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gen/ast/FloatLiteral.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gen/ast/FromKeyword.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="22" selection-start-line="2" selection-start-column="22" selection-end-line="2" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gen/ast/FromStatement.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="15" column="31" selection-start-line="15" selection-start-column="31" selection-end-line="15" selection-end-column="31" />
-          <folding>
-            <element signature="e#451#452#0" expanded="true" />
-            <element signature="e#496#497#0" expanded="true" />
-            <element signature="e#534#535#0" expanded="true" />
-            <element signature="e#565#566#0" expanded="true" />
-            <element signature="e#593#594#0" expanded="true" />
-            <element signature="e#634#635#0" expanded="true" />
-            <element signature="e#668#669#0" expanded="true" />
-            <element signature="e#712#713#0" expanded="true" />
-            <element signature="e#747#748#0" expanded="true" />
-            <element signature="e#808#809#0" expanded="true" />
-            <element signature="e#856#857#0" expanded="true" />
-            <element signature="e#895#896#0" expanded="true" />
-            <element signature="e#923#924#0" expanded="true" />
-            <element signature="e#972#973#0" expanded="true" />
-            <element signature="e#1006#1007#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gen/ast/FunctionCall.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="13" column="41" selection-start-line="13" selection-start-column="41" selection-end-line="13" selection-end-column="41" />
-          <folding>
-            <element signature="e#406#407#0" expanded="true" />
-            <element signature="e#466#467#0" expanded="true" />
-            <element signature="e#514#515#0" expanded="true" />
-            <element signature="e#555#556#0" expanded="true" />
-            <element signature="e#587#588#0" expanded="true" />
-            <element signature="e#642#643#0" expanded="true" />
-            <element signature="e#684#685#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gen/ast/FunctionDeclaration.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="16" column="41" selection-start-line="16" selection-start-column="41" selection-end-line="16" selection-end-column="41" />
-          <folding>
-            <element signature="e#517#518#0" expanded="true" />
-            <element signature="e#577#578#0" expanded="true" />
-            <element signature="e#625#626#0" expanded="true" />
-            <element signature="e#671#672#0" expanded="true" />
-            <element signature="e#704#705#0" expanded="true" />
-            <element signature="e#765#766#0" expanded="true" />
-            <element signature="e#809#810#0" expanded="true" />
-            <element signature="e#851#852#0" expanded="true" />
-            <element signature="e#882#883#0" expanded="true" />
-            <element signature="e#937#938#0" expanded="true" />
-            <element signature="e#977#978#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gen/ast/GreaterThan.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="13" column="4" lean-forward="true" selection-start-line="13" selection-start-column="4" selection-end-line="13" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gen/ast/Identifier.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gen/ast/IfStatement.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="35">
-          <caret line="34" column="32" selection-start-line="34" selection-start-column="32" selection-end-line="34" selection-end-column="32" />
-          <folding>
-            <element signature="e#1042#1043#0" expanded="true" />
-            <element signature="e#1089#1090#0" expanded="true" />
-            <element signature="e#1129#1130#0" expanded="true" />
-            <element signature="e#1170#1171#0" expanded="true" />
-            <element signature="e#1200#1201#0" expanded="true" />
-            <element signature="e#1253#1254#0" expanded="true" />
-            <element signature="e#1291#1292#0" expanded="true" />
-            <element signature="e#1340#1341#0" expanded="true" />
-            <element signature="e#1370#1371#0" expanded="true" />
-            <element signature="e#1431#1432#0" expanded="true" />
-            <element signature="e#1469#1470#0" expanded="true" />
-            <element signature="e#1510#1511#0" expanded="true" />
-            <element signature="e#1541#1542#0" expanded="true" />
-            <element signature="e#1595#1596#0" expanded="true" />
-            <element signature="e#1635#1636#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gen/ast/INTDCL.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gen/ast/IntDeclaration.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="13" column="31" selection-start-line="13" selection-start-column="31" selection-end-line="13" selection-end-column="31" />
-          <folding>
-            <element signature="e#279#280#0" expanded="true" />
-            <element signature="e#319#320#0" expanded="true" />
-            <element signature="e#347#348#0" expanded="true" />
-            <element signature="e#376#377#0" expanded="true" />
-            <element signature="e#402#403#0" expanded="true" />
-            <element signature="e#439#440#0" expanded="true" />
-            <element signature="e#469#470#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gen/ast/IntegerLiteral.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gen/ast/LessThan.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="5" lean-forward="true" selection-start-line="11" selection-start-column="5" selection-end-line="11" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gen/ast/Minus.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gen/ast/MultipleElementAssign.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="11" column="38" selection-start-line="11" selection-start-column="38" selection-end-line="11" selection-end-column="38" />
-          <folding>
-            <element signature="e#292#293#0" expanded="true" />
-            <element signature="e#345#346#0" expanded="true" />
-            <element signature="e#385#386#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gen/ast/Not.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="13" column="29" selection-start-line="13" selection-start-column="29" selection-end-line="13" selection-end-column="29" />
-          <folding>
-            <element signature="e#261#262#0" expanded="true" />
-            <element signature="e#302#303#0" expanded="true" />
-            <element signature="e#336#337#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gen/ast/Operator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="22" selection-start-line="2" selection-start-column="22" selection-end-line="2" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gen/ast/Or.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gen/ast/Parameter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" column="32" selection-start-line="14" selection-start-column="32" selection-end-line="14" selection-end-column="32" />
-          <folding>
-            <element signature="e#365#366#0" expanded="true" />
-            <element signature="e#413#414#0" expanded="true" />
-            <element signature="e#455#456#0" expanded="true" />
-            <element signature="e#488#489#0" expanded="true" />
-            <element signature="e#513#514#0" expanded="true" />
-            <element signature="e#553#554#0" expanded="true" />
-            <element signature="e#581#582#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gen/ast/Plus.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/gen/ast/RepeatStatement.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
@@ -1094,18 +751,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/gen/ast/TurnLeftStatement.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="9" column="27" selection-start-line="9" selection-start-column="27" selection-end-line="9" selection-end-column="27" />
-          <folding>
-            <element signature="e#205#206#0" expanded="true" />
-            <element signature="e#242#243#0" expanded="true" />
-            <element signature="e#272#273#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/gen/ast/TruthOperator.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="527">
@@ -1200,25 +845,120 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/gen/AbstractNodeVisitor.java">
+    <entry file="file://$PROJECT_DIR$/gen/AbstractNodeVisitor.java" />
+    <entry file="file://$PROJECT_DIR$/gen/PyTrun.java" />
+    <entry file="file://$PROJECT_DIR$/src/Sym.java" />
+    <entry file="file://$PROJECT_DIR$/src/SymbolTable.java" />
+    <entry file="file://$PROJECT_DIR$/src/SymbolTableVisitor.java" />
+    <entry file="jar://$PROJECT_DIR$/jar-files/gen.jar!/ast/ArrayAssignment.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="22" selection-start-line="2" selection-start-column="22" selection-end-line="2" selection-end-column="22" />
+        <state relative-caret-position="80">
+          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/prog">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="12" column="20" lean-forward="true" selection-start-line="12" selection-start-column="20" selection-end-line="12" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/jar-files/gen.jar!/ast/Identifier.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="80">
+          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/jar-files/gen.jar!/ast/Type.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="220">
+          <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/jar-files/gen.jar!/ast/FunctionDeclaration.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="13" lean-forward="true" selection-start-line="13" selection-end-line="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/jar-files/gen.jar!/ast/ReturnFunctionDeclaration.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="25" lean-forward="true" selection-start-line="25" selection-end-line="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="527">
+          <caret line="38" column="12" selection-start-line="38" selection-start-column="12" selection-end-line="38" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/CodeGeneration/CodeGenVisitor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="372">
+          <caret line="257" column="13" lean-forward="true" selection-start-line="257" selection-start-column="13" selection-end-line="257" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/genFile.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="796">
+          <caret line="47" column="1" selection-start-line="47" selection-start-column="1" selection-end-line="47" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gen/ast/TurnLeftStatement.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="280">
+          <caret line="18" selection-start-line="18" selection-end-line="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gen/astVisitor/AbstractNodeVisitor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-287">
+          <caret line="7" column="22" selection-start-line="7" selection-start-column="22" selection-end-line="7" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/symbolTable/SymbolTable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="80">
+          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gen/cfg/PyTrun.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1354">
+          <caret line="372" column="27" selection-start-line="372" selection-start-column="27" selection-end-line="372" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gen/ast/WaitStatement.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="40">
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+          <folding>
+            <element signature="e#219#220#0" expanded="true" />
+            <element signature="e#245#246#0" expanded="true" />
+            <element signature="e#282#283#0" expanded="true" />
+            <element signature="e#312#313#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/gen/BuildASTVisitor.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-407">
-          <caret line="191" selection-start-line="191" selection-end-line="191" />
+        <state relative-caret-position="673">
+          <caret line="666" selection-start-line="666" selection-end-line="666" />
           <folding>
-            <element signature="method#visitStart#0;class#BuildASTVisitor#0" />
-            <element signature="method#visitStmts#0;class#BuildASTVisitor#0" />
-            <element signature="method#visitStmt#0;class#BuildASTVisitor#0" />
-            <element signature="method#visitFunctiondcl#0;class#BuildASTVisitor#0" />
-            <element signature="method#visitDcl#0;class#BuildASTVisitor#0" />
-            <element signature="method#visitTruedcl#0;class#BuildASTVisitor#0" />
-            <element signature="method#visitFunctioncall#0;class#BuildASTVisitor#0" />
             <element signature="method#visitIfstmt#0;class#BuildASTVisitor#0" />
             <element signature="method#visitWhilestmt#0;class#BuildASTVisitor#0" />
             <element signature="method#visitRepeatuntilstmt#0;class#BuildASTVisitor#0" />
@@ -1228,7 +968,6 @@
             <element signature="method#visitValue#0;class#BuildASTVisitor#0" />
             <element signature="method#visitExpr#0;class#BuildASTVisitor#0" />
             <element signature="method#visitArithmexpr#0;class#BuildASTVisitor#0" />
-            <element signature="e#11020#11083#0" />
             <element signature="method#visitMultexpr#0;class#BuildASTVisitor#0" />
             <element signature="method#visitParexpr#0;class#BuildASTVisitor#0" />
             <element signature="method#visitTruthexpr#0;class#BuildASTVisitor#0" />
@@ -1243,44 +982,59 @@
             <element signature="method#visitType#0;class#BuildASTVisitor#0" />
             <element signature="method#visitTypes#0;class#BuildASTVisitor#0" />
             <element signature="method#visitDclValue#0;class#BuildASTVisitor#0" />
-            <element signature="method#visitTurnleft#0;class#BuildASTVisitor#0" />
-            <element signature="method#visitTurnright#0;class#BuildASTVisitor#0" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/gen/PyTrun.java">
+    <entry file="file://$PROJECT_DIR$/gen/gen.iml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gen/astVisitor/BasicAbstractNodeVisitor.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-8347">
-          <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
+        <state relative-caret-position="673">
+          <caret line="54" column="76" selection-start-line="54" selection-start-column="76" selection-end-line="54" selection-end-column="76" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cfg/PyTrunLexer.g4">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="820">
+          <caret line="41" column="18" selection-start-line="41" selection-start-column="18" selection-end-line="41" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cfg/PyTrun.g4">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2620">
+          <caret line="131" selection-start-line="131" selection-end-line="131" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/gen/PrettyPrintAST.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-4538">
-          <caret line="250" column="31" selection-start-line="250" selection-start-column="31" selection-end-line="250" selection-end-column="31" />
+        <state relative-caret-position="933">
+          <caret line="420" column="5" selection-start-line="420" selection-start-column="5" selection-end-line="420" selection-end-column="5" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Sym.java">
+    <entry file="file://$PROJECT_DIR$/src/symbolTable/SymbolTableVisitor.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+        <state relative-caret-position="466">
+          <caret line="590" column="20" selection-start-line="590" selection-start-column="20" selection-end-line="590" selection-end-column="20" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/SymbolTable.java">
+    <entry file="file://$PROJECT_DIR$/src/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-33">
-          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+        <state relative-caret-position="315">
+          <caret line="56" column="8" selection-start-line="56" selection-start-column="8" selection-end-line="56" selection-end-column="8" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/SymbolTableVisitor.java">
+    <entry file="file://$PROJECT_DIR$/src/semanticAnalysis/semanticVisitor.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-170">
-          <caret line="2" selection-start-line="2" selection-end-line="2" />
+        <state relative-caret-position="-5287">
+          <caret line="10" column="23" selection-start-line="10" selection-start-column="23" selection-end-line="10" selection-end-column="23" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
