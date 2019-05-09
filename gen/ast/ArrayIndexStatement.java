@@ -1,6 +1,6 @@
 package ast;
 
-public class ArrayIndexStatement extends Statement{
+public class ArrayIndexStatement extends Statement implements Value{
     Identifier id;
     Value number;
 
