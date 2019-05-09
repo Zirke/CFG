@@ -582,6 +582,10 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
         return null;
     }
 
+    public void stringSetup(){
+        GenSetup stringSetup = new GenSetup();
+        emitter.emit(stringSetup.stringCompare());
+    }
 
     public void setup() {
         GenSetup setup = new GenSetup();

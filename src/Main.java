@@ -4,9 +4,8 @@ import ast.AbstractNode;
 import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
-import parser.PyTrun;
-import parser.PyTrunLexer;
-import semanticAnalysis.semanticVisitor;
+import cfg.PyTrun;
+import cfg.PyTrunLexer;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -16,7 +15,7 @@ import java.io.IOException;
 public class Main{
 
     public static void main(String[] args) throws IOException {
-        File file = new File("src/prog");
+        File file = new File("src/test.txt");
         String d = "";
         BufferedReader br = new BufferedReader(new FileReader(file));
 
@@ -54,14 +53,8 @@ public class Main{
         // System.out.println(ast);
 
         symbolTable.SymbolTableVisitor symbolTableVisitor = new symbolTable.SymbolTableVisitor();
-        semanticVisitor sV = new semanticVisitor();
         try {
             symbolTableVisitor.visit(ast);
-            sV.visit(ast);
-            sV.establishArrayHashMap();
-            for(String s: sV.getSizeOfArrays().keySet()){
-                System.out.println("array " + s + " has size " + sV.getSizeOfArrays().get(s));
-            }
 
         }catch (NoSuchMethodException e){
             System.out.println(e);
@@ -69,7 +62,7 @@ public class Main{
 
         Emitter emitter = new Emitter();
         CodeGenVisitor codeGenFunctionVisitor = new CodeGenVisitor(emitter, true);
-        codeGenFunctionVisitor.setupStringCompare();
+        codeGenFunctionVisitor.stringSetup();
         try {
             codeGenFunctionVisitor.visit(ast);
         } catch (NoSuchMethodException e) {
