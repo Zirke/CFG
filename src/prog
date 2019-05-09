@@ -1,43 +1,7 @@
-/#
+truth b
 
-integer i is 4
-decimal e is 4 + 3 - 2
-truth f is true AND false AND true
-text k is "hhshs"
-integer array ds is {2,3,3,4,5}
+if(b) then{
 
-if(true) then{
-integer i
-}else if(true) then{
-integer c
-}else if(true) then{
- integer c
- }
- else if(true) then{
- integer c
- }
-else then{
-integer k
-}
-while(false) do{
-integer i
-}
-repeat{
-}until(true)
-from(2 upto x){
-}
-from(3 downto x){
-}
-
-
-function functionanem returns integer (integer k){
-}
-integer id is f(10)
-if (true) then {
-    integer i
-}else if (d) then {
-    i is 4
 }else then{
-    i is 5
+
 }
-#/

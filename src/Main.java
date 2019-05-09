@@ -12,7 +12,7 @@ import java.io.IOException;
 public class Main{
 
     public static void main(String[] args) throws IOException {
-        File file = new File("src/test.txt");
+        File file = new File("src/prog");
         String d = "";
         BufferedReader br = new BufferedReader(new FileReader(file));
 

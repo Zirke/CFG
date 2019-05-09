@@ -1,15 +1,16 @@
-package semanticAnalysis;
+package ReachabilityAnalysis;
 
 import ast.*;
 import astVisitor.BasicAbstractNodeVisitor;
-import com.sun.jdi.Value;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class semanticVisitor extends BasicAbstractNodeVisitor {
+public class ReachabilityVisitor extends BasicAbstractNodeVisitor {
 
+    private boolean isReachable;
+    private boolean terminatesNormally;
     private HashMap<String, Integer> sizeOfArrays = new HashMap<>();
     private List<Integer> listOfNumbers = new ArrayList<>();
     private List<String> listOfKeys = new ArrayList<>();
@@ -30,7 +31,7 @@ public class semanticVisitor extends BasicAbstractNodeVisitor {
         return listOfKeys;
     }
 
-    public HashMap<String, Integer> getSizeOfArrays() {
+    public HashMap<String, Integer> getSizeOfArraysMap() {
         return sizeOfArrays;
     }
 
@@ -53,12 +54,12 @@ public class semanticVisitor extends BasicAbstractNodeVisitor {
 
     @Override
     public Object visit(ArrayDeclaration arrayDeclaration) throws NoSuchMethodException {
-        Value value = (Value) visit((visitable) arrayDeclaration.getValues());
+        //Value value = (Value) visit((visitable) arrayDeclaration.getValues());
 
 
-        if(value == null){
-            arraySize(0);
-        }
+        //if(value == null){
+        arraySize(0);
+        //}
         orderOfArrays(arrayDeclaration.getId().getSpelling());
         return null;
     }
@@ -180,9 +181,9 @@ public class semanticVisitor extends BasicAbstractNodeVisitor {
 
     @Override
     public Object visit(MultipleElementAssign multipleElementAssign) throws NoSuchMethodException {
-        if (!multipleElementAssign.getElements().isEmpty()) {
+        /*if (!multipleElementAssign.getElements().isEmpty()) {
             arraySize(multipleElementAssign.getElements().size());
-        }
+        }*/
         return null;
     }
 
@@ -305,19 +306,19 @@ public class semanticVisitor extends BasicAbstractNodeVisitor {
         return null;
     }
 
+    @Override
+    public Object visit(PauseStatement pauseStatement) throws NoSuchMethodException {
+        return null;
+    }
+
     //creates map of arrays and their sizes for code gen.
     public void establishArrayHashMap(){
         for (int i=0; i<getListOfKeys().size(); i++) {
-            if(!getSizeOfArrays().containsKey(i)) {
-                getSizeOfArrays().put(getListOfKeys().get(i),getListOfNumbers().get(i));
-            }else if(getSizeOfArrays().get(i) > getListOfNumbers().get(i)) {
-                getSizeOfArrays().replace(getListOfKeys().get(i), getListOfNumbers().get(i));
+            if(!getSizeOfArraysMap().containsKey(getListOfKeys().get(i))) {
+                getSizeOfArraysMap().put(getListOfKeys().get(i),getListOfNumbers().get(i));
+            }else if(getSizeOfArraysMap().get(getListOfKeys().get(i)) < getListOfNumbers().get(i)) {
+                getSizeOfArraysMap().replace(getListOfKeys().get(i), getListOfNumbers().get(i));
             }
         }
-    }
-
-    @Override
-    public Object visit(PauseStatement v) throws NoSuchMethodException {
-        return null;
     }
 }
