@@ -106,7 +106,7 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
     public Object visit(ElseIfStatement elseIfStatement) throws NoSuchMethodException {
         emitter.emit("else if(");
         visit(elseIfStatement.getTruth());
-        emitter.emit("){");
+        emitter.emit("){\n");
         visit(elseIfStatement.getStms());
         emitter.emit("} ");
         return null;
@@ -239,8 +239,11 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
         visit(functionCall.getFunctionName());
         emitter.emit("(");
         // Visit each argument in the functionCall argument list
-        for (Value val : functionCall.getArguments()) {
-            visit(val);
+        for(int i = 0; i < functionCall.getArguments().size(); i++){
+            visit(functionCall.getArguments().get(i));
+            if(functionCall.getArguments().size() > 1 && functionCall.getArguments().size() != i+1){
+                emitter.emit(",");
+            }
         }
         emitter.emit(")");
         return null;
@@ -258,8 +261,10 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
             }
         }
         emitter.emit(") {\n");
+        this.isFunctionGen = false;
         visit(functionDeclaration.getStmtBody());
         emitter.emit("\n}");
+        this.isFunctionGen = true;
 
         return null;
     }
@@ -398,8 +403,10 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
             }
         }
         emitter.emit("){\n");
+        this.isFunctionGen = false;
         visit(returnFunctionDeclaration.getStmtBody());
         emitter.emit("}\n");
+        this.isFunctionGen = true;
         return null;
     }
 
@@ -426,16 +433,16 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
 
         for (Statement s : statementList.getStmts()) {
             if (!isFunctionGen) {
-                if(!((s instanceof FunctionDeclaration) || (s instanceof ReturnFunctionDeclaration))){
+                if(!(s instanceof FunctionDeclaration)){
                     visit(s);
-                    if (!((s instanceof WhileStatement) || (s instanceof FromStatement))) {
+                    if (!(s instanceof WhileStatement || s instanceof FromStatement || s instanceof IfStatement)) {
                         emitter.emit(";\n");
                     } else {
                         emitter.emit("\n");
                     }
                 }
-            }else{
-                if((s instanceof FunctionDeclaration) || (s instanceof ReturnFunctionDeclaration)){
+            }else if (isFunctionGen){
+                if(s instanceof FunctionDeclaration){
                     visit(s);
                     emitter.emit("\n");
                 }
