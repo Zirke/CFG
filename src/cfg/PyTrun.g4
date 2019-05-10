@@ -3,12 +3,12 @@ parser grammar PyTrun;
 options { tokenVocab=PyTrunLexer; }
 
 start
-        : EOL* (stmts | functiondcl)* EOL* EOF?;
+        : stmts EOF?;//EOL* (stmts | functiondcl)* EOL* EOF?;
 stmts
-        : stmt (EOL stmt)*;
+        : EOL* dcl* arrdcl* functiondcl* stmt*;//stmt (EOL stmt)*;
 stmt
-        : dcl //TODO : move to stmts
-        | ifstmt
+        : //dcl
+          ifstmt
         | whilestmt
         | returnstmt
         | functioncall
@@ -21,13 +21,11 @@ stmt
         | turnleft
         | turnright
         | pause
-        //| BLOCKCOMMENT
         | EOL ;
 
 functiondcl
-
-        : FUNCTION ID RETURNS (type | ARRDCL) LPAR (truedcl (COMMA truedcl)*)? RPAR LCB stmt* RCB //TODO: FIxed superfluous asterisk hereh
-        | FUNCTION ID LPAR (truedcl (COMMA truedcl)*)? RPAR LCB stmt* RCB ;
+        : FUNCTION ID RETURNS type LPAR (truedcl (COMMA truedcl)*)? RPAR stmtblock
+        | FUNCTION ID LPAR (truedcl (COMMA truedcl)*)? RPAR stmtblock ;
 
 
 dcl
@@ -35,7 +33,12 @@ dcl
         |  FLOATDCL ID dclValue?
         |  TEXTDCL ID dclValue?
         |  TRUTHDCL ID (ASSIGN truthexpr)?
-        |  type ARRDCL ID (ASSIGN ((functioncall) | LCB (types (COMMA types)*) RCB))?; //TODO: FIxed superfluous asterisk here
+        | EOL
+        ;//(ASSIGN ((functioncall) | LCB (types (COMMA types)*) RCB))?;
+
+arrdcl :
+        type ARRDCL  ID
+        | EOL;
 
 dclValue
         :( ASSIGN value
@@ -49,7 +52,7 @@ truedcl
         | TRUTHDCL ID ;
 
 functioncall
-        : ID LPAR (types (COMMA types)*)? RPAR; //TODO: FIxed superfluous asterisk here
+        : ID LPAR (types (COMMA types)*)? RPAR;
 
 ifstmt
         : IF truthpar THEN stmtblock EOL*
@@ -63,23 +66,25 @@ repeatuntilstmt
         : REPEAT stmtblock UNTIL truthpar ;
 
 fromstmt
-        : FROM LPAR value (UPTO | DOWNTO) value RPAR stmtblock ;
+        : FROM LPAR valueorfunctioncall  (UPTO | DOWNTO) valueorfunctioncall RPAR stmtblock ;
 
 returnstmt
-        : RETURN (value | truthexpr) EOL* ;
+        : RETURN (valueorfunctioncall | truthexpr) EOL* ;
 
 assignment
-        : ID ( ASSIGN value
-        |  ELEMENT INUM ASSIGN value
+        : ID ( ASSIGN valueorfunctioncall
+        |  ELEMENT INUM ASSIGN valueorfunctioncall
         |  ASSIGN TEXT
-        |  ASSIGN expr
-        |  ASSIGN LCB (types (COMMA types)*) RCB) ; //TODO: FIxed superfluous asterisk here
+        |  ASSIGN expr );
 
 value
         : arithmexpr
-        | functioncall
         | arrindex
         | ID ;
+
+valueorfunctioncall
+        : value
+        | functioncall;
 
 expr
         : arithmexpr
@@ -87,7 +92,7 @@ expr
         | append;
 
 arithmexpr
-         : multexpr ((PLUS | MINUS ) multexpr)* ; //TODO: Add function calls?
+         : multexpr ((PLUS | MINUS ) multexpr)* ;
 multexpr
          : parexpr ((TIMES | DIVIDES) parexpr)* ;
 parexpr
@@ -104,7 +109,7 @@ logicalexpr
         ;
 
 relationalexpr
-        :   value ((EQUALS  | GRTHAN | LESSTHAN)  value)
+        :   valueorfunctioncall ((EQUALS  | GRTHAN | LESSTHAN)  valueorfunctioncall)
         |   LPAR logicalexpr RPAR //grt less equals
         |   truth
         ;
@@ -112,26 +117,26 @@ append
         : (TEXT | ID) PLUS (TEXT | ID) ;
 
 arrindex
-        :  ID ELEMENT (INUM | ID);
+        :  ID ELEMENT arithmexpr; //TODO expression in arrindex
 
 arradd
-        : ID ELEMENT (INUM | ID) ASSIGN types ;
+        : ID ELEMENT arithmexpr ASSIGN expr; //TODO expression in arrindex
 
-drive   : DRIVE LPAR value RPAR;
+drive   : DRIVE LPAR valueorfunctioncall RPAR;
 
-turnleft   : TURNLEFT LPAR value RPAR;
+turnleft   : TURNLEFT LPAR valueorfunctioncall RPAR;
 
-turnright   : TURNRIGHT LPAR value RPAR;
+turnright   : TURNRIGHT LPAR valueorfunctioncall RPAR;
 
-pause    : PAUSE LPAR value RPAR;
+pause    : PAUSE LPAR valueorfunctioncall RPAR;
 
 nums
         : INUM
         | FNUM
-        | ID | MINUS nums;
+        | ID | MINUS nums; //TODO buildast
 
 stmtblock
-        : LCB stmt* RCB ;
+        : LCB EOL* dcl* stmt* RCB ;
 
 truthpar
         : LPAR truthexpr RPAR ;

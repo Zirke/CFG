@@ -76,6 +76,18 @@ public class PyTrunBaseListener implements PyTrunListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterArrdcl(PyTrun.ArrdclContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitArrdcl(PyTrun.ArrdclContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterDclValue(PyTrun.DclValueContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -191,6 +203,18 @@ public class PyTrunBaseListener implements PyTrunListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitValue(PyTrun.ValueContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterValueorfunctioncall(PyTrun.ValueorfunctioncallContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitValueorfunctioncall(PyTrun.ValueorfunctioncallContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

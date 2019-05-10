@@ -1,5 +1,6 @@
-pause(10)
+integer array executable
 
-if(true) then{
-}else then{
+function simon returns integer(){
+return true
 }
+executable element 2+2 is simon()

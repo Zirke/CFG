@@ -1,17 +1,14 @@
-import CodeGeneration.CodeGenVisitor;
-import CodeGeneration.Emitter;
 import ast.AbstractNode;
+import cfg.PyTrun;
+import cfg.PyTrunLexer;
 import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
-import cfg.PyTrun;
-import cfg.PyTrunLexer;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-
 public class Main{
 
     public static void main(String[] args) throws IOException {
@@ -23,7 +20,7 @@ public class Main{
         while ((st = br.readLine()) != null) {
            d += st;
            d += "\n";
-            // System.out.println(st);
+           // System.out.println(st);
         }
 
         ANTLRInputStream input = new ANTLRInputStream(d);
@@ -32,7 +29,7 @@ public class Main{
         PyTrun parser = new PyTrun(tokens);
         ParseTree tree = parser.start();
 
-        //System.out.println(tree.toStringTree(parser));
+        System.out.println(tree.toStringTree(parser));
         // System.out.println(((PyTrun.DclContext) tree).ASSIGN());
         /*for(ParseTree i : ((PyTrun.StmtContext) tree).children){
             System.out.println(i.toStringTree(parser));
@@ -40,42 +37,30 @@ public class Main{
             System.out.println(tree.getChildCount());
         }*/
 
-
         BuildASTVisitor visitor = new BuildASTVisitor();
         AbstractNode ast = visitor.visit(tree);
-        //System.out.println(ast);
-       /*   PrettyPrintAST visitor2 = new PrettyPrintAST();
+        PrettyPrintAST visitor2 = new PrettyPrintAST();
         try {
             visitor2.visit(ast);
-        }catch (NoSuchMethodException e){
-            System.out.println(e);
-        }*/
+        }catch(NoSuchMethodException e){
+
+        }
         // System.out.println(ast);
 
         symbolTable.SymbolTableVisitor symbolTableVisitor = new symbolTable.SymbolTableVisitor();
+        symbolTable.SymbolTable sym = null;
         try {
-            symbolTableVisitor.visit(ast);
-
-        }catch (NoSuchMethodException e){
-            System.out.println(e);
-        }
-
-        Emitter emitter = new Emitter();
-        CodeGenVisitor codeGenFunctionVisitor = new CodeGenVisitor(emitter, true);
-        codeGenFunctionVisitor.stringSetup();
-        try {
-            codeGenFunctionVisitor.visit(ast);
+            sym = (symbolTable.SymbolTable) symbolTableVisitor.visit(ast);
         } catch (NoSuchMethodException e) {
             e.printStackTrace();
         }
 
-        CodeGenVisitor codeGenVisitor = new CodeGenVisitor(emitter, false);
-        codeGenVisitor.setup();
+        /*Emitter emitter = new Emitter();
+        CodeGenVisitor genVisitor = new CodeGenVisitor(emitter);
+        genVisitor.setup();
         try {
-            codeGenVisitor.visit(ast);
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
-        }
-        codeGenFunctionVisitor.closeEmitter();
+            genVisitor.visit(ast);
+        }catch(NoSuchMethodException e){}
+        emitter.closeFile();*/
     }
 }
