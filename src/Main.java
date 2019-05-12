@@ -1,6 +1,7 @@
 import ast.AbstractNode;
 import cfg.PyTrun;
 import cfg.PyTrunLexer;
+import CodeGeneration.*;
 import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
@@ -29,7 +30,7 @@ public class Main{
         PyTrun parser = new PyTrun(tokens);
         ParseTree tree = parser.start();
 
-        System.out.println(tree.toStringTree(parser));
+        //System.out.println(tree.toStringTree(parser));
         // System.out.println(((PyTrun.DclContext) tree).ASSIGN());
         /*for(ParseTree i : ((PyTrun.StmtContext) tree).children){
             System.out.println(i.toStringTree(parser));
@@ -55,12 +56,22 @@ public class Main{
             e.printStackTrace();
         }
 
-        /*Emitter emitter = new Emitter();
-        CodeGenVisitor genVisitor = new CodeGenVisitor(emitter);
-        genVisitor.setup();
+        Emitter emitter = new Emitter();
+        CodeGenVisitor codeGenFunctionVisitor = new CodeGenVisitor(emitter, true);
+        codeGenFunctionVisitor.stringSetup();
         try {
-            genVisitor.visit(ast);
-        }catch(NoSuchMethodException e){}
-        emitter.closeFile();*/
+            codeGenFunctionVisitor.visit(ast);
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        }
+
+        CodeGenVisitor codeGenVisitor = new CodeGenVisitor(emitter, false);
+        codeGenVisitor.setup();
+        try {
+            codeGenVisitor.visit(ast);
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        }
+        codeGenFunctionVisitor.closeEmitter();
     }
 }

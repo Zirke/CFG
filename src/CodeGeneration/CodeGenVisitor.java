@@ -192,7 +192,7 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
 
         //Init expression
         if (fromValInt) {
-            emitter.emit("int "+generatedString+" = ");
+            emitter.emit("int " + generatedString + " = ");
             visit(fromStatement.getFromVal());
         } else {
             visit(fromStatement.getFromVal());
@@ -205,11 +205,11 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
             if (isUpto) {
                 emitter.emit(" < ");
                 visit(fromStatement.getToVal());
-                emitter.emit("; "+generatedString+"++");
+                emitter.emit("; " + generatedString + "++");
             } else {
                 emitter.emit(" > ");
                 visit(fromStatement.getToVal());
-                emitter.emit("; "+generatedString+"--");
+                emitter.emit("; " + generatedString + "--");
             }
         }
         //Continue/Update expression if from value is variable
@@ -243,9 +243,9 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
         visit(functionCall.getFunctionName());
         emitter.emit("(");
         // Visit each argument in the functionCall argument list
-        for(int i = 0; i < functionCall.getArguments().size(); i++){
+        for (int i = 0; i < functionCall.getArguments().size(); i++) {
             visit(functionCall.getArguments().get(i));
-            if(functionCall.getArguments().size() > 1 && functionCall.getArguments().size() != i+1){
+            if (functionCall.getArguments().size() > 1 && functionCall.getArguments().size() != i + 1) {
                 emitter.emit(",");
             }
         }
@@ -258,9 +258,9 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
         emitter.emit("void ");
         visit(functionDeclaration.getFunctionName());
         emitter.emit("(");
-        for(int i = 0; i < functionDeclaration.getParameters().size(); i++){
+        for (int i = 0; i < functionDeclaration.getParameters().size(); i++) {
             visit(functionDeclaration.getParameters().get(i));
-            if(functionDeclaration.getParameters().size() > 1 && functionDeclaration.getParameters().size() != i+1){
+            if (functionDeclaration.getParameters().size() > 1 && functionDeclaration.getParameters().size() != i + 1) {
                 emitter.emit(",");
             }
         }
@@ -317,7 +317,7 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
     public Object visit(IntDeclaration intDeclaration) throws NoSuchMethodException {
         emitter.emit("int ");
         visit(intDeclaration.getId());
-        if(intDeclaration.getStm() != null) {
+        if (intDeclaration.getStm() != null) {
             emitter.emit(" = ");
             visit(intDeclaration.getStm());
         }
@@ -400,9 +400,9 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
         visit(returnFunctionDeclaration.getReturnType());
         visit(returnFunctionDeclaration.getFunctionName());
         emitter.emit("(");
-        for(int i = 0; i < returnFunctionDeclaration.getParameters().size(); i++){
+        for (int i = 0; i < returnFunctionDeclaration.getParameters().size(); i++) {
             visit(returnFunctionDeclaration.getParameters().get(i));
-            if(returnFunctionDeclaration.getParameters().size() > 1 && returnFunctionDeclaration.getParameters().size() != i+1){
+            if (returnFunctionDeclaration.getParameters().size() > 1 && returnFunctionDeclaration.getParameters().size() != i + 1) {
                 emitter.emit(",");
             }
         }
@@ -437,7 +437,7 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
 
         for (Statement s : statementList.getStmts()) {
             if (!isFunctionGen) {
-                if(!(s instanceof FunctionDeclaration)){
+                if (!(s instanceof FunctionDeclaration)) {
                     visit(s);
                     if (!(s instanceof WhileStatement || s instanceof FromStatement || s instanceof IfStatement)) {
                         emitter.emit(";\n");
@@ -445,8 +445,8 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
                         emitter.emit("\n");
                     }
                 }
-            }else if (isFunctionGen){
-                if(s instanceof FunctionDeclaration){
+            } else if (isFunctionGen) {
+                if (s instanceof FunctionDeclaration) {
                     visit(s);
                     emitter.emit("\n");
                 }
@@ -480,7 +480,7 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
         emitter.emit("char *");
         visit(textDeclaration.getId());
         emitter.emit(" = (char*)calloc(128, sizeof(char));\n");
-        if(textDeclaration.getVal() != null){
+        if (textDeclaration.getVal() != null) {
             visit(textDeclaration.getId());
             emitter.emit(" = ");
             visit(textDeclaration.getVal());
@@ -558,7 +558,6 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
     }
 
 
-
     @Override
     public Object visit(Upto upto) throws NoSuchMethodException {
         return "upto";
@@ -576,13 +575,20 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
 
     @Override
     public Object visit(Equal equal) throws NoSuchMethodException {
-        visit(equal.getLhs());
-        emitter.emit(" == ");
-        visit(equal.getRhs());
+        if(!(equal.getLhs() instanceof TextLiteral)){
+            visit(equal.getLhs());
+            emitter.emit(" == ");
+            visit(equal.getRhs());
+        } else {
+            emitter.emit("stringEquals(");
+            visit(equal.getLhs());
+            emitter.emit(", ");
+            visit(equal.getRhs());
+        }
         return null;
     }
 
-    public void stringSetup(){
+    public void stringSetup() {
         GenSetup stringSetup = new GenSetup();
         emitter.emit(stringSetup.stringCompare());
     }
