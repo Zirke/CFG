@@ -8,9 +8,10 @@ import java.util.List;
 
 public class Symbol {
     private AbstractNode node;
-    private ArrayList< AbstractNode> nodes = new ArrayList<>();
+    private ArrayList<AbstractNode> nodes = new ArrayList<>();
     private int depth;
     private Value vType;
+    private Value value;
     private List<Value> parameters = new ArrayList<>();
 
     public Symbol(AbstractNode node, int depth, Value vType) {
@@ -46,5 +47,13 @@ public class Symbol {
 
     public void setNodes(AbstractNode nodes) {
         this.nodes.add(nodes);
+    }
+
+    public void setValue(Value value) {
+        this.value = value;
+    }
+
+    public ArrayList<AbstractNode> getNodes() {
+        return nodes;
     }
 }
