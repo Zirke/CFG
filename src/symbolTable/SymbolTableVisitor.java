@@ -77,10 +77,13 @@ public class SymbolTableVisitor extends BasicAbstractNodeVisitor<Object> {
 
     @Override
     public Object visit(ArrayIndexStatement node) throws NoSuchMethodException {
+
         Value value = (Value) visit(node.getNumber());
         if (!(value instanceof IntegerLiteral)) {
+
             errorCallIntegerIncompatibleTypes(node.getClass().getName(), node.getLineNumber());
-        } else if(Integer.valueOf(((IntegerLiteral) value).getSpelling()) > 128 || Integer.valueOf(((IntegerLiteral) value).getSpelling()) < 0){
+        } else if(isNumeric (((IntegerLiteral) value).getSpelling()) &&(Integer.valueOf(((IntegerLiteral) value).getSpelling()) > 128 || Integer.valueOf(((IntegerLiteral) value).getSpelling()) < 0)){
+
             try{
                 throw new OutOfBounds("line: "+ node + " -- " + " is out of bounds");
             }catch (SemanticException e){
@@ -88,7 +91,8 @@ public class SymbolTableVisitor extends BasicAbstractNodeVisitor<Object> {
                 exit(0);
             }
         }
-        return visit(node.getId());
+
+        return value;
     }
 
     @Override
@@ -107,7 +111,6 @@ public class SymbolTableVisitor extends BasicAbstractNodeVisitor<Object> {
     @Override
     public Object visit(DriveStatement node) throws NoSuchMethodException {
 
-        out.println((Value) visit(node.getVal()));
         if (!(visit(node.getVal()) instanceof IntegerLiteral)) {
             errorCallIntegerIncompatibleTypes(node.getClass().getName().substring(4), node.getLineNumber());
         }
@@ -802,5 +805,14 @@ public class SymbolTableVisitor extends BasicAbstractNodeVisitor<Object> {
         } else {
             return new TextLiteral("text");
         }
+    }
+
+    private boolean isNumeric(String numberString) {
+        try {
+            double d = Double.parseDouble(numberString);
+        } catch (NumberFormatException | NullPointerException nfe) {
+            return false;
+        }
+        return true;
     }
 }
