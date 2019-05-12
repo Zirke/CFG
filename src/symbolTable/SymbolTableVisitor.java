@@ -80,7 +80,6 @@ public class SymbolTableVisitor extends BasicAbstractNodeVisitor<Object> {
 
         Value value = (Value) visit(node.getNumber());
         if (!(value instanceof IntegerLiteral)) {
-
             errorCallIntegerIncompatibleTypes(node.getClass().getName(), node.getLineNumber());
         } else if(isNumeric (((IntegerLiteral) value).getSpelling()) &&(Integer.valueOf(((IntegerLiteral) value).getSpelling()) > 128 || Integer.valueOf(((IntegerLiteral) value).getSpelling()) < 0)){
 
@@ -175,7 +174,7 @@ public class SymbolTableVisitor extends BasicAbstractNodeVisitor<Object> {
                 errorCallAssignIncompatibleTypes(value.getClass().getName().substring(4, value.getClass().getName().length() - 7), node.getId().getSpelling(), node.getLineNumber());
             }
         }
-        return null;
+        return new FloatLiteral(node.getId().getSpelling());
     }
 
     //returns as a float literal
@@ -209,10 +208,14 @@ public class SymbolTableVisitor extends BasicAbstractNodeVisitor<Object> {
     @Override
     public Object visit(FunctionCall node) throws NoSuchMethodException {
         List<Value> parameters = symbolTable.getIdTable().get(node.getFunctionName().getSpelling()).getParameters();
+        List<Value> arguments = new ArrayList<>();
         if (parameters != null) {
             if (parameters.size() == node.getArguments().size()) {
-                for (int i = 0; i < node.getArguments().size(); i++) {
-                    if (!(node.getArguments().get(i).getClass().equals(parameters.get(i).getClass()))) {
+                for(Value value : node.getArguments()){
+                    arguments.add((Value)visit(value));
+                }
+                for (int i = 0; i < arguments.size(); i++) {
+                    if (!(((arguments.get(i)).getClass()).equals(parameters.get(i).getClass()))) {
                         errorCallFunctionCallIncorrectTypes(node.getClass().getName().substring(4), node.getLineNumber());
                     }
                 }
@@ -392,15 +395,13 @@ public class SymbolTableVisitor extends BasicAbstractNodeVisitor<Object> {
     //TODO null fix seems hacky
     @Override
     public Object visit(Parameter node) throws NoSuchMethodException {
-        AbstractNode typeOfDCL = node.getParamType();
-
-        if (typeOfDCL instanceof INTDCL) {
+        if (node.getParamType() instanceof INTDCL) {
             return visit(new IntDeclaration(node.getId(), new IntegerLiteral("null")));
-        } else if (typeOfDCL instanceof FLOATDCL) {
+        } else if (node.getParamType() instanceof FLOATDCL) {
             return visit(new FloatDeclaration(node.getId(), new FloatLiteral("null")));
-        } else if (typeOfDCL instanceof TRUTHDCL) {
+        } else if (node.getParamType() instanceof TRUTHDCL) {
             return visit(new TruthDeclaration(node.getId(), new TruthLiteral("null")));
-        } else if (typeOfDCL instanceof TEXTDCL) {
+        } else if(node.getParamType() instanceof TEXTDCL){
             return visit(new TextDeclaration(node.getId(), new TextLiteral("null")));
         }
         return null;
@@ -445,6 +446,7 @@ public class SymbolTableVisitor extends BasicAbstractNodeVisitor<Object> {
             for (Parameter parameter : node.getParameters()) {
                 parameters.add((Value) visit(parameter));
             }
+
             symbolTable.put(node.getFunctionName().getSpelling(), new Symbol(node, symbolTable.getDepth(), typeCasting(node.getReturnType()), parameters));
 
             symbolTable.openScope();
@@ -452,7 +454,11 @@ public class SymbolTableVisitor extends BasicAbstractNodeVisitor<Object> {
             for (Statement statement : node.getStmtBody().getStmts()) {
                 if (statement instanceof ReturnStatement) {
                     if (!(visit(statement)).getClass().equals(typeCasting(node.getReturnType()).getClass())) {
-                        errorCallAssignIncompatibleTypes(typeCasting(node.getReturnType()).getClass().getName(), statement.getClass().getName(), node.lineNumber);
+                        try{
+                            throw new IncompatibleTypes("line: " + node.getLineNumber() + " -- function has to return a " + typeCasting(node.getReturnType()).getClass().getName().substring(4));
+                        }catch (SemanticException e){
+                            err.println("IncompatibleTypes " + e.getLocalizedMessage());
+                        }
                     }
                 }
             }
@@ -540,7 +546,7 @@ public class SymbolTableVisitor extends BasicAbstractNodeVisitor<Object> {
                 }
             }
         }
-        return null;
+        return new TextLiteral(node.getId().getSpelling());
     }
 
     // returns text literal
@@ -584,7 +590,7 @@ public class SymbolTableVisitor extends BasicAbstractNodeVisitor<Object> {
                 }
             }
         }
-        return null;
+        return new TruthLiteral(node.getId().getSpelling());
     }
 
     // returns truth literal
@@ -760,7 +766,7 @@ public class SymbolTableVisitor extends BasicAbstractNodeVisitor<Object> {
         } else if (leftValue instanceof IntegerLiteral && rightValue instanceof FloatLiteral) {
             return new FloatLiteral("float");
         } else {
-            errorCallIncorrectOperatorUse(node, leftValue.toString(), rightValue.toString(), linenumber);
+            errorCallIncorrectOperatorUse(node, leftValue.getClass().getName().substring(4), rightValue.getClass().getName().substring(4), linenumber);
         }
         return null;
     }
@@ -776,7 +782,7 @@ public class SymbolTableVisitor extends BasicAbstractNodeVisitor<Object> {
         } else if (leftValue instanceof IntegerLiteral && rightValue instanceof FloatLiteral) {
             return new TruthLiteral("truth");
         } else {
-            errorCallIncorrectOperatorUse(node, leftValue.toString(), rightValue.toString(), linenumber);
+            errorCallIncorrectOperatorUse(node, leftValue.getClass().getName().substring(4), rightValue.getClass().getName().substring(4), linenumber);
         }
         return null;
     }
