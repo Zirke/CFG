@@ -22,6 +22,27 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
         this.isFunctionGen = isFunctionGen;
     }
 
+    private String uniqueString(){
+        String generatedString = null;
+        Random random = new Random();
+        StringBuilder buffer = new StringBuilder(10);
+        for (int i = 0; i < 10; i++) {
+            int randomLimitedInt = 97 + (int)
+                    (random.nextFloat() * (122 - 97 + 1));
+            buffer.append((char) randomLimitedInt);
+        }
+        generatedString = buffer.toString();
+        while(!noDuplicateStrings.add(generatedString)){
+            for (int i = 0; i < 10; i++) {
+                int randomLimitedInt = 97 + (int)
+                        (random.nextFloat() * (122 - 97 + 1));
+                buffer.append((char) randomLimitedInt);
+            }
+            generatedString = buffer.toString();
+        }
+        return generatedString;
+    }
+
     @Override
     public Object visit(And and) throws NoSuchMethodException {
         visit(and.getLhs());
@@ -182,22 +203,7 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
         //Check if from value is an integer or variable, if it is an integer, create random string for int name in C
         if (fromStatement.getFromVal() instanceof IntegerLiteral) {
             fromValInt = true;
-            Random random = new Random();
-            StringBuilder buffer = new StringBuilder(10);
-            for (int i = 0; i < 10; i++) {
-                int randomLimitedInt = 97 + (int)
-                        (random.nextFloat() * (122 - 97 + 1));
-                buffer.append((char) randomLimitedInt);
-            }
-            generatedString = buffer.toString();
-            while(!noDuplicateStrings.add(generatedString)){
-                for (int i = 0; i < 10; i++) {
-                    int randomLimitedInt = 97 + (int)
-                            (random.nextFloat() * (122 - 97 + 1));
-                    buffer.append((char) randomLimitedInt);
-                }
-                generatedString = buffer.toString();
-            }
+            generatedString = uniqueString();
         }
 
         //Start formatting
@@ -402,7 +408,7 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
     public Object visit(RepeatStatement repeatStatement) throws NoSuchMethodException {
         emitter.emit("do {\n");
         visit(repeatStatement.getStmts());
-        emitter.emit("} while (");
+        emitter.emit("} while (!");
         visit(repeatStatement.getExpr());
         emitter.emit(")");
         return null;
