@@ -17,7 +17,7 @@ public class GenSetup {
                 "void loop() {\n";
     }
 
-    String stringCompare(){
+/*    String stringCompare(){
         return  "int stringEquals(char *a, char *b){\n" +
                 "  int retVal = strcmp(a, b);\n" +
                 "  if (retVal == 0){\n" +
@@ -28,5 +28,5 @@ public class GenSetup {
                 "  }\n" +
                 "}\n";
 
-    }
+    }*/
 }

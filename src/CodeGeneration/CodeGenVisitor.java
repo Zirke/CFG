@@ -3,6 +3,7 @@ package CodeGeneration;
 import ast.*;
 import astVisitor.BasicAbstractNodeVisitor;
 
+import java.util.HashSet;
 import java.util.Random;
 
 public class CodeGenVisitor extends BasicAbstractNodeVisitor {
@@ -13,6 +14,7 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
 
     private Emitter emitter;
     private boolean isFunctionGen;
+    private HashSet<String> noDuplicateStrings;
 
     public CodeGenVisitor(Emitter emitter, boolean isFunctionGen) {
         super();
@@ -43,6 +45,7 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
         visit(arrayAssignment.getId());
         emitter.emit("[");
         visit(arrayAssignment.getValue());
+
         return null;
     }
 
@@ -50,6 +53,8 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
     // Current size is 128 but not checked if the source array is bigger.
     @Override
     public Object visit(ArrayDeclaration arrayDeclaration) throws NoSuchMethodException {
+        visit(arrayDeclaration.getType());
+        emitter.emit("*");
         visit(arrayDeclaration.getId());
         emitter.emit(" = (");
         visit(arrayDeclaration.getType());
@@ -185,6 +190,14 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
                 buffer.append((char) randomLimitedInt);
             }
             generatedString = buffer.toString();
+            while(!noDuplicateStrings.add(generatedString)){
+                for (int i = 0; i < 10; i++) {
+                    int randomLimitedInt = 97 + (int)
+                            (random.nextFloat() * (122 - 97 + 1));
+                    buffer.append((char) randomLimitedInt);
+                }
+                generatedString = buffer.toString();
+            }
         }
 
         //Start formatting
@@ -580,7 +593,7 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
             emitter.emit(" == ");
             visit(equal.getRhs());
         } else {
-            emitter.emit("stringEquals(");
+            emitter.emit("!strcmp(");
             visit(equal.getLhs());
             emitter.emit(", ");
             visit(equal.getRhs());
@@ -588,10 +601,10 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
         return null;
     }
 
-    public void stringSetup() {
+/*    public void stringSetup() {
         GenSetup stringSetup = new GenSetup();
         emitter.emit(stringSetup.stringCompare());
-    }
+    }*/
 
     public void setup() {
         GenSetup setup = new GenSetup();
