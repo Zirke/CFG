@@ -60,7 +60,7 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
         visit(arrayDeclaration.getType());
         emitter.emit("*) calloc(128, sizeof(");
         visit(arrayDeclaration.getType());
-        emitter.emit(")");
+        emitter.emit("))");
 
         if (arrayDeclaration.getValues() != null) {
             //TODO what happens when we use calloc and there is an assignment list?
@@ -597,6 +597,7 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
             visit(equal.getLhs());
             emitter.emit(", ");
             visit(equal.getRhs());
+            emitter.emit(")");
         }
         return null;
     }
