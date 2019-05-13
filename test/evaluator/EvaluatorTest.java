@@ -2,11 +2,14 @@ package evaluator;
 
 import ast.*;
 import org.junit.Test;
+import symbolTable.Symbol;
+import symbolTable.SymbolTable;
 
 import static org.junit.Assert.*;
 
 public class EvaluatorTest {
-    Evaluator eval = new Evaluator();
+    SymbolTable symbolTable = new SymbolTable();
+    Evaluator eval = new Evaluator(symbolTable);
 
     @Test
     public void visitPlus() {
@@ -96,6 +99,17 @@ public class EvaluatorTest {
 
     @Test
     public void visitIdentifier() {
-
+        Identifier testid =new Identifier("s");
+        IntDeclaration intdecl= new IntDeclaration(testid, new IntegerLiteral("10"));
+        Symbol sym = new Symbol(intdecl, symbolTable.getDepth(), new IntegerLiteral("integer"));
+        sym.setValue(new IntegerLiteral("3"));
+        symbolTable.put(intdecl.getId().getSpelling(), sym);
+        Integer test = 0;
+        try {
+            test = (Integer) eval.visit(testid);
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        }
+        assertEquals(3, test.intValue());
     }
 }

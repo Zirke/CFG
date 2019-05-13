@@ -2,10 +2,14 @@ package evaluator;
 
 import ast.*;
 import astVisitor.AbstractNodeVisitor;
+import symbolTable.SymbolTable;
 
 public class Evaluator extends AbstractNodeVisitor<Object> {
+    SymbolTable symtable = new SymbolTable();
 
-
+    public Evaluator(SymbolTable symtable) {
+        this.symtable = symtable;
+    }
 
     public Object visit(ArithmParenthesis node) throws NoSuchMethodException {
         return visit(node.getLeft());
@@ -60,8 +64,8 @@ public class Evaluator extends AbstractNodeVisitor<Object> {
     public Object visit(FloatLiteral node){
         return Double.parseDouble(node.getSpelling());
     }
-    //TODO do something with symboltable
-    public AbstractNode visit(Identifier node){
-        return null;
+
+    public Object visit(Identifier node) throws NoSuchMethodException {
+        return visit(symtable.getIdTable().get(node.getSpelling()).getValue());
     }
 }

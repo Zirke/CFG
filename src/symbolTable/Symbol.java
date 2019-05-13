@@ -56,4 +56,8 @@ public class Symbol {
     public ArrayList<AbstractNode> getNodes() {
         return nodes;
     }
+
+    public Value getValue() {
+        return value;
+    }
 }

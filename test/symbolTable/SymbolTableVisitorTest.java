@@ -19,7 +19,6 @@ public class SymbolTableVisitorTest {
     @org.junit.Test
     public void visitAndTest() {
         And node = new And("And node", new TruthLiteral("false"), new TruthLiteral("true"), 2);
-
         try {
             assertTrue(symbolTableVisitor.visit(node) instanceof TruthLiteral);
             assertFalse(symbolTableVisitor.visit(node) instanceof TextLiteral);
