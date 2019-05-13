@@ -408,9 +408,9 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
     public Object visit(RepeatStatement repeatStatement) throws NoSuchMethodException {
         emitter.emit("do {\n");
         visit(repeatStatement.getStmts());
-        emitter.emit("} while (!");
+        emitter.emit("} while (!(");
         visit(repeatStatement.getExpr());
-        emitter.emit(")");
+        emitter.emit("))");
         return null;
     }
 
