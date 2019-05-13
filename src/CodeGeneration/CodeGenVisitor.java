@@ -14,7 +14,7 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
 
     private Emitter emitter;
     private boolean isFunctionGen;
-    private HashSet<String> noDuplicateStrings;
+    private HashSet<String> noDuplicateStrings = new HashSet<>();
 
     public CodeGenVisitor(Emitter emitter, boolean isFunctionGen) {
         super();
@@ -23,17 +23,17 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
     }
 
     private String uniqueString(){
-        String generatedString = null;
+        String generatedString;
         Random random = new Random();
         StringBuilder buffer = new StringBuilder(10);
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 8; i++) {
             int randomLimitedInt = 97 + (int)
                     (random.nextFloat() * (122 - 97 + 1));
             buffer.append((char) randomLimitedInt);
         }
         generatedString = buffer.toString();
         while(!noDuplicateStrings.add(generatedString)){
-            for (int i = 0; i < 10; i++) {
+            for (int i = 0; i < 1; i++) {
                 int randomLimitedInt = 97 + (int)
                         (random.nextFloat() * (122 - 97 + 1));
                 buffer.append((char) randomLimitedInt);
@@ -253,7 +253,7 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
         emitter.emit(") {\n");
         emitter.emit("\t");
         visit(fromStatement.getStmts());
-        emitter.emit("\n}");
+        emitter.emit("}");
         return null;
     }
 
