@@ -17,14 +17,5 @@
         <jarDirectory url="file://$MODULE_DIR$/../jar-files" recursive="false" />
       </library>
     </orderEntry>
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
-          <root url="jar://$USER_HOME$/Desktop/Antlr/antlr-runtime-4.7.2.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
   </component>
 </module>

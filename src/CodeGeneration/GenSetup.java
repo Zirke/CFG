@@ -18,11 +18,7 @@ public class GenSetup {
     }
 
     String stringCompare(){
-        return "#include <stdio.h>\n" +
-                "#include <string.h>\n" +
-                "#include <stdlib.h>\n" +
-                "\n" +
-                "int stringEquals(char *a, char *b){\n" +
+        return  "int stringEquals(char *a, char *b){\n" +
                 "  int retVal = strcmp(a, b);\n" +
                 "  if (retVal == 0){\n" +
                 "    return 1;\n" +
