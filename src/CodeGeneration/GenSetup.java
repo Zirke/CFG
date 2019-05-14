@@ -10,8 +10,8 @@ public class GenSetup {
                 "const int rightMotor = 13;\n" +
                 "\n" +
                 "void setup() {\n" +
-                "  pinMode(pin12, OUTPUT);\n" +
-                "  pinMode(pin13, OUTPUT);\n" +
+                "  pinMode(leftMotor, OUTPUT);\n" +
+                "  pinMode(rightMotor, OUTPUT);\n" +
                 "}\n" +
                 "\n" +
                 "void loop() {\n";

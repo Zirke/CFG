@@ -14,12 +14,33 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
 
     private Emitter emitter;
     private boolean isFunctionGen;
-    private HashSet<String> noDuplicateStrings;
+    private HashSet<String> noDuplicateStrings = new HashSet<>();
 
     public CodeGenVisitor(Emitter emitter, boolean isFunctionGen) {
         super();
         this.emitter = emitter;
         this.isFunctionGen = isFunctionGen;
+    }
+
+    private String uniqueString(){
+        String generatedString;
+        Random random = new Random();
+        StringBuilder buffer = new StringBuilder(10);
+        for (int i = 0; i < 8; i++) {
+            int randomLimitedInt = 97 + (int)
+                    (random.nextFloat() * (122 - 97 + 1));
+            buffer.append((char) randomLimitedInt);
+        }
+        generatedString = buffer.toString();
+        while(!noDuplicateStrings.add(generatedString)){
+            for (int i = 0; i < 1; i++) {
+                int randomLimitedInt = 97 + (int)
+                        (random.nextFloat() * (122 - 97 + 1));
+                buffer.append((char) randomLimitedInt);
+            }
+            generatedString = buffer.toString();
+        }
+        return generatedString;
     }
 
     @Override
@@ -182,22 +203,7 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
         //Check if from value is an integer or variable, if it is an integer, create random string for int name in C
         if (fromStatement.getFromVal() instanceof IntegerLiteral) {
             fromValInt = true;
-            Random random = new Random();
-            StringBuilder buffer = new StringBuilder(10);
-            for (int i = 0; i < 10; i++) {
-                int randomLimitedInt = 97 + (int)
-                        (random.nextFloat() * (122 - 97 + 1));
-                buffer.append((char) randomLimitedInt);
-            }
-            generatedString = buffer.toString();
-            while(!noDuplicateStrings.add(generatedString)){
-                for (int i = 0; i < 10; i++) {
-                    int randomLimitedInt = 97 + (int)
-                            (random.nextFloat() * (122 - 97 + 1));
-                    buffer.append((char) randomLimitedInt);
-                }
-                generatedString = buffer.toString();
-            }
+            generatedString = uniqueString();
         }
 
         //Start formatting
@@ -247,7 +253,7 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
         emitter.emit(") {\n");
         emitter.emit("\t");
         visit(fromStatement.getStmts());
-        emitter.emit("\n}");
+        emitter.emit("}");
         return null;
     }
 
@@ -402,9 +408,9 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
     public Object visit(RepeatStatement repeatStatement) throws NoSuchMethodException {
         emitter.emit("do {\n");
         visit(repeatStatement.getStmts());
-        emitter.emit("} while (");
+        emitter.emit("} while (!(");
         visit(repeatStatement.getExpr());
-        emitter.emit(")");
+        emitter.emit("))");
         return null;
     }
 
@@ -558,7 +564,7 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
     public Object visit(TurnLeftStatement turnLeftStatement) throws NoSuchMethodException {
         emitter.emit("digitalWrite(leftMotor, LOW);\ndigitalWrite(rightMotor, HIGH);\ndelay(1000*");
         visit(turnLeftStatement.getVal());
-        emitter.emit(");\ndigitalWrite(lefMotor, LOW);\ndigitalWrite(rightMotor, LOW)");
+        emitter.emit(");\ndigitalWrite(leftMotor, LOW);\ndigitalWrite(rightMotor, LOW)");
         return null;
     }
 
@@ -566,7 +572,7 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
     public Object visit(TurnRightStatement turnRightStatement) throws NoSuchMethodException {
         emitter.emit("digitalWrite(leftMotor, HIGH);\ndigitalWrite(rightMotor, LOW);\ndelay(1000*");
         visit(turnRightStatement.getVal());
-        emitter.emit(");\ndigitalWrite(lefMotor, LOW);\ndigitalWrite(rightMotor, LOW)");
+        emitter.emit(");\ndigitalWrite(leftMotor, LOW);\ndigitalWrite(rightMotor, LOW)");
         return null;
     }
 

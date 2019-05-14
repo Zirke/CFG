@@ -635,7 +635,10 @@ public class BuildASTVisitor extends AbstractParseTreeVisitor<AbstractNode> impl
 			return visitFunctioncall(ctx.functioncall());
 		}else if(ctx.value() != null){
 			return visitValue(ctx.value());
-		}else
+		}else if(ctx.TEXT() != null){
+			return new TextLiteral(ctx.TEXT().getText());
+		}
+		else
 			return  null;
 	}
 
