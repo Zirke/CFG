@@ -58,7 +58,7 @@ public class Main{
 
         Emitter emitter = new Emitter();
         CodeGenVisitor codeGenFunctionVisitor = new CodeGenVisitor(emitter, true);
-        codeGenFunctionVisitor.stringSetup();
+        /*codeGenFunctionVisitor.stringSetup();*/
         try {
             codeGenFunctionVisitor.visit(ast);
         } catch (NoSuchMethodException e) {

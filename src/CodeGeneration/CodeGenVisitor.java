@@ -564,7 +564,7 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
     public Object visit(TurnLeftStatement turnLeftStatement) throws NoSuchMethodException {
         emitter.emit("digitalWrite(leftMotor, LOW);\ndigitalWrite(rightMotor, HIGH);\ndelay(1000*");
         visit(turnLeftStatement.getVal());
-        emitter.emit(");\ndigitalWrite(lefMotor, LOW);\ndigitalWrite(rightMotor, LOW)");
+        emitter.emit(");\ndigitalWrite(leftMotor, LOW);\ndigitalWrite(rightMotor, LOW)");
         return null;
     }
 
@@ -572,7 +572,7 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
     public Object visit(TurnRightStatement turnRightStatement) throws NoSuchMethodException {
         emitter.emit("digitalWrite(leftMotor, HIGH);\ndigitalWrite(rightMotor, LOW);\ndelay(1000*");
         visit(turnRightStatement.getVal());
-        emitter.emit(");\ndigitalWrite(lefMotor, LOW);\ndigitalWrite(rightMotor, LOW)");
+        emitter.emit(");\ndigitalWrite(leftMotor, LOW);\ndigitalWrite(rightMotor, LOW)");
         return null;
     }
 

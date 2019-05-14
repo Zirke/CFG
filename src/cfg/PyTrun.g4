@@ -84,7 +84,8 @@ value
 
 valueorfunctioncall
         : value
-        | functioncall;
+        | functioncall
+        | TEXT;
 
 expr
         : arithmexpr
