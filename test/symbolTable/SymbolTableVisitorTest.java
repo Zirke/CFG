@@ -109,7 +109,7 @@ public class SymbolTableVisitorTest {
         ArrayIndexStatement node = new ArrayIndexStatement(id, intNode, 3);
 
         try {
-            assertNull(symbolTableVisitor.visit(node));
+            assertTrue(symbolTableVisitor.visit(node) instanceof IntegerLiteral);
         } catch (NoSuchMethodException e) {
             e.printStackTrace();
         }
