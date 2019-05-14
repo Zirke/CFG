@@ -2,9 +2,9 @@ package ast;
 
 public class ArrayAssignment extends Statement{
     Identifier id;
-    ArrayAsmValue value;
+    SingleElementAssign value;
 
-    public ArrayAssignment(Identifier id, ArrayAsmValue value, int linenr) {
+    public ArrayAssignment(Identifier id, SingleElementAssign value, int linenr) {
         this.id = id;
         this.value = value;
         this.setLineNumber(linenr);
@@ -18,12 +18,11 @@ public class ArrayAssignment extends Statement{
         this.id = id;
     }
 
-    public ArrayAsmValue getValue() {
+    public SingleElementAssign getValue() {
         return value;
     }
 
-    public void setValue(ArrayAsmValue value) {
+    public void setValue(SingleElementAssign value) {
         this.value = value;
     }
-
 }

@@ -2,7 +2,7 @@ package ast;
 
 import java.util.List;
 
-public class FunctionCall extends Statement implements Value, ArrayAsmValue{
+public class FunctionCall extends Statement implements Value, visitable {
     Identifier functionName;
     List<Value> arguments;
 

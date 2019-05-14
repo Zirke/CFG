@@ -366,7 +366,7 @@ public class SymbolTableVisitor extends BasicAbstractNodeVisitor<Object> {
     }
 
     //checks if every element in the multiple assign node is the same. if so it returns in the first elements type.
-    @Override
+    /*@Override
     public Object visit(MultipleElementAssign node) throws NoSuchMethodException {
         Value firstElement = null;
         if (!node.getElements().isEmpty()) {
@@ -384,7 +384,7 @@ public class SymbolTableVisitor extends BasicAbstractNodeVisitor<Object> {
         }
 
         return firstElement;
-    }
+    }*/
 
     //has to be of type truth literal
     @Override
@@ -698,6 +698,12 @@ public class SymbolTableVisitor extends BasicAbstractNodeVisitor<Object> {
         return null;
     }
 
+    @Override
+    public Object visit(UnaryMinus node) throws NoSuchMethodException {
+
+        return null;
+    }
+
     /*
      * Error calls for variety of type issues; list goes; IncorrectOperatorUse
      *                                                    DuplicateDeclaration
@@ -745,7 +751,7 @@ public class SymbolTableVisitor extends BasicAbstractNodeVisitor<Object> {
         }
     }
 
-    private void errorCallArrayIncompatibleTypes(ArrayAsmValue node, String identifier, int linenumber) {
+    private void errorCallArrayIncompatibleTypes(SingleElementAssign node, String identifier, int linenumber) {
         try {
             throw new IncompatibleTypes(" line: " + linenumber + " -- " + node.getClass().getName() + " cannot be assigned to " + identifier);
         } catch (IncompatibleTypes e) {
@@ -856,4 +862,5 @@ public class SymbolTableVisitor extends BasicAbstractNodeVisitor<Object> {
         }
         return true;
     }
+
 }

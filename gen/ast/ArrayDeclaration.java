@@ -3,11 +3,9 @@ package ast;
 public class ArrayDeclaration extends Statement{
     Identifier id;
     Type type;
-    ArrayAsmValue values;
 
-    public ArrayDeclaration(Identifier id, ArrayAsmValue values, Type type) {
+    public ArrayDeclaration(Identifier id,  Type type) {
         this.id = id;
-        this.values = values;
         this.type = type;
     }
 
@@ -25,14 +23,6 @@ public class ArrayDeclaration extends Statement{
 
     public void setType(Type type) {
         this.type = type;
-    }
-
-    public ArrayAsmValue getValues() {
-        return values;
-    }
-
-    public void setValues(ArrayAsmValue values) {
-        this.values = values;
     }
 
 }

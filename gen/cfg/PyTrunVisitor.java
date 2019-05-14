@@ -1,4 +1,4 @@
-// Generated from C:/Users/Zirke/Documents/JavaProjects/CFG23/src/cfg\PyTrun.g4 by ANTLR 4.7.2
+// Generated from C:/Users/Abiram Mohanaraj/Documents/GitHub/CFG/src/cfg\PyTrun.g4 by ANTLR 4.7.2
 package cfg;
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
@@ -130,6 +130,12 @@ public interface PyTrunVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitMultexpr(PyTrun.MultexprContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link PyTrun#unaryminus}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitUnaryminus(PyTrun.UnaryminusContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link PyTrun#parexpr}.
 	 * @param ctx the parse tree

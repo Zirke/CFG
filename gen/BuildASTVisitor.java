@@ -348,7 +348,7 @@ public class BuildASTVisitor extends AbstractParseTreeVisitor<AbstractNode> impl
 	}
 	@Override public AbstractNode visitMultexpr(PyTrun.MultexprContext ctx) {
 		ArrayList<ArithmOperator> timesDivide = new ArrayList<>();
-		List<PyTrun.ParexprContext> exprs = ctx.parexpr();
+		List<PyTrun.UnaryminusContext> exprs = ctx.unaryminus();
 		for(ParseTree x : ctx.children){
 			if(x.getText().equals("*")){
 				timesDivide.add(new Times(ctx.getStart().getLine()));
@@ -358,32 +358,42 @@ public class BuildASTVisitor extends AbstractParseTreeVisitor<AbstractNode> impl
 		}
 
 		if(timesDivide.isEmpty()){
-			return visitParexpr(ctx.parexpr(0));
+			return visitUnaryminus(ctx.unaryminus(0));
 		}else if(timesDivide.size() == 1){
-			timesDivide.get(0).setLeft((Value)visitParexpr(ctx.parexpr(0)));
-			timesDivide.get(0).setRight((Value)visitParexpr(ctx.parexpr(1)));
+			timesDivide.get(0).setLeft((Value)visitUnaryminus(ctx.unaryminus(0)));
+			timesDivide.get(0).setRight((Value)visitUnaryminus(ctx.unaryminus(1)));
 			return timesDivide.get(0);
 		}else{
-			timesDivide.get(0).setLeft((Value) visitParexpr (exprs.get(0)));
+			timesDivide.get(0).setLeft((Value) visitUnaryminus (exprs.get(0)));
 			timesDivide.get(0).setRight(timesDivide.get(1));
 			exprs.remove(0);
 			int i = 1;
 			while (i < (timesDivide.size())){
 				if( exprs.size() == 2){
-					timesDivide.get(i).setRight((Value) visitParexpr(exprs.get(1)));
-					timesDivide.get(i).setLeft((Value) visitParexpr(exprs.get(0)));
+					timesDivide.get(i).setRight((Value) visitUnaryminus(exprs.get(1)));
+					timesDivide.get(i).setLeft((Value) visitUnaryminus(exprs.get(0)));
 					exprs.remove(1);
 					exprs.remove(0);
 					break;
 				}else {
 					timesDivide.get(i).setRight(timesDivide.get(i + 1));
-					timesDivide.get(i).setLeft((Value) visitParexpr(exprs.get(0)));
+					timesDivide.get(i).setLeft((Value) visitUnaryminus(exprs.get(0)));
 					exprs.remove(0);
 				}
 				i++;
 			}
 			return timesDivide.get(0);
 		}
+	}
+
+	@Override
+	public AbstractNode visitUnaryminus(PyTrun.UnaryminusContext ctx) {
+		if(ctx.MINUS() == null){
+			return visitParexpr(ctx.parexpr());
+		}else if(ctx.MINUS() != null){
+			return new UnaryMinus("unary minus",(Value) visitParexpr(ctx.parexpr()),null);
+		}
+		return null;
 	}
 
 	@Override public AbstractNode visitParexpr(PyTrun.ParexprContext ctx) {
@@ -625,7 +635,7 @@ public class BuildASTVisitor extends AbstractParseTreeVisitor<AbstractNode> impl
 	@Override
 	public AbstractNode visitArrdcl(PyTrun.ArrdclContext ctx) {
 		if(ctx.ID() != null) {
-			return new ArrayDeclaration(new Identifier(ctx.ID().getText()), null, (Type) visitType(ctx.type()));
+			return new ArrayDeclaration(new Identifier(ctx.ID().getText()), (Type) visitType(ctx.type()));
 		}else return null;
 	}
 

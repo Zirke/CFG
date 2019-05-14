@@ -1,4 +1,4 @@
-// Generated from C:/Users/Zirke/Documents/JavaProjects/CFG23/src/cfg\PyTrun.g4 by ANTLR 4.7.2
+// Generated from C:/Users/Abiram Mohanaraj/Documents/GitHub/CFG/src/cfg\PyTrun.g4 by ANTLR 4.7.2
 package cfg;
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
@@ -207,6 +207,16 @@ public interface PyTrunListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitMultexpr(PyTrun.MultexprContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link PyTrun#unaryminus}.
+	 * @param ctx the parse tree
+	 */
+	void enterUnaryminus(PyTrun.UnaryminusContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PyTrun#unaryminus}.
+	 * @param ctx the parse tree
+	 */
+	void exitUnaryminus(PyTrun.UnaryminusContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link PyTrun#parexpr}.
 	 * @param ctx the parse tree

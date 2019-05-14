@@ -51,7 +51,11 @@ public class ReachabilityVisitor extends BasicAbstractNodeVisitor {
         orderOfArrays(arrayAssignment.getId().getSpelling());
         return null;
     }
+    @Override
+    public Object visit(UnaryMinus node) throws NoSuchMethodException {
 
+        return null;
+    }
     @Override
     public Object visit(ArrayDeclaration arrayDeclaration) throws NoSuchMethodException {
         //Value value = (Value) visit((visitable) arrayDeclaration.getValues());
@@ -176,14 +180,6 @@ public class ReachabilityVisitor extends BasicAbstractNodeVisitor {
 
     @Override
     public Object visit(Minus minus) throws NoSuchMethodException {
-        return null;
-    }
-
-    @Override
-    public Object visit(MultipleElementAssign multipleElementAssign) throws NoSuchMethodException {
-        /*if (!multipleElementAssign.getElements().isEmpty()) {
-            arraySize(multipleElementAssign.getElements().size());
-        }*/
         return null;
     }
 

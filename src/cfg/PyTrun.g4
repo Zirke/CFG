@@ -95,7 +95,9 @@ expr
 arithmexpr
          : multexpr ((PLUS | MINUS ) multexpr)* ;
 multexpr
-         : parexpr ((TIMES | DIVIDES) parexpr)* ;
+         : unaryminus ((TIMES | DIVIDES) unaryminus)* ;
+unaryminus
+        :  (MINUS)? parexpr;
 parexpr
          : nums
          | functioncall

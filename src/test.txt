@@ -1,6 +1,1 @@
-integer array executable
-
-function simon returns integer(){
-return true
-}
-executable element 2+2 is simon()
+integer i is -2

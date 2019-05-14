@@ -1,6 +1,6 @@
 package ast;
 
-public class SingleElementAssign implements ArrayAsmValue{
+public class SingleElementAssign implements visitable {
     IntegerLiteral elementNr;
     Value assignemntVal;
     int linenumber;

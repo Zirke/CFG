@@ -145,10 +145,6 @@ public class CodeGenVisitorFunctions extends BasicAbstractNodeVisitor {
         return null;
     }
 
-    @Override
-    public Object visit(MultipleElementAssign multipleElementAssign) throws NoSuchMethodException {
-        return null;
-    }
 
     @Override
     public Object visit(Not not) throws NoSuchMethodException {
@@ -262,6 +258,11 @@ public class CodeGenVisitorFunctions extends BasicAbstractNodeVisitor {
 
     @Override
     public Object visit(Equal equal) throws NoSuchMethodException {
+        return null;
+    }
+    @Override
+    public Object visit(UnaryMinus node) throws NoSuchMethodException {
+
         return null;
     }
 }

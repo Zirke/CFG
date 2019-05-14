@@ -31,7 +31,6 @@ abstract public class BasicAbstractNodeVisitor<T> extends AbstractNodeVisitor  {
     public abstract T visit(IntegerLiteral node)throws NoSuchMethodException;
     public abstract T visit(LessThan node)throws NoSuchMethodException;
     public abstract T visit(Minus node)throws NoSuchMethodException;
-    public abstract T visit(MultipleElementAssign node)throws NoSuchMethodException;
     public abstract T visit(Not node)throws NoSuchMethodException;
     public abstract T visit(Or node)throws NoSuchMethodException;
     public abstract T visit(Parameter node)throws NoSuchMethodException;
@@ -56,4 +55,5 @@ abstract public class BasicAbstractNodeVisitor<T> extends AbstractNodeVisitor  {
     public abstract T visit(Upto node) throws NoSuchMethodException;
     public abstract T visit(WhileStatement node) throws NoSuchMethodException;
     public abstract T visit(Equal node) throws NoSuchMethodException;
+    public abstract T visit(UnaryMinus node) throws NoSuchMethodException;
 }

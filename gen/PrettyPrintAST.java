@@ -22,7 +22,6 @@ public class PrettyPrintAST extends BasicAbstractNodeVisitor<AbstractNode> {
     public AbstractNode visit(ArrayAssignment node) throws NoSuchMethodException{
         System.out.println("Array assignment node");
         visit(node.getId());
-        visit(node.getValue());
         return null;
     }
 
@@ -31,7 +30,6 @@ public class PrettyPrintAST extends BasicAbstractNodeVisitor<AbstractNode> {
         System.out.println("Array declaration node");
         visit(node.getId());
         visit(node.getType());
-        visit(node.getValues());
         return null;
     }
 
@@ -226,14 +224,6 @@ public class PrettyPrintAST extends BasicAbstractNodeVisitor<AbstractNode> {
     }
 
     @Override
-    public AbstractNode visit(MultipleElementAssign node) throws NoSuchMethodException{
-        for(Value x : node.getElements()){
-            visit(x);
-        }
-        return null;
-    }
-
-    @Override
     public AbstractNode visit(Not node) throws NoSuchMethodException{
         visit(node.getTruth());
         System.out.println("ast.Not node");
@@ -417,6 +407,18 @@ public class PrettyPrintAST extends BasicAbstractNodeVisitor<AbstractNode> {
     public AbstractNode visit(PauseStatement node) throws NoSuchMethodException{
         visit(node.getVal());
         System.out.println("Pause Statement node");
+        return null;
+    }
+
+    public AbstractNode defaultVisit(){
+        System.out.println("default visit");
+        return null;
+    }
+
+    @Override
+    public AbstractNode visit(UnaryMinus node) throws NoSuchMethodException {
+        visit(node.getLeft());
+        System.out.println("Unary node");
         return null;
     }
 }

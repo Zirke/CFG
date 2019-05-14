@@ -83,10 +83,6 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
         visit(arrayDeclaration.getType());
         emitter.emit("))");
 
-        if (arrayDeclaration.getValues() != null) {
-            //TODO what happens when we use calloc and there is an assignment list?
-            visit(arrayDeclaration.getValues());
-        }
         return null;
     }
 
@@ -366,12 +362,7 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
         return null;
     }
 
-    //TODO Fix
-    @Override
-    public Object visit(MultipleElementAssign multipleElementAssign) throws NoSuchMethodException {
 
-        return null;
-    }
 
     @Override
     public Object visit(Not not) throws NoSuchMethodException {
@@ -606,6 +597,15 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
             emitter.emit(")");
         }
         return null;
+    }
+    //TODO needs implementation
+    @Override
+    public Object visit(UnaryMinus node) throws NoSuchMethodException {
+
+        return null;
+    }
+    public void stringSetup() {
+
     }
 
 /*    public void stringSetup() {
