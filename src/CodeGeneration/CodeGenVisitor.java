@@ -9,6 +9,9 @@ import java.util.Random;
 public class CodeGenVisitor extends BasicAbstractNodeVisitor {
     @Override
     public Object visit(PauseStatement pauseStatement) throws NoSuchMethodException {
+        emitter.emit("delay(1000*");
+        visit(pauseStatement.getVal());
+        emitter.emit(")");
         return null;
     }
 
@@ -601,12 +604,11 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
     //TODO needs implementation
     @Override
     public Object visit(UnaryMinus node) throws NoSuchMethodException {
-
+        emitter.emit("-");
+        visit(node.getLeft());
         return null;
     }
-    public void stringSetup() {
 
-    }
 
 /*    public void stringSetup() {
         GenSetup stringSetup = new GenSetup();
