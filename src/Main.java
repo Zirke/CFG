@@ -40,12 +40,12 @@ public class Main{
 
         BuildASTVisitor visitor = new BuildASTVisitor();
         AbstractNode ast = visitor.visit(tree);
-        PrettyPrintAST visitor2 = new PrettyPrintAST();
+/*        PrettyPrintAST visitor2 = new PrettyPrintAST();
         try {
             visitor2.visit(ast);
         }catch(NoSuchMethodException e){
 
-        }
+        }*/
         // System.out.println(ast);
 
         symbolTable.SymbolTableVisitor symbolTableVisitor = new symbolTable.SymbolTableVisitor();

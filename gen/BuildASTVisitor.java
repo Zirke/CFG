@@ -396,6 +396,8 @@ public class BuildASTVisitor extends AbstractParseTreeVisitor<AbstractNode> impl
 	@Override public AbstractNode visitParexpr(PyTrun.ParexprContext ctx) {
 		if(ctx.LPAR() != null){
 			return new ArithmParenthesis("parenthesis", (Value)visitArithmexpr(ctx.arithmexpr()),null, ctx.getStart().getLine());
+		}else if(ctx.arrindex() != null){
+			return visitArrindex(ctx.arrindex());
 		}else if(ctx.nums() != null){
 			return visitNums(ctx.nums()) ;
 		}else if(ctx.functioncall() != null){

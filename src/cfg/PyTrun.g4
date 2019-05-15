@@ -99,6 +99,7 @@ unaryminus
 parexpr
          : nums
          | functioncall
+         | arrindex
          | LPAR arithmexpr RPAR ;
 
 truthexpr

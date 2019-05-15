@@ -1,1 +1,17 @@
-integer i is -2
+integer simon is -2 + 4 * (-3 / 4)
+
+integer array simonarr
+
+function gay returns truth(){
+    return true
+}
+
+
+
+if(gay())then{
+    simon is -1
+    simonarr element 1 is 20
+
+}
+
+simon is (simonarr element 1) - 10

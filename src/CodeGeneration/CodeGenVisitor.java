@@ -7,13 +7,7 @@ import java.util.HashSet;
 import java.util.Random;
 
 public class CodeGenVisitor extends BasicAbstractNodeVisitor {
-    @Override
-    public Object visit(PauseStatement pauseStatement) throws NoSuchMethodException {
-        emitter.emit("delay(1000*");
-        visit(pauseStatement.getVal());
-        emitter.emit(")");
-        return null;
-    }
+
 
     private Emitter emitter;
     private boolean isFunctionGen;
@@ -95,7 +89,7 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
         visit(arrayElementAddStatement.getArrayName());
         emitter.emit("[");
         visit(arrayElementAddStatement.getElementNumber());
-        emitter.emit("] = ");
+        emitter.emit("-1] = ");
         visit(arrayElementAddStatement.getValue());
         return null;
     }
@@ -105,7 +99,7 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
         visit(arrayIndexStatement.getId());
         emitter.emit("[");
         visit(arrayIndexStatement.getNumber());
-        emitter.emit("]");
+        emitter.emit("-1]");
         return null;
     }
 
@@ -390,6 +384,14 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
     }
 
     @Override
+    public Object visit(PauseStatement pauseStatement) throws NoSuchMethodException {
+        emitter.emit("delay(1000*");
+        visit(pauseStatement.getVal());
+        emitter.emit(")");
+        return null;
+    }
+
+    @Override
     public Object visit(Plus plus) throws NoSuchMethodException {
         visit(plus.getLeft());
         emitter.emit(" + ");
@@ -438,7 +440,7 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
     @Override
     public Object visit(SingleElementAssign singleElementAssign) throws NoSuchMethodException {
         visit(singleElementAssign.getElementNr());
-        emitter.emit("] = ");
+        emitter.emit("-1] = ");
         visit(singleElementAssign.getAssignemntVal());
         return null;
     }
@@ -450,7 +452,9 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
 
         for (Statement s : statementList.getStmts()) {
             if (!isFunctionGen) {
-                if (!(s instanceof FunctionDeclaration)) {
+                if (!(s instanceof FunctionDeclaration) && !(s instanceof IntDeclaration)
+                        && !(s instanceof TextDeclaration) && !(s instanceof FloatDeclaration)
+                        && !(s instanceof TruthDeclaration) && !(s instanceof ArrayDeclaration)) {
                     visit(s);
                     if (!(s instanceof WhileStatement || s instanceof FromStatement || s instanceof IfStatement)) {
                         emitter.emit(";\n");
@@ -459,7 +463,9 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
                     }
                 }
             } else if (isFunctionGen) {
-                if (s instanceof FunctionDeclaration) {
+                if (s instanceof FunctionDeclaration || s instanceof IntDeclaration
+                        || s instanceof TextDeclaration || s instanceof FloatDeclaration
+                        || s instanceof TruthDeclaration || s instanceof ArrayDeclaration) {
                     visit(s);
                     emitter.emit("\n");
                 }
@@ -519,7 +525,7 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
 
     @Override
     public Object visit(TRUTHDCL truthdcl) throws NoSuchMethodException {
-        visit(truthdcl.getId());
+        emitter.emit("int ");
         return null;
     }
 
