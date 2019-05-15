@@ -7,8 +7,7 @@ start
 stmts
         : EOL* dcl* arrdcl* functiondcl* stmt*;//stmt (EOL stmt)*;
 stmt
-        : //dcl
-          ifstmt
+        : ifstmt
         | whilestmt
         | returnstmt
         | functioncall
@@ -34,7 +33,7 @@ dcl
         |  TEXTDCL ID dclValue?
         |  TRUTHDCL ID (ASSIGN truthexpr)?
         | EOL
-        ;//(ASSIGN ((functioncall) | LCB (types (COMMA types)*) RCB))?;
+        ;
 
 arrdcl :
         type ARRDCL  ID
@@ -136,7 +135,7 @@ pause    : PAUSE LPAR valueorfunctioncall RPAR;
 nums
         : INUM
         | FNUM
-        | ID | MINUS nums; //TODO buildast
+        | ID; //TODO buildast
 
 stmtblock
         : LCB EOL* dcl* stmt* RCB ;

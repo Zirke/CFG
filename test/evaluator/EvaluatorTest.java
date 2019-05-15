@@ -2,6 +2,7 @@ package evaluator;
 
 import ast.*;
 import org.junit.Test;
+import sidevisitors.Evaluator;
 import symbolTable.Symbol;
 import symbolTable.SymbolTable;
 

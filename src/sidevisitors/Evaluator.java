@@ -1,4 +1,4 @@
-package evaluator;
+package sidevisitors;
 
 import ast.*;
 import astVisitor.AbstractNodeVisitor;
