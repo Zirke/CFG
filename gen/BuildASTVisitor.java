@@ -273,9 +273,6 @@ public class BuildASTVisitor extends AbstractParseTreeVisitor<AbstractNode> impl
 	@Override public AbstractNode visitAssignment(PyTrun.AssignmentContext ctx) {
 		if(ctx.TEXT() != null){
 			return new TextAssignment(new Identifier(ctx.ID().getText()), new TextLiteral(ctx.TEXT().getText()), ctx.getStart().getLine());
-		}else if(ctx.ELEMENT() != null){
-			return new ArrayAssignment(new Identifier(ctx.ID().getText()), new SingleElementAssign(
-					new IntegerLiteral(ctx.INUM().getText()),(Value) visitValueorfunctioncall(ctx.valueorfunctioncall()), ctx.getStart().getLine()), ctx.getStart().getLine());
 		}else if (ctx.valueorfunctioncall() != null){
 			return new ValueAssignment(new Identifier(ctx.ID().getText()), (Value) visitValueorfunctioncall(ctx.valueorfunctioncall()), ctx.getStart().getLine());
 		}else if(ctx.expr() != null){

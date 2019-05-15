@@ -73,10 +73,8 @@ returnstmt
 
 assignment
         : ID ( ASSIGN valueorfunctioncall
-        |  ELEMENT INUM ASSIGN valueorfunctioncall
         |  ASSIGN TEXT
         |  ASSIGN expr );
-
 value
         : arithmexpr
         | arrindex
