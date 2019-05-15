@@ -467,7 +467,11 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
                         || s instanceof TextDeclaration || s instanceof FloatDeclaration
                         || s instanceof TruthDeclaration || s instanceof ArrayDeclaration) {
                     visit(s);
-                    emitter.emit("\n");
+                    if(s instanceof FunctionDeclaration){
+                        emitter.emit("\n");
+                    } else {
+                        emitter.emit(";\n");
+                    }
                 }
             }
         }
