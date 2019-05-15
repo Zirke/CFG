@@ -113,6 +113,7 @@ relationalexpr
         :   valueorfunctioncall ((EQUALS  | GRTHAN | LESSTHAN)  valueorfunctioncall)
         |   LPAR logicalexpr RPAR //grt less equals
         |   truth
+        |   functioncall
         ;
 append
         : (TEXT | ID) PLUS (TEXT | ID) ;

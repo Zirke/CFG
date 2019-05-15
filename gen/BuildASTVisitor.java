@@ -198,7 +198,7 @@ public class BuildASTVisitor extends AbstractParseTreeVisitor<AbstractNode> impl
 			if(visitTruthpar(ctx.truthpar(0)) instanceof Identifier){
 				return new IfStatement((Identifier) visitTruthpar( ctx.truthpar(0)),(StatementList) visitStmtblock(ctx.stmtblock(0)),ctx.getStart().getLine());
 			}else{
-				return new IfStatement((TruthOperator) visitTruthpar( ctx.truthpar(0)),(StatementList) visitStmtblock(ctx.stmtblock(0)),ctx.getStart().getLine());
+				return new IfStatement( (Value) visitTruthpar( ctx.truthpar(0)),(StatementList) visitStmtblock(ctx.stmtblock(0)),ctx.getStart().getLine());
 			}
 		}else if(ctx.IF().size() > 1){
 			ArrayList<ElseIfStatement> elseIfStatements = new ArrayList<>();
@@ -491,7 +491,9 @@ public class BuildASTVisitor extends AbstractParseTreeVisitor<AbstractNode> impl
 			return visitTruth(ctx.truth());
 		}else if(ctx.LPAR() != null){
 			return new TruthParenthesis("truth parenthesis",(Value) visitLogicalexpr(ctx.logicalexpr()), ctx.getStart().getLine());
-		}else{
+		}else if(ctx.functioncall() != null){
+			return visitFunctioncall(ctx.functioncall());
+		} else{
 			if(ctx.EQUALS() != null){
 				return new Equal((Value) visitValueorfunctioncall( ctx.valueorfunctioncall(0)),(Value) visitValueorfunctioncall( ctx.valueorfunctioncall(1)), ctx.getStart().getLine());
 			}else if(ctx.LESSTHAN() != null){
