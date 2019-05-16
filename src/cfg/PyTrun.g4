@@ -3,7 +3,7 @@ parser grammar PyTrun;
 options { tokenVocab=PyTrunLexer; }
 
 start
-        : stmts EOF?;//EOL* (stmts | functiondcl)* EOL* EOF?;
+        : stmts EOF?;
 stmts
         : EOL* dcl* arrdcl* functiondcl* stmt*;//stmt (EOL stmt)*;
 stmt
@@ -135,7 +135,7 @@ pause    : PAUSE LPAR valueorfunctioncall RPAR;
 nums
         : INUM
         | FNUM
-        | ID; //TODO buildast
+        | ID;
 
 stmtblock
         : LCB EOL* dcl* stmt* RCB ;

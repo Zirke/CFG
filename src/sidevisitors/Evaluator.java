@@ -23,6 +23,8 @@ public class Evaluator extends AbstractNodeVisitor<Object> {
             return (Double)left + (Double)right;
         }else if(right instanceof Integer && left instanceof Integer){
             return (Integer)left + (Integer)right;
+        }else if(right instanceof String && left instanceof String){
+            return (String)left + (String)right;
         }
         return  null;
     }
@@ -67,6 +69,10 @@ public class Evaluator extends AbstractNodeVisitor<Object> {
 
     public Object visit(Identifier node) throws NoSuchMethodException {
         return visit(symtable.getIdTable().get(node.getSpelling()).getValue());
+    }
+
+    public Object visit(TextLiteral node){
+        return node.getSpelling();
     }
 
     public static Value convertNumberToValue(Object number){
