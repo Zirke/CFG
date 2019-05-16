@@ -68,4 +68,14 @@ public class Evaluator extends AbstractNodeVisitor<Object> {
     public Object visit(Identifier node) throws NoSuchMethodException {
         return visit(symtable.getIdTable().get(node.getSpelling()).getValue());
     }
+
+    public static Value convertNumberToValue(Object number){
+        if(number instanceof Integer){
+            return new IntegerLiteral(number.toString());
+        }else if(number instanceof Double){
+            return new FloatLiteral(number.toString());
+        }else{
+            return null;
+        }
+    }
 }
