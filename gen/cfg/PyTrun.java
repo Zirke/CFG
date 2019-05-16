@@ -1,4 +1,4 @@
-// Generated from C:/Users/Abiram Mohanaraj/Documents/GitHub/CFG/src/cfg\PyTrun.g4 by ANTLR 4.7.2
+// Generated from C:/Users/Zirke/Documents/JavaProjects/CFG23/src/cfg\PyTrun.g4 by ANTLR 4.7.2
 package cfg;
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
@@ -1061,7 +1061,7 @@ public class PyTrun extends Parser {
 			setState(220);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << TRUTHVAL) | (1L << FNUM) | (1L << INUM) | (1L << ID) | (1L << TEXT))) != 0)) {
+			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << LPAR) | (1L << MINUS) | (1L << NOT) | (1L << TRUTHVAL) | (1L << FNUM) | (1L << INUM) | (1L << ID) | (1L << TEXT))) != 0)) {
 				{
 				setState(212);
 				types();
@@ -3077,6 +3077,9 @@ public class PyTrun extends Parser {
 		public NumsContext nums() {
 			return getRuleContext(NumsContext.class,0);
 		}
+		public ExprContext expr() {
+			return getRuleContext(ExprContext.class,0);
+		}
 		public TerminalNode TEXT() { return getToken(PyTrun.TEXT, 0); }
 		public TerminalNode TRUTHVAL() { return getToken(PyTrun.TRUTHVAL, 0); }
 		public TypesContext(ParserRuleContext parent, int invokingState) {
@@ -3102,34 +3105,37 @@ public class PyTrun extends Parser {
 		TypesContext _localctx = new TypesContext(_ctx, getState());
 		enterRule(_localctx, 74, RULE_types);
 		try {
-			setState(434);
+			setState(435);
 			_errHandler.sync(this);
-			switch (_input.LA(1)) {
-			case FNUM:
-			case INUM:
-			case ID:
+			switch ( getInterpreter().adaptivePredict(_input,43,_ctx) ) {
+			case 1:
 				enterOuterAlt(_localctx, 1);
 				{
 				setState(431);
 				nums();
 				}
 				break;
-			case TEXT:
+			case 2:
 				enterOuterAlt(_localctx, 2);
 				{
 				setState(432);
-				match(TEXT);
+				expr();
 				}
 				break;
-			case TRUTHVAL:
+			case 3:
 				enterOuterAlt(_localctx, 3);
 				{
 				setState(433);
+				match(TEXT);
+				}
+				break;
+			case 4:
+				enterOuterAlt(_localctx, 4);
+				{
+				setState(434);
 				match(TRUTHVAL);
 				}
 				break;
-			default:
-				throw new NoViableAltException(this);
 			}
 		}
 		catch (RecognitionException re) {
@@ -3144,7 +3150,7 @@ public class PyTrun extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\62\u01b7\4\2\t\2"+
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\62\u01b8\4\2\t\2"+
 		"\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13"+
 		"\t\13\4\f\t\f\4\r\t\r\4\16\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22"+
 		"\4\23\t\23\4\24\t\24\4\25\t\25\4\26\t\26\4\27\t\27\4\30\t\30\4\31\t\31"+
@@ -3176,18 +3182,18 @@ public class PyTrun extends Parser {
 		"\3\35\3\35\3\35\3\35\3\35\3\36\3\36\3\36\3\36\3\36\3\37\3\37\3\37\3\37"+
 		"\3\37\3 \3 \3 \3 \3 \3!\3!\3!\3!\3!\3\"\3\"\3#\3#\7#\u0197\n#\f#\16#\u019a"+
 		"\13#\3#\7#\u019d\n#\f#\16#\u01a0\13#\3#\7#\u01a3\n#\f#\16#\u01a6\13#\3"+
-		"#\3#\3$\3$\3$\3$\3%\3%\3&\3&\3\'\3\'\3\'\5\'\u01b5\n\'\3\'\2\2(\2\4\6"+
-		"\b\n\f\16\20\22\24\26\30\32\34\36 \"$&(*,.\60\62\64\668:<>@BDFHJL\2\13"+
-		"\3\2\35\36\3\2\f\r\3\2\n\13\3\2\16\17\3\2\22\24\3\2./\3\2,.\4\2\21\21"+
-		"..\3\2\3\6\2\u01d7\2N\3\2\2\2\4U\3\2\2\2\6~\3\2\2\2\b\u00a1\3\2\2\2\n"+
-		"\u00b9\3\2\2\2\f\u00c0\3\2\2\2\16\u00c8\3\2\2\2\20\u00d2\3\2\2\2\22\u00d4"+
-		"\3\2\2\2\24\u00e2\3\2\2\2\26\u0101\3\2\2\2\30\u0106\3\2\2\2\32\u010b\3"+
-		"\2\2\2\34\u0113\3\2\2\2\36\u011e\3\2\2\2 \u012a\3\2\2\2\"\u012f\3\2\2"+
-		"\2$\u0134\3\2\2\2&\u0136\3\2\2\2(\u013e\3\2\2\2*\u0147\3\2\2\2,\u0152"+
+		"#\3#\3$\3$\3$\3$\3%\3%\3&\3&\3\'\3\'\3\'\3\'\5\'\u01b6\n\'\3\'\2\2(\2"+
+		"\4\6\b\n\f\16\20\22\24\26\30\32\34\36 \"$&(*,.\60\62\64\668:<>@BDFHJL"+
+		"\2\13\3\2\35\36\3\2\f\r\3\2\n\13\3\2\16\17\3\2\22\24\3\2./\3\2,.\4\2\21"+
+		"\21..\3\2\3\6\2\u01d9\2N\3\2\2\2\4U\3\2\2\2\6~\3\2\2\2\b\u00a1\3\2\2\2"+
+		"\n\u00b9\3\2\2\2\f\u00c0\3\2\2\2\16\u00c8\3\2\2\2\20\u00d2\3\2\2\2\22"+
+		"\u00d4\3\2\2\2\24\u00e2\3\2\2\2\26\u0101\3\2\2\2\30\u0106\3\2\2\2\32\u010b"+
+		"\3\2\2\2\34\u0113\3\2\2\2\36\u011e\3\2\2\2 \u012a\3\2\2\2\"\u012f\3\2"+
+		"\2\2$\u0134\3\2\2\2&\u0136\3\2\2\2(\u013e\3\2\2\2*\u0147\3\2\2\2,\u0152"+
 		"\3\2\2\2.\u0154\3\2\2\2\60\u0157\3\2\2\2\62\u016e\3\2\2\2\64\u0170\3\2"+
 		"\2\2\66\u0174\3\2\2\28\u0178\3\2\2\2:\u017e\3\2\2\2<\u0183\3\2\2\2>\u0188"+
 		"\3\2\2\2@\u018d\3\2\2\2B\u0192\3\2\2\2D\u0194\3\2\2\2F\u01a9\3\2\2\2H"+
-		"\u01ad\3\2\2\2J\u01af\3\2\2\2L\u01b4\3\2\2\2NP\5\4\3\2OQ\7\2\2\3PO\3\2"+
+		"\u01ad\3\2\2\2J\u01af\3\2\2\2L\u01b5\3\2\2\2NP\5\4\3\2OQ\7\2\2\3PO\3\2"+
 		"\2\2PQ\3\2\2\2Q\3\3\2\2\2RT\7+\2\2SR\3\2\2\2TW\3\2\2\2US\3\2\2\2UV\3\2"+
 		"\2\2V[\3\2\2\2WU\3\2\2\2XZ\5\n\6\2YX\3\2\2\2Z]\3\2\2\2[Y\3\2\2\2[\\\3"+
 		"\2\2\2\\a\3\2\2\2][\3\2\2\2^`\5\f\7\2_^\3\2\2\2`c\3\2\2\2a_\3\2\2\2ab"+
@@ -3296,12 +3302,12 @@ public class PyTrun extends Parser {
 		"\2\2\u01a4\u01a5\3\2\2\2\u01a5\u01a7\3\2\2\2\u01a6\u01a4\3\2\2\2\u01a7"+
 		"\u01a8\7&\2\2\u01a8E\3\2\2\2\u01a9\u01aa\7\b\2\2\u01aa\u01ab\5.\30\2\u01ab"+
 		"\u01ac\7\t\2\2\u01acG\3\2\2\2\u01ad\u01ae\t\t\2\2\u01aeI\3\2\2\2\u01af"+
-		"\u01b0\t\n\2\2\u01b0K\3\2\2\2\u01b1\u01b5\5B\"\2\u01b2\u01b5\7/\2\2\u01b3"+
-		"\u01b5\7\21\2\2\u01b4\u01b1\3\2\2\2\u01b4\u01b2\3\2\2\2\u01b4\u01b3\3"+
-		"\2\2\2\u01b5M\3\2\2\2.PU[agm~\u008a\u008d\u009a\u009d\u00a1\u00a6\u00ab"+
-		"\u00b0\u00b6\u00b9\u00c0\u00c8\u00d2\u00db\u00de\u00e9\u00f4\u00f9\u00ff"+
-		"\u0116\u011b\u0125\u012a\u012f\u0134\u013b\u0143\u0147\u0152\u0157\u015c"+
-		"\u0161\u016e\u0198\u019e\u01a4\u01b4";
+		"\u01b0\t\n\2\2\u01b0K\3\2\2\2\u01b1\u01b6\5B\"\2\u01b2\u01b6\5$\23\2\u01b3"+
+		"\u01b6\7/\2\2\u01b4\u01b6\7\21\2\2\u01b5\u01b1\3\2\2\2\u01b5\u01b2\3\2"+
+		"\2\2\u01b5\u01b3\3\2\2\2\u01b5\u01b4\3\2\2\2\u01b6M\3\2\2\2.PU[agm~\u008a"+
+		"\u008d\u009a\u009d\u00a1\u00a6\u00ab\u00b0\u00b6\u00b9\u00c0\u00c8\u00d2"+
+		"\u00db\u00de\u00e9\u00f4\u00f9\u00ff\u0116\u011b\u0125\u012a\u012f\u0134"+
+		"\u013b\u0143\u0147\u0152\u0157\u015c\u0161\u016e\u0198\u019e\u01a4\u01b5";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

@@ -611,7 +611,9 @@ public class BuildASTVisitor extends AbstractParseTreeVisitor<AbstractNode> impl
 	@Override public AbstractNode visitTypes(PyTrun.TypesContext ctx) {
 		if(ctx.nums() != null){
 			return visitNums(ctx.nums());
-		}else if(ctx.TEXT() != null){
+		} else if(ctx.expr() != null){
+			return visitExpr(ctx.expr());
+		} else if(ctx.TEXT() != null){
 			return new TextLiteral(ctx.TEXT().getText());
 		}else if(ctx.TRUTHVAL() != null){
 			return new TruthLiteral(ctx.TRUTHVAL().getText());
