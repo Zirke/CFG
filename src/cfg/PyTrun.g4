@@ -155,5 +155,6 @@ type
 
 types
         : nums
+        | expr
         | TEXT
         | TRUTHVAL ;
