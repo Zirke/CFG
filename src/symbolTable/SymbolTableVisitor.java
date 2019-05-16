@@ -83,7 +83,7 @@ public class SymbolTableVisitor extends BasicAbstractNodeVisitor<Object> {
             try {
                 throw new OutOfBounds("line: " + node.getLineNumber() + " -- element index is out of bounds");
             } catch (SemanticException e) {
-                out.println("OutOfBounds " + e.getLocalizedMessage());
+                out.println("WARNING: OutOfBounds " + e.getLocalizedMessage());
             }
         }
 
@@ -107,7 +107,7 @@ public class SymbolTableVisitor extends BasicAbstractNodeVisitor<Object> {
             try {
                 throw new OutOfBounds("line: " + node.getLineNumber() + " -- element index is out of bounds");
             } catch (SemanticException e) {
-                out.println("OutOfBounds " + e.getLocalizedMessage());
+                out.println("WARNING: OutOfBounds " + e.getLocalizedMessage());
             }
         }
 
