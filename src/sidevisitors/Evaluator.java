@@ -5,7 +5,7 @@ import astVisitor.AbstractNodeVisitor;
 import symbolTable.SymbolTable;
 
 public class Evaluator extends AbstractNodeVisitor<Object> {
-    SymbolTable symtable = new SymbolTable();
+    SymbolTable symtable;
 
     public Evaluator(SymbolTable symtable) {
         this.symtable = symtable;
@@ -51,6 +51,7 @@ public class Evaluator extends AbstractNodeVisitor<Object> {
     public Object visit(Divide node)throws NoSuchMethodException{
         Object right = visit(node.getRight());
         Object left = visit(node.getLeft());
+
         if(right instanceof Double && left instanceof Double){
             return (Double)left / (Double)right;
         }else if(right instanceof Integer && left instanceof Integer){
@@ -68,7 +69,12 @@ public class Evaluator extends AbstractNodeVisitor<Object> {
     }
 
     public Object visit(Identifier node) throws NoSuchMethodException {
-        return visit(symtable.getIdTable().get(node.getSpelling()).getValue());
+        if(symtable.getIdTable().get(node.getSpelling()).getType() instanceof IntegerLiteral){
+            return Integer.valueOf(((IntegerLiteral)symtable.getIdTable().get(node.getSpelling()).getValue()).getSpelling());
+        }else if(symtable.getIdTable().get(node.getSpelling()).getType() instanceof FloatLiteral){
+            return Double.valueOf(((FloatLiteral)symtable.getIdTable().get(node.getSpelling()).getValue()).getSpelling());
+        }
+        return null;
     }
 
     public Object visit(TextLiteral node){

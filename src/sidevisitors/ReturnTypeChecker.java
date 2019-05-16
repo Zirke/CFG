@@ -9,10 +9,14 @@ import java.util.ArrayList;
 public class ReturnTypeChecker extends AbstractNodeVisitor<Object> {
     ArrayList<Value> returnValus = new ArrayList<>();
     SymbolTable symTable;
-    Evaluator eval = new Evaluator(symTable);
 
+
+    public ReturnTypeChecker(SymbolTable symTable) {
+        this.symTable = symTable;
+    }
 
     public void visit(StatementList node){
+        Evaluator eval = new Evaluator(symTable);
         for(Statement stm : node.getStmts()){
             if(stm instanceof ReturnStatement){
                 ReturnStatement retstm = (ReturnStatement) stm;
@@ -26,6 +30,7 @@ public class ReturnTypeChecker extends AbstractNodeVisitor<Object> {
                          value = eval.visit(retstm.getVal());
                     } catch (NoSuchMethodException e) { }
                     if(value instanceof Integer){
+
                         IntegerLiteral retval = new IntegerLiteral("integer literal"); retval.setLineNumber(retstm.getLineNumber());
                         returnValus.add(retval);
                     }else if(value instanceof Double){
@@ -35,6 +40,12 @@ public class ReturnTypeChecker extends AbstractNodeVisitor<Object> {
 
                 }else{
                     returnValus.add(retstm.getVal());
+                }
+            }else{
+                try {
+                    visit(stm);
+                } catch (NoSuchMethodException e) {
+                    e.printStackTrace();
                 }
             }
         }
@@ -71,6 +82,8 @@ public class ReturnTypeChecker extends AbstractNodeVisitor<Object> {
     public void visit(WhileStatement node){
         visit(node.getStmts());
     }
+
+    public void defaultVisit(AbstractNode node){}
 
     public ArrayList<Value> getReturnValus() {
         return returnValus;
