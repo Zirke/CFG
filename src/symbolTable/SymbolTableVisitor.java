@@ -311,7 +311,7 @@ public class SymbolTableVisitor extends BasicAbstractNodeVisitor<Object> {
         }
 
         if (symbolTable.getIdTable().get(node.getSpelling()).getType() instanceof TextLiteral) {
-            node.setText(true);
+            node.isText = true;
         }
 
         return null;
@@ -597,7 +597,7 @@ public class SymbolTableVisitor extends BasicAbstractNodeVisitor<Object> {
             Value value = (Value) visit(node.getVal());
             symbolTable.getIdTable().get(node.getId().getSpelling()).setNodes(node);
             symbolTable.getIdTable().get(node.getId().getSpelling()).setValue(node.getVal());
-            node.getId().setText(true);
+            node.getId().isText = true;
 
             if (!(value instanceof TextLiteral)) {
                 errorCallAssignIncompatibleTypes(value.getClass().getName().substring(4, value.getClass().getName().length() - 7), node.getId().getSpelling(), node.getLineNumber());

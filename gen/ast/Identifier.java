@@ -1,7 +1,7 @@
 package ast;
 
 public class Identifier extends Terminal implements Value{
-    boolean isText;
+    public boolean isText;
     public Identifier(String spelling) {
         super(spelling);
     }

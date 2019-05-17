@@ -301,11 +301,12 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
 
     @Override
     public Object visit(Identifier identifier) throws NoSuchMethodException {
+        //identifier.isText = true;
         if(identifier.isText()){
-            emitter.emit(identifier.getSpelling());
             return new TextLiteral(identifier.getSpelling());
-        }
+        } else {
         emitter.emit(identifier.getSpelling());
+        }
         return null;
     }
 
@@ -403,7 +404,8 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
 
     @Override
     public Object visit(Plus plus) throws NoSuchMethodException {
-        if (plus.getLeft() instanceof TextLiteral){
+
+        if (visit(plus.getLeft()) instanceof TextLiteral){
             emitter.emit("stringConcat(");
             visit(plus.getLeft());
             emitter.emit(", ");
