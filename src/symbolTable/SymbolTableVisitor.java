@@ -36,7 +36,7 @@ public class SymbolTableVisitor extends BasicAbstractNodeVisitor<Object> {
         Value expressionType = (Value) visit(arrayAssignment.getValue());
 
         if (!(variableType.getClass().equals(expressionType.getClass()))) {
-           // errorCallIntegerIncompatibleTypes(arrayAssignment.getValue(), arrayAssignment.getId(),arrayAssignment.getLineNumber());
+            // errorCallIntegerIncompatibleTypes(arrayAssignment.getValue(), arrayAssignment.getId(),arrayAssignment.getLineNumber());
         }
 
         symbolTable.getIdTable().get(arrayAssignment.getId().getSpelling()).setNodes(arrayAssignment);
@@ -76,9 +76,9 @@ public class SymbolTableVisitor extends BasicAbstractNodeVisitor<Object> {
                 exit(0);
             }
         }
-        if((isNumeric(((IntegerLiteral) elementNumber).getSpelling()) && (Integer.valueOf(((IntegerLiteral) elementNumber).getSpelling()) >= 129 || Integer.valueOf(((IntegerLiteral) elementNumber).getSpelling()) < 1))
-        || Integer.valueOf(((IntegerLiteral)symbolTable.getIdTable().get(((IntegerLiteral)elementNumber).getSpelling()).getValue()).getSpelling()) >= 129
-        || Integer.valueOf(((IntegerLiteral)symbolTable.getIdTable().get(((IntegerLiteral)elementNumber).getSpelling()).getValue()).getSpelling()) < 0) {
+        if ((isNumeric(((IntegerLiteral) elementNumber).getSpelling()) && (Integer.valueOf(((IntegerLiteral) elementNumber).getSpelling()) >= 129 || Integer.valueOf(((IntegerLiteral) elementNumber).getSpelling()) < 1))
+                || Integer.valueOf(((IntegerLiteral) symbolTable.getIdTable().get(((IntegerLiteral) elementNumber).getSpelling()).getValue()).getSpelling()) >= 129
+                || Integer.valueOf(((IntegerLiteral) symbolTable.getIdTable().get(((IntegerLiteral) elementNumber).getSpelling()).getValue()).getSpelling()) < 0) {
 
             try {
                 throw new OutOfBounds("line: " + node.getLineNumber() + " -- element index is possibly out of bounds");
@@ -95,14 +95,13 @@ public class SymbolTableVisitor extends BasicAbstractNodeVisitor<Object> {
     public Object visit(ArrayIndexStatement node) throws NoSuchMethodException {
 
 
-
         Value value = (Value) visit(node.getNumber());
         if (!(value instanceof IntegerLiteral)) {
             errorCallIntegerIncompatibleTypes(node.getClass().getName(), node.getLineNumber());
         }
         if ((isNumeric(((IntegerLiteral) value).getSpelling()) && (Integer.valueOf(((IntegerLiteral) value).getSpelling()) >= 129 || Integer.valueOf(((IntegerLiteral) value).getSpelling()) < 1))
-                || Integer.valueOf(((IntegerLiteral)symbolTable.getIdTable().get(((IntegerLiteral)value).getSpelling()).getValue()).getSpelling()) >= 129
-                || Integer.valueOf(((IntegerLiteral)symbolTable.getIdTable().get(((IntegerLiteral)value).getSpelling()).getValue()).getSpelling()) < 0) {
+                || Integer.valueOf(((IntegerLiteral) symbolTable.getIdTable().get(((IntegerLiteral) value).getSpelling()).getValue()).getSpelling()) >= 129
+                || Integer.valueOf(((IntegerLiteral) symbolTable.getIdTable().get(((IntegerLiteral) value).getSpelling()).getValue()).getSpelling()) < 0) {
 
             try {
                 throw new OutOfBounds("line: " + node.getLineNumber() + " -- element index is possibly out of bounds");
@@ -174,7 +173,7 @@ public class SymbolTableVisitor extends BasicAbstractNodeVisitor<Object> {
         }
         symbolTable.getIdTable().get(node.getId().getSpelling()).setNodes(node);
         symbolTable.getIdTable().get(node.getId().getSpelling()).setValue(convertNumberToValue(evaluator.visit(node.getValue()))); ///TODO EVALUATE VIISTOR
-        if(variableType instanceof TextLiteral){
+        if (variableType instanceof TextLiteral) {
             node.getId().setText(true);
         }
         return null;
@@ -252,10 +251,10 @@ public class SymbolTableVisitor extends BasicAbstractNodeVisitor<Object> {
                     errorCallTooFewParameters(node.getClass().getName().substring(4), node.getLineNumber());
                 }
             }
-        }else{
+        } else {
             try {
                 throw new VariableMissing(node.getFunctionName().getSpelling() + " has not been declared");
-            }catch (SemanticException e){
+            } catch (SemanticException e) {
                 err.println("VariableMissing " + e.getLocalizedMessage());
             }
         }
@@ -310,6 +309,11 @@ public class SymbolTableVisitor extends BasicAbstractNodeVisitor<Object> {
                 err.println("UninitializedVariable " + e.getLocalizedMessage());
             }
         }
+
+        if (symbolTable.getIdTable().get(node.getSpelling()).getType() instanceof TextLiteral) {
+            node.setText(true);
+        }
+
         return null;
     }
 
@@ -357,7 +361,7 @@ public class SymbolTableVisitor extends BasicAbstractNodeVisitor<Object> {
             symbolTable.getIdTable().get(node.getId().getSpelling()).setValue(convertNumberToValue(evaluator.visit(node.getStm())));
             Value value = (Value) visit(node.getStm());
             if (!(value instanceof IntegerLiteral)) {
-                    errorCallAssignIncompatibleTypes(value.getClass().getName().substring(4, value.getClass().getName().length() - 7), node.getId().getSpelling(), node.getLineNumber());
+                errorCallAssignIncompatibleTypes(value.getClass().getName().substring(4, value.getClass().getName().length() - 7), node.getId().getSpelling(), node.getLineNumber());
             }
         }
         return new IntegerLiteral(node.getId().getSpelling());
@@ -496,21 +500,21 @@ public class SymbolTableVisitor extends BasicAbstractNodeVisitor<Object> {
             visit(node.getStmtBody());
             ReturnTypeChecker returnTypeChecker = new ReturnTypeChecker(symbolTable);
             returnTypeChecker.visit(node.getStmtBody());
-            for(Value returnstatement : returnTypeChecker.getReturnValus()){
-                    nodes.add(returnstatement);
-                    if (!(returnstatement).getClass().equals(typeCasting(node.getReturnType()).getClass())) {
-                        try {
-                            throw new IncompatibleTypes("line: " + node.getLineNumber() + " -- " + node.getFunctionName().getSpelling() + " has to return a " + typeCasting(node.getReturnType()).getClass().getName().substring(4));
-                        } catch (SemanticException e) {
-                            err.println("IncompatibleTypes " + e.getLocalizedMessage());
-                        }
+            for (Value returnstatement : returnTypeChecker.getReturnValus()) {
+                nodes.add(returnstatement);
+                if (!(visit(returnstatement).getClass().equals(typeCasting(node.getReturnType()).getClass()))) {
+                    try {
+                        throw new IncompatibleTypes("line: " + node.getLineNumber() + " -- " + node.getFunctionName().getSpelling() + " has to return a " + typeCasting(node.getReturnType()).getClass().getName().substring(4));
+                    } catch (SemanticException e) {
+                        err.println("IncompatibleTypes " + e.getLocalizedMessage());
                     }
                 }
+            }
 
-            if(nodes.isEmpty()){
-                try{
+            if (nodes.isEmpty()) {
+                try {
                     throw new MissingReturnStatement("line: " + node.getLineNumber() + " -- " + node.getFunctionName().getSpelling() + " has no return statement");
-                }catch (SemanticException e){
+                } catch (SemanticException e) {
                     err.println("MissingReturnStatement " + e.getLocalizedMessage());
                 }
             }
@@ -596,7 +600,7 @@ public class SymbolTableVisitor extends BasicAbstractNodeVisitor<Object> {
             node.getId().setText(true);
 
             if (!(value instanceof TextLiteral)) {
-                    errorCallAssignIncompatibleTypes(value.getClass().getName().substring(4, value.getClass().getName().length() - 7), node.getId().getSpelling(), node.getLineNumber());
+                errorCallAssignIncompatibleTypes(value.getClass().getName().substring(4, value.getClass().getName().length() - 7), node.getId().getSpelling(), node.getLineNumber());
 
             }
         }
@@ -637,7 +641,7 @@ public class SymbolTableVisitor extends BasicAbstractNodeVisitor<Object> {
             symbolTable.getIdTable().get(node.getId().getSpelling()).setNodes(node);
             symbolTable.getIdTable().get(node.getId().getSpelling()).setValue(node.getExpr()); ///TODO EVALUATE VIISTOR
             if (!(value instanceof TruthLiteral)) {
-                    errorCallAssignIncompatibleTypes(value.getClass().getName().substring(4, value.getClass().getName().length() - 7), node.getId().getSpelling(), node.getLineNumber());
+                errorCallAssignIncompatibleTypes(value.getClass().getName().substring(4, value.getClass().getName().length() - 7), node.getId().getSpelling(), node.getLineNumber());
             }
         }
         return new TruthLiteral(node.getId().getSpelling());
@@ -867,10 +871,12 @@ public class SymbolTableVisitor extends BasicAbstractNodeVisitor<Object> {
         }
         return true;
     }
-    private Integer convertIntegerLiteral(Identifier identifier){
-        return Integer.valueOf(((IntegerLiteral)symbolTable.getIdTable().get(identifier.getSpelling()).getValue()).getSpelling());
+
+    private Integer convertIntegerLiteral(Identifier identifier) {
+        return Integer.valueOf(((IntegerLiteral) symbolTable.getIdTable().get(identifier.getSpelling()).getValue()).getSpelling());
     }
-    private Float convertFloatLiteral(Identifier identifier){
-        return Float.valueOf(((FloatLiteral)symbolTable.getIdTable().get(identifier.getSpelling()).getValue()).getSpelling());
+
+    private Float convertFloatLiteral(Identifier identifier) {
+        return Float.valueOf(((FloatLiteral) symbolTable.getIdTable().get(identifier.getSpelling()).getValue()).getSpelling());
     }
 }
