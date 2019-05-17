@@ -116,7 +116,9 @@ relationalexpr
         |   functioncall
         ;
 append
-        : (TEXT | ID) PLUS (TEXT | ID) ;
+        : textorid PLUS textorid ;
+textorid
+        : TEXT | ID;
 
 arrindex
         :  ID ELEMENT arithmexpr; //TODO expression in arrindex

@@ -21,7 +21,6 @@ public class Main{
         while ((st = br.readLine()) != null) {
            d += st;
            d += "\n";
-           // System.out.println(st);
         }
 
         ANTLRInputStream input = new ANTLRInputStream(d);
@@ -30,23 +29,8 @@ public class Main{
         PyTrun parser = new PyTrun(tokens);
         ParseTree tree = parser.start();
 
-        //System.out.println(tree.toStringTree(parser));
-        // System.out.println(((PyTrun.DclContext) tree).ASSIGN());
-        /*for(ParseTree i : ((PyTrun.StmtContext) tree).children){
-            System.out.println(i.toStringTree(parser));
-            System.out.println(i.getChildCount());
-            System.out.println(tree.getChildCount());
-        }*/
-
         BuildASTVisitor visitor = new BuildASTVisitor();
         AbstractNode ast = visitor.visit(tree);
-/*        PrettyPrintAST visitor2 = new PrettyPrintAST();
-        try {
-            visitor2.visit(ast);
-        }catch(NoSuchMethodException e){
-
-        }*/
-        // System.out.println(ast);
 
         symbolTable.SymbolTableVisitor symbolTableVisitor = new symbolTable.SymbolTableVisitor();
         symbolTable.SymbolTable sym = null;
@@ -56,10 +40,8 @@ public class Main{
             e.printStackTrace();
         }
 
-        Emitter emitter = new Emitter();
+        Emitter emitter = new Emitter("genFile.c");
         CodeGenVisitor codeGenFunctionVisitor = new CodeGenVisitor(emitter, true);
-        codeGenFunctionVisitor.setupConcat();
-        /*codeGenFunctionVisitor.stringSetup();*/
         try {
             codeGenFunctionVisitor.visit(ast);
         } catch (NoSuchMethodException e) {
