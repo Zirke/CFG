@@ -71,14 +71,20 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
     // Current size is 128 but not checked if the source array is bigger.
     @Override
     public Object visit(ArrayDeclaration arrayDeclaration) throws NoSuchMethodException {
-        visit(arrayDeclaration.getType());
-        emitter.emit("*");
-        visit(arrayDeclaration.getId());
-        emitter.emit(" = (");
-        visit(arrayDeclaration.getType());
-        emitter.emit("*) calloc(128, sizeof(");
-        visit(arrayDeclaration.getType());
-        emitter.emit("))");
+        if (!(arrayDeclaration.getType() instanceof TEXTDCL)){
+            visit(arrayDeclaration.getType());
+            emitter.emit("*");
+            visit(arrayDeclaration.getId());
+            emitter.emit(" = (");
+            visit(arrayDeclaration.getType());
+            emitter.emit("*) calloc(128, sizeof(");
+            visit(arrayDeclaration.getType());
+            emitter.emit("))");
+        }else{
+            emitter.emit("char** ");
+            visit(arrayDeclaration.getId());
+            emitter.emit(" = (char**) calloc(128, sizeof(char*))");
+        }
 
         return null;
     }
@@ -295,6 +301,10 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
 
     @Override
     public Object visit(Identifier identifier) throws NoSuchMethodException {
+        if(identifier.isText()){
+            emitter.emit(identifier.getSpelling());
+            return new TextLiteral(identifier.getSpelling());
+        }
         emitter.emit(identifier.getSpelling());
         return null;
     }
@@ -393,9 +403,17 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
 
     @Override
     public Object visit(Plus plus) throws NoSuchMethodException {
-        visit(plus.getLeft());
-        emitter.emit(" + ");
-        visit(plus.getRight());
+        if (plus.getLeft() instanceof TextLiteral){
+            emitter.emit("stringConcat(");
+            visit(plus.getLeft());
+            emitter.emit(", ");
+            visit(plus.getRight());
+            emitter.emit(")");
+        } else{
+            visit(plus.getLeft());
+            emitter.emit(" + ");
+            visit(plus.getRight());
+        }
         return null;
     }
 
@@ -514,8 +532,9 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
 
     @Override
     public Object visit(TextLiteral textLiteral) throws NoSuchMethodException {
+
         emitter.emit(textLiteral.getSpelling());
-        return null;
+        return new TextLiteral(textLiteral.getSpelling());
     }
 
     @Override
@@ -620,10 +639,10 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
     }
 
 
-/*    public void stringSetup() {
+    public void setupConcat() {
         GenSetup stringSetup = new GenSetup();
-        emitter.emit(stringSetup.stringCompare());
-    }*/
+        emitter.emit(stringSetup.stringConcat());
+    }
 
     public void setup() {
         GenSetup setup = new GenSetup();

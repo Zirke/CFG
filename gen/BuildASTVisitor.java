@@ -508,9 +508,10 @@ public class BuildASTVisitor extends AbstractParseTreeVisitor<AbstractNode> impl
 	}
 
 	@Override public AbstractNode visitAppend(PyTrun.AppendContext ctx) {
-		Value left;
-		Value right = null;
-		if(ctx.TEXT() != null){
+		Value left = (Value) visitTextorid(ctx.textorid(0));
+		Value right = (Value) visitTextorid(ctx.textorid(1));
+		return new Plus("Append", left, right, ctx.getStart().getLine());
+		/*if(ctx.TEXT() != null){
 			left = new TextLiteral( ctx.TEXT().get(0).getText());
 			if(ctx.TEXT().size() == 2){
 				right = new TextLiteral( ctx.TEXT().get(1).getText());
@@ -519,13 +520,21 @@ public class BuildASTVisitor extends AbstractParseTreeVisitor<AbstractNode> impl
 				right = new Identifier(ctx.ID(0).toString());
 				return new Plus("Append", left, right, ctx.getStart().getLine());
 			}
-		}/*else if(ctx.ID() != null){   //this will never happen as an arithmetic expression instead.
+		}*//*else if(ctx.ID() != null){   //this will never happen as an arithmetic expression instead.
 			   left = new ast.Identifier(ctx.ID().get(0).getText());
 			   right = new ast.Identifier(ctx.ID().get(1).getText());
 			   return new Append("Append", left, right);
 		}*/
+	}
 
-		return null;
+	@Override
+	public AbstractNode visitTextorid(PyTrun.TextoridContext ctx) {
+		if(ctx.TEXT() != null){
+			return new TextLiteral(ctx.TEXT().getText());
+		}else if(ctx.ID() != null){
+			return new Identifier(ctx.ID().getText());
+		}else
+			return null;
 	}
 
 	@Override public AbstractNode visitArrindex(PyTrun.ArrindexContext ctx) {
@@ -533,9 +542,16 @@ public class BuildASTVisitor extends AbstractParseTreeVisitor<AbstractNode> impl
 	}
 
 	@Override public AbstractNode visitArradd(PyTrun.ArraddContext ctx) {
-		return new ArrayElementAddStatement(new Identifier(ctx.ID().getText()),
+		if (ctx.expr() != null){
+			return new ArrayElementAddStatement(new Identifier(ctx.ID().getText()),
 				(Value) visitArithmexpr(ctx.arithmexpr()),
 				(Value) visitExpr(ctx.expr()), ctx.getStart().getLine());
+		} else if(ctx.TEXT() != null){
+			return new ArrayElementAddStatement(new Identifier(ctx.ID().getText()),
+					(Value) visitArithmexpr(ctx.arithmexpr()),
+					(Value) new TextLiteral(ctx.TEXT().getText()), ctx.getStart().getLine());
+		}
+		return null;
 		/*if(ctx.INUM() != null){
 			return new ArrayElementAddStatement(new Identifier(ctx.ID().get(0).getText()),
 					new IntegerLiteral(ctx.INUM().getText()),

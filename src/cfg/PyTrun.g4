@@ -116,13 +116,15 @@ relationalexpr
         |   functioncall
         ;
 append
-        : (TEXT | ID) PLUS (TEXT | ID) ;
+        : textorid PLUS textorid ;
+textorid
+        : TEXT | ID;
 
 arrindex
         :  ID ELEMENT arithmexpr; //TODO expression in arrindex
 
 arradd
-        : ID ELEMENT arithmexpr ASSIGN expr; //TODO expression in arrindex
+        : ID ELEMENT arithmexpr ASSIGN (expr | TEXT); //TODO expression in arrindex
 
 drive   : DRIVE LPAR valueorfunctioncall RPAR;
 
