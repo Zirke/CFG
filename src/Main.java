@@ -58,6 +58,7 @@ public class Main{
 
         Emitter emitter = new Emitter();
         CodeGenVisitor codeGenFunctionVisitor = new CodeGenVisitor(emitter, true);
+        codeGenFunctionVisitor.setupConcat();
         /*codeGenFunctionVisitor.stringSetup();*/
         try {
             codeGenFunctionVisitor.visit(ast);

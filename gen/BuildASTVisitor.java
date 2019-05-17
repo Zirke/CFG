@@ -533,9 +533,16 @@ public class BuildASTVisitor extends AbstractParseTreeVisitor<AbstractNode> impl
 	}
 
 	@Override public AbstractNode visitArradd(PyTrun.ArraddContext ctx) {
-		return new ArrayElementAddStatement(new Identifier(ctx.ID().getText()),
+		if (ctx.expr() != null){
+			return new ArrayElementAddStatement(new Identifier(ctx.ID().getText()),
 				(Value) visitArithmexpr(ctx.arithmexpr()),
 				(Value) visitExpr(ctx.expr()), ctx.getStart().getLine());
+		} else if(ctx.TEXT() != null){
+			return new ArrayElementAddStatement(new Identifier(ctx.ID().getText()),
+					(Value) visitArithmexpr(ctx.arithmexpr()),
+					(Value) new TextLiteral(ctx.TEXT().getText()), ctx.getStart().getLine());
+		}
+		return null;
 		/*if(ctx.INUM() != null){
 			return new ArrayElementAddStatement(new Identifier(ctx.ID().get(0).getText()),
 					new IntegerLiteral(ctx.INUM().getText()),

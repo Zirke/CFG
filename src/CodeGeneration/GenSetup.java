@@ -17,6 +17,15 @@ public class GenSetup {
                 "void loop() {\n";
     }
 
+    String stringConcat(){
+        return "char* stringConcat(char* str1, char* str2){\n" +
+                "\tchar* tempstr = (char*) calloc(128, sizeof(char));\n" +
+                "\tstrcpy(tempstr, str1);\n" +
+                "\tstrcat(tempstr, str2);\n" +
+                "\treturn tempstr;\n" +
+                "}";
+    }
+
 /*    String stringCompare(){
         return  "int stringEquals(char *a, char *b){\n" +
                 "  int retVal = strcmp(a, b);\n" +
