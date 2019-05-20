@@ -40,8 +40,9 @@ public class Main{
             e.printStackTrace();
         }
 
-        Emitter emitter = new Emitter("genFile.c");
+        Emitter emitter = new Emitter();
         CodeGenVisitor codeGenFunctionVisitor = new CodeGenVisitor(emitter, true);
+        codeGenFunctionVisitor.setupConcat();
         try {
             codeGenFunctionVisitor.visit(ast);
         } catch (NoSuchMethodException e) {

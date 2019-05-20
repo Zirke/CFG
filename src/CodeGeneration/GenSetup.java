@@ -23,7 +23,7 @@ public class GenSetup {
                 "\tstrcpy(tempstr, str1);\n" +
                 "\tstrcat(tempstr, str2);\n" +
                 "\treturn tempstr;\n" +
-                "}";
+                "}\n";
     }
 
 /*    String stringCompare(){

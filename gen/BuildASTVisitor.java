@@ -510,7 +510,8 @@ public class BuildASTVisitor extends AbstractParseTreeVisitor<AbstractNode> impl
 	@Override public AbstractNode visitAppend(PyTrun.AppendContext ctx) {
 		Value left = (Value) visitTextorid(ctx.textorid(0));
 		Value right = (Value) visitTextorid(ctx.textorid(1));
-		return new Plus("Append", left, right, ctx.getStart().getLine());
+		return new Append("append", left, right, ctx.getStart().getLine());
+
 		/*if(ctx.TEXT() != null){
 			left = new TextLiteral( ctx.TEXT().get(0).getText());
 			if(ctx.TEXT().size() == 2){
@@ -549,7 +550,7 @@ public class BuildASTVisitor extends AbstractParseTreeVisitor<AbstractNode> impl
 		} else if(ctx.TEXT() != null){
 			return new ArrayElementAddStatement(new Identifier(ctx.ID().getText()),
 					(Value) visitArithmexpr(ctx.arithmexpr()),
-					(Value) new TextLiteral(ctx.TEXT().getText()), ctx.getStart().getLine());
+					 new TextLiteral(ctx.TEXT().getText()), ctx.getStart().getLine());
 		}
 		return null;
 		/*if(ctx.INUM() != null){

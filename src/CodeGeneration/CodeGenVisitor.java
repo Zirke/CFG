@@ -8,7 +8,6 @@ import java.util.Random;
 
 public class CodeGenVisitor extends BasicAbstractNodeVisitor {
 
-
     private Emitter emitter;
     private boolean isFunctionGen;
     private HashSet<String> noDuplicateStrings = new HashSet<>();
@@ -45,6 +44,15 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
         visit(and.getLhs());
         emitter.emit(" && ");
         visit(and.getRhs());
+        return null;
+    }
+
+    public Object visit(Append append) throws NoSuchMethodException{
+        emitter.emit("stringConcat(");
+        visit(append.getLeft());
+        emitter.emit(", ");
+        visit(append.getRight());
+        emitter.emit(")");
         return null;
     }
 
@@ -301,12 +309,7 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
 
     @Override
     public Object visit(Identifier identifier) throws NoSuchMethodException {
-        //identifier.isText = true;
-        if(identifier.isText()){
-            return new TextLiteral(identifier.getSpelling());
-        } else {
         emitter.emit(identifier.getSpelling());
-        }
         return null;
     }
 
@@ -404,18 +407,10 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
 
     @Override
     public Object visit(Plus plus) throws NoSuchMethodException {
+        visit(plus.getLeft());
+        emitter.emit(" + ");
+        visit(plus.getRight());
 
-        if (visit(plus.getLeft()) instanceof TextLiteral){
-            emitter.emit("stringConcat(");
-            visit(plus.getLeft());
-            emitter.emit(", ");
-            visit(plus.getRight());
-            emitter.emit(")");
-        } else{
-            visit(plus.getLeft());
-            emitter.emit(" + ");
-            visit(plus.getRight());
-        }
         return null;
     }
 

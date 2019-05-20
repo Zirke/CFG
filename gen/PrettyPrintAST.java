@@ -12,6 +12,14 @@ public class PrettyPrintAST extends BasicAbstractNodeVisitor<AbstractNode> {
     }
 
     @Override
+    public AbstractNode visit(Append node) throws NoSuchMethodException {
+        System.out.println("ast.Append Node");
+        visit(node.getLeft());
+        visit(node.getRight());
+        return null;
+    }
+
+    @Override
     public AbstractNode visit(ArithmParenthesis node) throws NoSuchMethodException{
         System.out.println("Arithmetic Parenthesis");
         visit(node.getLeft());

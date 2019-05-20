@@ -39,7 +39,8 @@ RCB      : '}' ;
 DRIVE    : 'drive';
 TURNLEFT : 'turnleft';
 TURNRIGHT: 'turnright';
-PAUSE     : 'pause';
+PAUSE    : 'pause';
+APPEND   : 'append';
 EOL      : NEWLINE+ ; //for newline
 FNUM     : ([0-9])+ '.' ([0-9])+ ;
 INUM     : ([0-9])+ ;

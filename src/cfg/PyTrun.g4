@@ -116,7 +116,7 @@ relationalexpr
         |   functioncall
         ;
 append
-        : textorid PLUS textorid ;
+        : textorid APPEND textorid ;
 textorid
         : TEXT | ID;
 

@@ -5,6 +5,7 @@ import ast.*;
 abstract public class BasicAbstractNodeVisitor<T> extends AbstractNodeVisitor  {
 
     public abstract T visit(And node) throws NoSuchMethodException;
+    public abstract T visit(Append node) throws NoSuchMethodException;
     public abstract T visit(ArithmParenthesis node)throws NoSuchMethodException;
     public abstract T visit(ArrayAssignment node)throws NoSuchMethodException;
     public abstract T visit(ArrayDeclaration node)throws NoSuchMethodException;

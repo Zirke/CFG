@@ -13,7 +13,7 @@ import java.util.List;
 import static java.lang.System.*;
 import static sidevisitors.Evaluator.convertNumberToValue;
 
-public class SymbolTableVisitor extends BasicAbstractNodeVisitor<Object> {
+public class SymbolTableVisitor extends BasicAbstractNodeVisitor<Object>{
     SymbolTable symbolTable = new SymbolTable();
     Evaluator evaluator = new Evaluator(symbolTable);
 
@@ -25,6 +25,11 @@ public class SymbolTableVisitor extends BasicAbstractNodeVisitor<Object> {
         } else {
             errorCallIncorrectOperatorUse(node.getClass().getName(), node.getLhs().toString(), node.getRhs().toString(), node.getLineNumber());
         }
+        return null;
+    }
+
+    @Override
+    public Object visit(Append node) throws NoSuchMethodException {
         return null;
     }
 
@@ -311,7 +316,7 @@ public class SymbolTableVisitor extends BasicAbstractNodeVisitor<Object> {
         }
 
         if (symbolTable.getIdTable().get(node.getSpelling()).getType() instanceof TextLiteral) {
-            node.isText = true;
+            node.setText(true);
         }
 
         return null;
@@ -597,7 +602,7 @@ public class SymbolTableVisitor extends BasicAbstractNodeVisitor<Object> {
             Value value = (Value) visit(node.getVal());
             symbolTable.getIdTable().get(node.getId().getSpelling()).setNodes(node);
             symbolTable.getIdTable().get(node.getId().getSpelling()).setValue(node.getVal());
-            node.getId().isText = true;
+            node.getId().setText(true);
 
             if (!(value instanceof TextLiteral)) {
                 errorCallAssignIncompatibleTypes(value.getClass().getName().substring(4, value.getClass().getName().length() - 7), node.getId().getSpelling(), node.getLineNumber());

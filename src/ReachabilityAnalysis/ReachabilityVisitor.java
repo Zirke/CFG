@@ -41,6 +41,11 @@ public class ReachabilityVisitor extends BasicAbstractNodeVisitor {
     }
 
     @Override
+    public Object visit(Append append) throws NoSuchMethodException {
+        return null;
+    }
+
+    @Override
     public Object visit(ArithmParenthesis arithmParenthesis) throws NoSuchMethodException {
         return null;
     }
