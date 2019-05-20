@@ -521,7 +521,7 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
             emitter.emit(" = ");
             visit(textDeclaration.getVal());
         } else{
-            emitter.emit(" = (char*)calloc(128, sizeof(char));\n");
+            emitter.emit(" = (char*)calloc(128, sizeof(char))");
         }
 
         return null;
