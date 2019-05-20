@@ -133,9 +133,9 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
 
     @Override
     public Object visit(DriveStatement driveStatement) throws NoSuchMethodException {
-        emitter.emit("\ndigitalWrite(leftMotor, HIGH);\ndigitalWrite(rightMotor, HIGH);\ndelay(1000*");
+        emitter.emit("\ndigitalWrite(leftMotor, HIGH);\ndigitalWrite(rightMotor, HIGH);\ndelay(1000*(");
         visit(driveStatement.getVal());
-        emitter.emit(");\ndigitalWrite(leftMotor, LOW);\ndigitalWrite(rightMotor, LOW)");
+        emitter.emit("));\ndigitalWrite(leftMotor, LOW);\ndigitalWrite(rightMotor, LOW)");
         return null;
     }
 
@@ -399,9 +399,9 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
 
     @Override
     public Object visit(PauseStatement pauseStatement) throws NoSuchMethodException {
-        emitter.emit("delay(1000*");
+        emitter.emit("delay(1000*(");
         visit(pauseStatement.getVal());
-        emitter.emit(")");
+        emitter.emit("))");
         return null;
     }
 
@@ -582,17 +582,17 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
 
     @Override
     public Object visit(TurnLeftStatement turnLeftStatement) throws NoSuchMethodException {
-        emitter.emit("digitalWrite(leftMotor, LOW);\ndigitalWrite(rightMotor, HIGH);\ndelay(1000*");
+        emitter.emit("digitalWrite(leftMotor, LOW);\ndigitalWrite(rightMotor, HIGH);\ndelay(1000*(");
         visit(turnLeftStatement.getVal());
-        emitter.emit(");\ndigitalWrite(leftMotor, LOW);\ndigitalWrite(rightMotor, LOW)");
+        emitter.emit("));\ndigitalWrite(leftMotor, LOW);\ndigitalWrite(rightMotor, LOW)");
         return null;
     }
 
     @Override
     public Object visit(TurnRightStatement turnRightStatement) throws NoSuchMethodException {
-        emitter.emit("digitalWrite(leftMotor, HIGH);\ndigitalWrite(rightMotor, LOW);\ndelay(1000*");
+        emitter.emit("digitalWrite(leftMotor, HIGH);\ndigitalWrite(rightMotor, LOW);\ndelay(1000*(");
         visit(turnRightStatement.getVal());
-        emitter.emit(");\ndigitalWrite(leftMotor, LOW);\ndigitalWrite(rightMotor, LOW)");
+        emitter.emit("));\ndigitalWrite(leftMotor, LOW);\ndigitalWrite(rightMotor, LOW)");
         return null;
     }
 
