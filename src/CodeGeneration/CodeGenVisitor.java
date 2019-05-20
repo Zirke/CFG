@@ -517,12 +517,13 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
     public Object visit(TextDeclaration textDeclaration) throws NoSuchMethodException {
         emitter.emit("char *");
         visit(textDeclaration.getId());
-        emitter.emit(" = (char*)calloc(128, sizeof(char));\n");
         if (textDeclaration.getVal() != null) {
-            visit(textDeclaration.getId());
             emitter.emit(" = ");
             visit(textDeclaration.getVal());
+        } else{
+            emitter.emit(" = (char*)calloc(128, sizeof(char));\n");
         }
+
         return null;
     }
 
