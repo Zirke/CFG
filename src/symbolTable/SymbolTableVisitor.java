@@ -30,18 +30,29 @@ public class SymbolTableVisitor extends BasicAbstractNodeVisitor<Object>{
 
     @Override
     public Object visit(Append node) throws NoSuchMethodException {
-        return null;
+        if (visit(node.getLeft()) instanceof TextLiteral && visit(node.getRight()) instanceof TextLiteral) {
+                return new TextLiteral(node.getSpelling());
+            } else {
+                errorCallIncorrectOperatorUse(node.getClass().getName().substring(4), node.getLeft().toString(), node.getRight().toString(), node.getLineNumber());
+            }
+            return null;
     }
 
     //array assignment, checks if the variable exists in the symbol table then compares the type of the variable with
     // what is trying to be assigned.
     @Override
     public Object visit(ArrayAssignment arrayAssignment) throws NoSuchMethodException {
+
         Value variableType = variableTypeCheck(arrayAssignment.getId().getSpelling(), arrayAssignment.getLineNumber());
         Value expressionType = (Value) visit(arrayAssignment.getValue());
 
         if (!(variableType.getClass().equals(expressionType.getClass()))) {
-            // errorCallIntegerIncompatibleTypes(arrayAssignment.getValue(), arrayAssignment.getId(),arrayAssignment.getLineNumber());
+            try{
+                throw new IncompatibleTypes("line: " + arrayAssignment.getLineNumber() + " array requires " + variableType.getClass().getName());
+            }catch (SemanticException e){
+                err.println("IncompatibleTypes: " + e.getLocalizedMessage());
+                exit(0);
+            }
         }
 
         symbolTable.getIdTable().get(arrayAssignment.getId().getSpelling()).setNodes(arrayAssignment);
@@ -69,7 +80,7 @@ public class SymbolTableVisitor extends BasicAbstractNodeVisitor<Object>{
 
     @Override
     public Object visit(ArrayElementAddStatement node) throws NoSuchMethodException {
-
+        Value variableType = variableTypeCheck(node.getArrayName().getSpelling(), node.getLineNumber());
         Value elementNumber = (Value) visit(node.getElementNumber());
         Value valueElement = (Value) visit(node.getValue());
 
@@ -81,19 +92,29 @@ public class SymbolTableVisitor extends BasicAbstractNodeVisitor<Object>{
                 exit(0);
             }
         }
-        if ((isNumeric(((IntegerLiteral) elementNumber).getSpelling()) && (Integer.valueOf(((IntegerLiteral) elementNumber).getSpelling()) >= 129 || Integer.valueOf(((IntegerLiteral) elementNumber).getSpelling()) < 1))
-                || Integer.valueOf(((IntegerLiteral) symbolTable.getIdTable().get(((IntegerLiteral) elementNumber).getSpelling()).getValue()).getSpelling()) >= 129
-                || Integer.valueOf(((IntegerLiteral) symbolTable.getIdTable().get(((IntegerLiteral) elementNumber).getSpelling()).getValue()).getSpelling()) < 0) {
 
+        if (!(variableType.getClass().equals(valueElement.getClass()))) {
+            try{
+                throw new IncompatibleTypes("line: " + node.getLineNumber() + " array requires " + variableType.getClass().getName().substring(4,variableType.getClass().getName().length()-7));
+            }catch (SemanticException e){
+                err.println("IncompatibleTypes: " + e.getLocalizedMessage());
+                exit(0);
+            }
+        }
+
+        symbolTable.getIdTable().get(node.getArrayName().getSpelling()).setNodes(node);
+
+        if ((isNumeric(((IntegerLiteral) elementNumber).getSpelling()) && ((Integer.valueOf(((IntegerLiteral) elementNumber).getSpelling()) >= 129 || Integer.valueOf(((IntegerLiteral) elementNumber).getSpelling()) < 1))
+                || Integer.valueOf(((IntegerLiteral) symbolTable.getIdTable().get(((IntegerLiteral) elementNumber).getSpelling()).getValue()).getSpelling()) >= 129
+                || Integer.valueOf(((IntegerLiteral) symbolTable.getIdTable().get(((IntegerLiteral) elementNumber).getSpelling()).getValue()).getSpelling()) < 0)) {
             try {
                 throw new OutOfBounds("line: " + node.getLineNumber() + " -- element index is possibly out of bounds");
             } catch (SemanticException e) {
                 out.println("WARNING: OutOfBounds " + e.getLocalizedMessage());
             }
         }
+        return null;
 
-
-        return valueElement;
     }
 
     @Override
