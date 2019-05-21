@@ -9,9 +9,9 @@ public class Emitter {
     private Writer writer;
 
 
-    public Emitter() {
+    public Emitter(String filepath) {
         try {
-            writer = new FileWriter("src/genFile.c");
+            writer = new FileWriter(filepath);
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -13,14 +13,14 @@ import java.io.IOException;
 public class Main{
 
     public static void main(String[] args) throws IOException {
-        File file = new File("src/test.txt");
+        File file = new File(args[0]);
         String d = "";
         BufferedReader br = new BufferedReader(new FileReader(file));
 
         String st;
         while ((st = br.readLine()) != null) {
-           d += st;
-           d += "\n";
+            d += st;
+            d += "\n";
         }
 
         ANTLRInputStream input = new ANTLRInputStream(d);
@@ -40,9 +40,8 @@ public class Main{
             e.printStackTrace();
         }
 
-        Emitter emitter = new Emitter();
+        Emitter emitter = new Emitter(args[1]);
         CodeGenVisitor codeGenFunctionVisitor = new CodeGenVisitor(emitter, true);
-        codeGenFunctionVisitor.setupConcat();
         try {
             codeGenFunctionVisitor.visit(ast);
         } catch (NoSuchMethodException e) {

@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="CFG:jar">
+    <output-path>$USER_HOME$/Desktop/artifacts/CFG_jar</output-path>
+    <root id="archive" name="CFG.jar">
+      <element id="module-output" name="CFG" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/jar-files/gen.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
