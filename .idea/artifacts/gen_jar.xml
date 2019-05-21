@@ -3,6 +3,7 @@
     <output-path>$PROJECT_DIR$/jar-files</output-path>
     <root id="archive" name="gen.jar">
       <element id="module-output" name="gen" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/jar-files/gen.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/jar-files/antlr-runtime-4.7.2.jar" path-in-jar="/" />
     </root>
   </artifact>
