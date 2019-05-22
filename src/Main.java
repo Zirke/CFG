@@ -56,5 +56,12 @@ public class Main{
             e.printStackTrace();
         }
         codeGenFunctionVisitor.closeEmitter();
+
+        if(args.length >= 3){
+        if(args[2].equals("--upload")){
+            String command = "arduino --upload "+args[1];
+            Runtime.getRuntime().exec(command);
+        }
+        }
     }
 }

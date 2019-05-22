@@ -26,7 +26,9 @@ public class Emitter {
     }
 
     public void closeFile() {
-        emit("}");
+        emit("}\n" +
+                "void loop() {\n" +
+                "}");
         try {
             writer.close();
         } catch (IOException e) {

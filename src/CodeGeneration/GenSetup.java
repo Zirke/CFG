@@ -11,11 +11,11 @@ public class GenSetup {
                 "\n" +
                 "void setup() {\n" +
                 "  pinMode(leftMotor, OUTPUT);\n" +
-                "  pinMode(rightMotor, OUTPUT);\n" +
-                "}\n" +
-                "\n" +
-                "void loop() {\n";
+                "  pinMode(rightMotor, OUTPUT);\n";
+
     }
+
+
 
     String stringConcat(){
         return "char* stringConcat(char* str1, char* str2){\n" +
