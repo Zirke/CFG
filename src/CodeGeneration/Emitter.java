@@ -25,13 +25,10 @@ public class Emitter {
         }
     }
 
-    public void closeFile() {
-        emit("}\n" +
-                "void loop() {\n" +
-                "}");
+    public void closeFile(){
         try {
             writer.close();
-        } catch (IOException e) {
+        } catch (IOException e){
             e.printStackTrace();
         }
     }

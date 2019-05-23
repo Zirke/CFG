@@ -5,14 +5,25 @@ public class GenSetup {
     public GenSetup() {
     }
 
-    String getInitialCode(){
+    String getInitialCodeForSetup(){
         return "const int leftMotor = 12;\n" +
                 "const int rightMotor = 13;\n" +
                 "\n" +
-                "void setup() {\n" +
+                "void setupInSetup() {\n" +
                 "  pinMode(leftMotor, OUTPUT);\n" +
                 "  pinMode(rightMotor, OUTPUT);\n";
 
+    }
+
+    String getInitialCodeForLoop(){
+        return "const int leftMotor = 12;\n" +
+                "const int rightMotor = 13;\n" +
+                "\n" +
+                "void setupInSetup() {\n" +
+                "  pinMode(leftMotor, OUTPUT);\n" +
+                "  pinMode(rightMotor, OUTPUT);\n" +
+                "}\n" +
+                "void loop() {\n";
     }
 
 
