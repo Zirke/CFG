@@ -51,28 +51,38 @@ public class Main{
 
         CodeGenVisitor codeGenVisitor = new CodeGenVisitor(emitter, false);
 
+        String command = null;
+        boolean isLoop = false;
         for (String s : args){
-            if(s.equals("--loop")){
-                codeGenVisitor.setupInLoop();
-                try {
-                    codeGenVisitor.visit(ast);
-                } catch (NoSuchMethodException e) {
-                    e.printStackTrace();
-                }
-                codeGenFunctionVisitor.closeLoopEmitter();
-            } else {
-                codeGenVisitor.setupInSetup();
-                try {
-                    codeGenVisitor.visit(ast);
-                } catch (NoSuchMethodException e) {
-                    e.printStackTrace();
-                }
-                codeGenFunctionVisitor.closeSetupEmitter();
+            if (s.equals("--loop")){
+                isLoop = true;
             }
             if(s.equals("--upload")){
-                String command = "arduino --upload "+args[1];
-                Runtime.getRuntime().exec(command);
+                command = "arduino --upload "+args[1];
+
             }
+        }
+        if(isLoop){
+            codeGenVisitor.setupInLoop();
+            try {
+                codeGenVisitor.visit(ast);
+            } catch (NoSuchMethodException e) {
+                e.printStackTrace();
+            }
+            codeGenFunctionVisitor.closeLoopEmitter();
+        } else {
+            codeGenVisitor.setupInSetup();
+            try {
+                codeGenVisitor.visit(ast);
+            } catch (NoSuchMethodException e) {
+                e.printStackTrace();
+            }
+            codeGenFunctionVisitor.closeSetupEmitter();
+        }
+        emitter.closeFile();
+
+        if (command != null){
+            Runtime.getRuntime().exec(command);
         }
     }
 }

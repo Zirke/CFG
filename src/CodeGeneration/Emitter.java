@@ -25,19 +25,7 @@ public class Emitter {
         }
     }
 
-    public void closeFileForSetup() {
-        emit("}\n" +
-                "void loop() {\n" +
-                "}");
-        try {
-            writer.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void closeFileForLoop(){
-        emit("}");
+    public void closeFile(){
         try {
             writer.close();
         } catch (IOException e){

@@ -653,10 +653,11 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
     }
 
     public void closeSetupEmitter() {
-        emitter.closeFileForSetup();
+        emitter.emit("}\n" +
+                "void loop(){}\n");
     }
 
     public void closeLoopEmitter() {
-        emitter.closeFileForLoop();
+        emitter.emit("}\n");
     }
 }
