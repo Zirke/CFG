@@ -8,57 +8,128 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BuildASTVisitor extends AbstractParseTreeVisitor<AbstractNode> implements PyTrunVisitor<AbstractNode> {
+	boolean isSyntaxError = true;
 
 	@Override public AbstractNode visitStart(PyTrun.StartContext ctx) {
-		try{
-			if(ctx.EOF() == null){
-				throw new RuntimeException("Syntax Error");
+		ArrayList<Statement> stmtList = new ArrayList<>();
+		if(ctx.dclblock() != null) {
+			stmtList.addAll(((StatementList) visitDclblock(ctx.dclblock())).getStmts());
+		}
+		isSyntaxError = true;
+		if(ctx.arrdclblock() != null) {
+			stmtList.addAll(((StatementList) visitArrdclblock(ctx.arrdclblock())).getStmts());
+		}
+		isSyntaxError = true;
+		if(ctx.functiondclblock() != null) {
+			stmtList.addAll(((StatementList) visitFunctiondclblock(ctx.functiondclblock())).getStmts());
+		}
+		isSyntaxError = true;
+		if(ctx.stmtstartblock() != null) {
+			stmtList.addAll(((StatementList) visitStmtstartblock(ctx.stmtstartblock())).getStmts());
+		}
+		ArrayList<Statement> noNullStmts = new ArrayList<>();
+		for(Statement s : stmtList){
+			if(s != null){
+				noNullStmts.add(s);
 			}
-		}catch(RuntimeException e){
-
-			System.err.println(e.getLocalizedMessage());
+		}
+		if(isSyntaxError){
+			System.err.println("Syntax Error");
 			System.exit(0);
 		}
-
-		if(ctx.stmts() != null){
-			return visitStmts(ctx.stmts());
-		}
-
-
-		return null;
+		return new StatementList(noNullStmts);
 	}
 
-	@Override public AbstractNode visitStmts(PyTrun.StmtsContext ctx) {
-		ArrayList<Statement> stmts = new ArrayList();
-
+	@Override
+	public AbstractNode visitDclblock(PyTrun.DclblockContext ctx) {
+		ArrayList<Statement> dclList = new ArrayList<>();
 		if(ctx.dcl() != null) {
-			for (PyTrun.DclContext x : ctx.dcl()) {
-				stmts.add((Statement) visitDcl(x));
+			dclList.add((Statement) visitDcl(ctx.dcl()));
+		}
+		for(PyTrun.DclblockContext x : ctx.dclblock()){
+			if(x != null){
+				dclList.addAll(((StatementList) visitDclblock(x)).getStmts());
 			}
 		}
-		if(ctx.arrdcl() != null) {
-			for (PyTrun.ArrdclContext x : ctx.arrdcl()) {
-				stmts.add((Statement) visitArrdcl(x));
-			}
-		}
-		if(ctx.functiondcl() != null) {
-			for (PyTrun.FunctiondclContext x : ctx.functiondcl()) {
-				stmts.add((Statement) visitFunctiondcl(x));
-			}
-		}
-		if(ctx.stmt() != null) {
-			for (PyTrun.StmtContext x : ctx.stmt()) {
-				stmts.add((Statement) visitStmt(x));
-			}
-		}
-
-		ArrayList<Statement> withoutnullList = new ArrayList<>();
-		for(Statement s : stmts){
+		ArrayList<Statement> noNullStmts = new ArrayList<>();
+		for(Statement s : dclList){
 			if(s != null){
-				withoutnullList.add(s);
+				noNullStmts.add(s);
 			}
 		}
-		return new StatementList(withoutnullList);
+		if(ctx.EOF() == null){
+			isSyntaxError = false;
+		}
+		return new StatementList(noNullStmts);
+	}
+
+	@Override
+	public AbstractNode visitArrdclblock(PyTrun.ArrdclblockContext ctx) {
+		ArrayList<Statement> arrdclList = new ArrayList<>();
+		if(ctx.arrdcl() != null) {
+			arrdclList.add((Statement) visitArrdcl(ctx.arrdcl()));
+		}
+		for(PyTrun.ArrdclblockContext x : ctx.arrdclblock()){
+			if(x != null){
+				arrdclList.addAll(((StatementList) visitArrdclblock(x)).getStmts());
+			}
+		}
+		ArrayList<Statement> noNullStmts = new ArrayList<>();
+		for(Statement s : arrdclList){
+			if(s != null){
+				noNullStmts.add(s);
+			}
+		}
+		if(ctx.EOF() == null){
+			isSyntaxError = false;
+		}
+		return new StatementList(noNullStmts);
+	}
+
+	@Override
+	public AbstractNode visitFunctiondclblock(PyTrun.FunctiondclblockContext ctx) {
+		ArrayList<Statement> funcdclList = new ArrayList<>();
+		if(ctx.functiondcl() != null) {
+			funcdclList.add((Statement) visitFunctiondcl(ctx.functiondcl()));
+		}
+		for(PyTrun.FunctiondclblockContext x : ctx.functiondclblock()){
+			if(x != null){
+				funcdclList.addAll(((StatementList) visitFunctiondclblock(x)).getStmts());
+			}
+		}
+		ArrayList<Statement> noNullStmts = new ArrayList<>();
+		for(Statement s : funcdclList){
+			if(s != null){
+				noNullStmts.add(s);
+			}
+		}
+		if(ctx.EOF() == null){
+			isSyntaxError = false;
+		}
+		return new StatementList(noNullStmts);
+	}
+
+	@Override
+	public AbstractNode visitStmtstartblock(PyTrun.StmtstartblockContext ctx) {
+		ArrayList<Statement> stmtList = new ArrayList<>();
+		if(ctx.stmt() != null) {
+			stmtList.add((Statement) visitStmt(ctx.stmt()));
+		}
+		for(PyTrun.StmtstartblockContext x : ctx.stmtstartblock()){
+			if(x != null){
+				stmtList.addAll(((StatementList) visitStmtstartblock(x)).getStmts());
+			}
+		}
+		ArrayList<Statement> noNullStmts = new ArrayList<>();
+		for(Statement s : stmtList){
+			if(s != null){
+				noNullStmts.add(s);
+			}
+		}
+		if(ctx.EOF() == null){
+			isSyntaxError = false;
+		}
+		return new StatementList(noNullStmts);
 	}
 
 	@Override public AbstractNode visitStmt(PyTrun.StmtContext ctx) {
@@ -579,7 +650,7 @@ public class BuildASTVisitor extends AbstractParseTreeVisitor<AbstractNode> impl
 	@Override public AbstractNode visitStmtblock(PyTrun.StmtblockContext ctx) {
 		ArrayList<Statement> statements = new ArrayList<>();
 		if(ctx != null){
-			if(ctx.dcl() != null) {
+			/*if(ctx.dcl() != null) {
 				for (PyTrun.DclContext x : ctx.dcl()) {
 					statements.add((Statement) visitDcl(x));
 				}
@@ -589,6 +660,16 @@ public class BuildASTVisitor extends AbstractParseTreeVisitor<AbstractNode> impl
 					statements.add((Statement) visitStmt(x));
 				}
 			}
+			ArrayList<Statement> noNullStmts = new ArrayList<>();
+			for(Statement s : statements){
+				if(s != null){
+					noNullStmts.add(s);
+				}
+			}
+			return new StatementList(noNullStmts);*/
+
+			statements.addAll(((StatementList)visitDclblock(ctx.dclblock())).getStmts());
+			statements.addAll(((StatementList)(visitStmtstartblock(ctx.stmtstartblock()))).getStmts());
 			ArrayList<Statement> noNullStmts = new ArrayList<>();
 			for(Statement s : statements){
 				if(s != null){

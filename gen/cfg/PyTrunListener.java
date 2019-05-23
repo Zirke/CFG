@@ -1,4 +1,4 @@
-// Generated from C:/Users/Zirke/Documents/JavaProjects/CFG23/src/cfg\PyTrun.g4 by ANTLR 4.7.2
+// Generated from C:/Users/Abiram Mohanaraj/Documents/GitHub/CFG/src/cfg\PyTrun.g4 by ANTLR 4.7.2
 package cfg;
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
@@ -18,15 +18,45 @@ public interface PyTrunListener extends ParseTreeListener {
 	 */
 	void exitStart(PyTrun.StartContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link PyTrun#stmts}.
+	 * Enter a parse tree produced by {@link PyTrun#dclblock}.
 	 * @param ctx the parse tree
 	 */
-	void enterStmts(PyTrun.StmtsContext ctx);
+	void enterDclblock(PyTrun.DclblockContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link PyTrun#stmts}.
+	 * Exit a parse tree produced by {@link PyTrun#dclblock}.
 	 * @param ctx the parse tree
 	 */
-	void exitStmts(PyTrun.StmtsContext ctx);
+	void exitDclblock(PyTrun.DclblockContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link PyTrun#arrdclblock}.
+	 * @param ctx the parse tree
+	 */
+	void enterArrdclblock(PyTrun.ArrdclblockContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PyTrun#arrdclblock}.
+	 * @param ctx the parse tree
+	 */
+	void exitArrdclblock(PyTrun.ArrdclblockContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link PyTrun#functiondclblock}.
+	 * @param ctx the parse tree
+	 */
+	void enterFunctiondclblock(PyTrun.FunctiondclblockContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PyTrun#functiondclblock}.
+	 * @param ctx the parse tree
+	 */
+	void exitFunctiondclblock(PyTrun.FunctiondclblockContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link PyTrun#stmtstartblock}.
+	 * @param ctx the parse tree
+	 */
+	void enterStmtstartblock(PyTrun.StmtstartblockContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PyTrun#stmtstartblock}.
+	 * @param ctx the parse tree
+	 */
+	void exitStmtstartblock(PyTrun.StmtstartblockContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link PyTrun#stmt}.
 	 * @param ctx the parse tree
