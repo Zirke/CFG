@@ -642,6 +642,11 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
         emitter.emit(stringSetup.stringConcat());
     }
 
+    public void setupConsts(){
+        GenSetup constSetup = new GenSetup();
+        emitter.emit(constSetup.getConsts());
+    }
+
     public void setupInSetup() {
         GenSetup setup = new GenSetup();
         emitter.emit(setup.getInitialCodeForSetup());
