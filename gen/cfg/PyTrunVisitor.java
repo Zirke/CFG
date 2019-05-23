@@ -1,4 +1,4 @@
-// Generated from C:/Users/Zirke/Documents/JavaProjects/CFG23/src/cfg\PyTrun.g4 by ANTLR 4.7.2
+// Generated from C:/Users/Abiram Mohanaraj/Documents/GitHub/CFG/src/cfg\PyTrun.g4 by ANTLR 4.7.2
 package cfg;
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
@@ -17,11 +17,29 @@ public interface PyTrunVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitStart(PyTrun.StartContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link PyTrun#stmts}.
+	 * Visit a parse tree produced by {@link PyTrun#dclblock}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitStmts(PyTrun.StmtsContext ctx);
+	T visitDclblock(PyTrun.DclblockContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link PyTrun#arrdclblock}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitArrdclblock(PyTrun.ArrdclblockContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link PyTrun#functiondclblock}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFunctiondclblock(PyTrun.FunctiondclblockContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link PyTrun#stmtstartblock}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitStmtstartblock(PyTrun.StmtstartblockContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link PyTrun#stmt}.
 	 * @param ctx the parse tree

@@ -3,9 +3,25 @@ parser grammar PyTrun;
 options { tokenVocab=PyTrunLexer; }
 
 start
-        : stmts EOF?;
-stmts
-        : EOL* dcl* arrdcl* functiondcl* stmt*;//stmt (EOL stmt)*;
+        : dclblock arrdclblock functiondclblock stmtstartblock;
+/*stmts
+        : dclblock arrdclblock functiondclblock stmtstartblock;*///stmt (EOL stmt)*;
+
+dclblock:
+        (dcl (EOL dclblock)*)
+        | EOF?;
+
+arrdclblock:
+        (arrdcl (EOL arrdclblock)*)
+        | EOF?;
+functiondclblock:
+
+        (functiondcl (EOL functiondclblock)*)
+        |EOF?;
+
+stmtstartblock:
+        (stmt (EOL stmtstartblock)*)
+        | EOF?;
 stmt
         : ifstmt
         | whilestmt
@@ -20,7 +36,7 @@ stmt
         | turnleft
         | turnright
         | pause
-        | EOL ;
+        ;
 
 functiondcl
         : FUNCTION ID RETURNS type LPAR (truedcl (COMMA truedcl)*)? RPAR stmtblock
@@ -32,12 +48,11 @@ dcl
         |  FLOATDCL ID dclValue?
         |  TEXTDCL ID dclValue?
         |  TRUTHDCL ID (ASSIGN truthexpr)?
-        | EOL
         ;
 
 arrdcl :
         type ARRDCL  ID
-        | EOL;
+       ;
 
 dclValue
         :( ASSIGN value
@@ -140,7 +155,7 @@ nums
         | ID;
 
 stmtblock
-        : LCB EOL* dcl* stmt* RCB ;
+        : LCB EOL* dclblock stmtstartblock RCB ;
 
 truthpar
         : LPAR truthexpr RPAR ;
