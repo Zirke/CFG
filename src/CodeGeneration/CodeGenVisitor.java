@@ -463,7 +463,7 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
     @Override
     public Object visit(StatementList statementList) throws NoSuchMethodException {
 
-        //emitter.emit(setup.getInitialCode());
+        //emitter.emit(setupInSetup.getInitialCodeForSetup());
 
         for (Statement s : statementList.getStmts()) {
             if (!isFunctionGen) {
@@ -493,7 +493,7 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
 
         //emitter.emit("}\n");
 
-        //emitter.closeFile();
+        //emitter.closeFileForSetup();
         return null;
     }
 
@@ -642,12 +642,21 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
         emitter.emit(stringSetup.stringConcat());
     }
 
-    public void setup() {
+    public void setupInSetup() {
         GenSetup setup = new GenSetup();
-        emitter.emit(setup.getInitialCode());
+        emitter.emit(setup.getInitialCodeForSetup());
     }
 
-    public void closeEmitter() {
-        emitter.closeFile();
+    public void setupInLoop() {
+        GenSetup setup = new GenSetup();
+        emitter.emit(setup.getInitialCodeForLoop());
+    }
+
+    public void closeSetupEmitter() {
+        emitter.closeFileForSetup();
+    }
+
+    public void closeLoopEmitter() {
+        emitter.closeFileForLoop();
     }
 }

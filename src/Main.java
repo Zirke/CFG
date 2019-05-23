@@ -42,6 +42,7 @@ public class Main{
 
         Emitter emitter = new Emitter(args[1]);
         CodeGenVisitor codeGenFunctionVisitor = new CodeGenVisitor(emitter, true);
+        codeGenFunctionVisitor.setupConcat();
         try {
             codeGenFunctionVisitor.visit(ast);
         } catch (NoSuchMethodException e) {
@@ -49,19 +50,29 @@ public class Main{
         }
 
         CodeGenVisitor codeGenVisitor = new CodeGenVisitor(emitter, false);
-        codeGenVisitor.setup();
-        try {
-            codeGenVisitor.visit(ast);
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
-        }
-        codeGenFunctionVisitor.closeEmitter();
 
-        if(args.length >= 3){
-        if(args[2].equals("--upload")){
-            String command = "arduino --upload "+args[1];
-            Runtime.getRuntime().exec(command);
-        }
+        for (String s : args){
+            if(s.equals("--loop")){
+                codeGenVisitor.setupInLoop();
+                try {
+                    codeGenVisitor.visit(ast);
+                } catch (NoSuchMethodException e) {
+                    e.printStackTrace();
+                }
+                codeGenFunctionVisitor.closeLoopEmitter();
+            } else {
+                codeGenVisitor.setupInSetup();
+                try {
+                    codeGenVisitor.visit(ast);
+                } catch (NoSuchMethodException e) {
+                    e.printStackTrace();
+                }
+                codeGenFunctionVisitor.closeSetupEmitter();
+            }
+            if(s.equals("--upload")){
+                String command = "arduino --upload "+args[1];
+                Runtime.getRuntime().exec(command);
+            }
         }
     }
 }
