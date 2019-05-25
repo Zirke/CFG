@@ -44,7 +44,7 @@ APPEND   : 'append';
 EOL      : NEWLINE+ ; //for newline
 FNUM     : ([0-9])+ '.' ([0-9])+ ;
 INUM     : ([0-9])+ ;
-ID       : (([A-Za-z])+([0-9A-Za-z])*) ; //TODO: Add support for symbols for example: _funcName()
+ID       : (([_A-Za-z])+([_\-0-9A-Za-z])*) ; //TODO: Add support for symbols for example: _funcName()
 TEXT
    : '"' ~ ["\r\n]* '"' //Tilde symbol means negate, dot means include (Blockcomment)
    | '\'' ~ ['\r\n]* '\''
@@ -60,6 +60,6 @@ WS : [ \t\u000C]+ -> skip ; //Unsure if \r\n should be in here as well, parser a
 COMMENT       : '/#' .*? '#/' -> skip ;
 LINE_COMMENT  : '#' .*? NEWLINE -> skip ;
 
-fragment UNICODE  :  '\u0000'..'\u00FF' ;
+fragment UNICODE  :  '\u0021'..'\u007E' ;
 fragment NEWLINE   : '\r' '\n' | '\n' | '\r';
 
