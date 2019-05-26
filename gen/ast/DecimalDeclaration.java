@@ -1,11 +1,10 @@
 package ast;
 
-//Declaration types
-public class IntDeclaration extends Statement{
+public class DecimalDeclaration extends Statement{
     Identifier id;
     Value value;
 
-    public IntDeclaration(Identifier id, Value stm) {
+    public DecimalDeclaration(Identifier id, Value stm) {
         this.id = id;
         this.value = stm;
     }

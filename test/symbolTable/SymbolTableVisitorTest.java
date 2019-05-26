@@ -22,7 +22,7 @@ public class SymbolTableVisitorTest {
         try {
             assertTrue(symbolTableVisitor.visit(node) instanceof TruthLiteral);
             assertFalse(symbolTableVisitor.visit(node) instanceof TextLiteral);
-            assertFalse(symbolTableVisitor.visit(node) instanceof FloatLiteral);
+            assertFalse(symbolTableVisitor.visit(node) instanceof DecimalLiteral);
             assertFalse(symbolTableVisitor.visit(node) instanceof IntegerLiteral);
         } catch (NoSuchMethodException e) {
             e.printStackTrace();
@@ -51,14 +51,14 @@ public class SymbolTableVisitorTest {
         Minus minusNode = new Minus("Minus", new IntegerLiteral("19"), new IntegerLiteral("9"), 10);
         ArithmParenthesis node = new ArithmParenthesis("ArthimParen", minusNode, null, 4);
 
-        Plus plusNode = new Plus("Plus", new FloatLiteral("19.0"), new IntegerLiteral("9"), 11);
+        Plus plusNode = new Plus("Plus", new DecimalLiteral("19.0"), new IntegerLiteral("9"), 11);
         ArithmParenthesis nodePlus = new ArithmParenthesis("ArthimParen", plusNode, null, 4);
         try {
             assertTrue(symbolTableVisitor.visit(node) instanceof IntegerLiteral);
             assertFalse(symbolTableVisitor.visit(node) instanceof TextLiteral);
-            assertFalse(symbolTableVisitor.visit(node) instanceof FloatLiteral);
+            assertFalse(symbolTableVisitor.visit(node) instanceof DecimalLiteral);
             assertFalse(symbolTableVisitor.visit(node) instanceof TruthLiteral);
-            assertTrue(symbolTableVisitor.visit(nodePlus) instanceof FloatLiteral);
+            assertTrue(symbolTableVisitor.visit(nodePlus) instanceof DecimalLiteral);
         } catch (NoSuchMethodException e) {
             e.printStackTrace();
         }
@@ -113,10 +113,10 @@ public class SymbolTableVisitorTest {
 
     @org.junit.Test
     public void visitDivideTest() {
-        Divide node = new Divide("Divide", new FloatLiteral("float"), new IntegerLiteral("integer"), 10);
+        Divide node = new Divide("Divide", new DecimalLiteral("float"), new IntegerLiteral("integer"), 10);
         Divide iNode = new Divide("Divide", new IntegerLiteral("integer"), new IntegerLiteral("integer"), 11);
         try {
-            assertTrue(symbolTableVisitor.visit(node) instanceof FloatLiteral);
+            assertTrue(symbolTableVisitor.visit(node) instanceof DecimalLiteral);
             assertTrue(symbolTableVisitor.visit(iNode) instanceof IntegerLiteral);
             assertFalse(symbolTableVisitor.visit(node) instanceof TextLiteral);
             assertFalse(symbolTableVisitor.visit(node) instanceof IntegerLiteral);
@@ -192,9 +192,9 @@ public class SymbolTableVisitorTest {
     public void visitFloatDeclarationTest() {
         Identifier identifier = new Identifier("b");
         Identifier secondID = new Identifier("c");
-        FloatLiteral floatlit = new FloatLiteral("2.2");
-        FloatDeclaration node = new FloatDeclaration(identifier, floatlit);
-        FloatDeclaration noVal = new FloatDeclaration(secondID, null);
+        DecimalLiteral floatlit = new DecimalLiteral("2.2");
+        DecimalDeclaration node = new DecimalDeclaration(identifier, floatlit);
+        DecimalDeclaration noVal = new DecimalDeclaration(secondID, null);
 
         try {
             symbolTableVisitor.visit(node);
@@ -209,9 +209,9 @@ public class SymbolTableVisitorTest {
 
     @org.junit.Test
     public void visitFloatLiteralTest() {
-        FloatLiteral floatLiteral = new FloatLiteral("2.7");
+        DecimalLiteral floatLiteral = new DecimalLiteral("2.7");
 
-        assertTrue(symbolTableVisitor.visit(floatLiteral) instanceof FloatLiteral);
+        assertTrue(symbolTableVisitor.visit(floatLiteral) instanceof DecimalLiteral);
         assertFalse(symbolTableVisitor.visit(floatLiteral) instanceof IntegerLiteral);
         assertFalse(symbolTableVisitor.visit(floatLiteral) instanceof TextLiteral);
         assertFalse(symbolTableVisitor.visit(floatLiteral) instanceof TruthLiteral);
@@ -273,7 +273,7 @@ public class SymbolTableVisitorTest {
     @org.junit.Test
     public void visitGreaterThanTest() {
         IntegerLiteral integerLiteral = new IntegerLiteral("2");
-        FloatLiteral floatLiteral = new FloatLiteral("1.1");
+        DecimalLiteral floatLiteral = new DecimalLiteral("1.1");
         IntegerLiteral integerLiteral1 = new IntegerLiteral("10");
         GreaterThan node = new GreaterThan("GreaterThan", integerLiteral, floatLiteral, 10);
         GreaterThan intNode = new GreaterThan("GreaterThan1", integerLiteral, integerLiteral1, 10);
@@ -282,7 +282,7 @@ public class SymbolTableVisitorTest {
             assertTrue(symbolTableVisitor.visit(node) instanceof TruthLiteral);
             assertTrue(symbolTableVisitor.visit(intNode) instanceof TruthLiteral);
             assertFalse(symbolTableVisitor.visit(intNode) instanceof IntegerLiteral);
-            assertFalse(symbolTableVisitor.visit(node) instanceof FloatLiteral);
+            assertFalse(symbolTableVisitor.visit(node) instanceof DecimalLiteral);
         } catch (NoSuchMethodException e) {
             e.printStackTrace();
         }
@@ -296,7 +296,7 @@ public class SymbolTableVisitorTest {
         try {
             symbolTableVisitor.visit(intDeclaration);
             assertTrue(symbolTableVisitor.visit(identifier) instanceof IntegerLiteral);
-            assertFalse(symbolTableVisitor.visit(identifier) instanceof FloatLiteral);
+            assertFalse(symbolTableVisitor.visit(identifier) instanceof DecimalLiteral);
             assertFalse(symbolTableVisitor.visit(identifier) instanceof TruthLiteral);
             assertFalse(symbolTableVisitor.visit(identifier) instanceof TextLiteral);
         } catch (NoSuchMethodException e) {
@@ -343,7 +343,7 @@ public class SymbolTableVisitorTest {
 
         try {
             assertTrue(symbolTableVisitor.visit(integerLiteral) instanceof IntegerLiteral);
-            assertFalse(symbolTableVisitor.visit(integerLiteral) instanceof FloatLiteral);
+            assertFalse(symbolTableVisitor.visit(integerLiteral) instanceof DecimalLiteral);
             assertFalse(symbolTableVisitor.visit(integerLiteral) instanceof TextLiteral);
             assertFalse(symbolTableVisitor.visit(integerLiteral) instanceof TruthLiteral);
         } catch (NoSuchMethodException e) {
@@ -354,7 +354,7 @@ public class SymbolTableVisitorTest {
     @org.junit.Test
     public void visitLessThanTest() {
         IntegerLiteral integerLiteral = new IntegerLiteral("2");
-        FloatLiteral floatLiteral = new FloatLiteral("1.1");
+        DecimalLiteral floatLiteral = new DecimalLiteral("1.1");
         IntegerLiteral integerLiteral1 = new IntegerLiteral("10");
         LessThan node = new LessThan("LessThan", integerLiteral, floatLiteral, 10);
         LessThan intNode = new LessThan("LessThan1", integerLiteral, integerLiteral1, 12);
@@ -363,7 +363,7 @@ public class SymbolTableVisitorTest {
             assertTrue(symbolTableVisitor.visit(node) instanceof TruthLiteral);
             assertTrue(symbolTableVisitor.visit(intNode) instanceof TruthLiteral);
             assertFalse(symbolTableVisitor.visit(intNode) instanceof IntegerLiteral);
-            assertFalse(symbolTableVisitor.visit(node) instanceof FloatLiteral);
+            assertFalse(symbolTableVisitor.visit(node) instanceof DecimalLiteral);
         } catch (NoSuchMethodException e) {
             e.printStackTrace();
         }
@@ -375,35 +375,21 @@ public class SymbolTableVisitorTest {
     public void visitMinusTest() {
         IntegerLiteral integerLiteral = new IntegerLiteral("1");
         IntegerLiteral integerLiteral1 = new IntegerLiteral("20");
-        FloatLiteral floatLiteral = new FloatLiteral("2.2");
+        DecimalLiteral floatLiteral = new DecimalLiteral("2.2");
         Minus node = new Minus("Minus", integerLiteral, integerLiteral1, 10);
         Minus mixNode = new Minus("Minus2", integerLiteral, floatLiteral, 20);
 
         try {
             assertTrue(symbolTableVisitor.visit(node) instanceof IntegerLiteral);
-            assertFalse(symbolTableVisitor.visit(node) instanceof FloatLiteral);
+            assertFalse(symbolTableVisitor.visit(node) instanceof DecimalLiteral);
             assertFalse(symbolTableVisitor.visit(node) instanceof TruthLiteral);
             assertFalse(symbolTableVisitor.visit(node) instanceof TextLiteral);
-            assertTrue(symbolTableVisitor.visit(mixNode) instanceof FloatLiteral);
+            assertTrue(symbolTableVisitor.visit(mixNode) instanceof DecimalLiteral);
         } catch (NoSuchMethodException e) {
             e.printStackTrace();
         }
 
     }
-
-    /*@org.junit.Test
-    public void visitMultipleAssignTest() {
-        List<Value> listOfValues = new ArrayList<>();
-        listOfValues.add(new IntegerLiteral("2"));
-        listOfValues.add(new IntegerLiteral("4"));
-        MultipleElementAssign node = new MultipleElementAssign(listOfValues, 10);
-
-        try {
-            assertTrue(symbolTableVisitor.visit(node) instanceof IntegerLiteral);
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
-        }
-    }*/
 
     @org.junit.Test
     public void visitNotTest() {
@@ -485,11 +471,6 @@ public class SymbolTableVisitorTest {
     @org.junit.Test
     public void visitReturnStatementTest() {
         ReturnStatement node = new ReturnStatement(new IntegerLiteral("22"), 10);
-        /* try {
-            assertTrue(symbolTableVisitor.visit(node) instanceof TruthLiteral);
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
-        } */
     }/*
     @org.junit.Test
     public void visitSingleElementAssignTest() {
@@ -544,11 +525,11 @@ public class SymbolTableVisitorTest {
     @org.junit.Test
     public void visitTimesTest() {
         Times node = new Times("times", new IntegerLiteral("2"), new IntegerLiteral("10"), 10);
-        Times fnode = new Times("times2", new IntegerLiteral("2"), new FloatLiteral("1.1"), 11);
+        Times fnode = new Times("times2", new IntegerLiteral("2"), new DecimalLiteral("1.1"), 11);
 
         try {
             assertTrue(symbolTableVisitor.visit(node) instanceof IntegerLiteral);
-            assertTrue(symbolTableVisitor.visit(fnode) instanceof FloatLiteral);
+            assertTrue(symbolTableVisitor.visit(fnode) instanceof DecimalLiteral);
         } catch (NoSuchMethodException e) {
             e.printStackTrace();
         }
@@ -629,13 +610,13 @@ public class SymbolTableVisitorTest {
     @org.junit.Test
     public void visitEqualTest() {
         Equal node = new Equal(new IntegerLiteral("1"), new IntegerLiteral("10"), 10);
-        Equal fnode = new Equal(new FloatLiteral("2.2"), new FloatLiteral("10.0"), 11);
+        Equal fnode = new Equal(new DecimalLiteral("2.2"), new DecimalLiteral("10.0"), 11);
 
         try {
             assertTrue(symbolTableVisitor.visit(node) instanceof TruthLiteral);
             assertFalse(symbolTableVisitor.visit(node) instanceof IntegerLiteral);
             assertTrue(symbolTableVisitor.visit(fnode) instanceof TruthLiteral);
-            assertFalse(symbolTableVisitor.visit(fnode) instanceof FloatLiteral);
+            assertFalse(symbolTableVisitor.visit(fnode) instanceof DecimalLiteral);
         } catch (NoSuchMethodException e) {
             e.printStackTrace();
         }
@@ -652,7 +633,7 @@ public class SymbolTableVisitorTest {
     }
     @org.junit.Test
     public void visitFLOATDCL() {
-        FLOATDCL node = new FLOATDCL();
+        DECIMALDCL node = new DECIMALDCL();
 
         try{
             assertNull(symbolTableVisitor.visit(node));

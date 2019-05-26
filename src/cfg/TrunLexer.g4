@@ -1,4 +1,4 @@
-lexer grammar PyTrunLexer;
+lexer grammar TrunLexer;
 
 INTDCL   : 'integer' ; //Name a bit weird? ast.Not a dcl on its own.
 FLOATDCL : 'decimal' ; //

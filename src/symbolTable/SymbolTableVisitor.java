@@ -206,33 +206,33 @@ public class SymbolTableVisitor extends BasicAbstractNodeVisitor<Object>{
     }
 
     @Override
-    public Object visit(FLOATDCL node) throws NoSuchMethodException {
+    public Object visit(DECIMALDCL node) throws NoSuchMethodException {
         return null;
     }
 
     //float declaration checks if the declaration has any value and that has to be a float literal. afterwards it is put in the symbol table
     @Override
-    public Object visit(FloatDeclaration node) throws NoSuchMethodException {
+    public Object visit(DecimalDeclaration node) throws NoSuchMethodException {
         if (!isInSymbolTable(node.getId().getSpelling())) {
-            symbolTable.put(node.getId().getSpelling(), new Symbol(node, symbolTable.getDepth(), new FloatLiteral(node.getId().getSpelling())));
+            symbolTable.put(node.getId().getSpelling(), new Symbol(node, symbolTable.getDepth(), new DecimalLiteral(node.getId().getSpelling())));
         } else {
             errorCallDuplicateDeclaration(node.getId().getSpelling(), node.getLineNumber());
         }
-        if (node.getStm() != null) {
-            Value value = (Value) visit(node.getStm());
+        if (node.getValue() != null) {
+            Value value = (Value) visit(node.getValue());
             symbolTable.getIdTable().get(node.getId().getSpelling()).setNodes(node);
-            symbolTable.getIdTable().get(node.getId().getSpelling()).setValue(convertNumberToValue(evaluator.visit(node.getStm()))); ///TODO EVALUATE VIISTOR
-            if (!(value instanceof FloatLiteral)) {
+            symbolTable.getIdTable().get(node.getId().getSpelling()).setValue(convertNumberToValue(evaluator.visit(node.getValue()))); ///TODO EVALUATE VIISTOR
+            if (!(value instanceof DecimalLiteral)) {
                 errorCallAssignIncompatibleTypes(value.getClass().getName().substring(4, value.getClass().getName().length() - 7), node.getId().getSpelling(), node.getLineNumber());
             }
         }
-        return new FloatLiteral(node.getId().getSpelling());
+        return new DecimalLiteral(node.getId().getSpelling());
     }
 
     //returns as a float literal
     @Override
-    public Object visit(FloatLiteral node) {
-        return new FloatLiteral(node.getSpelling());
+    public Object visit(DecimalLiteral node) {
+        return new DecimalLiteral(node.getSpelling());
     }
 
     @Override
@@ -382,10 +382,10 @@ public class SymbolTableVisitor extends BasicAbstractNodeVisitor<Object>{
         } else {
             errorCallDuplicateDeclaration(node.getId().getSpelling(), node.getLineNumber());
         }
-        if (node.getStm() != null) {
+        if (node.getValue() != null) {
             symbolTable.getIdTable().get(node.getId().getSpelling()).setNodes(node);
-            symbolTable.getIdTable().get(node.getId().getSpelling()).setValue(convertNumberToValue(evaluator.visit(node.getStm())));
-            Value value = (Value) visit(node.getStm());
+            symbolTable.getIdTable().get(node.getId().getSpelling()).setValue(convertNumberToValue(evaluator.visit(node.getValue())));
+            Value value = (Value) visit(node.getValue());
             if (!(value instanceof IntegerLiteral)) {
                 errorCallAssignIncompatibleTypes(value.getClass().getName().substring(4, value.getClass().getName().length() - 7), node.getId().getSpelling(), node.getLineNumber());
             }
@@ -469,8 +469,8 @@ public class SymbolTableVisitor extends BasicAbstractNodeVisitor<Object>{
     public Object visit(Parameter node) throws NoSuchMethodException {
         if (node.getParamType() instanceof INTDCL) {
             return visit(new IntDeclaration(node.getId(), new IntegerLiteral("22")));
-        } else if (node.getParamType() instanceof FLOATDCL) {
-            return visit(new FloatDeclaration(node.getId(), new FloatLiteral("1.1")));
+        } else if (node.getParamType() instanceof DECIMALDCL) {
+            return visit(new DecimalDeclaration(node.getId(), new DecimalLiteral("1.1")));
         } else if (node.getParamType() instanceof TRUTHDCL) {
             return visit(new TruthDeclaration(node.getId(), new TruthLiteral("false")));
         } else if (node.getParamType() instanceof TEXTDCL) {
@@ -835,12 +835,12 @@ public class SymbolTableVisitor extends BasicAbstractNodeVisitor<Object>{
     private Object evaluateArithmetic(String node, Value leftValue, Value rightValue, int linenumber) {
         if (leftValue instanceof IntegerLiteral && rightValue instanceof IntegerLiteral) {
             return new IntegerLiteral("integer");
-        } else if (leftValue instanceof FloatLiteral && rightValue instanceof FloatLiteral) {
-            return new FloatLiteral("float");
-        } else if (leftValue instanceof FloatLiteral && rightValue instanceof IntegerLiteral) {
-            return new FloatLiteral("float");
-        } else if (leftValue instanceof IntegerLiteral && rightValue instanceof FloatLiteral) {
-            return new FloatLiteral("float");
+        } else if (leftValue instanceof DecimalLiteral && rightValue instanceof DecimalLiteral) {
+            return new DecimalLiteral("float");
+        } else if (leftValue instanceof DecimalLiteral && rightValue instanceof IntegerLiteral) {
+            return new DecimalLiteral("float");
+        } else if (leftValue instanceof IntegerLiteral && rightValue instanceof DecimalLiteral) {
+            return new DecimalLiteral("float");
         } else {
             errorCallIncorrectOperatorUse(node, leftValue.getClass().getName().substring(4), rightValue.getClass().getName().substring(4), linenumber);
         }
@@ -851,11 +851,11 @@ public class SymbolTableVisitor extends BasicAbstractNodeVisitor<Object>{
     private Object evaluateTruth(String node, Value leftValue, Value rightValue, int linenumber) {
         if (leftValue instanceof IntegerLiteral && rightValue instanceof IntegerLiteral) {
             return new TruthLiteral("truth");
-        } else if (leftValue instanceof FloatLiteral && rightValue instanceof FloatLiteral) {
+        } else if (leftValue instanceof DecimalLiteral && rightValue instanceof DecimalLiteral) {
             return new TruthLiteral("truth");
-        } else if (leftValue instanceof FloatLiteral && rightValue instanceof IntegerLiteral) {
+        } else if (leftValue instanceof DecimalLiteral && rightValue instanceof IntegerLiteral) {
             return new TruthLiteral("truth");
-        } else if (leftValue instanceof IntegerLiteral && rightValue instanceof FloatLiteral) {
+        } else if (leftValue instanceof IntegerLiteral && rightValue instanceof DecimalLiteral) {
             return new TruthLiteral("truth");
         } else {
             errorCallIncorrectOperatorUse(node, leftValue.getClass().getName().substring(4), rightValue.getClass().getName().substring(4), linenumber);
@@ -880,8 +880,8 @@ public class SymbolTableVisitor extends BasicAbstractNodeVisitor<Object>{
     private Value typeCasting(Type vType) {
         if (vType instanceof INTDCL) {
             return new IntegerLiteral("integer");
-        } else if (vType instanceof FLOATDCL) {
-            return new FloatLiteral("decimal");
+        } else if (vType instanceof DECIMALDCL) {
+            return new DecimalLiteral("decimal");
         } else if (vType instanceof TRUTHDCL) {
             return new TruthLiteral("truth");
         } else {
@@ -902,7 +902,7 @@ public class SymbolTableVisitor extends BasicAbstractNodeVisitor<Object>{
         return Integer.valueOf(((IntegerLiteral) symbolTable.getIdTable().get(identifier.getSpelling()).getValue()).getSpelling());
     }
 
-    private Float convertFloatLiteral(Identifier identifier) {
-        return Float.valueOf(((FloatLiteral) symbolTable.getIdTable().get(identifier.getSpelling()).getValue()).getSpelling());
+    private Float convertDecimalLiteral(Identifier identifier) {
+        return Float.valueOf(((DecimalLiteral) symbolTable.getIdTable().get(identifier.getSpelling()).getValue()).getSpelling());
     }
 }

@@ -34,7 +34,7 @@ public class ReturnTypeChecker extends AbstractNodeVisitor<Object> {
                         IntegerLiteral retval = new IntegerLiteral("integer literal"); retval.setLineNumber(retstm.getLineNumber());
                         returnValus.add(retval);
                     }else if(value instanceof Double){
-                        FloatLiteral retval = new FloatLiteral("float literal"); retval.setLineNumber(retstm.getLineNumber());
+                        DecimalLiteral retval = new DecimalLiteral("float literal"); retval.setLineNumber(retstm.getLineNumber());
                         returnValus.add(retval);
                     }
 

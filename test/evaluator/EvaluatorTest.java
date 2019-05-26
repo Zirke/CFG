@@ -88,7 +88,7 @@ public class EvaluatorTest {
 
     @Test
     public void visitFloatLiteral() {
-        AbstractNode node = new FloatLiteral("3.3");
+        AbstractNode node = new DecimalLiteral("3.3");
         Double test = 0.0;
         try {
             test = (Double) eval.visit(node);

@@ -1,4 +1,4 @@
-// Generated from C:/Users/Abiram Mohanaraj/Documents/GitHub/CFG/src/cfg\PyTrun.g4 by ANTLR 4.7.2
+// Generated from C:/Users/Abiram Mohanaraj/Documents/GitHub/CFG/src/cfg\Trun.g4 by ANTLR 4.7.2
 package cfg;
 
 import org.antlr.v4.runtime.ParserRuleContext;
@@ -6,515 +6,515 @@ import org.antlr.v4.runtime.tree.ErrorNode;
 import org.antlr.v4.runtime.tree.TerminalNode;
 
 /**
- * This class provides an empty implementation of {@link PyTrunListener},
+ * This class provides an empty implementation of {@link TrunListener},
  * which can be extended to create a listener which only needs to handle a subset
  * of the available methods.
  */
-public class PyTrunBaseListener implements PyTrunListener {
+public class TrunBaseListener implements TrunListener {
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterStart(PyTrun.StartContext ctx) { }
+	@Override public void enterStart(Trun.StartContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitStart(PyTrun.StartContext ctx) { }
+	@Override public void exitStart(Trun.StartContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterDclblock(PyTrun.DclblockContext ctx) { }
+	@Override public void enterDclblock(Trun.DclblockContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitDclblock(PyTrun.DclblockContext ctx) { }
+	@Override public void exitDclblock(Trun.DclblockContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterArrdclblock(PyTrun.ArrdclblockContext ctx) { }
+	@Override public void enterArrdclblock(Trun.ArrdclblockContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitArrdclblock(PyTrun.ArrdclblockContext ctx) { }
+	@Override public void exitArrdclblock(Trun.ArrdclblockContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterFunctiondclblock(PyTrun.FunctiondclblockContext ctx) { }
+	@Override public void enterFunctiondclblock(Trun.FunctiondclblockContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitFunctiondclblock(PyTrun.FunctiondclblockContext ctx) { }
+	@Override public void exitFunctiondclblock(Trun.FunctiondclblockContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterStmtstartblock(PyTrun.StmtstartblockContext ctx) { }
+	@Override public void enterStmtstartblock(Trun.StmtstartblockContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitStmtstartblock(PyTrun.StmtstartblockContext ctx) { }
+	@Override public void exitStmtstartblock(Trun.StmtstartblockContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterStmt(PyTrun.StmtContext ctx) { }
+	@Override public void enterStmt(Trun.StmtContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitStmt(PyTrun.StmtContext ctx) { }
+	@Override public void exitStmt(Trun.StmtContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterFunctiondcl(PyTrun.FunctiondclContext ctx) { }
+	@Override public void enterFunctiondcl(Trun.FunctiondclContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitFunctiondcl(PyTrun.FunctiondclContext ctx) { }
+	@Override public void exitFunctiondcl(Trun.FunctiondclContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterDcl(PyTrun.DclContext ctx) { }
+	@Override public void enterDcl(Trun.DclContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitDcl(PyTrun.DclContext ctx) { }
+	@Override public void exitDcl(Trun.DclContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterArrdcl(PyTrun.ArrdclContext ctx) { }
+	@Override public void enterArrdcl(Trun.ArrdclContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitArrdcl(PyTrun.ArrdclContext ctx) { }
+	@Override public void exitArrdcl(Trun.ArrdclContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterDclValue(PyTrun.DclValueContext ctx) { }
+	@Override public void enterDclValue(Trun.DclValueContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitDclValue(PyTrun.DclValueContext ctx) { }
+	@Override public void exitDclValue(Trun.DclValueContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterTruedcl(PyTrun.TruedclContext ctx) { }
+	@Override public void enterParam(Trun.ParamContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitTruedcl(PyTrun.TruedclContext ctx) { }
+	@Override public void exitParam(Trun.ParamContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterFunctioncall(PyTrun.FunctioncallContext ctx) { }
+	@Override public void enterFunctioncall(Trun.FunctioncallContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitFunctioncall(PyTrun.FunctioncallContext ctx) { }
+	@Override public void exitFunctioncall(Trun.FunctioncallContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterIfstmt(PyTrun.IfstmtContext ctx) { }
+	@Override public void enterIfstmt(Trun.IfstmtContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitIfstmt(PyTrun.IfstmtContext ctx) { }
+	@Override public void exitIfstmt(Trun.IfstmtContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterWhilestmt(PyTrun.WhilestmtContext ctx) { }
+	@Override public void enterWhilestmt(Trun.WhilestmtContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitWhilestmt(PyTrun.WhilestmtContext ctx) { }
+	@Override public void exitWhilestmt(Trun.WhilestmtContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterRepeatuntilstmt(PyTrun.RepeatuntilstmtContext ctx) { }
+	@Override public void enterRepeatuntilstmt(Trun.RepeatuntilstmtContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitRepeatuntilstmt(PyTrun.RepeatuntilstmtContext ctx) { }
+	@Override public void exitRepeatuntilstmt(Trun.RepeatuntilstmtContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterFromstmt(PyTrun.FromstmtContext ctx) { }
+	@Override public void enterFromstmt(Trun.FromstmtContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitFromstmt(PyTrun.FromstmtContext ctx) { }
+	@Override public void exitFromstmt(Trun.FromstmtContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterReturnstmt(PyTrun.ReturnstmtContext ctx) { }
+	@Override public void enterReturnstmt(Trun.ReturnstmtContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitReturnstmt(PyTrun.ReturnstmtContext ctx) { }
+	@Override public void exitReturnstmt(Trun.ReturnstmtContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterAssignment(PyTrun.AssignmentContext ctx) { }
+	@Override public void enterAssignment(Trun.AssignmentContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitAssignment(PyTrun.AssignmentContext ctx) { }
+	@Override public void exitAssignment(Trun.AssignmentContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterValue(PyTrun.ValueContext ctx) { }
+	@Override public void enterValue(Trun.ValueContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitValue(PyTrun.ValueContext ctx) { }
+	@Override public void exitValue(Trun.ValueContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterValueorfunctioncall(PyTrun.ValueorfunctioncallContext ctx) { }
+	@Override public void enterValueorfunctioncallortext(Trun.ValueorfunctioncallortextContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitValueorfunctioncall(PyTrun.ValueorfunctioncallContext ctx) { }
+	@Override public void exitValueorfunctioncallortext(Trun.ValueorfunctioncallortextContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterExpr(PyTrun.ExprContext ctx) { }
+	@Override public void enterExpr(Trun.ExprContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitExpr(PyTrun.ExprContext ctx) { }
+	@Override public void exitExpr(Trun.ExprContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterArithmexpr(PyTrun.ArithmexprContext ctx) { }
+	@Override public void enterArithmexpr(Trun.ArithmexprContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitArithmexpr(PyTrun.ArithmexprContext ctx) { }
+	@Override public void exitArithmexpr(Trun.ArithmexprContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterMultexpr(PyTrun.MultexprContext ctx) { }
+	@Override public void enterMultexpr(Trun.MultexprContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitMultexpr(PyTrun.MultexprContext ctx) { }
+	@Override public void exitMultexpr(Trun.MultexprContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterUnaryminus(PyTrun.UnaryminusContext ctx) { }
+	@Override public void enterUnaryminus(Trun.UnaryminusContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitUnaryminus(PyTrun.UnaryminusContext ctx) { }
+	@Override public void exitUnaryminus(Trun.UnaryminusContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterParexpr(PyTrun.ParexprContext ctx) { }
+	@Override public void enterParexpr(Trun.ParexprContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitParexpr(PyTrun.ParexprContext ctx) { }
+	@Override public void exitParexpr(Trun.ParexprContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterTruthexpr(PyTrun.TruthexprContext ctx) { }
+	@Override public void enterTruthexpr(Trun.TruthexprContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitTruthexpr(PyTrun.TruthexprContext ctx) { }
+	@Override public void exitTruthexpr(Trun.TruthexprContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterLogicalexpr(PyTrun.LogicalexprContext ctx) { }
+	@Override public void enterLogicalexpr(Trun.LogicalexprContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitLogicalexpr(PyTrun.LogicalexprContext ctx) { }
+	@Override public void exitLogicalexpr(Trun.LogicalexprContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterRelationalexpr(PyTrun.RelationalexprContext ctx) { }
+	@Override public void enterRelationalexpr(Trun.RelationalexprContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitRelationalexpr(PyTrun.RelationalexprContext ctx) { }
+	@Override public void exitRelationalexpr(Trun.RelationalexprContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterAppend(PyTrun.AppendContext ctx) { }
+	@Override public void enterAppend(Trun.AppendContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitAppend(PyTrun.AppendContext ctx) { }
+	@Override public void exitAppend(Trun.AppendContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterTextorid(PyTrun.TextoridContext ctx) { }
+	@Override public void enterTextorid(Trun.TextoridContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitTextorid(PyTrun.TextoridContext ctx) { }
+	@Override public void exitTextorid(Trun.TextoridContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterArrindex(PyTrun.ArrindexContext ctx) { }
+	@Override public void enterArrindex(Trun.ArrindexContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitArrindex(PyTrun.ArrindexContext ctx) { }
+	@Override public void exitArrindex(Trun.ArrindexContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterArradd(PyTrun.ArraddContext ctx) { }
+	@Override public void enterArradd(Trun.ArraddContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitArradd(PyTrun.ArraddContext ctx) { }
+	@Override public void exitArradd(Trun.ArraddContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterDrive(PyTrun.DriveContext ctx) { }
+	@Override public void enterDrive(Trun.DriveContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitDrive(PyTrun.DriveContext ctx) { }
+	@Override public void exitDrive(Trun.DriveContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterTurnleft(PyTrun.TurnleftContext ctx) { }
+	@Override public void enterTurnleft(Trun.TurnleftContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitTurnleft(PyTrun.TurnleftContext ctx) { }
+	@Override public void exitTurnleft(Trun.TurnleftContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterTurnright(PyTrun.TurnrightContext ctx) { }
+	@Override public void enterTurnright(Trun.TurnrightContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitTurnright(PyTrun.TurnrightContext ctx) { }
+	@Override public void exitTurnright(Trun.TurnrightContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterPause(PyTrun.PauseContext ctx) { }
+	@Override public void enterPause(Trun.PauseContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitPause(PyTrun.PauseContext ctx) { }
+	@Override public void exitPause(Trun.PauseContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterNums(PyTrun.NumsContext ctx) { }
+	@Override public void enterNums(Trun.NumsContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitNums(PyTrun.NumsContext ctx) { }
+	@Override public void exitNums(Trun.NumsContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterStmtblock(PyTrun.StmtblockContext ctx) { }
+	@Override public void enterStmtblock(Trun.StmtblockContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitStmtblock(PyTrun.StmtblockContext ctx) { }
+	@Override public void exitStmtblock(Trun.StmtblockContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterTruthpar(PyTrun.TruthparContext ctx) { }
+	@Override public void enterTruthpar(Trun.TruthparContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitTruthpar(PyTrun.TruthparContext ctx) { }
+	@Override public void exitTruthpar(Trun.TruthparContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterTruth(PyTrun.TruthContext ctx) { }
+	@Override public void enterTruth(Trun.TruthContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitTruth(PyTrun.TruthContext ctx) { }
+	@Override public void exitTruth(Trun.TruthContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterType(PyTrun.TypeContext ctx) { }
+	@Override public void enterType(Trun.TypeContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitType(PyTrun.TypeContext ctx) { }
+	@Override public void exitType(Trun.TypeContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterTypes(PyTrun.TypesContext ctx) { }
+	@Override public void enterArg(Trun.ArgContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitTypes(PyTrun.TypesContext ctx) { }
+	@Override public void exitArg(Trun.ArgContext ctx) { }
 
 	/**
 	 * {@inheritDoc}

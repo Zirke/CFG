@@ -1,19 +1,16 @@
-// Generated from C:/Users/Abiram Mohanaraj/Documents/GitHub/CFG/src/cfg\PyTrun.g4 by ANTLR 4.7.2
+// Generated from C:/Users/Abiram Mohanaraj/Documents/GitHub/CFG/src/cfg\Trun.g4 by ANTLR 4.7.2
 package cfg;
-import org.antlr.v4.runtime.*;
-import org.antlr.v4.runtime.atn.ATN;
-import org.antlr.v4.runtime.atn.ATNDeserializer;
-import org.antlr.v4.runtime.atn.ParserATNSimulator;
-import org.antlr.v4.runtime.atn.PredictionContextCache;
+import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
-import org.antlr.v4.runtime.tree.ParseTreeListener;
-import org.antlr.v4.runtime.tree.ParseTreeVisitor;
-import org.antlr.v4.runtime.tree.TerminalNode;
-
+import org.antlr.v4.runtime.*;
+import org.antlr.v4.runtime.misc.*;
+import org.antlr.v4.runtime.tree.*;
 import java.util.List;
+import java.util.Iterator;
+import java.util.ArrayList;
 
 @SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast"})
-public class PyTrun extends Parser {
+public class Trun extends Parser {
 	static { RuntimeMetaData.checkVersion("4.7.2", RuntimeMetaData.VERSION); }
 
 	protected static final DFA[] _decisionToDFA;
@@ -30,24 +27,24 @@ public class PyTrun extends Parser {
 	public static final int
 		RULE_start = 0, RULE_dclblock = 1, RULE_arrdclblock = 2, RULE_functiondclblock = 3, 
 		RULE_stmtstartblock = 4, RULE_stmt = 5, RULE_functiondcl = 6, RULE_dcl = 7, 
-		RULE_arrdcl = 8, RULE_dclValue = 9, RULE_truedcl = 10, RULE_functioncall = 11, 
+		RULE_arrdcl = 8, RULE_dclValue = 9, RULE_param = 10, RULE_functioncall = 11, 
 		RULE_ifstmt = 12, RULE_whilestmt = 13, RULE_repeatuntilstmt = 14, RULE_fromstmt = 15, 
-		RULE_returnstmt = 16, RULE_assignment = 17, RULE_value = 18, RULE_valueorfunctioncall = 19, 
+		RULE_returnstmt = 16, RULE_assignment = 17, RULE_value = 18, RULE_valueorfunctioncallortext = 19, 
 		RULE_expr = 20, RULE_arithmexpr = 21, RULE_multexpr = 22, RULE_unaryminus = 23, 
 		RULE_parexpr = 24, RULE_truthexpr = 25, RULE_logicalexpr = 26, RULE_relationalexpr = 27, 
 		RULE_append = 28, RULE_textorid = 29, RULE_arrindex = 30, RULE_arradd = 31, 
 		RULE_drive = 32, RULE_turnleft = 33, RULE_turnright = 34, RULE_pause = 35, 
 		RULE_nums = 36, RULE_stmtblock = 37, RULE_truthpar = 38, RULE_truth = 39, 
-		RULE_type = 40, RULE_types = 41;
+		RULE_type = 40, RULE_arg = 41;
 	private static String[] makeRuleNames() {
 		return new String[] {
 			"start", "dclblock", "arrdclblock", "functiondclblock", "stmtstartblock", 
-			"stmt", "functiondcl", "dcl", "arrdcl", "dclValue", "truedcl", "functioncall", 
+			"stmt", "functiondcl", "dcl", "arrdcl", "dclValue", "param", "functioncall", 
 			"ifstmt", "whilestmt", "repeatuntilstmt", "fromstmt", "returnstmt", "assignment", 
-			"value", "valueorfunctioncall", "expr", "arithmexpr", "multexpr", "unaryminus", 
-			"parexpr", "truthexpr", "logicalexpr", "relationalexpr", "append", "textorid", 
-			"arrindex", "arradd", "drive", "turnleft", "turnright", "pause", "nums", 
-			"stmtblock", "truthpar", "truth", "type", "types"
+			"value", "valueorfunctioncallortext", "expr", "arithmexpr", "multexpr", 
+			"unaryminus", "parexpr", "truthexpr", "logicalexpr", "relationalexpr", 
+			"append", "textorid", "arrindex", "arradd", "drive", "turnleft", "turnright", 
+			"pause", "nums", "stmtblock", "truthpar", "truth", "type", "arg"
 		};
 	}
 	public static final String[] ruleNames = makeRuleNames();
@@ -109,7 +106,7 @@ public class PyTrun extends Parser {
 	}
 
 	@Override
-	public String getGrammarFileName() { return "PyTrun.g4"; }
+	public String getGrammarFileName() { return "Trun.g4"; }
 
 	@Override
 	public String[] getRuleNames() { return ruleNames; }
@@ -120,7 +117,7 @@ public class PyTrun extends Parser {
 	@Override
 	public ATN getATN() { return _ATN; }
 
-	public PyTrun(TokenStream input) {
+	public Trun(TokenStream input) {
 		super(input);
 		_interp = new ParserATNSimulator(this,_ATN,_decisionToDFA,_sharedContextCache);
 	}
@@ -144,15 +141,15 @@ public class PyTrun extends Parser {
 		@Override public int getRuleIndex() { return RULE_start; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof PyTrunListener ) ((PyTrunListener)listener).enterStart(this);
+			if ( listener instanceof TrunListener ) ((TrunListener)listener).enterStart(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof PyTrunListener ) ((PyTrunListener)listener).exitStart(this);
+			if ( listener instanceof TrunListener ) ((TrunListener)listener).exitStart(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof PyTrunVisitor ) return ((PyTrunVisitor<? extends T>)visitor).visitStart(this);
+			if ( visitor instanceof TrunVisitor ) return ((TrunVisitor<? extends T>)visitor).visitStart(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -188,9 +185,9 @@ public class PyTrun extends Parser {
 		public DclContext dcl() {
 			return getRuleContext(DclContext.class,0);
 		}
-		public List<TerminalNode> EOL() { return getTokens(PyTrun.EOL); }
+		public List<TerminalNode> EOL() { return getTokens(Trun.EOL); }
 		public TerminalNode EOL(int i) {
-			return getToken(PyTrun.EOL, i);
+			return getToken(Trun.EOL, i);
 		}
 		public List<DclblockContext> dclblock() {
 			return getRuleContexts(DclblockContext.class);
@@ -198,22 +195,22 @@ public class PyTrun extends Parser {
 		public DclblockContext dclblock(int i) {
 			return getRuleContext(DclblockContext.class,i);
 		}
-		public TerminalNode EOF() { return getToken(PyTrun.EOF, 0); }
+		public TerminalNode EOF() { return getToken(Trun.EOF, 0); }
 		public DclblockContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_dclblock; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof PyTrunListener ) ((PyTrunListener)listener).enterDclblock(this);
+			if ( listener instanceof TrunListener ) ((TrunListener)listener).enterDclblock(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof PyTrunListener ) ((PyTrunListener)listener).exitDclblock(this);
+			if ( listener instanceof TrunListener ) ((TrunListener)listener).exitDclblock(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof PyTrunVisitor ) return ((PyTrunVisitor<? extends T>)visitor).visitDclblock(this);
+			if ( visitor instanceof TrunVisitor ) return ((TrunVisitor<? extends T>)visitor).visitDclblock(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -285,9 +282,9 @@ public class PyTrun extends Parser {
 		public ArrdclContext arrdcl() {
 			return getRuleContext(ArrdclContext.class,0);
 		}
-		public List<TerminalNode> EOL() { return getTokens(PyTrun.EOL); }
+		public List<TerminalNode> EOL() { return getTokens(Trun.EOL); }
 		public TerminalNode EOL(int i) {
-			return getToken(PyTrun.EOL, i);
+			return getToken(Trun.EOL, i);
 		}
 		public List<ArrdclblockContext> arrdclblock() {
 			return getRuleContexts(ArrdclblockContext.class);
@@ -295,22 +292,22 @@ public class PyTrun extends Parser {
 		public ArrdclblockContext arrdclblock(int i) {
 			return getRuleContext(ArrdclblockContext.class,i);
 		}
-		public TerminalNode EOF() { return getToken(PyTrun.EOF, 0); }
+		public TerminalNode EOF() { return getToken(Trun.EOF, 0); }
 		public ArrdclblockContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_arrdclblock; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof PyTrunListener ) ((PyTrunListener)listener).enterArrdclblock(this);
+			if ( listener instanceof TrunListener ) ((TrunListener)listener).enterArrdclblock(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof PyTrunListener ) ((PyTrunListener)listener).exitArrdclblock(this);
+			if ( listener instanceof TrunListener ) ((TrunListener)listener).exitArrdclblock(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof PyTrunVisitor ) return ((PyTrunVisitor<? extends T>)visitor).visitArrdclblock(this);
+			if ( visitor instanceof TrunVisitor ) return ((TrunVisitor<? extends T>)visitor).visitArrdclblock(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -399,9 +396,9 @@ public class PyTrun extends Parser {
 		public FunctiondclContext functiondcl() {
 			return getRuleContext(FunctiondclContext.class,0);
 		}
-		public List<TerminalNode> EOL() { return getTokens(PyTrun.EOL); }
+		public List<TerminalNode> EOL() { return getTokens(Trun.EOL); }
 		public TerminalNode EOL(int i) {
-			return getToken(PyTrun.EOL, i);
+			return getToken(Trun.EOL, i);
 		}
 		public List<FunctiondclblockContext> functiondclblock() {
 			return getRuleContexts(FunctiondclblockContext.class);
@@ -409,22 +406,22 @@ public class PyTrun extends Parser {
 		public FunctiondclblockContext functiondclblock(int i) {
 			return getRuleContext(FunctiondclblockContext.class,i);
 		}
-		public TerminalNode EOF() { return getToken(PyTrun.EOF, 0); }
+		public TerminalNode EOF() { return getToken(Trun.EOF, 0); }
 		public FunctiondclblockContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_functiondclblock; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof PyTrunListener ) ((PyTrunListener)listener).enterFunctiondclblock(this);
+			if ( listener instanceof TrunListener ) ((TrunListener)listener).enterFunctiondclblock(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof PyTrunListener ) ((PyTrunListener)listener).exitFunctiondclblock(this);
+			if ( listener instanceof TrunListener ) ((TrunListener)listener).exitFunctiondclblock(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof PyTrunVisitor ) return ((PyTrunVisitor<? extends T>)visitor).visitFunctiondclblock(this);
+			if ( visitor instanceof TrunVisitor ) return ((TrunVisitor<? extends T>)visitor).visitFunctiondclblock(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -509,9 +506,9 @@ public class PyTrun extends Parser {
 		public StmtContext stmt() {
 			return getRuleContext(StmtContext.class,0);
 		}
-		public List<TerminalNode> EOL() { return getTokens(PyTrun.EOL); }
+		public List<TerminalNode> EOL() { return getTokens(Trun.EOL); }
 		public TerminalNode EOL(int i) {
-			return getToken(PyTrun.EOL, i);
+			return getToken(Trun.EOL, i);
 		}
 		public List<StmtstartblockContext> stmtstartblock() {
 			return getRuleContexts(StmtstartblockContext.class);
@@ -519,22 +516,22 @@ public class PyTrun extends Parser {
 		public StmtstartblockContext stmtstartblock(int i) {
 			return getRuleContext(StmtstartblockContext.class,i);
 		}
-		public TerminalNode EOF() { return getToken(PyTrun.EOF, 0); }
+		public TerminalNode EOF() { return getToken(Trun.EOF, 0); }
 		public StmtstartblockContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_stmtstartblock; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof PyTrunListener ) ((PyTrunListener)listener).enterStmtstartblock(this);
+			if ( listener instanceof TrunListener ) ((TrunListener)listener).enterStmtstartblock(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof PyTrunListener ) ((PyTrunListener)listener).exitStmtstartblock(this);
+			if ( listener instanceof TrunListener ) ((TrunListener)listener).exitStmtstartblock(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof PyTrunVisitor ) return ((PyTrunVisitor<? extends T>)visitor).visitStmtstartblock(this);
+			if ( visitor instanceof TrunVisitor ) return ((TrunVisitor<? extends T>)visitor).visitStmtstartblock(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -661,15 +658,15 @@ public class PyTrun extends Parser {
 		@Override public int getRuleIndex() { return RULE_stmt; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof PyTrunListener ) ((PyTrunListener)listener).enterStmt(this);
+			if ( listener instanceof TrunListener ) ((TrunListener)listener).enterStmt(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof PyTrunListener ) ((PyTrunListener)listener).exitStmt(this);
+			if ( listener instanceof TrunListener ) ((TrunListener)listener).exitStmt(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof PyTrunVisitor ) return ((PyTrunVisitor<? extends T>)visitor).visitStmt(this);
+			if ( visitor instanceof TrunVisitor ) return ((TrunVisitor<? extends T>)visitor).visitStmt(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -786,26 +783,26 @@ public class PyTrun extends Parser {
 	}
 
 	public static class FunctiondclContext extends ParserRuleContext {
-		public TerminalNode FUNCTION() { return getToken(PyTrun.FUNCTION, 0); }
-		public TerminalNode ID() { return getToken(PyTrun.ID, 0); }
-		public TerminalNode RETURNS() { return getToken(PyTrun.RETURNS, 0); }
+		public TerminalNode FUNCTION() { return getToken(Trun.FUNCTION, 0); }
+		public TerminalNode ID() { return getToken(Trun.ID, 0); }
+		public TerminalNode RETURNS() { return getToken(Trun.RETURNS, 0); }
 		public TypeContext type() {
 			return getRuleContext(TypeContext.class,0);
 		}
-		public TerminalNode LPAR() { return getToken(PyTrun.LPAR, 0); }
-		public TerminalNode RPAR() { return getToken(PyTrun.RPAR, 0); }
+		public TerminalNode LPAR() { return getToken(Trun.LPAR, 0); }
+		public TerminalNode RPAR() { return getToken(Trun.RPAR, 0); }
 		public StmtblockContext stmtblock() {
 			return getRuleContext(StmtblockContext.class,0);
 		}
-		public List<TruedclContext> truedcl() {
-			return getRuleContexts(TruedclContext.class);
+		public List<ParamContext> param() {
+			return getRuleContexts(ParamContext.class);
 		}
-		public TruedclContext truedcl(int i) {
-			return getRuleContext(TruedclContext.class,i);
+		public ParamContext param(int i) {
+			return getRuleContext(ParamContext.class,i);
 		}
-		public List<TerminalNode> COMMA() { return getTokens(PyTrun.COMMA); }
+		public List<TerminalNode> COMMA() { return getTokens(Trun.COMMA); }
 		public TerminalNode COMMA(int i) {
-			return getToken(PyTrun.COMMA, i);
+			return getToken(Trun.COMMA, i);
 		}
 		public FunctiondclContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -813,15 +810,15 @@ public class PyTrun extends Parser {
 		@Override public int getRuleIndex() { return RULE_functiondcl; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof PyTrunListener ) ((PyTrunListener)listener).enterFunctiondcl(this);
+			if ( listener instanceof TrunListener ) ((TrunListener)listener).enterFunctiondcl(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof PyTrunListener ) ((PyTrunListener)listener).exitFunctiondcl(this);
+			if ( listener instanceof TrunListener ) ((TrunListener)listener).exitFunctiondcl(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof PyTrunVisitor ) return ((PyTrunVisitor<? extends T>)visitor).visitFunctiondcl(this);
+			if ( visitor instanceof TrunVisitor ) return ((TrunVisitor<? extends T>)visitor).visitFunctiondcl(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -853,7 +850,7 @@ public class PyTrun extends Parser {
 				if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << INTDCL) | (1L << FLOATDCL) | (1L << TRUTHDCL) | (1L << TEXTDCL))) != 0)) {
 					{
 					setState(161);
-					truedcl();
+					param();
 					setState(166);
 					_errHandler.sync(this);
 					_la = _input.LA(1);
@@ -863,7 +860,7 @@ public class PyTrun extends Parser {
 						setState(162);
 						match(COMMA);
 						setState(163);
-						truedcl();
+						param();
 						}
 						}
 						setState(168);
@@ -894,7 +891,7 @@ public class PyTrun extends Parser {
 				if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << INTDCL) | (1L << FLOATDCL) | (1L << TRUTHDCL) | (1L << TEXTDCL))) != 0)) {
 					{
 					setState(177);
-					truedcl();
+					param();
 					setState(182);
 					_errHandler.sync(this);
 					_la = _input.LA(1);
@@ -904,7 +901,7 @@ public class PyTrun extends Parser {
 						setState(178);
 						match(COMMA);
 						setState(179);
-						truedcl();
+						param();
 						}
 						}
 						setState(184);
@@ -934,15 +931,15 @@ public class PyTrun extends Parser {
 	}
 
 	public static class DclContext extends ParserRuleContext {
-		public TerminalNode INTDCL() { return getToken(PyTrun.INTDCL, 0); }
-		public TerminalNode ID() { return getToken(PyTrun.ID, 0); }
+		public TerminalNode INTDCL() { return getToken(Trun.INTDCL, 0); }
+		public TerminalNode ID() { return getToken(Trun.ID, 0); }
 		public DclValueContext dclValue() {
 			return getRuleContext(DclValueContext.class,0);
 		}
-		public TerminalNode FLOATDCL() { return getToken(PyTrun.FLOATDCL, 0); }
-		public TerminalNode TEXTDCL() { return getToken(PyTrun.TEXTDCL, 0); }
-		public TerminalNode TRUTHDCL() { return getToken(PyTrun.TRUTHDCL, 0); }
-		public TerminalNode ASSIGN() { return getToken(PyTrun.ASSIGN, 0); }
+		public TerminalNode FLOATDCL() { return getToken(Trun.FLOATDCL, 0); }
+		public TerminalNode TEXTDCL() { return getToken(Trun.TEXTDCL, 0); }
+		public TerminalNode TRUTHDCL() { return getToken(Trun.TRUTHDCL, 0); }
+		public TerminalNode ASSIGN() { return getToken(Trun.ASSIGN, 0); }
 		public TruthexprContext truthexpr() {
 			return getRuleContext(TruthexprContext.class,0);
 		}
@@ -952,15 +949,15 @@ public class PyTrun extends Parser {
 		@Override public int getRuleIndex() { return RULE_dcl; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof PyTrunListener ) ((PyTrunListener)listener).enterDcl(this);
+			if ( listener instanceof TrunListener ) ((TrunListener)listener).enterDcl(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof PyTrunListener ) ((PyTrunListener)listener).exitDcl(this);
+			if ( listener instanceof TrunListener ) ((TrunListener)listener).exitDcl(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof PyTrunVisitor ) return ((PyTrunVisitor<? extends T>)visitor).visitDcl(this);
+			if ( visitor instanceof TrunVisitor ) return ((TrunVisitor<? extends T>)visitor).visitDcl(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1070,23 +1067,23 @@ public class PyTrun extends Parser {
 		public TypeContext type() {
 			return getRuleContext(TypeContext.class,0);
 		}
-		public TerminalNode ARRDCL() { return getToken(PyTrun.ARRDCL, 0); }
-		public TerminalNode ID() { return getToken(PyTrun.ID, 0); }
+		public TerminalNode ARRDCL() { return getToken(Trun.ARRDCL, 0); }
+		public TerminalNode ID() { return getToken(Trun.ID, 0); }
 		public ArrdclContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_arrdcl; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof PyTrunListener ) ((PyTrunListener)listener).enterArrdcl(this);
+			if ( listener instanceof TrunListener ) ((TrunListener)listener).enterArrdcl(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof PyTrunListener ) ((PyTrunListener)listener).exitArrdcl(this);
+			if ( listener instanceof TrunListener ) ((TrunListener)listener).exitArrdcl(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof PyTrunVisitor ) return ((PyTrunVisitor<? extends T>)visitor).visitArrdcl(this);
+			if ( visitor instanceof TrunVisitor ) return ((TrunVisitor<? extends T>)visitor).visitArrdcl(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1117,11 +1114,11 @@ public class PyTrun extends Parser {
 	}
 
 	public static class DclValueContext extends ParserRuleContext {
-		public TerminalNode ASSIGN() { return getToken(PyTrun.ASSIGN, 0); }
+		public TerminalNode ASSIGN() { return getToken(Trun.ASSIGN, 0); }
 		public ValueContext value() {
 			return getRuleContext(ValueContext.class,0);
 		}
-		public TerminalNode TEXT() { return getToken(PyTrun.TEXT, 0); }
+		public TerminalNode TEXT() { return getToken(Trun.TEXT, 0); }
 		public ExprContext expr() {
 			return getRuleContext(ExprContext.class,0);
 		}
@@ -1131,15 +1128,15 @@ public class PyTrun extends Parser {
 		@Override public int getRuleIndex() { return RULE_dclValue; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof PyTrunListener ) ((PyTrunListener)listener).enterDclValue(this);
+			if ( listener instanceof TrunListener ) ((TrunListener)listener).enterDclValue(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof PyTrunListener ) ((PyTrunListener)listener).exitDclValue(this);
+			if ( listener instanceof TrunListener ) ((TrunListener)listener).exitDclValue(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof PyTrunVisitor ) return ((PyTrunVisitor<? extends T>)visitor).visitDclValue(this);
+			if ( visitor instanceof TrunVisitor ) return ((TrunVisitor<? extends T>)visitor).visitDclValue(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1191,34 +1188,34 @@ public class PyTrun extends Parser {
 		return _localctx;
 	}
 
-	public static class TruedclContext extends ParserRuleContext {
-		public TerminalNode INTDCL() { return getToken(PyTrun.INTDCL, 0); }
-		public TerminalNode ID() { return getToken(PyTrun.ID, 0); }
-		public TerminalNode FLOATDCL() { return getToken(PyTrun.FLOATDCL, 0); }
-		public TerminalNode TEXTDCL() { return getToken(PyTrun.TEXTDCL, 0); }
-		public TerminalNode TRUTHDCL() { return getToken(PyTrun.TRUTHDCL, 0); }
-		public TruedclContext(ParserRuleContext parent, int invokingState) {
+	public static class ParamContext extends ParserRuleContext {
+		public TerminalNode INTDCL() { return getToken(Trun.INTDCL, 0); }
+		public TerminalNode ID() { return getToken(Trun.ID, 0); }
+		public TerminalNode FLOATDCL() { return getToken(Trun.FLOATDCL, 0); }
+		public TerminalNode TEXTDCL() { return getToken(Trun.TEXTDCL, 0); }
+		public TerminalNode TRUTHDCL() { return getToken(Trun.TRUTHDCL, 0); }
+		public ParamContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
-		@Override public int getRuleIndex() { return RULE_truedcl; }
+		@Override public int getRuleIndex() { return RULE_param; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof PyTrunListener ) ((PyTrunListener)listener).enterTruedcl(this);
+			if ( listener instanceof TrunListener ) ((TrunListener)listener).enterParam(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof PyTrunListener ) ((PyTrunListener)listener).exitTruedcl(this);
+			if ( listener instanceof TrunListener ) ((TrunListener)listener).exitParam(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof PyTrunVisitor ) return ((PyTrunVisitor<? extends T>)visitor).visitTruedcl(this);
+			if ( visitor instanceof TrunVisitor ) return ((TrunVisitor<? extends T>)visitor).visitParam(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 
-	public final TruedclContext truedcl() throws RecognitionException {
-		TruedclContext _localctx = new TruedclContext(_ctx, getState());
-		enterRule(_localctx, 20, RULE_truedcl);
+	public final ParamContext param() throws RecognitionException {
+		ParamContext _localctx = new ParamContext(_ctx, getState());
+		enterRule(_localctx, 20, RULE_param);
 		try {
 			setState(234);
 			_errHandler.sync(this);
@@ -1275,18 +1272,18 @@ public class PyTrun extends Parser {
 	}
 
 	public static class FunctioncallContext extends ParserRuleContext {
-		public TerminalNode ID() { return getToken(PyTrun.ID, 0); }
-		public TerminalNode LPAR() { return getToken(PyTrun.LPAR, 0); }
-		public TerminalNode RPAR() { return getToken(PyTrun.RPAR, 0); }
-		public List<TypesContext> types() {
-			return getRuleContexts(TypesContext.class);
+		public TerminalNode ID() { return getToken(Trun.ID, 0); }
+		public TerminalNode LPAR() { return getToken(Trun.LPAR, 0); }
+		public TerminalNode RPAR() { return getToken(Trun.RPAR, 0); }
+		public List<ArgContext> arg() {
+			return getRuleContexts(ArgContext.class);
 		}
-		public TypesContext types(int i) {
-			return getRuleContext(TypesContext.class,i);
+		public ArgContext arg(int i) {
+			return getRuleContext(ArgContext.class,i);
 		}
-		public List<TerminalNode> COMMA() { return getTokens(PyTrun.COMMA); }
+		public List<TerminalNode> COMMA() { return getTokens(Trun.COMMA); }
 		public TerminalNode COMMA(int i) {
-			return getToken(PyTrun.COMMA, i);
+			return getToken(Trun.COMMA, i);
 		}
 		public FunctioncallContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -1294,15 +1291,15 @@ public class PyTrun extends Parser {
 		@Override public int getRuleIndex() { return RULE_functioncall; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof PyTrunListener ) ((PyTrunListener)listener).enterFunctioncall(this);
+			if ( listener instanceof TrunListener ) ((TrunListener)listener).enterFunctioncall(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof PyTrunListener ) ((PyTrunListener)listener).exitFunctioncall(this);
+			if ( listener instanceof TrunListener ) ((TrunListener)listener).exitFunctioncall(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof PyTrunVisitor ) return ((PyTrunVisitor<? extends T>)visitor).visitFunctioncall(this);
+			if ( visitor instanceof TrunVisitor ) return ((TrunVisitor<? extends T>)visitor).visitFunctioncall(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1324,7 +1321,7 @@ public class PyTrun extends Parser {
 			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << LPAR) | (1L << MINUS) | (1L << NOT) | (1L << TRUTHVAL) | (1L << FNUM) | (1L << INUM) | (1L << ID) | (1L << TEXT))) != 0)) {
 				{
 				setState(238);
-				types();
+				arg();
 				setState(243);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
@@ -1334,7 +1331,7 @@ public class PyTrun extends Parser {
 					setState(239);
 					match(COMMA);
 					setState(240);
-					types();
+					arg();
 					}
 					}
 					setState(245);
@@ -1360,9 +1357,9 @@ public class PyTrun extends Parser {
 	}
 
 	public static class IfstmtContext extends ParserRuleContext {
-		public List<TerminalNode> IF() { return getTokens(PyTrun.IF); }
+		public List<TerminalNode> IF() { return getTokens(Trun.IF); }
 		public TerminalNode IF(int i) {
-			return getToken(PyTrun.IF, i);
+			return getToken(Trun.IF, i);
 		}
 		public List<TruthparContext> truthpar() {
 			return getRuleContexts(TruthparContext.class);
@@ -1370,9 +1367,9 @@ public class PyTrun extends Parser {
 		public TruthparContext truthpar(int i) {
 			return getRuleContext(TruthparContext.class,i);
 		}
-		public List<TerminalNode> THEN() { return getTokens(PyTrun.THEN); }
+		public List<TerminalNode> THEN() { return getTokens(Trun.THEN); }
 		public TerminalNode THEN(int i) {
-			return getToken(PyTrun.THEN, i);
+			return getToken(Trun.THEN, i);
 		}
 		public List<StmtblockContext> stmtblock() {
 			return getRuleContexts(StmtblockContext.class);
@@ -1380,13 +1377,13 @@ public class PyTrun extends Parser {
 		public StmtblockContext stmtblock(int i) {
 			return getRuleContext(StmtblockContext.class,i);
 		}
-		public List<TerminalNode> EOL() { return getTokens(PyTrun.EOL); }
+		public List<TerminalNode> EOL() { return getTokens(Trun.EOL); }
 		public TerminalNode EOL(int i) {
-			return getToken(PyTrun.EOL, i);
+			return getToken(Trun.EOL, i);
 		}
-		public List<TerminalNode> ELSE() { return getTokens(PyTrun.ELSE); }
+		public List<TerminalNode> ELSE() { return getTokens(Trun.ELSE); }
 		public TerminalNode ELSE(int i) {
-			return getToken(PyTrun.ELSE, i);
+			return getToken(Trun.ELSE, i);
 		}
 		public IfstmtContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -1394,15 +1391,15 @@ public class PyTrun extends Parser {
 		@Override public int getRuleIndex() { return RULE_ifstmt; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof PyTrunListener ) ((PyTrunListener)listener).enterIfstmt(this);
+			if ( listener instanceof TrunListener ) ((TrunListener)listener).enterIfstmt(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof PyTrunListener ) ((PyTrunListener)listener).exitIfstmt(this);
+			if ( listener instanceof TrunListener ) ((TrunListener)listener).exitIfstmt(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof PyTrunVisitor ) return ((PyTrunVisitor<? extends T>)visitor).visitIfstmt(this);
+			if ( visitor instanceof TrunVisitor ) return ((TrunVisitor<? extends T>)visitor).visitIfstmt(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1507,11 +1504,11 @@ public class PyTrun extends Parser {
 	}
 
 	public static class WhilestmtContext extends ParserRuleContext {
-		public TerminalNode WHILE() { return getToken(PyTrun.WHILE, 0); }
+		public TerminalNode WHILE() { return getToken(Trun.WHILE, 0); }
 		public TruthparContext truthpar() {
 			return getRuleContext(TruthparContext.class,0);
 		}
-		public TerminalNode DO() { return getToken(PyTrun.DO, 0); }
+		public TerminalNode DO() { return getToken(Trun.DO, 0); }
 		public StmtblockContext stmtblock() {
 			return getRuleContext(StmtblockContext.class,0);
 		}
@@ -1521,15 +1518,15 @@ public class PyTrun extends Parser {
 		@Override public int getRuleIndex() { return RULE_whilestmt; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof PyTrunListener ) ((PyTrunListener)listener).enterWhilestmt(this);
+			if ( listener instanceof TrunListener ) ((TrunListener)listener).enterWhilestmt(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof PyTrunListener ) ((PyTrunListener)listener).exitWhilestmt(this);
+			if ( listener instanceof TrunListener ) ((TrunListener)listener).exitWhilestmt(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof PyTrunVisitor ) return ((PyTrunVisitor<? extends T>)visitor).visitWhilestmt(this);
+			if ( visitor instanceof TrunVisitor ) return ((TrunVisitor<? extends T>)visitor).visitWhilestmt(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1562,11 +1559,11 @@ public class PyTrun extends Parser {
 	}
 
 	public static class RepeatuntilstmtContext extends ParserRuleContext {
-		public TerminalNode REPEAT() { return getToken(PyTrun.REPEAT, 0); }
+		public TerminalNode REPEAT() { return getToken(Trun.REPEAT, 0); }
 		public StmtblockContext stmtblock() {
 			return getRuleContext(StmtblockContext.class,0);
 		}
-		public TerminalNode UNTIL() { return getToken(PyTrun.UNTIL, 0); }
+		public TerminalNode UNTIL() { return getToken(Trun.UNTIL, 0); }
 		public TruthparContext truthpar() {
 			return getRuleContext(TruthparContext.class,0);
 		}
@@ -1576,15 +1573,15 @@ public class PyTrun extends Parser {
 		@Override public int getRuleIndex() { return RULE_repeatuntilstmt; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof PyTrunListener ) ((PyTrunListener)listener).enterRepeatuntilstmt(this);
+			if ( listener instanceof TrunListener ) ((TrunListener)listener).enterRepeatuntilstmt(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof PyTrunListener ) ((PyTrunListener)listener).exitRepeatuntilstmt(this);
+			if ( listener instanceof TrunListener ) ((TrunListener)listener).exitRepeatuntilstmt(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof PyTrunVisitor ) return ((PyTrunVisitor<? extends T>)visitor).visitRepeatuntilstmt(this);
+			if ( visitor instanceof TrunVisitor ) return ((TrunVisitor<? extends T>)visitor).visitRepeatuntilstmt(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1617,35 +1614,35 @@ public class PyTrun extends Parser {
 	}
 
 	public static class FromstmtContext extends ParserRuleContext {
-		public TerminalNode FROM() { return getToken(PyTrun.FROM, 0); }
-		public TerminalNode LPAR() { return getToken(PyTrun.LPAR, 0); }
-		public List<ValueorfunctioncallContext> valueorfunctioncall() {
-			return getRuleContexts(ValueorfunctioncallContext.class);
+		public TerminalNode FROM() { return getToken(Trun.FROM, 0); }
+		public TerminalNode LPAR() { return getToken(Trun.LPAR, 0); }
+		public List<ValueorfunctioncallortextContext> valueorfunctioncallortext() {
+			return getRuleContexts(ValueorfunctioncallortextContext.class);
 		}
-		public ValueorfunctioncallContext valueorfunctioncall(int i) {
-			return getRuleContext(ValueorfunctioncallContext.class,i);
+		public ValueorfunctioncallortextContext valueorfunctioncallortext(int i) {
+			return getRuleContext(ValueorfunctioncallortextContext.class,i);
 		}
-		public TerminalNode RPAR() { return getToken(PyTrun.RPAR, 0); }
+		public TerminalNode RPAR() { return getToken(Trun.RPAR, 0); }
 		public StmtblockContext stmtblock() {
 			return getRuleContext(StmtblockContext.class,0);
 		}
-		public TerminalNode UPTO() { return getToken(PyTrun.UPTO, 0); }
-		public TerminalNode DOWNTO() { return getToken(PyTrun.DOWNTO, 0); }
+		public TerminalNode UPTO() { return getToken(Trun.UPTO, 0); }
+		public TerminalNode DOWNTO() { return getToken(Trun.DOWNTO, 0); }
 		public FromstmtContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_fromstmt; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof PyTrunListener ) ((PyTrunListener)listener).enterFromstmt(this);
+			if ( listener instanceof TrunListener ) ((TrunListener)listener).enterFromstmt(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof PyTrunListener ) ((PyTrunListener)listener).exitFromstmt(this);
+			if ( listener instanceof TrunListener ) ((TrunListener)listener).exitFromstmt(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof PyTrunVisitor ) return ((PyTrunVisitor<? extends T>)visitor).visitFromstmt(this);
+			if ( visitor instanceof TrunVisitor ) return ((TrunVisitor<? extends T>)visitor).visitFromstmt(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1662,7 +1659,7 @@ public class PyTrun extends Parser {
 			setState(292);
 			match(LPAR);
 			setState(293);
-			valueorfunctioncall();
+			valueorfunctioncallortext();
 			setState(294);
 			_la = _input.LA(1);
 			if ( !(_la==UPTO || _la==DOWNTO) ) {
@@ -1674,7 +1671,7 @@ public class PyTrun extends Parser {
 				consume();
 			}
 			setState(295);
-			valueorfunctioncall();
+			valueorfunctioncallortext();
 			setState(296);
 			match(RPAR);
 			setState(297);
@@ -1693,16 +1690,16 @@ public class PyTrun extends Parser {
 	}
 
 	public static class ReturnstmtContext extends ParserRuleContext {
-		public TerminalNode RETURN() { return getToken(PyTrun.RETURN, 0); }
-		public ValueorfunctioncallContext valueorfunctioncall() {
-			return getRuleContext(ValueorfunctioncallContext.class,0);
+		public TerminalNode RETURN() { return getToken(Trun.RETURN, 0); }
+		public ValueorfunctioncallortextContext valueorfunctioncallortext() {
+			return getRuleContext(ValueorfunctioncallortextContext.class,0);
 		}
 		public TruthexprContext truthexpr() {
 			return getRuleContext(TruthexprContext.class,0);
 		}
-		public List<TerminalNode> EOL() { return getTokens(PyTrun.EOL); }
+		public List<TerminalNode> EOL() { return getTokens(Trun.EOL); }
 		public TerminalNode EOL(int i) {
-			return getToken(PyTrun.EOL, i);
+			return getToken(Trun.EOL, i);
 		}
 		public ReturnstmtContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -1710,15 +1707,15 @@ public class PyTrun extends Parser {
 		@Override public int getRuleIndex() { return RULE_returnstmt; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof PyTrunListener ) ((PyTrunListener)listener).enterReturnstmt(this);
+			if ( listener instanceof TrunListener ) ((TrunListener)listener).enterReturnstmt(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof PyTrunListener ) ((PyTrunListener)listener).exitReturnstmt(this);
+			if ( listener instanceof TrunListener ) ((TrunListener)listener).exitReturnstmt(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof PyTrunVisitor ) return ((PyTrunVisitor<? extends T>)visitor).visitReturnstmt(this);
+			if ( visitor instanceof TrunVisitor ) return ((TrunVisitor<? extends T>)visitor).visitReturnstmt(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1738,7 +1735,7 @@ public class PyTrun extends Parser {
 			case 1:
 				{
 				setState(300);
-				valueorfunctioncall();
+				valueorfunctioncallortext();
 				}
 				break;
 			case 2:
@@ -1778,12 +1775,12 @@ public class PyTrun extends Parser {
 	}
 
 	public static class AssignmentContext extends ParserRuleContext {
-		public TerminalNode ID() { return getToken(PyTrun.ID, 0); }
-		public TerminalNode ASSIGN() { return getToken(PyTrun.ASSIGN, 0); }
-		public ValueorfunctioncallContext valueorfunctioncall() {
-			return getRuleContext(ValueorfunctioncallContext.class,0);
+		public TerminalNode ID() { return getToken(Trun.ID, 0); }
+		public TerminalNode ASSIGN() { return getToken(Trun.ASSIGN, 0); }
+		public ValueorfunctioncallortextContext valueorfunctioncallortext() {
+			return getRuleContext(ValueorfunctioncallortextContext.class,0);
 		}
-		public TerminalNode TEXT() { return getToken(PyTrun.TEXT, 0); }
+		public TerminalNode TEXT() { return getToken(Trun.TEXT, 0); }
 		public ExprContext expr() {
 			return getRuleContext(ExprContext.class,0);
 		}
@@ -1793,15 +1790,15 @@ public class PyTrun extends Parser {
 		@Override public int getRuleIndex() { return RULE_assignment; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof PyTrunListener ) ((PyTrunListener)listener).enterAssignment(this);
+			if ( listener instanceof TrunListener ) ((TrunListener)listener).enterAssignment(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof PyTrunListener ) ((PyTrunListener)listener).exitAssignment(this);
+			if ( listener instanceof TrunListener ) ((TrunListener)listener).exitAssignment(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof PyTrunVisitor ) return ((PyTrunVisitor<? extends T>)visitor).visitAssignment(this);
+			if ( visitor instanceof TrunVisitor ) return ((TrunVisitor<? extends T>)visitor).visitAssignment(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1822,7 +1819,7 @@ public class PyTrun extends Parser {
 				setState(311);
 				match(ASSIGN);
 				setState(312);
-				valueorfunctioncall();
+				valueorfunctioncallortext();
 				}
 				break;
 			case 2:
@@ -1862,22 +1859,22 @@ public class PyTrun extends Parser {
 		public ArrindexContext arrindex() {
 			return getRuleContext(ArrindexContext.class,0);
 		}
-		public TerminalNode ID() { return getToken(PyTrun.ID, 0); }
+		public TerminalNode ID() { return getToken(Trun.ID, 0); }
 		public ValueContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_value; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof PyTrunListener ) ((PyTrunListener)listener).enterValue(this);
+			if ( listener instanceof TrunListener ) ((TrunListener)listener).enterValue(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof PyTrunListener ) ((PyTrunListener)listener).exitValue(this);
+			if ( listener instanceof TrunListener ) ((TrunListener)listener).exitValue(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof PyTrunVisitor ) return ((PyTrunVisitor<? extends T>)visitor).visitValue(this);
+			if ( visitor instanceof TrunVisitor ) return ((TrunVisitor<? extends T>)visitor).visitValue(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1923,36 +1920,36 @@ public class PyTrun extends Parser {
 		return _localctx;
 	}
 
-	public static class ValueorfunctioncallContext extends ParserRuleContext {
+	public static class ValueorfunctioncallortextContext extends ParserRuleContext {
 		public ValueContext value() {
 			return getRuleContext(ValueContext.class,0);
 		}
 		public FunctioncallContext functioncall() {
 			return getRuleContext(FunctioncallContext.class,0);
 		}
-		public TerminalNode TEXT() { return getToken(PyTrun.TEXT, 0); }
-		public ValueorfunctioncallContext(ParserRuleContext parent, int invokingState) {
+		public TerminalNode TEXT() { return getToken(Trun.TEXT, 0); }
+		public ValueorfunctioncallortextContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
-		@Override public int getRuleIndex() { return RULE_valueorfunctioncall; }
+		@Override public int getRuleIndex() { return RULE_valueorfunctioncallortext; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof PyTrunListener ) ((PyTrunListener)listener).enterValueorfunctioncall(this);
+			if ( listener instanceof TrunListener ) ((TrunListener)listener).enterValueorfunctioncallortext(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof PyTrunListener ) ((PyTrunListener)listener).exitValueorfunctioncall(this);
+			if ( listener instanceof TrunListener ) ((TrunListener)listener).exitValueorfunctioncallortext(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof PyTrunVisitor ) return ((PyTrunVisitor<? extends T>)visitor).visitValueorfunctioncall(this);
+			if ( visitor instanceof TrunVisitor ) return ((TrunVisitor<? extends T>)visitor).visitValueorfunctioncallortext(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 
-	public final ValueorfunctioncallContext valueorfunctioncall() throws RecognitionException {
-		ValueorfunctioncallContext _localctx = new ValueorfunctioncallContext(_ctx, getState());
-		enterRule(_localctx, 38, RULE_valueorfunctioncall);
+	public final ValueorfunctioncallortextContext valueorfunctioncallortext() throws RecognitionException {
+		ValueorfunctioncallortextContext _localctx = new ValueorfunctioncallortextContext(_ctx, getState());
+		enterRule(_localctx, 38, RULE_valueorfunctioncallortext);
 		try {
 			setState(327);
 			_errHandler.sync(this);
@@ -2007,15 +2004,15 @@ public class PyTrun extends Parser {
 		@Override public int getRuleIndex() { return RULE_expr; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof PyTrunListener ) ((PyTrunListener)listener).enterExpr(this);
+			if ( listener instanceof TrunListener ) ((TrunListener)listener).enterExpr(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof PyTrunListener ) ((PyTrunListener)listener).exitExpr(this);
+			if ( listener instanceof TrunListener ) ((TrunListener)listener).exitExpr(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof PyTrunVisitor ) return ((PyTrunVisitor<? extends T>)visitor).visitExpr(this);
+			if ( visitor instanceof TrunVisitor ) return ((TrunVisitor<? extends T>)visitor).visitExpr(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -2068,13 +2065,13 @@ public class PyTrun extends Parser {
 		public MultexprContext multexpr(int i) {
 			return getRuleContext(MultexprContext.class,i);
 		}
-		public List<TerminalNode> PLUS() { return getTokens(PyTrun.PLUS); }
+		public List<TerminalNode> PLUS() { return getTokens(Trun.PLUS); }
 		public TerminalNode PLUS(int i) {
-			return getToken(PyTrun.PLUS, i);
+			return getToken(Trun.PLUS, i);
 		}
-		public List<TerminalNode> MINUS() { return getTokens(PyTrun.MINUS); }
+		public List<TerminalNode> MINUS() { return getTokens(Trun.MINUS); }
 		public TerminalNode MINUS(int i) {
-			return getToken(PyTrun.MINUS, i);
+			return getToken(Trun.MINUS, i);
 		}
 		public ArithmexprContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -2082,15 +2079,15 @@ public class PyTrun extends Parser {
 		@Override public int getRuleIndex() { return RULE_arithmexpr; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof PyTrunListener ) ((PyTrunListener)listener).enterArithmexpr(this);
+			if ( listener instanceof TrunListener ) ((TrunListener)listener).enterArithmexpr(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof PyTrunListener ) ((PyTrunListener)listener).exitArithmexpr(this);
+			if ( listener instanceof TrunListener ) ((TrunListener)listener).exitArithmexpr(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof PyTrunVisitor ) return ((PyTrunVisitor<? extends T>)visitor).visitArithmexpr(this);
+			if ( visitor instanceof TrunVisitor ) return ((TrunVisitor<? extends T>)visitor).visitArithmexpr(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -2151,13 +2148,13 @@ public class PyTrun extends Parser {
 		public UnaryminusContext unaryminus(int i) {
 			return getRuleContext(UnaryminusContext.class,i);
 		}
-		public List<TerminalNode> TIMES() { return getTokens(PyTrun.TIMES); }
+		public List<TerminalNode> TIMES() { return getTokens(Trun.TIMES); }
 		public TerminalNode TIMES(int i) {
-			return getToken(PyTrun.TIMES, i);
+			return getToken(Trun.TIMES, i);
 		}
-		public List<TerminalNode> DIVIDES() { return getTokens(PyTrun.DIVIDES); }
+		public List<TerminalNode> DIVIDES() { return getTokens(Trun.DIVIDES); }
 		public TerminalNode DIVIDES(int i) {
-			return getToken(PyTrun.DIVIDES, i);
+			return getToken(Trun.DIVIDES, i);
 		}
 		public MultexprContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -2165,15 +2162,15 @@ public class PyTrun extends Parser {
 		@Override public int getRuleIndex() { return RULE_multexpr; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof PyTrunListener ) ((PyTrunListener)listener).enterMultexpr(this);
+			if ( listener instanceof TrunListener ) ((TrunListener)listener).enterMultexpr(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof PyTrunListener ) ((PyTrunListener)listener).exitMultexpr(this);
+			if ( listener instanceof TrunListener ) ((TrunListener)listener).exitMultexpr(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof PyTrunVisitor ) return ((PyTrunVisitor<? extends T>)visitor).visitMultexpr(this);
+			if ( visitor instanceof TrunVisitor ) return ((TrunVisitor<? extends T>)visitor).visitMultexpr(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -2231,22 +2228,22 @@ public class PyTrun extends Parser {
 		public ParexprContext parexpr() {
 			return getRuleContext(ParexprContext.class,0);
 		}
-		public TerminalNode MINUS() { return getToken(PyTrun.MINUS, 0); }
+		public TerminalNode MINUS() { return getToken(Trun.MINUS, 0); }
 		public UnaryminusContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_unaryminus; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof PyTrunListener ) ((PyTrunListener)listener).enterUnaryminus(this);
+			if ( listener instanceof TrunListener ) ((TrunListener)listener).enterUnaryminus(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof PyTrunListener ) ((PyTrunListener)listener).exitUnaryminus(this);
+			if ( listener instanceof TrunListener ) ((TrunListener)listener).exitUnaryminus(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof PyTrunVisitor ) return ((PyTrunVisitor<? extends T>)visitor).visitUnaryminus(this);
+			if ( visitor instanceof TrunVisitor ) return ((TrunVisitor<? extends T>)visitor).visitUnaryminus(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -2293,26 +2290,26 @@ public class PyTrun extends Parser {
 		public ArrindexContext arrindex() {
 			return getRuleContext(ArrindexContext.class,0);
 		}
-		public TerminalNode LPAR() { return getToken(PyTrun.LPAR, 0); }
+		public TerminalNode LPAR() { return getToken(Trun.LPAR, 0); }
 		public ArithmexprContext arithmexpr() {
 			return getRuleContext(ArithmexprContext.class,0);
 		}
-		public TerminalNode RPAR() { return getToken(PyTrun.RPAR, 0); }
+		public TerminalNode RPAR() { return getToken(Trun.RPAR, 0); }
 		public ParexprContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_parexpr; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof PyTrunListener ) ((PyTrunListener)listener).enterParexpr(this);
+			if ( listener instanceof TrunListener ) ((TrunListener)listener).enterParexpr(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof PyTrunListener ) ((PyTrunListener)listener).exitParexpr(this);
+			if ( listener instanceof TrunListener ) ((TrunListener)listener).exitParexpr(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof PyTrunVisitor ) return ((PyTrunVisitor<? extends T>)visitor).visitParexpr(this);
+			if ( visitor instanceof TrunVisitor ) return ((TrunVisitor<? extends T>)visitor).visitParexpr(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -2379,15 +2376,15 @@ public class PyTrun extends Parser {
 		@Override public int getRuleIndex() { return RULE_truthexpr; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof PyTrunListener ) ((PyTrunListener)listener).enterTruthexpr(this);
+			if ( listener instanceof TrunListener ) ((TrunListener)listener).enterTruthexpr(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof PyTrunListener ) ((PyTrunListener)listener).exitTruthexpr(this);
+			if ( listener instanceof TrunListener ) ((TrunListener)listener).exitTruthexpr(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof PyTrunVisitor ) return ((PyTrunVisitor<? extends T>)visitor).visitTruthexpr(this);
+			if ( visitor instanceof TrunVisitor ) return ((TrunVisitor<? extends T>)visitor).visitTruthexpr(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -2420,17 +2417,17 @@ public class PyTrun extends Parser {
 		public RelationalexprContext relationalexpr(int i) {
 			return getRuleContext(RelationalexprContext.class,i);
 		}
-		public List<TerminalNode> NOT() { return getTokens(PyTrun.NOT); }
+		public List<TerminalNode> NOT() { return getTokens(Trun.NOT); }
 		public TerminalNode NOT(int i) {
-			return getToken(PyTrun.NOT, i);
+			return getToken(Trun.NOT, i);
 		}
-		public List<TerminalNode> OR() { return getTokens(PyTrun.OR); }
+		public List<TerminalNode> OR() { return getTokens(Trun.OR); }
 		public TerminalNode OR(int i) {
-			return getToken(PyTrun.OR, i);
+			return getToken(Trun.OR, i);
 		}
-		public List<TerminalNode> AND() { return getTokens(PyTrun.AND); }
+		public List<TerminalNode> AND() { return getTokens(Trun.AND); }
 		public TerminalNode AND(int i) {
-			return getToken(PyTrun.AND, i);
+			return getToken(Trun.AND, i);
 		}
 		public LogicalexprContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -2438,15 +2435,15 @@ public class PyTrun extends Parser {
 		@Override public int getRuleIndex() { return RULE_logicalexpr; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof PyTrunListener ) ((PyTrunListener)listener).enterLogicalexpr(this);
+			if ( listener instanceof TrunListener ) ((TrunListener)listener).enterLogicalexpr(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof PyTrunListener ) ((PyTrunListener)listener).exitLogicalexpr(this);
+			if ( listener instanceof TrunListener ) ((TrunListener)listener).exitLogicalexpr(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof PyTrunVisitor ) return ((PyTrunVisitor<? extends T>)visitor).visitLogicalexpr(this);
+			if ( visitor instanceof TrunVisitor ) return ((TrunVisitor<? extends T>)visitor).visitLogicalexpr(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -2518,20 +2515,20 @@ public class PyTrun extends Parser {
 	}
 
 	public static class RelationalexprContext extends ParserRuleContext {
-		public List<ValueorfunctioncallContext> valueorfunctioncall() {
-			return getRuleContexts(ValueorfunctioncallContext.class);
+		public List<ValueorfunctioncallortextContext> valueorfunctioncallortext() {
+			return getRuleContexts(ValueorfunctioncallortextContext.class);
 		}
-		public ValueorfunctioncallContext valueorfunctioncall(int i) {
-			return getRuleContext(ValueorfunctioncallContext.class,i);
+		public ValueorfunctioncallortextContext valueorfunctioncallortext(int i) {
+			return getRuleContext(ValueorfunctioncallortextContext.class,i);
 		}
-		public TerminalNode EQUALS() { return getToken(PyTrun.EQUALS, 0); }
-		public TerminalNode GRTHAN() { return getToken(PyTrun.GRTHAN, 0); }
-		public TerminalNode LESSTHAN() { return getToken(PyTrun.LESSTHAN, 0); }
-		public TerminalNode LPAR() { return getToken(PyTrun.LPAR, 0); }
+		public TerminalNode EQUALS() { return getToken(Trun.EQUALS, 0); }
+		public TerminalNode GRTHAN() { return getToken(Trun.GRTHAN, 0); }
+		public TerminalNode LESSTHAN() { return getToken(Trun.LESSTHAN, 0); }
+		public TerminalNode LPAR() { return getToken(Trun.LPAR, 0); }
 		public LogicalexprContext logicalexpr() {
 			return getRuleContext(LogicalexprContext.class,0);
 		}
-		public TerminalNode RPAR() { return getToken(PyTrun.RPAR, 0); }
+		public TerminalNode RPAR() { return getToken(Trun.RPAR, 0); }
 		public TruthContext truth() {
 			return getRuleContext(TruthContext.class,0);
 		}
@@ -2544,15 +2541,15 @@ public class PyTrun extends Parser {
 		@Override public int getRuleIndex() { return RULE_relationalexpr; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof PyTrunListener ) ((PyTrunListener)listener).enterRelationalexpr(this);
+			if ( listener instanceof TrunListener ) ((TrunListener)listener).enterRelationalexpr(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof PyTrunListener ) ((PyTrunListener)listener).exitRelationalexpr(this);
+			if ( listener instanceof TrunListener ) ((TrunListener)listener).exitRelationalexpr(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof PyTrunVisitor ) return ((PyTrunVisitor<? extends T>)visitor).visitRelationalexpr(this);
+			if ( visitor instanceof TrunVisitor ) return ((TrunVisitor<? extends T>)visitor).visitRelationalexpr(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -2569,7 +2566,7 @@ public class PyTrun extends Parser {
 				enterOuterAlt(_localctx, 1);
 				{
 				setState(380);
-				valueorfunctioncall();
+				valueorfunctioncallortext();
 				{
 				setState(381);
 				_la = _input.LA(1);
@@ -2582,7 +2579,7 @@ public class PyTrun extends Parser {
 					consume();
 				}
 				setState(382);
-				valueorfunctioncall();
+				valueorfunctioncallortext();
 				}
 				}
 				break;
@@ -2631,22 +2628,22 @@ public class PyTrun extends Parser {
 		public TextoridContext textorid(int i) {
 			return getRuleContext(TextoridContext.class,i);
 		}
-		public TerminalNode APPEND() { return getToken(PyTrun.APPEND, 0); }
+		public TerminalNode APPEND() { return getToken(Trun.APPEND, 0); }
 		public AppendContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_append; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof PyTrunListener ) ((PyTrunListener)listener).enterAppend(this);
+			if ( listener instanceof TrunListener ) ((TrunListener)listener).enterAppend(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof PyTrunListener ) ((PyTrunListener)listener).exitAppend(this);
+			if ( listener instanceof TrunListener ) ((TrunListener)listener).exitAppend(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof PyTrunVisitor ) return ((PyTrunVisitor<? extends T>)visitor).visitAppend(this);
+			if ( visitor instanceof TrunVisitor ) return ((TrunVisitor<? extends T>)visitor).visitAppend(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -2677,23 +2674,23 @@ public class PyTrun extends Parser {
 	}
 
 	public static class TextoridContext extends ParserRuleContext {
-		public TerminalNode TEXT() { return getToken(PyTrun.TEXT, 0); }
-		public TerminalNode ID() { return getToken(PyTrun.ID, 0); }
+		public TerminalNode TEXT() { return getToken(Trun.TEXT, 0); }
+		public TerminalNode ID() { return getToken(Trun.ID, 0); }
 		public TextoridContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_textorid; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof PyTrunListener ) ((PyTrunListener)listener).enterTextorid(this);
+			if ( listener instanceof TrunListener ) ((TrunListener)listener).enterTextorid(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof PyTrunListener ) ((PyTrunListener)listener).exitTextorid(this);
+			if ( listener instanceof TrunListener ) ((TrunListener)listener).exitTextorid(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof PyTrunVisitor ) return ((PyTrunVisitor<? extends T>)visitor).visitTextorid(this);
+			if ( visitor instanceof TrunVisitor ) return ((TrunVisitor<? extends T>)visitor).visitTextorid(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -2729,8 +2726,8 @@ public class PyTrun extends Parser {
 	}
 
 	public static class ArrindexContext extends ParserRuleContext {
-		public TerminalNode ID() { return getToken(PyTrun.ID, 0); }
-		public TerminalNode ELEMENT() { return getToken(PyTrun.ELEMENT, 0); }
+		public TerminalNode ID() { return getToken(Trun.ID, 0); }
+		public TerminalNode ELEMENT() { return getToken(Trun.ELEMENT, 0); }
 		public ArithmexprContext arithmexpr() {
 			return getRuleContext(ArithmexprContext.class,0);
 		}
@@ -2740,15 +2737,15 @@ public class PyTrun extends Parser {
 		@Override public int getRuleIndex() { return RULE_arrindex; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof PyTrunListener ) ((PyTrunListener)listener).enterArrindex(this);
+			if ( listener instanceof TrunListener ) ((TrunListener)listener).enterArrindex(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof PyTrunListener ) ((PyTrunListener)listener).exitArrindex(this);
+			if ( listener instanceof TrunListener ) ((TrunListener)listener).exitArrindex(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof PyTrunVisitor ) return ((PyTrunVisitor<? extends T>)visitor).visitArrindex(this);
+			if ( visitor instanceof TrunVisitor ) return ((TrunVisitor<? extends T>)visitor).visitArrindex(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -2779,31 +2776,31 @@ public class PyTrun extends Parser {
 	}
 
 	public static class ArraddContext extends ParserRuleContext {
-		public TerminalNode ID() { return getToken(PyTrun.ID, 0); }
-		public TerminalNode ELEMENT() { return getToken(PyTrun.ELEMENT, 0); }
+		public TerminalNode ID() { return getToken(Trun.ID, 0); }
+		public TerminalNode ELEMENT() { return getToken(Trun.ELEMENT, 0); }
 		public ArithmexprContext arithmexpr() {
 			return getRuleContext(ArithmexprContext.class,0);
 		}
-		public TerminalNode ASSIGN() { return getToken(PyTrun.ASSIGN, 0); }
+		public TerminalNode ASSIGN() { return getToken(Trun.ASSIGN, 0); }
 		public ExprContext expr() {
 			return getRuleContext(ExprContext.class,0);
 		}
-		public TerminalNode TEXT() { return getToken(PyTrun.TEXT, 0); }
+		public TerminalNode TEXT() { return getToken(Trun.TEXT, 0); }
 		public ArraddContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_arradd; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof PyTrunListener ) ((PyTrunListener)listener).enterArradd(this);
+			if ( listener instanceof TrunListener ) ((TrunListener)listener).enterArradd(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof PyTrunListener ) ((PyTrunListener)listener).exitArradd(this);
+			if ( listener instanceof TrunListener ) ((TrunListener)listener).exitArradd(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof PyTrunVisitor ) return ((PyTrunVisitor<? extends T>)visitor).visitArradd(this);
+			if ( visitor instanceof TrunVisitor ) return ((TrunVisitor<? extends T>)visitor).visitArradd(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -2852,27 +2849,27 @@ public class PyTrun extends Parser {
 	}
 
 	public static class DriveContext extends ParserRuleContext {
-		public TerminalNode DRIVE() { return getToken(PyTrun.DRIVE, 0); }
-		public TerminalNode LPAR() { return getToken(PyTrun.LPAR, 0); }
-		public ValueorfunctioncallContext valueorfunctioncall() {
-			return getRuleContext(ValueorfunctioncallContext.class,0);
+		public TerminalNode DRIVE() { return getToken(Trun.DRIVE, 0); }
+		public TerminalNode LPAR() { return getToken(Trun.LPAR, 0); }
+		public ValueorfunctioncallortextContext valueorfunctioncallortext() {
+			return getRuleContext(ValueorfunctioncallortextContext.class,0);
 		}
-		public TerminalNode RPAR() { return getToken(PyTrun.RPAR, 0); }
+		public TerminalNode RPAR() { return getToken(Trun.RPAR, 0); }
 		public DriveContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_drive; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof PyTrunListener ) ((PyTrunListener)listener).enterDrive(this);
+			if ( listener instanceof TrunListener ) ((TrunListener)listener).enterDrive(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof PyTrunListener ) ((PyTrunListener)listener).exitDrive(this);
+			if ( listener instanceof TrunListener ) ((TrunListener)listener).exitDrive(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof PyTrunVisitor ) return ((PyTrunVisitor<? extends T>)visitor).visitDrive(this);
+			if ( visitor instanceof TrunVisitor ) return ((TrunVisitor<? extends T>)visitor).visitDrive(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -2888,7 +2885,7 @@ public class PyTrun extends Parser {
 			setState(411);
 			match(LPAR);
 			setState(412);
-			valueorfunctioncall();
+			valueorfunctioncallortext();
 			setState(413);
 			match(RPAR);
 			}
@@ -2905,27 +2902,27 @@ public class PyTrun extends Parser {
 	}
 
 	public static class TurnleftContext extends ParserRuleContext {
-		public TerminalNode TURNLEFT() { return getToken(PyTrun.TURNLEFT, 0); }
-		public TerminalNode LPAR() { return getToken(PyTrun.LPAR, 0); }
-		public ValueorfunctioncallContext valueorfunctioncall() {
-			return getRuleContext(ValueorfunctioncallContext.class,0);
+		public TerminalNode TURNLEFT() { return getToken(Trun.TURNLEFT, 0); }
+		public TerminalNode LPAR() { return getToken(Trun.LPAR, 0); }
+		public ValueorfunctioncallortextContext valueorfunctioncallortext() {
+			return getRuleContext(ValueorfunctioncallortextContext.class,0);
 		}
-		public TerminalNode RPAR() { return getToken(PyTrun.RPAR, 0); }
+		public TerminalNode RPAR() { return getToken(Trun.RPAR, 0); }
 		public TurnleftContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_turnleft; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof PyTrunListener ) ((PyTrunListener)listener).enterTurnleft(this);
+			if ( listener instanceof TrunListener ) ((TrunListener)listener).enterTurnleft(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof PyTrunListener ) ((PyTrunListener)listener).exitTurnleft(this);
+			if ( listener instanceof TrunListener ) ((TrunListener)listener).exitTurnleft(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof PyTrunVisitor ) return ((PyTrunVisitor<? extends T>)visitor).visitTurnleft(this);
+			if ( visitor instanceof TrunVisitor ) return ((TrunVisitor<? extends T>)visitor).visitTurnleft(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -2941,7 +2938,7 @@ public class PyTrun extends Parser {
 			setState(416);
 			match(LPAR);
 			setState(417);
-			valueorfunctioncall();
+			valueorfunctioncallortext();
 			setState(418);
 			match(RPAR);
 			}
@@ -2958,27 +2955,27 @@ public class PyTrun extends Parser {
 	}
 
 	public static class TurnrightContext extends ParserRuleContext {
-		public TerminalNode TURNRIGHT() { return getToken(PyTrun.TURNRIGHT, 0); }
-		public TerminalNode LPAR() { return getToken(PyTrun.LPAR, 0); }
-		public ValueorfunctioncallContext valueorfunctioncall() {
-			return getRuleContext(ValueorfunctioncallContext.class,0);
+		public TerminalNode TURNRIGHT() { return getToken(Trun.TURNRIGHT, 0); }
+		public TerminalNode LPAR() { return getToken(Trun.LPAR, 0); }
+		public ValueorfunctioncallortextContext valueorfunctioncallortext() {
+			return getRuleContext(ValueorfunctioncallortextContext.class,0);
 		}
-		public TerminalNode RPAR() { return getToken(PyTrun.RPAR, 0); }
+		public TerminalNode RPAR() { return getToken(Trun.RPAR, 0); }
 		public TurnrightContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_turnright; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof PyTrunListener ) ((PyTrunListener)listener).enterTurnright(this);
+			if ( listener instanceof TrunListener ) ((TrunListener)listener).enterTurnright(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof PyTrunListener ) ((PyTrunListener)listener).exitTurnright(this);
+			if ( listener instanceof TrunListener ) ((TrunListener)listener).exitTurnright(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof PyTrunVisitor ) return ((PyTrunVisitor<? extends T>)visitor).visitTurnright(this);
+			if ( visitor instanceof TrunVisitor ) return ((TrunVisitor<? extends T>)visitor).visitTurnright(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -2994,7 +2991,7 @@ public class PyTrun extends Parser {
 			setState(421);
 			match(LPAR);
 			setState(422);
-			valueorfunctioncall();
+			valueorfunctioncallortext();
 			setState(423);
 			match(RPAR);
 			}
@@ -3011,27 +3008,27 @@ public class PyTrun extends Parser {
 	}
 
 	public static class PauseContext extends ParserRuleContext {
-		public TerminalNode PAUSE() { return getToken(PyTrun.PAUSE, 0); }
-		public TerminalNode LPAR() { return getToken(PyTrun.LPAR, 0); }
-		public ValueorfunctioncallContext valueorfunctioncall() {
-			return getRuleContext(ValueorfunctioncallContext.class,0);
+		public TerminalNode PAUSE() { return getToken(Trun.PAUSE, 0); }
+		public TerminalNode LPAR() { return getToken(Trun.LPAR, 0); }
+		public ValueorfunctioncallortextContext valueorfunctioncallortext() {
+			return getRuleContext(ValueorfunctioncallortextContext.class,0);
 		}
-		public TerminalNode RPAR() { return getToken(PyTrun.RPAR, 0); }
+		public TerminalNode RPAR() { return getToken(Trun.RPAR, 0); }
 		public PauseContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_pause; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof PyTrunListener ) ((PyTrunListener)listener).enterPause(this);
+			if ( listener instanceof TrunListener ) ((TrunListener)listener).enterPause(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof PyTrunListener ) ((PyTrunListener)listener).exitPause(this);
+			if ( listener instanceof TrunListener ) ((TrunListener)listener).exitPause(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof PyTrunVisitor ) return ((PyTrunVisitor<? extends T>)visitor).visitPause(this);
+			if ( visitor instanceof TrunVisitor ) return ((TrunVisitor<? extends T>)visitor).visitPause(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -3047,7 +3044,7 @@ public class PyTrun extends Parser {
 			setState(426);
 			match(LPAR);
 			setState(427);
-			valueorfunctioncall();
+			valueorfunctioncallortext();
 			setState(428);
 			match(RPAR);
 			}
@@ -3064,24 +3061,24 @@ public class PyTrun extends Parser {
 	}
 
 	public static class NumsContext extends ParserRuleContext {
-		public TerminalNode INUM() { return getToken(PyTrun.INUM, 0); }
-		public TerminalNode FNUM() { return getToken(PyTrun.FNUM, 0); }
-		public TerminalNode ID() { return getToken(PyTrun.ID, 0); }
+		public TerminalNode INUM() { return getToken(Trun.INUM, 0); }
+		public TerminalNode FNUM() { return getToken(Trun.FNUM, 0); }
+		public TerminalNode ID() { return getToken(Trun.ID, 0); }
 		public NumsContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_nums; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof PyTrunListener ) ((PyTrunListener)listener).enterNums(this);
+			if ( listener instanceof TrunListener ) ((TrunListener)listener).enterNums(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof PyTrunListener ) ((PyTrunListener)listener).exitNums(this);
+			if ( listener instanceof TrunListener ) ((TrunListener)listener).exitNums(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof PyTrunVisitor ) return ((PyTrunVisitor<? extends T>)visitor).visitNums(this);
+			if ( visitor instanceof TrunVisitor ) return ((TrunVisitor<? extends T>)visitor).visitNums(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -3117,17 +3114,17 @@ public class PyTrun extends Parser {
 	}
 
 	public static class StmtblockContext extends ParserRuleContext {
-		public TerminalNode LCB() { return getToken(PyTrun.LCB, 0); }
+		public TerminalNode LCB() { return getToken(Trun.LCB, 0); }
 		public DclblockContext dclblock() {
 			return getRuleContext(DclblockContext.class,0);
 		}
 		public StmtstartblockContext stmtstartblock() {
 			return getRuleContext(StmtstartblockContext.class,0);
 		}
-		public TerminalNode RCB() { return getToken(PyTrun.RCB, 0); }
-		public List<TerminalNode> EOL() { return getTokens(PyTrun.EOL); }
+		public TerminalNode RCB() { return getToken(Trun.RCB, 0); }
+		public List<TerminalNode> EOL() { return getTokens(Trun.EOL); }
 		public TerminalNode EOL(int i) {
-			return getToken(PyTrun.EOL, i);
+			return getToken(Trun.EOL, i);
 		}
 		public StmtblockContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -3135,15 +3132,15 @@ public class PyTrun extends Parser {
 		@Override public int getRuleIndex() { return RULE_stmtblock; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof PyTrunListener ) ((PyTrunListener)listener).enterStmtblock(this);
+			if ( listener instanceof TrunListener ) ((TrunListener)listener).enterStmtblock(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof PyTrunListener ) ((PyTrunListener)listener).exitStmtblock(this);
+			if ( listener instanceof TrunListener ) ((TrunListener)listener).exitStmtblock(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof PyTrunVisitor ) return ((PyTrunVisitor<? extends T>)visitor).visitStmtblock(this);
+			if ( visitor instanceof TrunVisitor ) return ((TrunVisitor<? extends T>)visitor).visitStmtblock(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -3191,26 +3188,26 @@ public class PyTrun extends Parser {
 	}
 
 	public static class TruthparContext extends ParserRuleContext {
-		public TerminalNode LPAR() { return getToken(PyTrun.LPAR, 0); }
+		public TerminalNode LPAR() { return getToken(Trun.LPAR, 0); }
 		public TruthexprContext truthexpr() {
 			return getRuleContext(TruthexprContext.class,0);
 		}
-		public TerminalNode RPAR() { return getToken(PyTrun.RPAR, 0); }
+		public TerminalNode RPAR() { return getToken(Trun.RPAR, 0); }
 		public TruthparContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_truthpar; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof PyTrunListener ) ((PyTrunListener)listener).enterTruthpar(this);
+			if ( listener instanceof TrunListener ) ((TrunListener)listener).enterTruthpar(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof PyTrunListener ) ((PyTrunListener)listener).exitTruthpar(this);
+			if ( listener instanceof TrunListener ) ((TrunListener)listener).exitTruthpar(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof PyTrunVisitor ) return ((PyTrunVisitor<? extends T>)visitor).visitTruthpar(this);
+			if ( visitor instanceof TrunVisitor ) return ((TrunVisitor<? extends T>)visitor).visitTruthpar(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -3241,23 +3238,23 @@ public class PyTrun extends Parser {
 	}
 
 	public static class TruthContext extends ParserRuleContext {
-		public TerminalNode TRUTHVAL() { return getToken(PyTrun.TRUTHVAL, 0); }
-		public TerminalNode ID() { return getToken(PyTrun.ID, 0); }
+		public TerminalNode TRUTHVAL() { return getToken(Trun.TRUTHVAL, 0); }
+		public TerminalNode ID() { return getToken(Trun.ID, 0); }
 		public TruthContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_truth; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof PyTrunListener ) ((PyTrunListener)listener).enterTruth(this);
+			if ( listener instanceof TrunListener ) ((TrunListener)listener).enterTruth(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof PyTrunListener ) ((PyTrunListener)listener).exitTruth(this);
+			if ( listener instanceof TrunListener ) ((TrunListener)listener).exitTruth(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof PyTrunVisitor ) return ((PyTrunVisitor<? extends T>)visitor).visitTruth(this);
+			if ( visitor instanceof TrunVisitor ) return ((TrunVisitor<? extends T>)visitor).visitTruth(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -3293,25 +3290,25 @@ public class PyTrun extends Parser {
 	}
 
 	public static class TypeContext extends ParserRuleContext {
-		public TerminalNode INTDCL() { return getToken(PyTrun.INTDCL, 0); }
-		public TerminalNode FLOATDCL() { return getToken(PyTrun.FLOATDCL, 0); }
-		public TerminalNode TRUTHDCL() { return getToken(PyTrun.TRUTHDCL, 0); }
-		public TerminalNode TEXTDCL() { return getToken(PyTrun.TEXTDCL, 0); }
+		public TerminalNode INTDCL() { return getToken(Trun.INTDCL, 0); }
+		public TerminalNode FLOATDCL() { return getToken(Trun.FLOATDCL, 0); }
+		public TerminalNode TRUTHDCL() { return getToken(Trun.TRUTHDCL, 0); }
+		public TerminalNode TEXTDCL() { return getToken(Trun.TEXTDCL, 0); }
 		public TypeContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_type; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof PyTrunListener ) ((PyTrunListener)listener).enterType(this);
+			if ( listener instanceof TrunListener ) ((TrunListener)listener).enterType(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof PyTrunListener ) ((PyTrunListener)listener).exitType(this);
+			if ( listener instanceof TrunListener ) ((TrunListener)listener).exitType(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof PyTrunVisitor ) return ((PyTrunVisitor<? extends T>)visitor).visitType(this);
+			if ( visitor instanceof TrunVisitor ) return ((TrunVisitor<? extends T>)visitor).visitType(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -3346,37 +3343,37 @@ public class PyTrun extends Parser {
 		return _localctx;
 	}
 
-	public static class TypesContext extends ParserRuleContext {
+	public static class ArgContext extends ParserRuleContext {
 		public NumsContext nums() {
 			return getRuleContext(NumsContext.class,0);
 		}
 		public ExprContext expr() {
 			return getRuleContext(ExprContext.class,0);
 		}
-		public TerminalNode TEXT() { return getToken(PyTrun.TEXT, 0); }
-		public TerminalNode TRUTHVAL() { return getToken(PyTrun.TRUTHVAL, 0); }
-		public TypesContext(ParserRuleContext parent, int invokingState) {
+		public TerminalNode TEXT() { return getToken(Trun.TEXT, 0); }
+		public TerminalNode TRUTHVAL() { return getToken(Trun.TRUTHVAL, 0); }
+		public ArgContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
-		@Override public int getRuleIndex() { return RULE_types; }
+		@Override public int getRuleIndex() { return RULE_arg; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof PyTrunListener ) ((PyTrunListener)listener).enterTypes(this);
+			if ( listener instanceof TrunListener ) ((TrunListener)listener).enterArg(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof PyTrunListener ) ((PyTrunListener)listener).exitTypes(this);
+			if ( listener instanceof TrunListener ) ((TrunListener)listener).exitArg(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof PyTrunVisitor ) return ((PyTrunVisitor<? extends T>)visitor).visitTypes(this);
+			if ( visitor instanceof TrunVisitor ) return ((TrunVisitor<? extends T>)visitor).visitArg(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 
-	public final TypesContext types() throws RecognitionException {
-		TypesContext _localctx = new TypesContext(_ctx, getState());
-		enterRule(_localctx, 82, RULE_types);
+	public final ArgContext arg() throws RecognitionException {
+		ArgContext _localctx = new ArgContext(_ctx, getState());
+		enterRule(_localctx, 82, RULE_arg);
 		try {
 			setState(455);
 			_errHandler.sync(this);

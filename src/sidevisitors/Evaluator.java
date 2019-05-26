@@ -64,15 +64,15 @@ public class Evaluator extends AbstractNodeVisitor<Object> {
         return Integer.parseInt(node.getSpelling());
     }
 
-    public Object visit(FloatLiteral node){
+    public Object visit(DecimalLiteral node){
         return Double.parseDouble(node.getSpelling());
     }
 
     public Object visit(Identifier node) throws NoSuchMethodException {
         if(symtable.getIdTable().get(node.getSpelling()).getType() instanceof IntegerLiteral){
             return Integer.valueOf(((IntegerLiteral)symtable.getIdTable().get(node.getSpelling()).getValue()).getSpelling());
-        }else if(symtable.getIdTable().get(node.getSpelling()).getType() instanceof FloatLiteral){
-            return Double.valueOf(((FloatLiteral)symtable.getIdTable().get(node.getSpelling()).getValue()).getSpelling());
+        }else if(symtable.getIdTable().get(node.getSpelling()).getType() instanceof DecimalLiteral){
+            return Double.valueOf(((DecimalLiteral)symtable.getIdTable().get(node.getSpelling()).getValue()).getSpelling());
         }
         return null;
     }
@@ -85,7 +85,7 @@ public class Evaluator extends AbstractNodeVisitor<Object> {
         if(number instanceof Integer){
             return new IntegerLiteral(number.toString());
         }else if(number instanceof Double){
-            return new FloatLiteral(number.toString());
+            return new DecimalLiteral(number.toString());
         }else{
             return null;
         }

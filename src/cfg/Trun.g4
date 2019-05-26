@@ -1,11 +1,9 @@
-parser grammar PyTrun;
+parser grammar Trun;
 
-options { tokenVocab=PyTrunLexer; }
+options { tokenVocab=TrunLexer; }
 
 start
         : dclblock arrdclblock functiondclblock stmtstartblock;
-/*stmts
-        : dclblock arrdclblock functiondclblock stmtstartblock;*///stmt (EOL stmt)*;
 
 dclblock:
         (dcl (EOL dclblock)*)
@@ -39,8 +37,8 @@ stmt
         ;
 
 functiondcl
-        : FUNCTION ID RETURNS type LPAR (truedcl (COMMA truedcl)*)? RPAR stmtblock
-        | FUNCTION ID LPAR (truedcl (COMMA truedcl)*)? RPAR stmtblock ;
+        : FUNCTION ID RETURNS type LPAR (param (COMMA param)*)? RPAR stmtblock
+        | FUNCTION ID LPAR (param (COMMA param)*)? RPAR stmtblock ;
 
 
 dcl
@@ -59,14 +57,14 @@ dclValue
         |  ASSIGN TEXT
         |  ASSIGN expr);
 
-truedcl
+param
         : INTDCL ID
         | FLOATDCL ID
         | TEXTDCL ID
         | TRUTHDCL ID ;
 
 functioncall
-        : ID LPAR (types (COMMA types)*)? RPAR;
+        : ID LPAR (arg (COMMA arg)*)? RPAR;
 
 ifstmt
         : IF truthpar THEN stmtblock EOL*
@@ -80,13 +78,13 @@ repeatuntilstmt
         : REPEAT stmtblock UNTIL truthpar ;
 
 fromstmt
-        : FROM LPAR valueorfunctioncall  (UPTO | DOWNTO) valueorfunctioncall RPAR stmtblock ;
+        : FROM LPAR valueorfunctioncallortext  (UPTO | DOWNTO) valueorfunctioncallortext RPAR stmtblock ;
 
 returnstmt
-        : RETURN (valueorfunctioncall | truthexpr) EOL* ;
+        : RETURN (valueorfunctioncallortext | truthexpr) EOL* ;
 
 assignment
-        : ID ( ASSIGN valueorfunctioncall
+        : ID ( ASSIGN valueorfunctioncallortext
         |  ASSIGN TEXT
         |  ASSIGN expr );
 value
@@ -94,7 +92,7 @@ value
         | arrindex
         | ID ;
 
-valueorfunctioncall
+valueorfunctioncallortext
         : value
         | functioncall
         | TEXT;
@@ -120,13 +118,12 @@ truthexpr
         : logicalexpr;
 
 logicalexpr
-        :  NOT? relationalexpr ((OR| AND) NOT? relationalexpr)* //and or
-        //| relationalexpr
+        :  NOT? relationalexpr ((OR| AND) NOT? relationalexpr)*
         ;
 
 relationalexpr
-        :   valueorfunctioncall ((EQUALS  | GRTHAN | LESSTHAN)  valueorfunctioncall)
-        |   LPAR logicalexpr RPAR //grt less equals
+        :   valueorfunctioncallortext ((EQUALS  | GRTHAN | LESSTHAN)  valueorfunctioncallortext)
+        |   LPAR logicalexpr RPAR
         |   truth
         |   functioncall
         ;
@@ -136,18 +133,18 @@ textorid
         : TEXT | ID;
 
 arrindex
-        :  ID ELEMENT arithmexpr; //TODO expression in arrindex
+        :  ID ELEMENT arithmexpr;
 
 arradd
-        : ID ELEMENT arithmexpr ASSIGN (expr | TEXT); //TODO expression in arrindex
+        : ID ELEMENT arithmexpr ASSIGN (expr | TEXT);
 
-drive   : DRIVE LPAR valueorfunctioncall RPAR;
+drive   : DRIVE LPAR valueorfunctioncallortext RPAR;
 
-turnleft   : TURNLEFT LPAR valueorfunctioncall RPAR;
+turnleft   : TURNLEFT LPAR valueorfunctioncallortext RPAR;
 
-turnright   : TURNRIGHT LPAR valueorfunctioncall RPAR;
+turnright   : TURNRIGHT LPAR valueorfunctioncallortext RPAR;
 
-pause    : PAUSE LPAR valueorfunctioncall RPAR;
+pause    : PAUSE LPAR valueorfunctioncallortext RPAR;
 
 nums
         : INUM
@@ -170,7 +167,7 @@ type
         | TRUTHDCL
         | TEXTDCL ;
 
-types
+arg
         : nums
         | expr
         | TEXT

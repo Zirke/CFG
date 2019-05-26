@@ -167,26 +167,26 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
     }
 
     @Override
-    public Object visit(FLOATDCL floatdcl) {
+    public Object visit(DECIMALDCL floatdcl) {
         emitter.emit("float ");
 
         return null;
     }
 
     @Override
-    public Object visit(FloatDeclaration floatDeclaration) throws NoSuchMethodException {
+    public Object visit(DecimalDeclaration decimalDeclaration) throws NoSuchMethodException {
         emitter.emit("float ");
-        visit(floatDeclaration.getId());
-        if (floatDeclaration.getStm() != null) {
+        visit(decimalDeclaration.getId());
+        if (decimalDeclaration.getValue() != null) {
             emitter.emit(" = ");
-            visit(floatDeclaration.getStm());
+            visit(decimalDeclaration.getValue());
         }
         return null;
     }
 
     @Override
-    public Object visit(FloatLiteral floatLiteral) throws NoSuchMethodException {
-        emitter.emit(floatLiteral.getSpelling());
+    public Object visit(DecimalLiteral decimalLiteral) throws NoSuchMethodException {
+        emitter.emit(decimalLiteral.getSpelling());
         return null;
     }
 
@@ -343,9 +343,9 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
     public Object visit(IntDeclaration intDeclaration) throws NoSuchMethodException {
         emitter.emit("int ");
         visit(intDeclaration.getId());
-        if (intDeclaration.getStm() != null) {
+        if (intDeclaration.getValue() != null) {
             emitter.emit(" = ");
-            visit(intDeclaration.getStm());
+            visit(intDeclaration.getValue());
         }
 
         return null;
@@ -468,7 +468,7 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
         for (Statement s : statementList.getStmts()) {
             if (!isFunctionGen) {
                 if (!(s instanceof FunctionDeclaration) && !(s instanceof IntDeclaration)
-                        && !(s instanceof TextDeclaration) && !(s instanceof FloatDeclaration)
+                        && !(s instanceof TextDeclaration) && !(s instanceof DecimalDeclaration)
                         && !(s instanceof TruthDeclaration) && !(s instanceof ArrayDeclaration)) {
                     visit(s);
                     if (!(s instanceof WhileStatement || s instanceof FromStatement || s instanceof IfStatement)) {
@@ -479,7 +479,7 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
                 }
             } else if (isFunctionGen) {
                 if (s instanceof FunctionDeclaration || s instanceof IntDeclaration
-                        || s instanceof TextDeclaration || s instanceof FloatDeclaration
+                        || s instanceof TextDeclaration || s instanceof DecimalDeclaration
                         || s instanceof TruthDeclaration || s instanceof ArrayDeclaration) {
                     visit(s);
                     if(s instanceof FunctionDeclaration){

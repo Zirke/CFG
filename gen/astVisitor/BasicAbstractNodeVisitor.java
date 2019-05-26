@@ -17,9 +17,9 @@ abstract public class BasicAbstractNodeVisitor<T> extends AbstractNodeVisitor  {
     public abstract T visit(ElseIfStatement node)throws NoSuchMethodException;
     public abstract T visit(ElseThenStmt node)throws NoSuchMethodException;
     public abstract T visit(ValueAssignment node)throws NoSuchMethodException;
-    public abstract T visit(FLOATDCL node)throws NoSuchMethodException;
-    public abstract T visit(FloatDeclaration node)throws NoSuchMethodException;
-    public abstract T visit(FloatLiteral node)throws NoSuchMethodException;
+    public abstract T visit(DECIMALDCL node)throws NoSuchMethodException;
+    public abstract T visit(DecimalDeclaration node)throws NoSuchMethodException;
+    public abstract T visit(DecimalLiteral node)throws NoSuchMethodException;
     public abstract T visit(FromKeyword node)throws NoSuchMethodException;
     public abstract T visit(FromStatement node)throws NoSuchMethodException;
     public abstract T visit(FunctionCall node)throws NoSuchMethodException;

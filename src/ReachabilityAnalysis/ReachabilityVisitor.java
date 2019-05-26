@@ -114,17 +114,17 @@ public class ReachabilityVisitor extends BasicAbstractNodeVisitor {
     }
 
     @Override
-    public Object visit(FLOATDCL floatdcl) throws NoSuchMethodException {
+    public Object visit(DECIMALDCL floatdcl) throws NoSuchMethodException {
         return null;
     }
 
     @Override
-    public Object visit(FloatDeclaration floatDeclaration) throws NoSuchMethodException {
+    public Object visit(DecimalDeclaration floatDeclaration) throws NoSuchMethodException {
         return null;
     }
 
     @Override
-    public String visit(FloatLiteral floatLiteral) throws NoSuchMethodException {
+    public String visit(DecimalLiteral floatLiteral) throws NoSuchMethodException {
         return floatLiteral.getSpelling();
     }
 

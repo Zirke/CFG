@@ -102,22 +102,22 @@ public class PrettyPrintAST extends BasicAbstractNodeVisitor<AbstractNode> {
     }
 
     @Override
-    public AbstractNode visit(FLOATDCL node) throws NoSuchMethodException{
+    public AbstractNode visit(DECIMALDCL node) throws NoSuchMethodException{
         System.out.println("Float Node");
         return null;
     }
 
     @Override
-    public AbstractNode visit(FloatDeclaration node) throws NoSuchMethodException{
+    public AbstractNode visit(DecimalDeclaration node) throws NoSuchMethodException{
         System.out.println("Float Declaration node");
         visit(node.getId());
-        visit(node.getStm());
+        visit(node.getValue());
         System.out.println("Float Declaration node END");
         return null;
     }
 
     @Override
-    public AbstractNode visit(FloatLiteral node) throws NoSuchMethodException{
+    public AbstractNode visit(DecimalLiteral node) throws NoSuchMethodException{
         System.out.println(node.getSpelling());
         System.out.println("Float Literal Node");
         return null;
@@ -202,8 +202,8 @@ public class PrettyPrintAST extends BasicAbstractNodeVisitor<AbstractNode> {
     public AbstractNode visit(IntDeclaration node) throws NoSuchMethodException{
         System.out.println("Integer declaration node");
         visit(node.getId());
-        if(node.getStm() != null)
-            visit(node.getStm());
+        if(node.getValue() != null)
+            visit(node.getValue());
         System.out.println("Integer declaration node END");
         return null;
     }
