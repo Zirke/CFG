@@ -189,10 +189,10 @@ public class SymbolTableVisitor extends BasicAbstractNodeVisitor<Object> {
         Value expressionType = (Value) visit(node.getValue());
 
         if (!(variableType.getClass().equals(expressionType.getClass()))) {
-            errorCallAssignIncompatibleTypes(node.getValue().getClass().getName(), node.getId().getSpelling(), node.getLineNumber());
+            errorCallAssignIncompatibleTypes(node.getValue().getClass().getName().substring(4, expressionType.getClass().getName().length() - 7), node.getId().getSpelling(), node.getLineNumber());
         }
         symbolTable.getIdTable().get(node.getId().getSpelling()).setNodes(node);
-        symbolTable.getIdTable().get(node.getId().getSpelling()).setValue(convertNumberToValue(evaluator.visit(node.getValue()))); ///TODO EVALUATE VIISTOR
+        symbolTable.getIdTable().get(node.getId().getSpelling()).setValue(convertNumberToValue(evaluator.visit(node.getValue())));
         if (variableType instanceof TextLiteral) {
             node.getId().setText(true);
         }
@@ -215,7 +215,7 @@ public class SymbolTableVisitor extends BasicAbstractNodeVisitor<Object> {
         if (node.getValue() != null) {
             Value value = (Value) visit(node.getValue());
             symbolTable.getIdTable().get(node.getId().getSpelling()).setNodes(node);
-            symbolTable.getIdTable().get(node.getId().getSpelling()).setValue(convertNumberToValue(evaluator.visit(node.getValue()))); ///TODO EVALUATE VIISTOR
+            symbolTable.getIdTable().get(node.getId().getSpelling()).setValue(convertNumberToValue(evaluator.visit(node.getValue())));
             if (!(value instanceof DecimalLiteral)) {
                 errorCallAssignIncompatibleTypes(value.getClass().getName().substring(4, value.getClass().getName().length() - 7), node.getId().getSpelling(), node.getLineNumber());
             }
@@ -411,27 +411,6 @@ public class SymbolTableVisitor extends BasicAbstractNodeVisitor<Object> {
         return evaluateArithmetic(node.getClass().getName(), leftValue, rightValue, node.getLineNumber());
     }
 
-    //checks if every element in the multiple assign node is the same. if so it returns in the first elements type.
-    /*@Override
-    public Object visit(MultipleElementAssign node) throws NoSuchMethodException {
-        Value firstElement = null;
-        if (!node.getElements().isEmpty()) {
-            firstElement = (Value) visit(node.getElements().get(0));
-            for (Value x : node.getElements()) {
-                if (!(visit(x).getClass().equals(firstElement.getClass()))) {
-                    try {
-                        throw new IncompatibleTypes("line: " + node.getLinenumber() + " -- " + " Array elements are not of the same types");
-                    } catch (SemanticException e) {
-                        err.println("IncompatibleTypes" + e.getLocalizedMessage());
-                        exit(0);
-                    }
-                }
-            }
-        }
-
-        return firstElement;
-    }*/
-
     //has to be of type truth literal
     @Override
     public Object visit(Not node) throws NoSuchMethodException {
@@ -458,7 +437,6 @@ public class SymbolTableVisitor extends BasicAbstractNodeVisitor<Object> {
     }
 
     //depending on which parameter type it is, it is declared in the symbol table
-    //TODO null fix seems hacky
     @Override
     public Object visit(Parameter node) throws NoSuchMethodException {
         if (node.getParamType() instanceof INTDCL) {
@@ -587,7 +565,7 @@ public class SymbolTableVisitor extends BasicAbstractNodeVisitor<Object> {
         Value expressionType = (Value) visit((visitable) node.getText());
 
         if (!(variableType.getClass().equals(expressionType.getClass()))) {
-            errorCallAssignIncompatibleTypes(node.getText().getClass().getName(), node.getId().getSpelling(), node.getLineNumber());
+            errorCallAssignIncompatibleTypes(node.getText().getClass().getName().substring(4, node.getClass().getName().length() - 7), node.getId().getSpelling(), node.getLineNumber());
         }
 
         return null;
@@ -653,7 +631,7 @@ public class SymbolTableVisitor extends BasicAbstractNodeVisitor<Object> {
         if (node.getExpr() != null) {
             Value value = (Value) visit(node.getExpr());
             symbolTable.getIdTable().get(node.getId().getSpelling()).setNodes(node);
-            symbolTable.getIdTable().get(node.getId().getSpelling()).setValue(node.getExpr()); ///TODO EVALUATE VIISTOR
+            symbolTable.getIdTable().get(node.getId().getSpelling()).setValue(node.getExpr());
             if (!(value instanceof TruthLiteral)) {
                 errorCallAssignIncompatibleTypes(value.getClass().getName().substring(4, value.getClass().getName().length() - 7), node.getId().getSpelling(), node.getLineNumber());
             }

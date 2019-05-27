@@ -29,7 +29,6 @@ public class SymbolTableVisitorTest {
         }
     }
 
-    //TODO ASM value?
     @org.junit.Test
     public void visitArrayAssignmentTest() {
         Identifier identifier = new Identifier("a");
@@ -63,53 +62,6 @@ public class SymbolTableVisitorTest {
             e.printStackTrace();
         }
     }
-
-    /*@org.junit.Test
-    public void visitArrayDeclaration() {
-        List<Value> listOfIntegers = new ArrayList<>();
-        List<Value> listWithout = new ArrayList<>();
-        listOfIntegers.add(new IntegerLiteral("1"));
-        listOfIntegers.add(new IntegerLiteral("2"));
-        Identifier identifier = new Identifier("identifier");
-        Identifier noValIden = new Identifier("novals");
-
-        try {
-            symbolTableVisitor.visit(node);
-            symbolTableVisitor.visit(nodeWithOutValues);
-            assertTrue(symbolTableVisitor.symbolTable.getIdTable().containsKey(identifier.getSpelling()));
-            assertTrue(symbolTableVisitor.symbolTable.getIdTable().containsKey(noValIden.getSpelling()));
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
-        }
-
-    }*/
-
-   /* @org.junit.Test
-    public void visitArrayElementAddTest() {
-        Identifier identifier = new Identifier("id");
-        ArrayElementAddStatement node = new ArrayElementAddStatement(identifier, new IntegerLiteral("10"), new IntegerLiteral("20"), 1);
-        ArrayElementAddStatement floatnode = new ArrayElementAddStatement(identifier, new IntegerLiteral("10"), new FloatLiteral("2.0"), 2);
-
-        try {
-            assertTrue(symbolTableVisitor.visit(node) instanceof IntegerLiteral);
-            assertTrue(symbolTableVisitor.visit(floatnode) instanceof FloatLiteral);
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
-        }
-    }*/
-
-   /* @org.junit.Test
-    public void visitArrayIndexStatementTest() {
-        IntegerLiteral intNode = new IntegerLiteral("2");
-        Identifier id = new Identifier("intdcl");
-        ArrayIndexStatement node = new ArrayIndexStatement(id, intNode, 3);
-
-        try {
-            assertTrue(symbolTableVisitor.visit(node) instanceof IntegerLiteral);
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
-        }
-    } */
 
     @org.junit.Test
     public void visitDivideTest() {
@@ -471,13 +423,7 @@ public class SymbolTableVisitorTest {
     @org.junit.Test
     public void visitReturnStatementTest() {
         ReturnStatement node = new ReturnStatement(new IntegerLiteral("22"), 10);
-    }/*
-    @org.junit.Test
-    public void visitSingleElementAssignTest() {
-        SingleElementAssign node = new SingleElementAssign(new IntegerLiteral("2"),new IntegerLiteral("10"), 10);
-
-            assertTrue(node.getAssignemntVal() instanceof IntegerLiteral);
-    }*/
+    }
 
     @org.junit.Test
     public void visitTextAssignmentTest() {

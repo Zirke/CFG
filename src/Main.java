@@ -1,7 +1,8 @@
+import CodeGeneration.CodeGenVisitor;
+import CodeGeneration.Emitter;
 import ast.AbstractNode;
-import cfg.PyTrun;
-import cfg.PyTrunLexer;
-import CodeGeneration.*;
+import cfg.Trun;
+import cfg.TrunLexer;
 import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
@@ -24,18 +25,17 @@ public class Main{
         }
 
         ANTLRInputStream input = new ANTLRInputStream(d);
-        PyTrunLexer x = new PyTrunLexer(input);
+        TrunLexer x = new TrunLexer(input);
         CommonTokenStream tokens = new CommonTokenStream(x);
-        PyTrun parser = new PyTrun(tokens);
+        Trun parser = new Trun(tokens);
         ParseTree tree = parser.start();
 
         BuildASTVisitor visitor = new BuildASTVisitor();
         AbstractNode ast = visitor.visit(tree);
 
         symbolTable.SymbolTableVisitor symbolTableVisitor = new symbolTable.SymbolTableVisitor();
-        symbolTable.SymbolTable sym = null;
         try {
-            sym = (symbolTable.SymbolTable) symbolTableVisitor.visit(ast);
+            symbolTableVisitor.visit(ast);
         } catch (NoSuchMethodException e) {
             e.printStackTrace();
         }
