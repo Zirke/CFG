@@ -69,7 +69,7 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
     @Override
     public Object visit(ArrayAssignment arrayAssignment) throws NoSuchMethodException {
         visit(arrayAssignment.getId());
-        emitter.emit("[");
+        emitter.emit("[(");
         visit(arrayAssignment.getValue());
 
         return null;
@@ -101,9 +101,9 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
     @Override
     public Object visit(ArrayElementAddStatement arrayElementAddStatement) throws NoSuchMethodException {
         visit(arrayElementAddStatement.getArrayName());
-        emitter.emit("[");
+        emitter.emit("[(");
         visit(arrayElementAddStatement.getElementNumber());
-        emitter.emit("-1] = ");
+        emitter.emit(")-1] = ");
         visit(arrayElementAddStatement.getValue());
         return null;
     }
@@ -111,9 +111,9 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
     @Override
     public Object visit(ArrayIndexStatement arrayIndexStatement) throws NoSuchMethodException {
         visit(arrayIndexStatement.getId());
-        emitter.emit("[");
+        emitter.emit("[(");
         visit(arrayIndexStatement.getNumber());
-        emitter.emit("-1]");
+        emitter.emit(")-1]");
         return null;
     }
 
@@ -455,7 +455,7 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
     @Override
     public Object visit(SingleElementAssign singleElementAssign) throws NoSuchMethodException {
         visit(singleElementAssign.getElementNr());
-        emitter.emit("-1] = ");
+        emitter.emit(")-1] = ");
         visit(singleElementAssign.getAssignemntVal());
         return null;
     }
