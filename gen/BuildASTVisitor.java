@@ -12,23 +12,22 @@ public class BuildASTVisitor extends AbstractParseTreeVisitor<AbstractNode> impl
 
 	@Override public AbstractNode visitStart(Trun.StartContext ctx) {
 		ArrayList<Statement> stmtList = new ArrayList<>();
-
-		if(ctx.dclblock().isEmpty()) {
+		if(!ctx.dclblock().isEmpty()) {
 			isSyntaxError = true;
 			stmtList.addAll(((StatementList) visitDclblock(ctx.dclblock())).getStmts());
 		}
 
-		if(ctx.arrdclblock().isEmpty()) {
+		if(!ctx.arrdclblock().isEmpty()) {
 			isSyntaxError = true;
 			stmtList.addAll(((StatementList) visitArrdclblock(ctx.arrdclblock())).getStmts());
 		}
 
-		if(ctx.functiondclblock().isEmpty()) {
+		if(!ctx.functiondclblock().isEmpty()) {
 			isSyntaxError = true;
 			stmtList.addAll(((StatementList) visitFunctiondclblock(ctx.functiondclblock())).getStmts());
 		}
 
-		if(ctx.stmtstartblock().isEmpty()) {
+		if(!ctx.stmtstartblock().isEmpty()) {
 			isSyntaxError = true;
 			stmtList.addAll(((StatementList) visitStmtstartblock(ctx.stmtstartblock())).getStmts());
 		}
@@ -62,7 +61,7 @@ public class BuildASTVisitor extends AbstractParseTreeVisitor<AbstractNode> impl
 				noNullStmts.add(s);
 			}
 		}
-		if(ctx.EOF() == null){
+		if(ctx.EOF() != null){
 			isSyntaxError = false;
 		}
 		return new StatementList(noNullStmts);
@@ -85,7 +84,7 @@ public class BuildASTVisitor extends AbstractParseTreeVisitor<AbstractNode> impl
 				noNullStmts.add(s);
 			}
 		}
-		if(ctx.EOF() == null){
+		if(ctx.EOF() != null){
 			isSyntaxError = false;
 		}
 		return new StatementList(noNullStmts);
@@ -108,7 +107,7 @@ public class BuildASTVisitor extends AbstractParseTreeVisitor<AbstractNode> impl
 				noNullStmts.add(s);
 			}
 		}
-		if(ctx.EOF() == null){
+		if(ctx.EOF() != null){
 			isSyntaxError = false;
 		}
 		return new StatementList(noNullStmts);
@@ -131,7 +130,7 @@ public class BuildASTVisitor extends AbstractParseTreeVisitor<AbstractNode> impl
 				noNullStmts.add(s);
 			}
 		}
-		if(ctx.EOF() == null){
+		if(ctx.EOF() != null){
 			isSyntaxError = false;
 		}
 		return new StatementList(noNullStmts);
