@@ -8,23 +8,28 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BuildASTVisitor extends AbstractParseTreeVisitor<AbstractNode> implements TrunVisitor<AbstractNode> {
-	boolean isSyntaxError = true;
+	boolean isSyntaxError = false;
 
 	@Override public AbstractNode visitStart(Trun.StartContext ctx) {
 		ArrayList<Statement> stmtList = new ArrayList<>();
-		if(ctx.dclblock() != null) {
+
+		if(ctx.dclblock().isEmpty()) {
+			isSyntaxError = true;
 			stmtList.addAll(((StatementList) visitDclblock(ctx.dclblock())).getStmts());
 		}
-		isSyntaxError = true;
-		if(ctx.arrdclblock() != null) {
+
+		if(ctx.arrdclblock().isEmpty()) {
+			isSyntaxError = true;
 			stmtList.addAll(((StatementList) visitArrdclblock(ctx.arrdclblock())).getStmts());
 		}
-		isSyntaxError = true;
-		if(ctx.functiondclblock() != null) {
+
+		if(ctx.functiondclblock().isEmpty()) {
+			isSyntaxError = true;
 			stmtList.addAll(((StatementList) visitFunctiondclblock(ctx.functiondclblock())).getStmts());
 		}
-		isSyntaxError = true;
-		if(ctx.stmtstartblock() != null) {
+
+		if(ctx.stmtstartblock().isEmpty()) {
+			isSyntaxError = true;
 			stmtList.addAll(((StatementList) visitStmtstartblock(ctx.stmtstartblock())).getStmts());
 		}
 		ArrayList<Statement> noNullStmts = new ArrayList<>();

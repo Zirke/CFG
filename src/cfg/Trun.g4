@@ -6,19 +6,19 @@ start
         : dclblock arrdclblock functiondclblock stmtstartblock;
 
 dclblock:
-        (dcl (EOL dclblock)*)
+        (dcl (EOL dclblock)*) EOF?
         | EOF?;
 
 arrdclblock:
-        (arrdcl (EOL arrdclblock)*)
+        (arrdcl (EOL arrdclblock)*) EOF?
         | EOF?;
 functiondclblock:
 
-        (functiondcl (EOL functiondclblock)*)
+        (functiondcl (EOL functiondclblock)*) EOF?
         |EOF?;
 
 stmtstartblock:
-        (stmt (EOL stmtstartblock)*)
+        (stmt (EOL stmtstartblock)*) EOF?
         | EOF?;
 stmt
         : ifstmt
