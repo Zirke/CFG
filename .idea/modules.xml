@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/CFG.iml" filepath="$PROJECT_DIR$/CFG.iml" />
+      <module fileurl="file://$PROJECT_DIR$/TrunCompiler.iml" filepath="$PROJECT_DIR$/TrunCompiler.iml" />
       <module fileurl="file://$PROJECT_DIR$/gen/gen.iml" filepath="$PROJECT_DIR$/gen/gen.iml" />
     </modules>
   </component>
