@@ -2,7 +2,6 @@
 <project version="4">
   <component name="AnalysisUIOptions">
     <option name="ANALYZE_TEST_SOURCES" value="false" />
-    <option name="SCOPE_TYPE" value="3" />
   </component>
   <component name="ArtifactsWorkspaceSettings">
     <artifacts-to-build>
@@ -12,8 +11,8 @@
   <component name="ChangeListManager">
     <list default="true" id="08c3367c-482c-43b2-9911-903cc53e1dc6" name="Default Changelist" comment="Unary Minus">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/BuildASTVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/gen/BuildASTVisitor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jar-files/gen.jar" beforeDir="false" afterPath="$PROJECT_DIR$/jar-files/gen.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gen/cfg/Trun.java" beforeDir="false" afterPath="$PROJECT_DIR$/gen/cfg/Trun.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gen/cfg/TrunLexer.java" beforeDir="false" afterPath="$PROJECT_DIR$/gen/cfg/TrunLexer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/genFile.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/genFile.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/test.txt" afterDir="false" />
@@ -59,8 +58,32 @@
       <file leaf-file-name="ReturnTypeChecker.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/sidevisitors/ReturnTypeChecker.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="357">
-              <caret line="23" column="59" lean-forward="true" selection-start-line="23" selection-start-column="59" selection-end-line="23" selection-end-column="59" />
+            <state relative-caret-position="270">
+              <caret line="85" column="4" selection-start-line="85" selection-start-column="4" selection-end-line="85" selection-end-column="4" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Trun.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/gen/cfg/Trun.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="119">
+              <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TrunLexer.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/gen/cfg/TrunLexer.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-784">
+              <caret line="199" column="36" lean-forward="true" selection-start-line="199" selection-start-column="36" selection-end-line="199" selection-end-column="36" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -72,7 +95,7 @@
         <entry file="file://$PROJECT_DIR$/src/cfg/Trun.g4">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="68">
-              <caret line="4" column="2" lean-forward="true" selection-start-line="4" selection-start-column="2" selection-end-line="4" selection-end-column="2" />
+              <caret line="4" column="2" selection-start-line="4" selection-start-column="2" selection-end-line="4" selection-end-column="2" />
             </state>
           </provider>
         </entry>
@@ -93,7 +116,7 @@
         <entry file="file://$PROJECT_DIR$/src/test.txt">
           <provider selected="true" editor-type-id="text-editor">
             <state>
-              <caret column="9" lean-forward="true" selection-start-column="9" selection-end-column="9" />
+              <caret column="9" selection-start-column="9" selection-end-column="9" />
             </state>
           </provider>
         </entry>
@@ -107,32 +130,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BuildASTVisitor.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="BuildASTVisitor.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/gen/BuildASTVisitor.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
+            <state relative-caret-position="1224">
               <caret line="132" column="22" selection-start-line="132" selection-start-column="22" selection-end-line="132" selection-end-column="22" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ValueAssignment.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/gen/ast/ValueAssignment.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34">
-              <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="WhileStatement.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/gen/ast/WhileStatement.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="51">
-              <caret line="3" column="13" selection-start-line="3" selection-start-column="13" selection-end-line="3" selection-end-column="13" />
             </state>
           </provider>
         </entry>
@@ -188,8 +193,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/gen/ast/RepeatStatement.java" />
-        <option value="$PROJECT_DIR$/gen/ast/ReturnFunctionDeclaration.java" />
         <option value="$PROJECT_DIR$/gen/ast/ReturnStatement.java" />
         <option value="$PROJECT_DIR$/gen/ast/SingleElementAssign.java" />
         <option value="$PROJECT_DIR$/gen/ast/StatementList.java" />
@@ -239,6 +242,8 @@
         <option value="$PROJECT_DIR$/src/test.txt" />
         <option value="$PROJECT_DIR$/src/Main.java" />
         <option value="$PROJECT_DIR$/gen/BuildASTVisitor.java" />
+        <option value="$PROJECT_DIR$/gen/cfg/Trun.java" />
+        <option value="$PROJECT_DIR$/gen/cfg/TrunLexer.java" />
       </list>
     </option>
   </component>
@@ -541,7 +546,7 @@
       <workItem from="1557654065410" duration="7103000" />
       <workItem from="1557731745775" duration="29490000" />
       <workItem from="1558012863700" duration="28064000" />
-      <workItem from="1558942899025" duration="5221000" />
+      <workItem from="1558942899025" duration="5514000" />
     </task>
     <task id="LOCAL-00001" summary="Hejsa changes to Arrays.">
       <created>1557310430606</created>
@@ -690,7 +695,14 @@
       <option name="project" value="LOCAL" />
       <updated>1558953327224</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="fix to cfg visitor">
+      <created>1558956144592</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1558956144592</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -726,45 +738,45 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="317907000" />
+    <option name="totallyTimeSpent" value="318200000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-6" y="-6" width="1549" height="837" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
-      <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Tool Output" order="12" weight="0.32650274" />
-      <window_info anchor="bottom" id="Messages" order="15" sideWeight="0.49056605" weight="0.32786885" />
-      <window_info anchor="right" id="Palette&#9;" order="8" />
-      <window_info id="Image Layers" order="2" />
-      <window_info anchor="right" id="Capture Analysis" order="7" />
       <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.509434" side_tool="true" weight="0.32786885" />
       <window_info anchor="right" id="Maven Projects" order="2" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
-      <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.49902406" weight="0.329235" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.48471048" weight="0.32786885" />
-      <window_info anchor="bottom" id="Terminal" order="10" weight="0.32955405" />
       <window_info id="Capture Tool" order="5" />
       <window_info id="Designer" order="3" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.13012362" />
+      <window_info active="true" anchor="bottom" id="Inspection Results" order="14" visible="true" weight="0.329235" />
       <window_info anchor="right" id="Database" order="9" />
       <window_info anchor="bottom" id="ANTLR Preview" order="13" sideWeight="0.49902406" weight="0.36202186" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info id="UI Designer" order="4" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.495771" weight="0.3989071" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Messages" order="15" sideWeight="0.49056605" weight="0.32786885" />
+      <window_info anchor="right" id="Palette&#9;" order="8" />
+      <window_info id="Image Layers" order="2" />
+      <window_info anchor="right" id="Capture Analysis" order="7" />
+      <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.49902406" weight="0.329235" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.48471048" weight="0.32786885" />
+      <window_info anchor="bottom" id="Terminal" order="10" weight="0.32955405" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.13012362" />
+      <window_info anchor="bottom" id="Find" order="1" sideWeight="0.49902406" weight="0.32786885" />
       <window_info anchor="right" id="Theme Preview" order="5" />
       <window_info id="Favorites" order="6" side_tool="true" />
-      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.495771" weight="0.3989071" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Find" order="1" sideWeight="0.49902406" weight="0.32786885" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="right" id="Maven" order="6" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection Results" order="14" weight="0.329235" />
     </layout>
     <layout-to-restore>
       <window_info anchor="right" id="Maven" order="6" />
@@ -824,7 +836,8 @@
     <MESSAGE value="refactoring af CFG og AST klasser" />
     <MESSAGE value="cfg to truncompiler" />
     <MESSAGE value="syntax error fix" />
-    <option name="LAST_COMMIT_MESSAGE" value="syntax error fix" />
+    <MESSAGE value="fix to cfg visitor" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix to cfg visitor" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -832,7 +845,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/CodeGeneration/CodeGenVisitorFunctions.java" />
     <entry file="file://$PROJECT_DIR$/gen/ast/ElseIfStatement.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
@@ -1097,13 +1109,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/gen/cfg/Trun.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1055">
-          <caret line="799" column="30" selection-start-line="799" selection-start-column="20" selection-end-line="799" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/gen/cfg/TrunVisitor.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="154">
@@ -1122,16 +1127,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="137">
           <caret line="308" column="27" selection-start-line="308" selection-start-column="20" selection-end-line="308" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/sidevisitors/ReturnTypeChecker.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="23" column="59" lean-forward="true" selection-start-line="23" selection-start-column="59" selection-end-line="23" selection-end-column="59" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1159,13 +1154,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/genFile.c">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" selection-start-line="2" selection-end-line="2" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Main.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="323">
@@ -1179,21 +1167,58 @@
     <entry file="file://$PROJECT_DIR$/src/test.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state>
-          <caret column="9" lean-forward="true" selection-start-column="9" selection-end-column="9" />
+          <caret column="9" selection-start-column="9" selection-end-column="9" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/cfg/Trun.g4">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
-          <caret line="4" column="2" lean-forward="true" selection-start-line="4" selection-start-column="2" selection-end-line="4" selection-end-column="2" />
+          <caret line="4" column="2" selection-start-line="4" selection-start-column="2" selection-end-line="4" selection-end-column="2" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/gen/BuildASTVisitor.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
+        <state relative-caret-position="1224">
           <caret line="132" column="22" selection-start-line="132" selection-start-column="22" selection-end-line="132" selection-end-column="22" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/genFile.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" selection-start-line="2" selection-end-line="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sidevisitors/ReturnTypeChecker.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="85" column="4" selection-start-line="85" selection-start-column="4" selection-end-line="85" selection-end-column="4" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gen/cfg/Trun.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gen/cfg/TrunLexer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-784">
+          <caret line="199" column="36" lean-forward="true" selection-start-line="199" selection-start-column="36" selection-end-line="199" selection-end-column="36" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
