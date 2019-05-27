@@ -1,4 +1,4 @@
-// Generated from C:/Users/Abiram Mohanaraj/Documents/GitHub/CFG/src/cfg\Trun.g4 by ANTLR 4.7.2
+// Generated from C:/Users/Zirke/Documents/JavaProjects/CFG23/src/cfg\Trun.g4 by ANTLR 4.7.2
 package cfg;
 import org.antlr.v4.runtime.tree.AbstractParseTreeVisitor;
 

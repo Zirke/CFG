@@ -576,6 +576,8 @@ public class BuildASTVisitor extends AbstractParseTreeVisitor<AbstractNode> impl
 			return new TextLiteral(ctx.TEXT().getText());
 		}else if(ctx.ID() != null){
 			return new Identifier(ctx.ID().getText());
+		}else if(ctx.arrindex() != null){
+			return visitArrindex(ctx.arrindex());
 		}else
 			return null;
 	}

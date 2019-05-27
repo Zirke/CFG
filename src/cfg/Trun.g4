@@ -130,7 +130,7 @@ relationalexpr
 append
         : textorid APPEND textorid ;
 textorid
-        : TEXT | ID;
+        : arrindex | TEXT | ID;
 
 arrindex
         :  ID ELEMENT arithmexpr;
