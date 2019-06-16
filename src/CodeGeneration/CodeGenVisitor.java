@@ -10,6 +10,7 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
 
     private Emitter emitter;
     private boolean isFunctionGen;
+    private boolean dclInBlocks;
     private HashSet<String> noDuplicateStrings = new HashSet<>();
 
     public CodeGenVisitor(Emitter emitter, boolean isFunctionGen) {
@@ -467,21 +468,33 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
 
         for (Statement s : statementList.getStmts()) {
             if (!isFunctionGen) {
-                if (!(s instanceof FunctionDeclaration) && !(s instanceof IntDeclaration)
+                if ((!(s instanceof FunctionDeclaration) && !(s instanceof IntDeclaration)
                         && !(s instanceof TextDeclaration) && !(s instanceof DecimalDeclaration)
-                        && !(s instanceof TruthDeclaration) && !(s instanceof ArrayDeclaration)) {
-                    visit(s);
-                    if (!(s instanceof WhileStatement || s instanceof FromStatement || s instanceof IfStatement)) {
-                        emitter.emit(";\n");
-                    } else {
-                        emitter.emit("\n");
-                    }
+                        && !(s instanceof TruthDeclaration) && !(s instanceof ArrayDeclaration)) || dclInBlocks) {
+                        if(s instanceof WhileStatement || s instanceof FromStatement || s instanceof IfStatement){
+                            dclInBlocks = true;
+                        }
+                        visit(s);
+                        if(s instanceof WhileStatement || s instanceof FromStatement || s instanceof IfStatement){
+                            dclInBlocks = false;
+                        }
+                        if (!(s instanceof WhileStatement || s instanceof FromStatement || s instanceof IfStatement)) {
+                            emitter.emit(";\n");
+                        } else {
+                            emitter.emit("\n");
+                        }
                 }
             } else if (isFunctionGen) {
-                if (s instanceof FunctionDeclaration || s instanceof IntDeclaration
+                if ((s instanceof FunctionDeclaration || s instanceof IntDeclaration
                         || s instanceof TextDeclaration || s instanceof DecimalDeclaration
-                        || s instanceof TruthDeclaration || s instanceof ArrayDeclaration) {
+                        || s instanceof TruthDeclaration || s instanceof ArrayDeclaration) || dclInBlocks) {
+                    if(s instanceof FunctionDeclaration){
+                        dclInBlocks = true;
+                    }
                     visit(s);
+                    if(s instanceof FunctionDeclaration){
+                        dclInBlocks = false;
+                    }
                     if(s instanceof FunctionDeclaration){
                         emitter.emit("\n");
                     } else {
@@ -489,6 +502,7 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
                     }
                 }
             }
+
         }
 
         //emitter.emit("}\n");
