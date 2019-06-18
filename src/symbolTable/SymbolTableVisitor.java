@@ -291,14 +291,13 @@ public class SymbolTableVisitor extends BasicAbstractNodeVisitor<Object> {
     public Object visit(FunctionDeclaration node) throws NoSuchMethodException {
         List<Value> parameters = new ArrayList<>();
         if (!isInSymbolTable(node.getFunctionName().getSpelling())) {
+            symbolTable.openScope();
             for (Parameter parameter : node.getParameters()) {
                 parameters.add((Value) visit(parameter));
             }
-            symbolTable.put(node.getFunctionName().getSpelling(), new Symbol(node, symbolTable.getDepth(), null, parameters));
-
-            symbolTable.openScope();
             visit(node.getStmtBody());
             symbolTable.closeScope();
+            symbolTable.put(node.getFunctionName().getSpelling(), new Symbol(node, symbolTable.getDepth(), null, parameters));
         } else {
             errorCallDuplicateDeclaration(node.getFunctionName().getSpelling(), node.getLineNumber());
         }
@@ -482,13 +481,11 @@ public class SymbolTableVisitor extends BasicAbstractNodeVisitor<Object> {
         List<Value> parameters = new ArrayList<>();
         List<Value> nodes = new ArrayList<>();
         if (!isInSymbolTable(node.getFunctionName().getSpelling())) {
+            symbolTable.openScope();
             for (Parameter parameter : node.getParameters()) {
                 parameters.add((Value) visit(parameter));
             }
 
-            symbolTable.put(node.getFunctionName().getSpelling(), new Symbol(node, symbolTable.getDepth(), typeCasting(node.getReturnType()), parameters));
-
-            symbolTable.openScope();
             visit(node.getStmtBody());
             ReturnTypeChecker returnTypeChecker = new ReturnTypeChecker(symbolTable);
             returnTypeChecker.visit(node.getStmtBody());
@@ -501,7 +498,9 @@ public class SymbolTableVisitor extends BasicAbstractNodeVisitor<Object> {
                         err.println("IncompatibleTypes " + e.getLocalizedMessage());
                     }
                 }
+
             }
+            symbolTable.put(node.getFunctionName().getSpelling(), new Symbol(node, symbolTable.getDepth(), typeCasting(node.getReturnType()), parameters));
 
             if (nodes.isEmpty()) {
                 try {
