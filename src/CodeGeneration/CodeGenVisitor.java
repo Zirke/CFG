@@ -10,6 +10,7 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
 
     private Emitter emitter;
     private boolean isFunctionGen;
+    private boolean dclInBlocks;
     private HashSet<String> noDuplicateStrings = new HashSet<>();
 
     public CodeGenVisitor(Emitter emitter, boolean isFunctionGen) {
@@ -59,7 +60,7 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
     @Override
     public Object visit(ArithmParenthesis arithmParenthesis) throws NoSuchMethodException {
         emitter.emit("(");
-        // only needs to visit left because of sketchy implementation
+        // only needs to visit left
         visit(arithmParenthesis.getLeft());
         emitter.emit(")");
         return null;
@@ -157,7 +158,6 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
         return null;
     }
 
-    // Assuming ValueAssignment is only for ints and floats.
     @Override
     public String visit(ValueAssignment valueAssignment) throws NoSuchMethodException {
         visit(valueAssignment.getId());
@@ -414,7 +414,6 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
         return null;
     }
 
-    //TODO Fix
     @Override
     public Object visit(RepeatStatement repeatStatement) throws NoSuchMethodException {
         emitter.emit("do {\n");
@@ -451,7 +450,6 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
         return null;
     }
 
-    //TODO Fix
     @Override
     public Object visit(SingleElementAssign singleElementAssign) throws NoSuchMethodException {
         visit(singleElementAssign.getElementNr());
@@ -467,10 +465,16 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
 
         for (Statement s : statementList.getStmts()) {
             if (!isFunctionGen) {
-                if (!(s instanceof FunctionDeclaration) && !(s instanceof IntDeclaration)
+                if ((!(s instanceof FunctionDeclaration) && !(s instanceof IntDeclaration)
                         && !(s instanceof TextDeclaration) && !(s instanceof DecimalDeclaration)
-                        && !(s instanceof TruthDeclaration) && !(s instanceof ArrayDeclaration)) {
+                        && !(s instanceof TruthDeclaration) && !(s instanceof ArrayDeclaration)) || dclInBlocks) {
+                    if(s instanceof WhileStatement || s instanceof FromStatement || s instanceof IfStatement){
+                        dclInBlocks = true;
+                    }
                     visit(s);
+                    if(s instanceof WhileStatement || s instanceof FromStatement || s instanceof IfStatement){
+                        dclInBlocks = false;
+                    }
                     if (!(s instanceof WhileStatement || s instanceof FromStatement || s instanceof IfStatement)) {
                         emitter.emit(";\n");
                     } else {
@@ -478,10 +482,16 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
                     }
                 }
             } else if (isFunctionGen) {
-                if (s instanceof FunctionDeclaration || s instanceof IntDeclaration
+                if ((s instanceof FunctionDeclaration || s instanceof IntDeclaration
                         || s instanceof TextDeclaration || s instanceof DecimalDeclaration
-                        || s instanceof TruthDeclaration || s instanceof ArrayDeclaration) {
+                        || s instanceof TruthDeclaration || s instanceof ArrayDeclaration) || dclInBlocks) {
+                    if(s instanceof FunctionDeclaration){
+                        dclInBlocks = true;
+                    }
                     visit(s);
+                    if(s instanceof FunctionDeclaration){
+                        dclInBlocks = false;
+                    }
                     if(s instanceof FunctionDeclaration){
                         emitter.emit("\n");
                     } else {
@@ -489,6 +499,7 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
                     }
                 }
             }
+
         }
 
         //emitter.emit("}\n");
@@ -497,7 +508,6 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
         return null;
     }
 
-    //TODO Fixes senere
     @Override
     public Object visit(TextAssignment textAssignment) throws NoSuchMethodException {
         visit(textAssignment.getId());
@@ -512,7 +522,6 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
         return null;
     }
 
-    //TODO weird when the size of the array is not yet known.
     @Override
     public Object visit(TextDeclaration textDeclaration) throws NoSuchMethodException {
         emitter.emit("char *");
@@ -628,7 +637,7 @@ public class CodeGenVisitor extends BasicAbstractNodeVisitor {
         }
         return null;
     }
-    //TODO needs implementation
+
     @Override
     public Object visit(UnaryMinus node) throws NoSuchMethodException {
         emitter.emit("-");
